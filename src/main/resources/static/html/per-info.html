@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/bootstrap-theme.css"/>
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="../css/per-info.css"/>
+    <script src="../js/jquery-3.1.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/per-info.js"></script>
+</head>
+<style>
+    .modal-backdrop {
+        background: none;
+    }
+</style>
+<body>
+<!--编辑头像-->
+<div id="edit-pic">
+    <img src="../img/gangtiexia.jpg"/>
+    <div style="margin-top: -35px !important;"><a id="choose-pic-a" href="#perPicModal" data-toggle="modal"
+                                                  style="text-decoration:none">更换头像</a></div>
+</div>
+<!--编辑其他个人信息-->
+<div id="spacing"><a href="#perDetailsModal" data-toggle="modal" style="text-decoration:none"><span
+        class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a></div><!--间隔区-->
+<div id="per-otherInfo" style="margin-top: 50px;">
+    <div id="otherInfo"><p>昵称</p>
+        <div id="details">Double大宝</div>
+    </div>
+    <div id="otherInfo"><p>QQ</p>
+        <div id="details">287162738</div>
+    </div>
+    <div id="otherInfo"><p>微信</p>
+        <div id="details">15005422208</div>
+    </div>
+    <div id="otherInfo"><p>性别</p>
+        <div id="details">纯爷们</div>
+    </div>
+</div>
+
+
+<!--更改头像弹窗-->
+<div class="modal" id="perPicModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">更换头像</h4></h4>
+            </div>
+            <div id="old-pic" style="margin: 0 auto;">
+                <img id="show-pic" src="../img/gangtiexia.jpg"/>
+            </div>
+            <div id="choose-pic"><input style="display: none;" id="select-pic" type="file"/><a id="choose-pic-a"
+                                                                                               onclick="selectPic()"
+                                                                                               href="#"
+                                                                                               style="text-decoration:none;">选择头像</a>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">取消</button>
+                <button class="btn btn-info">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--更改详细资料弹窗-->
+<div class="modal" id="perDetailsModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">修改资料</h4></h4>
+            </div>
+            <!--个人详细信息表单-->
+            <form class="form-horizontal" id="perDeatils-change">
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="input1">
+                        昵称
+                    </label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="input1" value="Double大宝"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="input1">
+                        Q&nbsp;&nbsp;Q
+                    </label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="input1" value="287162738"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="input1">
+                        微信
+                    </label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="input1" value="15005422208"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="input3">
+                        性别
+                    </label>
+                    <div class="col-sm-6" id="per-sex">
+                        <label>
+                            <input type="radio" name="sex" id="input3"/>
+                            男
+                        </label>
+                        <label>
+                            <input type="radio" name="sex" id="input3"/>
+                            女
+                        </label>
+                        <label>
+                            <input type="radio" name="sex" id="input3"/>
+                            保密~
+                        </label>
+                    </div>
+                </div>
+
+
+            </form>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">取消</button>
+                <button class="btn btn-info">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

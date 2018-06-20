@@ -1,0 +1,134 @@
+/*发布part1*/
+#main-pic-div {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 5%;
+    margin-top: 2%;
+    width: 25%;
+}
+
+#main-other-div {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 2%;
+    width: 60%;
+    height: 100%;
+    margin-left: 3%;
+}
+
+#main-other-div-select1, #main-other-div-select2 {
+    width: 20%;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 3%;
+}
+
+#main-other-div-select1 h4 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#main-other-div-select2 h4 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#main-other-name {
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+}
+
+#main-other-name div {
+    margin-top: 2%;
+    font-size: 15px;
+}
+
+#main-other-name input {
+    height: 35px;
+    width: 70%;
+}
+
+#hr-line {
+    width: 800px;
+    border: 0;
+    height: 2px;
+    background-image: -webkit-linear-gradient(to right, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    background-image: -moz-linear-gradient(to right, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    background-image: -o-linear-gradient(to right, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    margin-bottom: 0;
+}
+
+#fabuWords {
+    width: 62% !important;
+}
+
+#tedian-pic {
+    cursor: pointer;
+    max-height: 35px;
+    margin-top: -3px;
+}
+
+#main-other-system {
+    display: inline-block;
+    vertical-align: top;
+    height: 210px;
+    width: 48%;
+    padding: 10px;
+}
+
+#main-other-system button {
+    margin-bottom: 3px !important;
+}
+
+/*发布部分2*/
+#fabu-part2 {
+    width: 90%;
+    margin: auto;
+    margin-top: 3%;
+}
+
+#fabu-part2-text {
+    border: none;
+    border-bottom: 2px solid #D3D3D3;
+    background: white;
+    border-style: inset;
+    font-family: Microsoft YaHei;
+    resize: none;
+    font-size: 17px;
+    margin-bottom: 2%;
+    text-align: center;
+    vertical-align: middle;
+    height: 140px;
+    line-height: 120px;
+}
+
+#fabu-part2-text-div {
+    margin-top: 3%;
+}
+
+/*发布按钮区*/
+#fabu-btn {
+    text-align: center;
+    margin-bottom: 3%;
+}
+
+#fabu-cancel {
+    margin-right: 3%;
+}
+
+/*警示弹窗*/
+#myAlert {
+    width: 90%;
+    margin: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2%;
+    display: none;
+    text-align: center;
+}
+
+#alert-p {
+    display: inline-block;
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="../../css/bootstrap-theme.css"/>
+    <link rel="stylesheet" href="../../css/bootstrap.css"/>
+    <link rel="stylesheet" href="../../css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="../../css/personCenter/editPerFaBu.css"/>
+    <link rel="stylesheet" href="../../css/special/hover-select-special.css"/>
+    <script src="../../js/jquery-3.1.1.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/personCenterJS/editPerFaBu.js"></script>
+    <title></title>
+</head>
+<body>
+
+<button class="btn btn-info" id="ok">OK</button>
+<!--edit部分开始-->
+<div class="modal" id="editModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 id="edit-owner" class="modal-title">SK嗖嗖</h4>
+                <h4 id="edit-de" class="modal-title">的</h4>
+                <h4 id="edit-goods" class="modal-title">物品详情</h4>
+            </div>
+
+            <div class="modal-body">
+                <div id="edit-pic-part">
+                    <div class="hovereffect">
+                        <form id="mainPicForm" method="post" enctype="multipart/form-data"><input
+                                style="display: none !important;" id="select-main-pic" type="file" multiple
+                                name="uploadFile" accept="image/*"/></form>
+                        <img class="img-responsive" id="mainPic" src="../../img/iphone7.png"/>
+                        <div class="overlay">
+                            <a class="info" href="#" id="changePic1">点击更换</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="edit-other-part">
+                    <div id="edit-goodsName"><span>名称</span><input value="name"/></div>
+                    <div id="edit-goodsWords"><span>特点</span><input value="words"/></div>
+                    <hr id="edit-hr2"/>
+                    <div id="edit-goodsArea"><span>区域</span>
+                        <select>
+                            <option value="">请选择区域</option>
+                            <option value="A">女神A区</option>
+                            <option value="B">男神B区</option>
+                            <option value="C">神秘C区</option>
+                            <option value="Z">其他</option>
+                        </select>
+                    </div>
+                    <div id="edit-goodsType"><span>类型</span>
+                        <select>
+                            <option value="">请选择类型</option>
+                            <option value="SM">数码闲置</option>
+                            <option value="SJ">书籍闲置</option>
+                            <option value="RC">日常用品</option>
+                            <option value="JZ">兼职信息</option>
+                        </select>
+                    </div>
+                    <div id="edit-jiage-div"><img id="edit-jiagePic" src="../../img/jiage.png"/><input type="number"
+                                                                                                       value="10.00"/>
+                    </div>
+                    <div id="edit-qq-div"><img id="edit-qqPic" src="../../img/qq.png"/><input value="qq"/></div>
+                    <div id="edit-weixin-div"><img id="edit-weixinPic" src="../../img/weixin.png"/><input value="wx"/>
+                    </div>
+                </div>
+                <hr id="edit-hr1" style="margin-top: 2%;"/>
+                <!--滑块展示开始-->
+                <object style="height: 310px;" id="edit-obj1" style="border:0px" type="text/x-scriptlet"
+                        data="editPerFabuOtherPic.html" width=100% height=615px;></object>
+                <!--滑块展示结束-->
+                <div id="edit-goodsOthers">
+                    <textarea id="edit-ownerSay" class="form-control" rows="5"></textarea>
+                </div>
+            </div>
+            <div id="edit-saveDiv">
+                <div>
+                    <button id="edit-saveBtn" class="btn tip tip-right" data-tip="保存修改"></button>
+                </div>
+                <div>
+                    <button id="edit-cancelBtn" class="btn tip tip-right" data-tip="取消修改"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--edit部分结束-->
+</body>
+</html>  

@@ -1,0 +1,541 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+a {
+    text-decoration: none !important;
+    cursor: pointer;
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+    outline: none;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+a:focus,
+a:active:focus,
+a.active:focus,
+a.focus,
+a:active.focus,
+a.active.focus {
+    outline: none;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+/*导航栏部分*/
+#nav {
+    padding: 0px;
+    width: 100%;
+    height: 60px;
+    border-radius: 0;
+    box-shadow: 0px 5px 5px #C0C0C0;
+}
+
+#logo {
+    display: inline-block;
+    width: 11%;
+    height: 60px;
+}
+
+#logoPic {
+    float: right;
+    padding-top: 3px;
+    width: 84%;
+    height: 89%;
+}
+
+#nav-caidan {
+    margin-left: 40px;
+    display: inline-block;
+    width: 50%;
+    height: 60px;
+    vertical-align: top;
+}
+
+#nav-caidan li {
+    /*去除小圆点*/
+    list-style: none;
+    display: inline;
+    margin-left: 6%;
+    line-height: 60px;
+    vertical-align: middle;
+}
+
+.nav-a {
+    font-size: 17px;
+    color: #808080;
+    background: white;
+    font-weight: 600;
+}
+
+.nav-a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+#nav-label {
+    font-size: 3px;
+    display: inline-block;
+    width: 23px;
+    height: 15px;
+    text-align: center;
+    vertical-align: top;
+    margin-top: 15px;
+}
+
+#nav-input {
+    display: inline-block;
+    height: 46px;
+    width: 19%;
+    vertical-align: top;
+    border-bottom: 1px solid #C0C0C0;
+}
+
+#sousuoInput {
+    outline: none;
+    padding: 0px;
+    margin: 0px;
+    height: 30px;
+    width: 80%;
+    border: none;
+    margin-top: 15px;
+    font-size: 15px;
+}
+
+#sousouSpan {
+    text-align: center;
+    line-height: 24px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #A9A9A9;
+    width: 35px;
+    height: 24px;
+    border-radius: 44%;
+    vertical-align: sub;
+}
+
+#sousouSpan:hover {
+    background: rgba(240, 20, 20, .4);
+}
+
+#perPicDiv {
+    display: inline-block;
+    width: 14%;
+    height: 60px;
+    vertical-align: top;
+}
+
+#perPic {
+    cursor: pointer;
+    float: right;
+    margin-top: 2px;
+    width: 52px;
+    height: 52px;
+}
+
+/*个人悬浮*/
+#person-detail {
+    border-radius: 10px;
+    width: 250px;
+    height: 150px;
+    position: absolute;
+    z-index: 999;
+    right: 26px;
+    background: #F5F5F5;
+}
+
+#person-pic {
+    float: left;
+    margin: 10px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+#person-pic > img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+#person-name {
+    float: left;
+    font-weight: 600;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+#loginOut {
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-top: 10px;
+    float: left;
+    width: 250px;
+    height: 50px;
+    border-top: 2px solid #DCDCDC;
+    background: #F5F5F5;
+    border-radius: 10px;
+}
+
+#per-sz > img {
+    float: left;
+    left: 10px;
+    width: 30px;
+    height: 30px;
+}
+
+#per-sz > a {
+    text-decoration: none;
+    color: #808080;
+    float: left;
+    margin-left: 5px;
+    margin-top: 5px;
+    font-size: 16px;
+}
+
+#per-sz > a:hover {
+    color: #000000;
+}
+
+#login-out > img {
+    margin-top: 3px;
+    float: left;
+    width: 27px;
+    height: 27px;
+    margin-left: 20px;
+}
+
+#login-out > a {
+    text-decoration: none;
+    color: #808080;
+    float: left;
+    margin-left: 5px;
+    margin-top: 5px;
+    font-size: 16px;
+}
+
+#login-out > a:hover {
+    color: #000000;
+}
+
+/*个人信息部分*/
+#person-div {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    background: url(../img/person-headBackground.jpg);
+}
+
+#per-pic {
+    display: inline-block;
+    vertical-align: top;
+    border-radius: 50%;
+    text-align: center;
+    width: 10%;
+    background: #D3D3D3;
+    margin-left: 3%;
+    margin-top: 2%;
+}
+
+#per-pic img {
+    border-radius: 50%;
+    vertical-align: middle;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+}
+
+#per-others {
+    margin-left: 2%;
+    color: white;
+    display: inline-block;
+    width: 20%;
+    height: 100%;
+}
+
+#per-name {
+    margin-top: 23%;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+#per-amount {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+/*展示部分*/
+#show-part {
+    width: 100%;
+}
+
+/*展示部分->点击部分*/
+#click-part {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 2%;
+    height: 80%;
+    display: inline-block;
+    width: 20%;
+}
+
+#per-ziliao, #per-fabu, #per-huishou, #per-shoucang {
+    width: 70%;
+    color: #808080;
+    padding: 10px;
+    border: 1px solid #A9A9A9;
+    font-size: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 10%;
+    border-radius: 5px 20px 20px 5px;
+}
+
+#per-fabu, #per-huishou, #per-shoucang, #per-ziliao:hover {
+    cursor: pointer;
+    color: #696969;
+}
+
+.per-click {
+    border: none !important;
+    background: rgba(240, 20, 20, .8);
+    color: white !important;
+}
+
+/*展示部分->详情部分*/
+#per-click-show, #yifabu-click-show, #sc-click-show, #recycle-click-show {
+    border-left: 2px solid #DCDCDC;
+    display: inline-block;
+    vertical-align: top;
+    width: 79%;
+    height: 95%;
+    margin-top: 2%;
+}
+
+/*个人资料部分*/
+#edit-pic {
+    margin: auto;
+    margin-top: 1%;
+    text-align: center;
+    border: 1px solid #DCDCDC;
+    width: 12%;
+    border-radius: 50%;
+}
+
+#edit-pic img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.notAllowed:hover {
+    cursor: not-allowed;
+}
+
+.hoverImg:hover {
+    cursor: pointer;
+    transform: scale(1.1)
+}
+
+#edit-ziliao {
+    height: 72%;
+}
+
+#edit-name, #edit-qq, #edit-weixin, #edit-sex {
+    border-bottom: 2px solid #DCDCDC;
+    margin: auto;
+    width: 60%;
+    height: 15%;
+    margin-bottom: 1%;
+}
+
+#edit-name img {
+    display: inline-block;
+    max-height: 50%;
+    float: right;
+    cursor: pointer;
+}
+
+#edit-name p, #edit-qq p, #edit-weixin p, #edit-sex p {
+    display: inline-block;
+    text-align: center;
+    font-size: 20px;
+    vertical-align: top;
+    padding-top: 1%;
+    margin-top: 1.2%;
+    width: 10%;
+    height: 80%;
+    background: #FAEBD7;
+    font-weight: bold;
+    border-radius: 20% 20% 0 0;
+}
+
+#edit-name input, #edit-qq input, #edit-weixin input, #edit-sex input {
+    border: none;
+    outline: none;
+    width: 80%;
+    height: 80%;
+    display: inline-block;
+    vertical-align: sub;
+    margin-top: 1.2%;
+    font-size: 20px;
+    background: white;
+}
+
+#edit-btn {
+    margin: auto;
+    width: 60%;
+    height: 15%;
+}
+
+#edit-btn button {
+    display: inline-block;
+    float: right;
+    margin-left: 2%;
+    margin-top: 2%;
+}
+
+/*已发布展示部分*/
+
+#yifabu, #shoucang, #recycle {
+    vertical-align: top;
+    display: inline-block;
+    width: 90%;
+    height: 86%;
+    margin-top: -15px;
+}
+
+#fabu-all {
+    width: 100%;
+    height: 33%;
+    margin-left: 5px;
+    margin-top: 5px;
+    box-shadow: 2px 2px 5px #888888;
+}
+
+#yifabu-page, #shoucang-page, #recycle-page {
+    display: inline-block;
+    width: 9%;
+    height: 86%;
+    float: right;
+}
+
+#fabu-pic {
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+    height: 150px;
+    width: 20%;
+    text-align: center;
+    line-height: 150px;
+}
+
+#fabu-pic img {
+    max-height: 90%;
+    max-width: 100%;
+    vertical-align: middle !important;
+}
+
+#fabu-other {
+    padding-top: 20px;
+    display: inline-block;
+    vertical-align: top;
+    width: 20%;
+    height: 100%;
+    margin-left: 20px;
+}
+
+#fabu-other-jiage {
+    width: 100%;
+    height: 30%;
+}
+
+#fabu-other-jiage img {
+    max-height: 60%;
+}
+
+#fabu-other-jiage span {
+    font-weight: bold;
+    font-size: 18px;
+    vertical-align: middle;
+    color: red;
+}
+
+#fabu-btn, #fabu-btn-1 {
+    margin-left: 10%;
+    position: relative;
+    height: 100%;
+    width: 30%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+/*已发布特殊设置  */
+#fabu-btn-1 {
+    width: 45%;
+}
+
+#edit, #delete, #show, #showSc, #deleteSc {
+    position: absolute;
+    bottom: 10px;
+    display: inline-block;
+    border: none;
+    color: #03a6ff;
+    border: 1px solid #03a6ff;
+    background: white;
+    width: 40%;
+    height: 20%;
+    margin-right: 5%;
+}
+
+#edit, #delete, #show {
+    width: 30%;
+}
+
+#show {
+    float: left;
+}
+
+#edit {
+    margin-left: 35%;
+}
+
+#delete {
+    margin-left: 70%
+}
+
+#deleteSc {
+    margin-left: 50%;
+}
+
+.pagination li {
+    display: flex;
+}
+
+.pagination a {
+    border-radius: 0 !important;
+    text-align: center;
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+.dddBlackground {
+    background: #ddd !important;
+}
+
+#souScUl, #souRecycleUl {
+    float: right;
+    margin-right: 10%;
+}
+
+#souScInput {
+
+}

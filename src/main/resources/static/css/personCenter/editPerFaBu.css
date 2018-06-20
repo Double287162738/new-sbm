@@ -1,0 +1,290 @@
+
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+    outline: none;
+}
+
+#edit-pic-part {
+    position: relative;
+    vertical-align: top;
+    display: inline-block;
+    margin-left: 2%;
+    width: 35%;
+    height: 30%;
+}
+
+#edit-pic-part img {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+#edit-other-part {
+    padding-left: 5%;
+    margin-top: 20px;
+    vertical-align: top;
+    display: inline-block;
+    margin-left: 3%;
+    width: 59%;
+}
+
+#edit-jiagePic, #edit-qqPic, #edit-weixinPic {
+    vertical-align: top;
+    display: inline-block;
+    max-height: 90%;
+    margin-right: 7px;
+}
+
+#edit-weixinPic {
+    width: 35px;
+}
+
+#edit-jiage-div {
+}
+
+#edit-jiage-div span {
+    font-size: 20px;
+    color: red;
+    font-weight: bold;
+    vertical-align: top;
+    display: inline-block;
+}
+
+#edit-shoucang-div {
+    margin-top: 1%;
+}
+
+#edit-shoucang-div span {
+    font-size: 20px;
+    font-weight: bold;
+    vertical-align: sub;
+    display: inline-block;
+}
+
+#edit-liulan-div {
+    margin-top: 1%;
+}
+
+#edit-liulan-div span {
+    font-size: 20px;
+    font-weight: bold;
+    vertical-align: sub;
+    display: inline-block;
+}
+
+#edit-hr2 {
+    width: 100%;
+    border: 0;
+    height: 2px;
+    background-image: -webkit-linear-gradient(to right, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    background-image: -moz-linear-gradient(to right, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    background-image: -o-linear-gradient(to right, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+#edit-qq-div {
+    margin-top: 1%;
+}
+
+#edit-qq-div span {
+    font-size: 20px;
+    font-weight: bold;
+    vertical-align: sub;
+    display: inline-block;
+}
+
+#edit-weixin-div {
+    margin-top: 1%;
+}
+
+#edit-weixin-div span {
+    font-size: 20px;
+    font-weight: bold;
+    vertical-align: sub;
+    display: inline-block;
+}
+
+#edit-ownerSay {
+    border: none;
+    border-bottom: 2px solid #D3D3D3;
+    background: white;
+    border-style: inset;
+    font-family: Microsoft YaHei;
+    resize: none;
+    font-size: 17px;
+    margin-bottom: 13%;
+}
+
+#edit-owner, #edit-de, #edit-goods {
+    display: inline-block;
+}
+
+/*修改内容部分*/
+#edit-goodsName, #edit-goodsWords, #edit-jiage-div,
+#edit-shoucang-div, #edit-liulan-div, #edit-qq-div,
+#edit-weixin-div, #edit-goodsArea, #edit-goodsType {
+    font-size: 15px;
+    font-weight: bold;
+    height: 40px;
+}
+
+#edit-goodsName span, #edit-goodsWords span, #edit-goodsArea span, #edit-goodsType span {
+    margin-right: 10px;
+}
+
+#edit-goodsName input, #edit-goodsWords input, #edit-jiage-div input,
+#edit-shoucang-div input, #edit-liulan-div input, #edit-qq-div input,
+#edit-weixin-div input, #edit-goodsArea select, #edit-goodsType select {
+    height: 85%;
+    width: 200px;
+    font-size: 20px;
+    font-weight: 200;
+}
+
+#edit-goodsArea select, #edit-goodsType select {
+    font-size: 17px;
+    font-weight: 400;
+}
+
+#edit-shoucang-div input, #edit-liulan-div input {
+    border: none;
+}
+
+#edit-saveDiv {
+    box-shadow: 5px 5px 5px black;
+    position: absolute;
+    right: -40px;
+    top: 150px;
+}
+
+#edit-saveDiv button {
+    width: 40px;
+    height: 40px;
+    margin-top: 1px;
+    border: none;
+    background: white;
+    border-radius: 0;
+}
+
+#edit-saveBtn {
+    background: url(../../img/perCenter/save.png) !important;
+}
+
+#edit-cancelBtn {
+    background: url(../../img/perCenter/cancel.png) !important;
+}
+
+.tip {
+    display: inline-block;
+    position: relative;
+}
+
+.tip:before, .tip:after {
+    opacity: 0; /*透明度为完全透明*/
+    position: absolute;
+    z-index: 1000; /*设为最上层*/
+    /*鼠标放上元素上时的动画，鼠标放上后效果在.tip-*:hover:before, .tip-*:hover:after中设置;
+    0.3s:规定完成过渡效果需要多少秒或毫秒,ease:规定慢速开始，然后变快，然后慢速结束的过渡效果*/
+    transition: 0.3s ease;
+    -webkit-transition: 0.3s ease;
+    -moz-transition: 0.3s ease;
+}
+
+.tip:before {
+    content: '';
+    border: 6px solid transparent;
+}
+
+.tip:after {
+    content: attr(data-tip); /*后去要提示的文本*/
+    padding: 5px;
+    white-space: nowrap; /*强制不换行*/
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.tip:hover:before, .tip:hover:after {
+    opacity: 1; /*鼠标放上时透明度为完全显示*/
+    z-index: 1000;
+}
+
+/*top*/
+.tip-top:before {
+    bottom: 100%;
+    left: 50%;
+    border-top-color: rgba(0, 0, 0, 0.8); /*小三角效果*/
+    margin-left: -3px;
+    margin-bottom: -12px;
+}
+
+.tip-top:after {
+    bottom: 100%;
+    left: 50%;
+    margin-left: -6px;
+}
+
+.tip-top:hover:before {
+    margin-bottom: -6px;
+}
+
+.tip-top:hover:after {
+    margin-bottom: 6px;
+}
+
+/*bottom*/
+.tip-bottom:before {
+    top: 100%;
+    left: 50%;
+    border-bottom-color: rgba(0, 0, 0, 0.8);
+    margin-left: -3px;
+    margin-top: -9px;
+}
+
+.tip-bottom:after {
+    top: 100%;
+    left: 50%;
+    margin-left: -6px;
+    margin-top: 3px;
+}
+
+.tip-bottom:hover:before {
+    margin-top: -3px;
+}
+
+.tip-bottom:hover:after {
+    margin-top: 9px;
+}
+
+/*right*/
+.tip-right:before {
+    top: 50%;
+    left: 100%;
+    border-right-color: rgba(0, 0, 0, 0.8);
+    margin-left: -9px;
+    margin-top: -3px;
+}
+
+.tip-right:after {
+    top: 50%;
+    left: 100%;
+    margin-left: 3px;
+    margin-top: -6px;
+}
+
+.tip-right:hover:before {
+    margin-left: -3px;
+}
+
+.tip-right:hover:after {
+    margin-left: 9px;
+}

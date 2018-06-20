@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SK嗖嗖-嗖嗖就有</title>
+    <link rel="shortcut icon" href="../img/favicon.ico"/>
+    <link rel="stylesheet" href="../css/bootstrap-theme.css"/>
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/recommend.css">
+    <script src="../js/jquery-3.1.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/jquery.cookie.js"></script>
+    <script src="../js/recommend.js"></script>
+    <meta charset="UTF-8">
+</head>
+<body data-spy="scroll" data-target="#myScrollspy">
+<!--导航栏部分-->
+<div id="nav">
+    <div id="logo">
+        <img id="logoPic" src="../img/skss.png"/>
+    </div>
+    <div id="nav-caidan">
+        <ul>
+            <li><a href="##" class="nav-a">已发布</a></li>
+            <li><a href="##" class="nav-a">收藏夹</a></li>
+            <li><a href="##" class="nav-a">人气闲置<span id="nav-label" class="label label-danger">N</span></a></li>
+        </ul>
+    </div>
+    <div id="nav-input">
+        <input id="sousuoInput" type="text" placeholder="嗖嗖就有~">
+        <span id="sousouSpan" class="glyphicon glyphicon-search"></span>
+    </div>
+    <div id="perPicDiv">
+        <img id="perPic" class="img-circle" src="../img/gangtiexia.jpg"/>
+    </div>
+</div>
+<!--导航栏部分结束-->
+
+<!--个人悬浮开始-->
+<div id="person-detail" class="pull-right" style="display: none;">
+    <div id="person-pic">
+        <img src="../img/gangtiexia.jpg"/>
+    </div>
+    <div id="person-name">
+        <span>风一样的男子</span>
+        <br/><span style="font-size: 15px !important;font-weight: 300;color:#808080;float: left;">15005422208</span>
+    </div>
+    <div id="loginOut">
+        <div id="per-sz"><img src="../img/per-sz.png"/><a href="##">个人设置</a></div>
+        <div id="login-out"><img src="../img/login-out.png"/><a href="##">退出登录</a></div>
+    </div>
+</div>
+<!--个人悬浮结束-->
+
+<div id="recommend-all">
+    <div id="myScrollspy">
+        <ul class="nav nav-tabs nav-stacked" id="myNav">
+            <li class="active"><a href="#section-1">电子产品</a></li>
+            <li><a href="#section-2">书籍资料</a></li>
+            <li><a href="#section-3">日常用品</a></li>
+            <li><a href="#section-4">兼职专区</a></li>
+            <li><a href="#section-5">待开发区</a></li>
+        </ul>
+    </div>
+    <div id="section">
+        <div id="section-1">
+            <div id="section-1-title">
+                <h3>潮玩科技 <strong id="section-1-strong">TECHNOLOGY</strong></h3>
+            </div>
+            <div id="section-1-pic">
+                <div class="hovereffect">
+                    <img class="img-responsive" src="../img/section1Pic.jpg"/>
+                    <div class="overlay">
+                        <h2>电子产品专区</h2>
+                        <a class="info" href="#">进入</a>
+                    </div>
+                </div>
+            </div>
+            <div id="section-1-goods">
+                <div id="selection-1-1">
+                    <div id="section-1-1-detail">
+                        <img src="../img/iphone6.png"/>
+                        <h4>Iphone7 <strong>￥150.00</strong></h4>
+                    </div>
+                    <div id="section-1-1-detail">
+                        <img src="../img/ipad.jpg"/>
+                        <h4>Ipad4 32G <strong>￥400.00</strong></h4>
+                    </div>
+                    <div id="section-1-1-detail">
+                        <img src="../img/iwatch.jpg"/>
+                        <h4>iWatch3代 <strong>￥521.00</strong></h4>
+                    </div>
+                    <div id="section-1-1-detail">
+                        <img src="../img/iwatch2.jpg"/>
+                        <h4>Iphone7 <strong>￥500.00</strong></h4>
+                    </div>
+                    <div id="section-1-1-detail">
+                        <img src="../img/iphoneSE.png"/>
+                        <h4>IphoneSE <strong>￥500.00</strong></h4>
+                    </div>
+
+                </div>
+                <div id="selection-1-2">
+                    <div id="section-1-1-detail">
+                        <img src="../img/ipad.jpg"/>
+                        <h4>小米Note<strong>￥300.00</strong></h4>
+                    </div>
+                    <div id="section-1-1-detail">
+                        <img src="../img/ipad.jpg"/>
+                        <h4>Ipad4 32G <strong>￥500.00</strong></h4>
+                    </div>
+                    <div id="section-1-1-detail">
+                        <img src="../img/iwatch2.jpg"/>
+                        <h4>iWatch3代 <strong>￥500.00</strong></h4>
+                    </div>
+                    <div id="section-1-1-detail">
+                        <img src="../img/iwatch.jpg"/>
+                        <h4>Iphone7 <strong>￥500.00</strong></h4>
+                    </div>
+                    <div id="section-1-1-detail">
+                        <img src="../img/iphone6.png"/>
+                        <h4>IphoneSE <strong>￥500.00</strong></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div id="section-2">
+            <div id="section-2-title">
+                <h3>书籍资料 <strong id="section-1-strong">BOOKS</strong></h3>
+            </div>
+            <div id="section-2-pic">
+                <div class="hovereffect">
+                    <img class="img-responsive" src="../img/section2Pic.jpg"/>
+                    <div class="overlay">
+                        <h2>书籍资料专区</h2>
+                        <a class="info" href="#">进入</a>
+                    </div>
+                </div>
+            </div>
+            <div id="section-2-goods">
+                <div id="selection-2-1">
+                    <div id="section-2-1-detail">
+                        <img src="../img/iphone6.png"/>
+                        <h4>Iphone7 <strong>￥150.00</strong></h4>
+                    </div>
+                    <div id="section-2-1-detail">
+                        <img src="../img/ipad.jpg"/>
+                        <h4>Ipad4 32G <strong>￥400.00</strong></h4>
+                    </div>
+                    <div id="section-2-1-detail">
+                        <img src="../img/iwatch.jpg"/>
+                        <h4>iWatch3代 <strong>￥521.00</strong></h4>
+                    </div>
+                    <div id="section-2-1-detail">
+                        <img src="../img/iwatch2.jpg"/>
+                        <h4>Iphone7 <strong>￥500.00</strong></h4>
+                    </div>
+                    <div id="section-2-1-detail">
+                        <img src="../img/iphoneSE.png"/>
+                        <h4>IphoneSE <strong>￥500.00</strong></h4>
+                    </div>
+
+                </div>
+                <div id="selection-2-2">
+                    <div id="section-2-1-detail">
+                        <img src="../img/ipad.jpg"/>
+                        <h4>小米Note<strong>￥300.00</strong></h4>
+                    </div>
+                    <div id="section-2-1-detail">
+                        <img src="../img/ipad.jpg"/>
+                        <h4>Ipad4 32G <strong>￥500.00</strong></h4>
+                    </div>
+                    <div id="section-2-1-detail">
+                        <img src="../img/iwatch2.jpg"/>
+                        <h4>iWatch3代 <strong>￥500.00</strong></h4>
+                    </div>
+                    <div id="section-2-1-detail">
+                        <img src="../img/iwatch.jpg"/>
+                        <h4>Iphone7 <strong>￥500.00</strong></h4>
+                    </div>
+                    <div id="section-2-1-detail">
+                        <img src="../img/iphone6.png"/>
+                        <h4>IphoneSE <strong>￥500.00</strong></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <h2 id="section-3">第三部分</h2>
+        <hr>
+        <h2 id="section-4">第四部分</h2>
+        <hr>
+        <h2 id="section-5">第五部分</h2>
+    </div>
+</div>
+</body>
+</html>
+ 

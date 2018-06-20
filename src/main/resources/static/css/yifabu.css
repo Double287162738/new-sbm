@@ -1,0 +1,91 @@
+body {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+a {
+    cursor: pointer;
+}
+
+#head > ul {
+    float: inherit;
+    margin: 0 auto !important;
+    padding-right: 10px;
+}
+
+#time-part {
+    border-right: 1px solid #C0C0C0;
+    width: 95px;
+    height: 200px;
+}
+
+#pic {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#pic > img {
+    max-height: 180px;
+    overflow: hidden;
+}
+
+#show {
+    padding-top: 10px;
+}
+
+/*编辑和删除按钮css*/
+#edit {
+    color: #03a6ff;
+    border: 1px solid #03a6ff;
+    width: 100px;
+    margin-top: 10px;
+    margin-left: 200px;
+}
+
+#delete {
+    color: #03a6ff;
+    border: 1px solid #03a6ff;
+    width: 100px;
+    margin-top: 10px;
+}
+
+/*分页区*/
+#page {
+    text-align: center;
+}
+
+/*已发布兼职*/
+#show-jianzhi1 {
+    padding: 0px;
+}
+
+#show-jianzhi2 {
+    padding: 0px;
+}
+
+#show-jianzhi3 {
+    padding: 0px;
+}
+
+#show-time {
+    height: 25px;
+    border-bottom: 1px solid #C0C0C0;
+}
+
+#show-time > h4 {
+    display: inline;
+}
+
+#show-time > h5 {
+    display: inline;
+}
+
+#dian {
+    width: 8px;
+    height: 8px;
+    float: right;
+    border-radius: 50%;
+    background: #C0C0C0;
+    margin-top: -4px;
+
+}
