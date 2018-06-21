@@ -1,8 +1,10 @@
-package com.sbm.pojo.model;
+package com.sbm.pojo.response;
+
 
 import java.util.Date;
+import java.util.List;
 
-public class Comment {
+public class CommentReplyResponse {
 
     /**
      * 主键
@@ -10,24 +12,34 @@ public class Comment {
     private Integer id;
 
     /**
-     * 主题id
+     * 评论id
      */
-    private Integer topicId;
+    private Integer commentId;
 
     /**
-     * 主题类型
+     * 回复目标id
      */
-    private String topicType;
+    private Integer replyId;
 
     /**
-     * 评论内容
+     * 回复类型
+     */
+    private String replyType;
+
+    /**
+     * 回复内容
      */
     private String content;
 
     /**
-     * 评论用户id
+     * 回复用户id
      */
     private Integer fromUid;
+
+    /**
+     * 目标用户id
+     */
+    private Integer toUid;
 
     /**
      * 图片路径
@@ -38,10 +50,6 @@ public class Comment {
      * 视频路径
      */
     private String videoPath;
-    /**
-     * 商品ID
-     */
-    private Integer goodsId;
 
     /**
      * 作废标记
@@ -59,7 +67,7 @@ public class Comment {
     private Date createTime;
 
     /**
-     * 修改时间
+     * 更新时间
      */
     private Date updateTime;
 
@@ -70,14 +78,26 @@ public class Comment {
     private String add3;
 
     /**
-     * 点赞次数
+     * 点赞
      */
     private Integer likeCount;
 
     /**
-     * 排名
+     * 排序
      */
     private Integer rank;
+
+    //回复
+    private List<CommentReplyResponse> commentReplies;
+
+
+    public List<CommentReplyResponse> getCommentReplies() {
+        return commentReplies;
+    }
+
+    public void setCommentReplies(List<CommentReplyResponse> commentReplies) {
+        this.commentReplies = commentReplies;
+    }
 
     public Integer getId() {
         return id;
@@ -87,20 +107,28 @@ public class Comment {
         this.id = id;
     }
 
-    public Integer getTopicId() {
-        return topicId;
+    public Integer getCommentId() {
+        return commentId;
     }
 
-    public void setTopicId(Integer topicId) {
-        this.topicId = topicId;
+    public void setCommentId(Integer commentId) {
+        this.commentId = commentId;
     }
 
-    public String getTopicType() {
-        return topicType;
+    public Integer getReplyId() {
+        return replyId;
     }
 
-    public void setTopicType(String topicType) {
-        this.topicType = topicType;
+    public void setReplyId(Integer replyId) {
+        this.replyId = replyId;
+    }
+
+    public String getReplyType() {
+        return replyType;
+    }
+
+    public void setReplyType(String replyType) {
+        this.replyType = replyType;
     }
 
     public String getContent() {
@@ -119,6 +147,14 @@ public class Comment {
         this.fromUid = fromUid;
     }
 
+    public Integer getToUid() {
+        return toUid;
+    }
+
+    public void setToUid(Integer toUid) {
+        this.toUid = toUid;
+    }
+
     public String getPicturePath() {
         return picturePath;
     }
@@ -133,14 +169,6 @@ public class Comment {
 
     public void setVideoPath(String videoPath) {
         this.videoPath = videoPath;
-    }
-
-    public Integer getGoodsId() {
-        return goodsId;
-    }
-
-    public void setGoodsId(Integer goodsId) {
-        this.goodsId = goodsId;
     }
 
     public Boolean getInvalid() {

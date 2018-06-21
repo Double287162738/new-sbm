@@ -1,8 +1,15 @@
-package com.sbm.pojo.model;
+package com.sbm.pojo.response;
+
+import com.sbm.pojo.model.CommentReply;
 
 import java.util.Date;
+import java.util.List;
 
-public class Comment {
+/**
+ * Created by zhangxz on 2018/6/19
+ */
+public class ACommentResponse {
+
 
     /**
      * 主键
@@ -78,6 +85,9 @@ public class Comment {
      * 排名
      */
     private Integer rank;
+
+    //回复
+    private List<CommentReplyResponse> commentReplies;
 
     public Integer getId() {
         return id;
@@ -213,5 +223,13 @@ public class Comment {
 
     public void setRank(Integer rank) {
         this.rank = rank;
+    }
+
+    public List<CommentReplyResponse> getCommentReplies() {
+        return commentReplies;
+    }
+
+    public void setCommentReplies(List<CommentReplyResponse> commentReplies) {
+        this.commentReplies = commentReplies;
     }
 }
