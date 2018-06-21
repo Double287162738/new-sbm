@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,6 +27,41 @@ public class CommentServiceImpl  implements CommentService {
     private CommentMapper  commentMapper;
     @Resource
     private CommentReplyMapper  commentReplyMapper;
+
+
+    /**
+     * 新加评论
+     * @param comment
+     * @return
+     */
+
+    @Override
+    public Boolean createComment(Comment comment) {
+        comment.setCreateTime(new Date());
+        comment.setRank(10);
+       int  count= commentMapper.insertSelective(comment);
+       if(count<1){
+        return false;
+       }
+        return true;
+    }
+
+    /**
+     * 回复评论
+     * @param commentReply
+     * @return
+     */
+    @Override
+    public Boolean createCommentReply(CommentReply commentReply) {
+        commentReply.setCreateTime(new Date());
+        commentReply.setRank(10);
+       int count= commentReplyMapper.insertSelective(commentReply);
+        if(count<1){
+            return false;
+        }
+        return true;
+    }
+
 
     /**
      * 商品查询评论

@@ -1,4 +1,6 @@
 package com.sbm.controller;
+import com.sbm.pojo.model.Comment;
+import com.sbm.pojo.model.CommentReply;
 import com.sbm.pojo.response.ACommentResponse;
 import com.sbm.service.CommentService;
 import com.sbm.util.ExecuteResult;
@@ -37,6 +39,34 @@ public class CommentController {
     }
 
 
+    /**
+     * 新增商品评论
+     * @param comment
+     * @return
+     */
+    @RequestMapping("/createComment")
+    @ResponseBody
+    public ExecuteResult<Boolean> createComment(Comment comment){
+
+        Boolean boo= commentService.createComment(comment);
+
+        return  new ExecuteResult<>(boo);
+    }
+
+
+    /**
+     * 新增商品回复
+     * @param commentReply
+     * @return
+     */
+    @RequestMapping("/createCommentReply")
+    @ResponseBody
+    public ExecuteResult<Boolean> createCommentReply(CommentReply commentReply){
+
+        Boolean boo= commentService.createCommentReply(commentReply);
+
+        return  new ExecuteResult<>(boo);
+    }
 
 
 }
