@@ -1,172 +1,184 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>SK嗖嗖-嗖嗖就有</title>
-    <link rel="shortcut icon" href="../img/favicon.ico"/>
-    <link rel="stylesheet" href="../css/bootstrap-theme.css"/>
-    <link rel="stylesheet" href="../css/bootstrap.css"/>
-    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../css/bootstrap-theme.min.css"/>
-    <link rel="stylesheet" href="../css/home.css">
-    <link rel="stylesheet" href="../css/common.css">
-    <script src="../js/jquery-3.1.1.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/home.js"></script>
-    <script src="../js/common.js"></script>
-    <script src="../js/jquery.cookie.js"></script>
-    <meta charset="UTF-8">
-</head>
-<body>
-<!--导航栏部分-->
-<div id="nav">
-    <div id="logo">
-        <img id="logoPic" src="../img/skss.png"/>
-    </div>
-    <div id="nav-caidan">
-        <ul>
-            <li><a href="##" class="nav-a">已发布</a></li>
-            <li><a href="##" class="nav-a">收藏夹</a></li>
-            <li><a href="##" class="nav-a">人气闲置<span id="nav-label" class="label label-danger">N</span></a></li>
-        </ul>
-    </div>
-    <div id="nav-input">
-        <input id="sousuoInput" type="text" placeholder="嗖嗖就有~">
-        <span id="sousouSpan" class="glyphicon glyphicon-search"></span>
-    </div>
-    <div id="perPicDiv">
-        <img id="perPic" class="img-circle" src="../img/gangtiexia.jpg"/>
-    </div>
-</div>
-<!--导航栏部分结束-->
-
-<!--个人悬浮开始-->
-<div id="person-detail" class="pull-right" style="display: none;">
-    <div id="person-pic">
-        <img src="../img/gangtiexia.jpg"/>
-    </div>
-    <div id="person-name">
-        <span>风一样的男子</span>
-        <br/><span style="font-size: 15px !important;font-weight: 300;color:#808080;float: left;">15005422208</span>
-    </div>
-    <div id="loginOut">
-        <div id="per-sz"><img src="../img/per-sz.png"/><a href="##">个人设置</a></div>
-        <div id="login-out"><img src="../img/login-out.png"/><a href="##">退出登录</a></div>
-    </div>
-</div>
-<!--个人悬浮结束-->
-
-
-<!--大搜索框-->
-<div id="find">
-    <div id="findDiv" class="input-group">
-        <input id="findInput" type="text" class="form-control input-lg" placeholder="嗖嗖就有~"/>
-        <span class="input-group-btn">
+	<head>
+	<title>SK嗖嗖-嗖嗖就有</title>
+	<link rel="shortcut icon" href="../img/favicon.ico"/>
+	<link rel="stylesheet" href="../css/bootstrap-theme.css" />
+	<link rel="stylesheet" href="../css/bootstrap.css" />
+	<link rel="stylesheet" href="../css/bootstrap.min.css" />
+	<link rel="stylesheet" href="../css/bootstrap-theme.min.css" />
+	<link rel="stylesheet" href="../css/home.css">
+	<link rel="stylesheet" href="../css/common.css">
+	<script src="../js/jquery-3.1.1.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/home.js"></script>
+	<script src="../js/common.js"></script>
+	<script src="../js/jquery.cookie.js"></script>
+	<meta charset="UTF-8">
+	</head>
+	<body>
+	<!--导航栏部分-->
+	<nav class="navbar navbar-default" role="navigation" id="navHeader">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a id="skssA" class="navbar-brand" href="#"><img src="../img/skss.png" id="skssPic"></a>
+			</div>
+			<div>
+				<ul class="nav navbar-nav">
+					<li class="margin20px"><a href="#">已发布</a></li>
+					<li class="margin20px"><a href="#">人气闲置</a></li>
+					<li class="margin20px"><a href="#">收藏夹</a></li>
+					<li class="margin20px"><a href="#">发布闲置</a></li>
+					<li class="margin20px"><a href="#">留白功能</a></li>
+				</ul>
+			</div>
+			<form class="navbar-form navbar-left" role="search" id="searchForm">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="嗖嗖就有">
+				</div>
+				<button type="submit" class="btn btn-danger">搜索</button>
+			</form>
+			<div id="perDiv" class="navbar-header navbar-right">
+				<a id="perA" class="navbar-brand" href="#"><img src="../img/gangtiexia.jpg" id="perPic" class="img-circle"></a>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"><span class="glyphicon glyphicon-user"></span> 注册</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+		<!--导航栏部分结束-->
+		
+		<!--个人悬浮开始-->
+		<div id="person-detail" class="pull-right" style="display: none;">
+			<div id="person-pic">
+				<img src="../img/gangtiexia.jpg" />
+			</div>
+			<div id="person-name">
+				<span>风一样的男子</span>
+				<br/><span style="font-size: 15px !important;font-weight: 300;color:#808080;float: left;">15005422208</span>
+			</div>
+			<div id="loginOut">
+				<div id="per-sz"><img src="../img/per-sz.png"/><a href="##">个人设置</a></div>
+				<div id="login-out"><img src="../img/login-out.png"/><a href="##">退出登录</a></div>
+			</div>
+		</div>
+		<!--个人悬浮结束-->
+		
+		
+		<!--大搜索框-->
+		<div id="find">
+			<div id="findDiv" class="input-group">
+				<input id="findInput" type="text" class="form-control input-lg" placeholder="嗖嗖就有~"/>
+				<span class="input-group-btn">  
 	               <button class="btn btn-default btn-lg"><span class="glyphicon glyphicon-search"></span></button>  
-	            </span>
-    </div>
-</div>
-<!--大搜索框结束-->
-
-<!--嗖嗖导航开始-->
-<div id="sousou-rec">
-    <button class="sousou-btn">嗖嗖推荐</button>
-    <button class="sousou-btn">嗖嗖人气</button>
-    <button class="sousou-btn">嗖嗖全站</button>
-
-    <div><input type="checkbox"/>A区</div>
-    <div><input type="checkbox"/>B区</div>
-    <div><input type="checkbox"/>C区</div>
-    <div><input type="checkbox"/>全校</div>
-</div>
-
-<!--间隔-->
-<hr id="hr1"/>
-<!--间隔结束-->
-
-<!--嗖嗖导航结束-->
-
-<!--闲置展示部分-->
-<div id="showPart">
-
-</div>
-<!--闲置展示部分结束-->
-<!--分页部分开始-->
-<div id="page">
-    <div id="yeshu">
-        <!-- <ul class="pagination">
-          <li><a href="##">&laquo;上一页</a></li>
-          <li><a href="##">1</a></li>
-          <li><a href="##">2</a></li>
-          <li><a href="##">3</a></li>
-          <li><a href="##">...</a></li>
-          <li><a href="##">15</a></li>
-          <li><a href="##">&raquo;下一页 </a></li>
-      </ul> -->
-    </div>
-</div>
-<!--分页部分结束-->
-
-<!--底部搜索框开始-->
-<div id="bottom-sousuo">
-    <input id="bottom-input" type="text" placeholder="&nbsp;&nbsp;嗖嗖就有~"/>
-    <button id="bottom-button">搜索</button>
-</div>
-
-<!--底部搜索框结束-->
-
-<!--闲置详情部分开始-->
-<div class="modal " id="goodsModal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 id="owner" class="modal-title">SK嗖嗖</h4>
-                <h4 id="de" class="modal-title">的</h4>
-                <h4 id="goods" class="modal-title">物品详情</h4>
-            </div>
-
-            <div class="modal-body">
-                <div id="pic-part">
-                    <img id="goodsPic1" src="../img/IphoneX.png"/>
-                </div>
-                <div id="other-part">
-                    <div><h3 id="goodsName"></h3></div>
-                    <div><h4 id="goodsWords"></h4></div>
-                    <hr id="hr2"/>
-                    <div id="jiage-div"><img id="jiagePic" src="../img/jiage.png"/><span id="goodsPrice"></span></div>
-                    <div id="shoucang-div"><a href="##"><img id="shoucangPic" src="../img/shoucang1.png"/></a><span
-                            id="goodsCollectionAmount"></span></div>
-                    <div id="liulan-div"><img id="liulanPic" src="../img/liulan.png"/><span
-                            id="goodsClickAmount"></span></div>
-                    <div id="qq-div"><img id="qqPic" src="../img/qq.png"/><span id="qqSpan"></span>
-                        <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=287162738&site=qq&menu=yes">
-                            <img id="fuzhi-pic" title="点击这里给我发消息" src="../img/fuzhi.png" alt="点击这里给我发消息"/>
-                        </a>
-                    </div>
-                    <div id="weixin-div"><img id="weixinPic" src="../img/weixin.png"/><span id="weixinSpan"></span><img
-                            id="fuzhi-pic" title="点击复制" src="../img/fuzhi.png"/></div>
-                </div>
-                <hr id="hr1" style="margin-top: 2%;"/>
-                <!--滑块展示开始-->
-                <object style="height: 310px;" id="obj1" style="border:0px" type="text/x-scriptlet"
-                        data="goodsDetails.html" width=100% height=615px;></object>
-                <!--滑块展示结束-->
-                <div id="goodsOthers">
-							<textarea id="ownerSay" class="form-control" rows="5" readonly="readonly">
+	            </span>  
+			</div>	
+		</div>
+		<!--大搜索框结束-->
+		
+  		<!--嗖嗖导航开始-->
+  		<div id="sousou-rec">
+  			<button class="sousou-btn">嗖嗖推荐</button>
+  			<button class="sousou-btn">嗖嗖人气</button>
+  			<button class="sousou-btn">嗖嗖全站</button>
+  			
+  			<div><input  type="checkbox"/>A区</div>
+  			<div><input  type="checkbox"/>B区</div>
+  			<div><input  type="checkbox"/>C区</div>
+  			<div><input  type="checkbox"/>全校</div>
+  		</div>
+  		
+  		<!--间隔-->
+  		<hr id="hr1" />
+  		<!--间隔结束-->	
+  		
+  		<!--嗖嗖导航结束-->
+  			
+  		<!--闲置展示部分-->	
+  		<div id="showPart">
+		
+		</div>
+ 	 	<!--闲置展示部分结束-->
+			<!--分页部分开始-->
+ 	 	<div id="page">
+ 	 		<div id="yeshu">
+	  			<!-- <ul class="pagination">
+				    <li><a href="##">&laquo;上一页</a></li>
+				    <li><a href="##">1</a></li>
+				    <li><a href="##">2</a></li>
+				    <li><a href="##">3</a></li>
+				    <li><a href="##">...</a></li>
+				    <li><a href="##">15</a></li>
+				    <li><a href="##">&raquo;下一页 </a></li>
+				</ul> -->
+			</div>
+  		</div>
+  		<!--分页部分结束-->
+  		
+  		<!--底部搜索框开始-->
+  		<div id="bottom-sousuo">
+			<input id="bottom-input" type="text" placeholder="&nbsp;&nbsp;嗖嗖就有~"/>
+			<button id="bottom-button">搜索</button>
+  		</div>
+  		
+  		<!--底部搜索框结束-->
+ 	 	
+ 	 	<!--闲置详情部分开始-->
+ 	 <div class="modal " id="goodsModal" >
+  			<div class="modal-dialog modal-lg" >
+  				<div class="modal-content">
+  					<div class="modal-header">
+  						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+  						<h4 id="owner" class="modal-title">SK嗖嗖</h4>
+  						<h4 id="de" class="modal-title">的</h4>
+  						<h4 id="goods" class="modal-title">物品详情</h4>
+  					</div>
+  					
+  					<div class="modal-body">
+  						<div id="pic-part">
+  							<img id="goodsPic1" src="../img/IphoneX.png" />
+  						</div>
+  						<div id="other-part">
+  							<div><h3 id="goodsName"></h3></div>
+  							<div><h4 id="goodsWords"></h4></div>
+  							<hr id="hr2" />
+							<div id="other-part-child1">
+								<div id="jiage-div"><img id="jiagePic" src="../img/jiage.png"/><span id="goodsPrice"></span></div>
+								<div id="shoucang-div"><a  href="##"><img id="shoucangPic" src="../img/shoucang1.png"/></a><span id="goodsCollectionAmount"></span></div>
+								<div id="liulan-div"><img id="liulanPic" src="../img/liulan.png"/><span id="goodsClickAmount"></span></div>
+							</div>
+							<div id="other-part-child2">
+								<div id="qq-div"><img id="qqPic" src="../img/qq.png"/><span id="qqSpan"></span><img id="connectQQ-pic" title="点击联系该QQ" src="../img/connectQQ.png"/></div>
+								<div id="weixin-div"><img id="weixinPic" src="../img/weixin.png"/><span id="weixinSpan"></span><img id="fuzhi-pic" title="点击复制" src="../img/fuzhi.png"/></div>
+								<div id="area-div"><img id="areaPic" src="../img/area.png"/><span id="areaSpan"></span></div>
+							</div>
+							<div id="other-part-btn">
+								<button class="btn" id="addCollectBtn"><span class="glyphicon glyphicon-heart"></span> 加入收藏夹</button>
+								<button class="btn" id="showDetailBtn">查看详情</button>
+							</div>
+  						</div>
+  						<hr id="hr1" style="margin-top: 2%;"/>
+  						<!--滑块展示开始55-->
+  						<object style="height: 310px;" id="obj1" style="border:0px" type="text/x-scriptlet" data="goodsDetails.html" width=100% height=615px;></object>
+    					<!--滑块展示结束-->
+    					<div id="goodsOthers">
+							<textarea id="ownerSay" class="form-control" rows="5"  readonly="readonly">
 								的法律框架快乐的积分浪费空间ADSL反馈记录卡第三方记录开始的减肥立刻将盛大六块腹肌剌肯定是解放路口j
 								接收的六块腹肌拉萨会计法律的空间撒德鲁克缴费厚大司考国会大厦赶快结婚的刷卡就好了可视对讲发了
 								发生的开官方卡拉还是都发奥斯卡交电话费卡时间的话反馈节点是否客家话山东科技付货款交话费可视电话
 								话费卡上附近肯定是个我为何无人空间是否会看见的手机客户
 							</textarea>
-                </div>
-            </div>
-
-
-        </div>
-    </div>
-</div>
-<!--闲置详情部分结束-->
-</body>
+						</div>
+  					</div>
+  					
+  					
+  					
+  					
+  			</div>		
+  			</div>
+  		</div>
+  		<!--闲置详情部分结束-->
+	</body>
 </html>
  
