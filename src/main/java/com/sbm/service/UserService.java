@@ -51,6 +51,12 @@ public interface UserService {
      * @return
      */
     int  registeredUSer(User user);
+    /**
+     * 注册用户
+     * @param user
+     * @return
+     */
+    int  forgetPassword(User user);
 
 
 

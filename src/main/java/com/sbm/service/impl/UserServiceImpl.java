@@ -75,5 +75,12 @@ public class UserServiceImpl implements UserService {
         return userMapper.insertSelective(user);
     }
 
+    @Override
+    public int forgetPassword(User user) {
+        UserExample  userExample= new  UserExample();
+        userExample.createCriteria().andUserPhoneEqualTo(user.getUserPhone());
+        return userMapper.updateByExampleSelective(user,userExample);
+    }
+
 
 }

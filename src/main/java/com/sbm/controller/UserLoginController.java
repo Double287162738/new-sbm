@@ -5,10 +5,16 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.alibaba.fastjson.JSON;
+import com.sbm.pojo.Information;
 import com.sbm.pojo.request.RegisteredRequest;
 import com.sbm.util.AppMD5Util;
 import com.sbm.util.RedisUtil;
 import org.apache.commons.lang.StringUtils;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -96,6 +102,44 @@ public class UserLoginController {
     }
 
 
+
+    /**
+     * 修改密码
+     *
+     * @param registeredRequest
+     * @return
+     */
+    @RequestMapping("/forgetPassword")
+    @ResponseBody
+    public ExecuteResult<User> forgetPassword(RegisteredRequest registeredRequest) {
+        ExecuteResult<User> result = new ExecuteResult<>();
+
+        String phoneCode = registeredRequest.getPhoneCode();
+        Object object = redisUtil.get("registered" + phoneCode);
+        if (object == null) {
+            result.addErrorMessage("验证码不正确！");
+            return result;
+        }
+        String phoneVerified = (String) object;
+
+        if (!registeredRequest.getPhoneVerified().equals(phoneVerified)) {
+            result.addErrorMessage("验证码不正确！");
+            return result;
+        }
+        User user = new User();
+        user.setUserPwd(registeredRequest.getPassWord());
+        user.setUserPhone(registeredRequest.getPhoneCode());
+        int count = UserService.registeredUSer(user);
+        if (count < 0) {
+            result.addErrorMessage("密码失败失败，请联系管理员！");
+            return result;
+        }
+        result.setResult(user);
+        result.setSuccessMessage(registeredRequest.getUserName() + "修改成功");
+        return result;
+    }
+
+
     /**
      * 发送验证码
      *
@@ -168,7 +212,7 @@ public class UserLoginController {
         para.add(timestamp);
         para.add(sig);
         para.add(param);
-       /* try {//把参数封装到请求体里面
+        try {//把参数封装到请求体里面
             httppost.setEntity(new UrlEncodedFormEntity(para, "UTF-8"));
             //准备客户端
             org.apache.http.client.HttpClient httpclient = HttpClients.createDefault();
@@ -184,7 +228,7 @@ public class UserLoginController {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
 
         return new ExecuteResult<Boolean>(true);
     }
