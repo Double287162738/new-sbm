@@ -118,27 +118,68 @@ a {
 }
 
 #perPicDiv {
-    display: inline-block;
-    width: 14%;
+    float: right;
+    margin-right:50px;
+    width: 52px;
     height: 60px;
     vertical-align: top;
+    position: relative;
 }
 
 #perPic {
-    float: right;
     margin-top: 2px;
     width: 52px;
     height: 52px;
 }
 
+#perPicDiv:hover #person-detail{
+    /*display: block;*/
+    -webkit-animation:userInfo .5s cubic-bezier(0.22, 0.58, 0.12, 0.98) 0s 1 normal forwards;
+    -o-animation:userInfo .5s cubic-bezier(0.22, 0.58, 0.12, 0.98) 0s 1 normal forwards;
+    animation:userInfo .5s cubic-bezier(0.22, 0.58, 0.12, 0.98) 0s 1 normal forwards;
+}
+
+@keyframes userInfo {
+    0%{
+        opacity: 0;
+    }
+    70%{
+        opacity: 1;
+        height: 150px;
+        width: 260px;
+    }
+    100%{
+        opacity: 1;
+        height: 150px;
+        width: 250px;
+    }
+}
+@-webkit-keyframes userInfo {
+    0%{
+        opacity: 0;
+    }
+    70%{
+        opacity: 1;
+        height: 150px;
+        width: 260px;
+    }
+    100%{
+        opacity: 1;
+        height: 150px;
+        width: 250px;
+    }
+}
+
 /*个人悬浮*/
 #person-detail {
+    display: none;
+    opacity: 0;
     border-radius: 10px;
     width: 250px;
-    height: 150px;
+    height: 0px;
     position: absolute;
     z-index: 999;
-    right: 26px;
+    right: 0px;
     background: #F5F5F5;
 }
 
