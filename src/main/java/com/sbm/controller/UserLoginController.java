@@ -66,7 +66,7 @@ public class UserLoginController {
 
     /**
      * 注册
-     *
+     *`1
      * @param registeredRequest
      * @return
      */
