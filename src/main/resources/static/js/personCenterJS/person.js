@@ -85,24 +85,14 @@ $(function () {
     //判断用户点击操作
     if (index == "personInfo") {
         document.getElementById("per-ziliao").click();
-    } else if (index == "personFabu") {
+    } else if (index == "personFB") {
         document.getElementById("per-fabu").click();
-    } else {
+    }  else if (index == "personSC") {
+        document.getElementById("per-shoucang").click();
+    }else {
         document.getElementById("per-ziliao").click();
     }
 
-
-    $("#perPic").click(function () {
-        $("#person-detail").slideToggle();
-    })
-    //搜索框点击
-    $("#sousuoInput").focus(function () {
-        $("#nav-input").css("border-bottom", "1px solid rgba(240,20,20,.4)");
-    })
-    //搜索框失去焦点
-    $("#sousuoInput").blur(function () {
-        $("#nav-input").css("border-bottom", "1px solid #C0C0C0");
-    })
 
     //个人资料启动编辑
     $("#edit-open").click(function () {
