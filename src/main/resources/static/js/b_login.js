@@ -1,5 +1,15 @@
 var baseUrl = "http://localhost:8080/my-sbm";
 $(function () {
+    $("#registB").click(function () {
+        $("#loginmain").hide();
+        $("#sm-pic").hide();
+        $("#sm-pic2").show();
+        $("#regist").show();
+    })
+    var locationUrl = window.location.href;
+    if(locationUrl.indexOf("regist")!=-1){
+        document.getElementById("registB").click();
+    }
     var a = document.getElementById('sm-pic');
     $("#sm-pic").hover(function () {
         $("#sm-login-warning").show();
@@ -20,12 +30,6 @@ $(function () {
         $("#sm-pic").show();//扫码登录图片隐藏
         $("#sm-pic1").hide();//密码登录图片显示
     });
-    $("#registB").click(function () {
-        $("#loginmain").hide();
-        $("#sm-pic").hide();
-        $("#sm-pic2").show();
-        $("#regist").show();
-    })
     $("#forgetB").click(function () {
         $("#loginmain").hide();
         $("#sm-pic").hide();

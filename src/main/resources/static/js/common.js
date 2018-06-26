@@ -10,4 +10,8 @@ $(function () {
             window.event.returnValue=false;
         }
     });
+    $("#sousuoBtn").click(function () {
+        window.location.href = 'home.html?keyword=' + $("#sousuoInput").val() + "&currentPage=1";
+        window.event.returnValue=false;
+    });
 });
