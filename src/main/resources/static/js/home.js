@@ -26,21 +26,6 @@ $(function () {
 //		 	a.src="../img/shoucang.png";
 //		 }
 //	});
-
-
-    $("#perPic").click(function () {
-        $("#person-detail").slideToggle();
-    })
-    //搜索框点击
-    $("#sousuoInput").focus(function () {
-        $("#nav-input").css("border-bottom", "1px solid rgba(240,20,20,.4)");
-    })
-    //搜索框失去焦点
-    $("#sousuoInput").blur(function () {
-        $("#nav-input").css("border-bottom", "1px solid #C0C0C0");
-    })
-
-
     //接收搜索请求
     var locationUrl = window.location.href;
     if (locationUrl.indexOf("?") == -1 || locationUrl.indexOf("&") == -1) {
