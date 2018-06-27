@@ -21,7 +21,6 @@ import java.util.List;
 @RequestMapping("/comment")
 public class CommentController {
 
-
     @Resource
     private CommentService  commentService;
     /**
