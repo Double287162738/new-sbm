@@ -22,9 +22,20 @@
 #perDiv{
 }
 #perA{
+	position:relative;
 	padding: 0px;
+	height:60px;
+	width:60px;
+	border-radius: 50%;
+	border:	1px solid #A9A9A9;
 }
 #perPic{
+	position:absolute;
+	margin:auto;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
 	max-height: 100%;
 }
 
@@ -84,4 +95,7 @@ a:link{
 	padding-left: 62px;
 	border: 1px solid red;
 	height: 444px;
+}
+.loginOrLoginOut{
+	margin-top:5px;
 }

@@ -290,6 +290,11 @@ public class UserLoginController {
                 result.setResult(user);
                 result.setSuccessMessage(userName + "登录成功");
                 cleanCookie("verCode", response, request);
+                //用户头像放入cookie
+                Cookie cookie = new Cookie("userAvatar",user.getUserAvatar());
+                cookie.setMaxAge(24*60*60);
+                cookie.setPath("/");
+                response.addCookie(cookie);
                 //创建session对象
                 HttpSession session = request.getSession();
                 session.setAttribute("userId", user.getUserId());
