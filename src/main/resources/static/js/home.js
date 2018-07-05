@@ -433,6 +433,7 @@ function openDetail(e) {
                 document.getElementById("goodsClickAmount").innerHTML = "&nbsp;" + data.result.goodsClickAmount + "人浏览过";
                 document.getElementById("qqSpan").innerHTML = "&nbsp;" + data.result.goodsQq;
                 document.getElementById("weixinSpan").innerHTML = "&nbsp;" + data.result.goodsWx;
+                document.getElementById("areaSpan").innerHTML = data.result.goodsArea+"区";
                 document.getElementById("ownerSay").innerHTML = data.result.goodsOther;
                 if (data.result.goodsPic2 != null) {
                     $.cookie("goodsPic2", data.result.goodsPic2);

@@ -10,14 +10,8 @@ var totalPage;
 var currentPage;
 var nowYiFaBuClick = 'allClick';//当前选中的已发布内容
 $(function () {
-    var screenHeight = window.screen.height;
     var locationUrl = window.location.href;
     var index = locationUrl.split("?")[1].split("=")[1];
-    //初始化个人信息height
-    $("#person-div").css("height", screenHeight * 0.2);
-    $("#per-pic").css("height", $("#per-pic").width());
-    $("#show-part").css("height", screenHeight * 0.7);
-    $("#edit-pic").css("height", $("#edit-pic").width());
     //初始化取消和保存按钮绑定的所有事件
     $("#save-btn").unbind("click");
     $("#cancel-btn").unbind();
@@ -83,7 +77,7 @@ $(function () {
         yiFaBuClick(nowYiFaBuClick);
     });
     //判断用户点击操作
-    if (index == "personInfo") {
+    if (index == "personZL") {
         document.getElementById("per-ziliao").click();
     } else if (index == "personFB") {
         document.getElementById("per-fabu").click();
