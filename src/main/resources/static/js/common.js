@@ -16,7 +16,12 @@ $(function () {
     }
     //发布闲置
     $("#fabu-a").click(function () {
-        window.location.href = 'fabu.html';
+        if(getCookie("userId") != null){
+            window.location.href = 'fabu.html';
+        }else{
+            window.location.href = 'login.html';
+        }
+
     });
     //搜索框的回车事件
     $('#sousuoInput').bind('keydown', function (event) {
@@ -29,9 +34,25 @@ $(function () {
         window.location.href = 'home.html?keyword=' + $("#sousuoInput").val() + "&currentPage=1";
         window.event.returnValue=false;
     });
-    
+
+
+    //用户注销
     $("#logOut").click(function () {
-        window.location.href = 'login.html';
+        $.ajax({
+            url: baseUrl + "/my-sbm/login/userLoginOut.do",
+            type: "post",
+            dataType: 'json',
+            success: function (data) {
+                if (data.result) {
+                    window.location.href = 'login.html';
+                } else {
+                    window.location.href = 'login.html';
+                }
+            },
+            error: function (e) {
+                window.location.href = 'login.html';
+            }
+        });
     });
 
 });

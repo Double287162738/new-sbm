@@ -23,6 +23,7 @@ import com.sbm.pojo.model.User;
 import com.sbm.service.UserService;
 import com.sbm.util.ExecuteResult;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -59,6 +60,14 @@ public class UserLoginController {
     private String url;
     @Value("${login.minute}")
     private String minute;
+
+
+
+    @RequestMapping("/needLogin.do")
+    @ResponseBody
+    public void needLogin(HttpServletResponse response) throws IOException {
+        response.sendRedirect("../html/login.html");
+    }
 
 
     //======================注册  手机注册==========
@@ -291,10 +300,15 @@ public class UserLoginController {
                 result.setSuccessMessage(userName + "登录成功");
                 cleanCookie("verCode", response, request);
                 //用户头像放入cookie
-                Cookie cookie = new Cookie("userAvatar",user.getUserAvatar());
-                cookie.setMaxAge(24*60*60);
-                cookie.setPath("/");
-                response.addCookie(cookie);
+                Cookie userAvatarCookie = new Cookie("userAvatar",user.getUserAvatar());
+                userAvatarCookie.setMaxAge(24*60*60);
+                userAvatarCookie.setPath("/");
+                response.addCookie(userAvatarCookie);
+                //用户ID放入cookie
+                Cookie userIdCookie = new Cookie("userId",user.getUserId());
+                userIdCookie.setMaxAge(24*60*60);
+                userIdCookie.setPath("/");
+                response.addCookie(userIdCookie);
                 //创建session对象
                 HttpSession session = request.getSession();
                 session.setAttribute("userId", user.getUserId());
@@ -314,28 +328,24 @@ public class UserLoginController {
 
 
     /**
-     * 登出
-     *
-     * @param userId
+     * 用户注销登录
+     * @param response
+     * @param request
      * @return
      */
     @RequestMapping("/userLoginOut.do")
     @ResponseBody
-    public ExecuteResult<Boolean> loginOut(String userId) {
+    public ExecuteResult<Boolean> loginOut(HttpServletResponse response, HttpServletRequest request) {
         ExecuteResult<Boolean> result = new ExecuteResult<>();
-        if (userId == null || userId.equals("")) {
-            result.setResult(false);
-            result.addErrorMessage("用户未登录");
+        result.setResult(Boolean.TRUE);
+        Cookie[] cookies = request.getCookies();
+        cleanCookie("userId",response,request);
+        cleanCookie("userAvatar",response,request);
+        HttpSession session = request.getSession();
+        if(session.getAttribute("userId")!=null){
+            session.removeAttribute("userId");
         }
-        User user = UserService.getUserByUserId(userId);
-        if (user == null) {
-            result.setResult(false);
-            result.addErrorMessage("用户不存在");
-        }
-        result.setResult(true);
-        result.setSuccessMessage("退出成功");
         return result;
-
     }
 
 

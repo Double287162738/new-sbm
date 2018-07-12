@@ -1,135 +1,275 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<link rel="stylesheet" href="../css/bootstrap.min.css" />
-		<link rel="stylesheet" href="../css/bootstrap-theme.min.css" />
-		<link rel="stylesheet" href="../css/fabu.css">
-		<link rel="stylesheet" href="../css/common.css">
-		<link href="../newFileInput/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
-		<link href="../newFileInput/font-awesome.min.css" media="all" rel="stylesheet" type="text/css"/>
-		<link href="../newFileInput/themes/explorer-fa/theme.css" media="all" rel="stylesheet" type="text/css"/>
-		<script src="../js/jquery-3.1.1.min.js"></script>
-		<script src="../newFileInput/js/plugins/sortable.js" type="text/javascript"></script>
-		<script src="../newFileInput/js/fileinput.js" type="text/javascript"></script>
-		<script src="../newFileInput/js/locales/zh.js" type="text/javascript"></script>
-		<script src="../newFileInput/themes/explorer-fa/theme.js" type="text/javascript"></script>
-		<script src="../newFileInput/themes/fa/theme.js" type="text/javascript"></script>
-		<script src="../newFileInput/popper.min.js" type="text/javascript"></script>
-		<script src="../js/bootstrap.min.js"></script>
-		<script src="../js/common.js"></script>
-		<script src="../js/fabu.js"></script>
-		<script src="../js/cookie.js"></script>
-		<meta charset="UTF-8">
-		<title></title>
-	</head>
-	<body>
-	<!--导航栏部分-->
-	<nav class="navbar navbar-default" role="navigation" id="navHeader">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a id="skssA" class="navbar-brand" href="main.html"><img src="../img/skss.png" id="skssPic"></a>
+<head>
+	<link rel="stylesheet" href="../css/bootstrap.css" />
+	<link rel="stylesheet" href="../css/bootstrap-theme.css" />
+	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" href="../css/fabu.css">
+	<link href="../newFileInput/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+	<link href="../newFileInput/font-awesome.min.css" media="all" rel="stylesheet" type="text/css"/>
+	<link href="../newFileInput/themes/explorer-fa/theme.css" media="all" rel="stylesheet" type="text/css"/>
+	<script src="../js/jquery-3.1.1.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/fabu.js"></script>
+	<script src="../newFileInput/js/plugins/sortable.js" type="text/javascript"></script>
+	<script src="../newFileInput/js/fileinput.js" type="text/javascript"></script>
+	<script src="../newFileInput/js/locales/zh.js" type="text/javascript"></script>
+	<script src="../newFileInput/themes/explorer-fa/theme.js" type="text/javascript"></script>
+	<script src="../newFileInput/themes/fa/theme.js" type="text/javascript"></script>
+	<script src="../newFileInput/popper.min.js" type="text/javascript"></script>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+<!--导航栏部分-->
+<nav class="navbar navbar-default" role="navigation" id="navHeader">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a id="skssA" class="navbar-brand" href="main.html"><img src="../img/skss.png" id="skssPic"></a>
+		</div>
+		<div>
+			<ul class="nav navbar-nav">
+				<li class="margin20px"><a href="person.html?index=personFB">已发布</a></li>
+				<li class="margin20px"><a href="##">人气闲置</a></li>
+				<li class="margin20px"><a href="person.html?index=personSC">收藏夹</a></li>
+				<li class="margin20px"><a id="fabu-a">发布闲置</a></li>
+				<li class="margin20px"><a href="##">留白功能</a></li>
+			</ul>
+		</div>
+		<form class="navbar-form navbar-left" role="search" id="searchForm">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="嗖嗖就有" id="sousuoInput">
 			</div>
-			<div>
-				<ul class="nav navbar-nav">
-					<li class="margin20px"><a href="person.html?index=personFB">已发布</a></li>
-					<li class="margin20px"><a href="##">人气闲置</a></li>
-					<li class="margin20px"><a href="person.html?index=personSC">收藏夹</a></li>
-					<li class="margin20px"><a id="fabu-a">发布闲置</a></li>
-					<li class="margin20px"><a href="##">留白功能</a></li>
-				</ul>
-			</div>
-			<form class="navbar-form navbar-left" role="search" id="searchForm">
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="嗖嗖就有" id="sousuoInput">
-				</div>
-				<button type="submit" class="btn btn-danger" id="sousuoBtn">搜索</button>
-			</form>
-			<div id="perDiv" class="navbar-header navbar-right">
-				<a id="perA" class="navbar-brand" href="person.html?index=personZL"><img src="" id="perPic" class="img-circle"></a>
-				<ul class="nav navbar-nav navbar-right" id="loginOrLoginOut">
-					<li class="loginOrLoginOut"><a href="login.html?index=regist"><span class="glyphicon glyphicon-user"></span> 注册</a></li>
-					<li class="loginOrLoginOut"><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
-				</ul>
+			<button type="submit" class="btn btn-danger" id="sousuoBtn">搜索</button>
+		</form>
+		<div id="perDiv" class="navbar-header navbar-right">
+			<a id="perA" class="navbar-brand" href="person.html?index=personZL"><img src="" id="perPic" class="img-circle"></a>
+			<ul class="nav navbar-nav navbar-right" id="loginOrLoginOut">
+				<li class="loginOrLoginOut"><a href="login.html?index=regist"><span class="glyphicon glyphicon-user"></span> 注册</a></li>
+				<li class="loginOrLoginOut"><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+
+
+
+
+<div id="firstDiv">
+	<div id="firstTitle">选择发布闲置类型</div>
+	<div id="xzTypeDiv">
+		<div id="first" class="buttonBox">
+			<button class="xzTypeBtn xzTypeBtnFirst" onclick="selectXzType('DZ')">电子产品</button>
+			<div class="border"></div>
+			<div class="border"></div>
+			<div class="border"></div>
+			<div class="border"></div>
+		</div>
+
+		<div id="second" class="buttonBox">
+			<button class="xzTypeBtn xzTypeBtnSecond" onclick="selectXzType('DZ')">书籍资料</button>
+			<div class="border"></div>
+			<div class="border"></div>
+		</div>
+
+		<div id="third" class="buttonBox">
+			<button class="xzTypeBtn xzTypeBtnthird" onclick="selectXzType('DZ')">日常用品</button>
+			<div class="border"></div>
+			<div class="border"></div>
+			<div class="border"></div>
+			<div class="border"></div>
+		</div>
+
+
+		<div id="fourth" class="buttonBox">
+			<button class="xzTypeBtn xzTypeBtnfourth" onclick="selectXzType('DZ')">发布兼职</button>
+			<div class="border"></div>
+			<div class="border"></div>
+			<div class="border"></div>
+			<div class="border"></div>
+		</div>
+	</div>
+
+	<div id="xzDetailDiv" style="display: none;">
+		<img id="previous" src="../img/previous.png" title="返回"/>
+		<img id="next" src="../img/next.png" title="下一项"/>
+		<div id="xzAreaDiv">
+			<label for="name"><h4><span class="label label-success">所在区域</span></h4></label>
+			<select id="fabu-area-select" class="form-control">
+				<option value="">请选择区域</option>
+				<option value="A">女神A区</option>
+				<option value="B">男神B区</option>
+				<option value="C">神秘C区 </option>
+				<option value="Z">其他 </option>
+			</select>
+		</div>
+
+		<div id="xzSmTypeDiv">
+			<label for="name"><h4><span class="label label-warning">闲置类型</span></h4></label>
+			<select id="fabu-area-select" class="form-control">
+				<option value="">请选择类型</option>
+				<option value="A">手机</option>
+				<option value="B">电脑</option>
+				<option value="C">平板 </option>
+				<option value="Z">其他 </option>
+			</select>
+		</div>
+
+		<div id="xzSmNameDiv">
+			<div><label for="name"><h4><span class="label label-success">闲置名称</span></h4></label></div>
+			<input id="fabuName" type="text" placeholder="" />
+		</div>
+
+		<div id="xzSmPriceDiv">
+			<div><label for="name"><h4><span class="label label-warning">闲置价格</span></h4></label></div>
+			<input id="fabuPrice" type="number" placeholder="" />
+		</div>
+
+		<div id="xzSmQqDiv">
+			<div><label for="name"><h4><span class="label label-success">&nbsp;QQ&nbsp;</span></h4></label></div>
+			<input id="fabuQq" type="text" placeholder="" />
+		</div>
+
+		<div id="xzSmWxDiv">
+			<div><label for="name"><h4><span class="label label-warning">&nbsp;微信&nbsp;</span></h4></label></div>
+			<input id="fabuWx" type="text" placeholder="" />
+		</div>
+
+		<div id="xzSmWordsDiv">
+			<div><label for="name"><h4><span class="label label-success">闲置特点</span></h4></label></div>
+			<input id="fabuWords" type="text" placeholder="" /><img id="tedian-pic" src="../img/tedian-open.png" title="点击选择"/>
+			<div id="teDianDiv" style="display: none;">
+				<button class="btn btn-default" value="颜值高" onclick="selectBtn(this)">颜值高</button>
+				<button class="btn btn-default" value="全新" onclick="selectBtn(this)">全新</button>
+				<button class="btn btn-default" value="国行" onclick="selectBtn(this)">国行</button>
+				<button class="btn btn-default" value="港版" onclick="selectBtn(this)">港版</button>
+				<button class="btn btn-default" value="全新" onclick="selectBtn(this)">全新</button>
+				<button class="btn btn-default" value="九成新" onclick="selectBtn(this)">九成新</button>
+				<button class="btn btn-default" value="价格可刀" onclick="selectBtn(this)">价格可刀</button>
+				<button class="btn btn-default" value="一口价" onclick="selectBtn(this)">一口价</button>
+				<button class="btn btn-default" value="上门交易" onclick="selectBtn(this)">上门交易</button>
+				<button class="btn btn-default" value="自取" onclick="selectBtn(this)">自取</button>
+				<button class="btn btn-default" value="无押金" onclick="selectBtn(this)">无押金</button>
 			</div>
 		</div>
-	</nav>
-		<!--发布part1-->
-		<div id="fabu-part1">
-			<div id="main-pic-div">
-				<form enctype="multipart/form-data">
-        			<div class="file-loading">
-           				<input id="file-1" name="file-1" type="file" accept="image/*">
-       				 </div>
-    			</form>
+
+		<div id="xzSmOtherDiv">
+			<div><label for="name"><h4><span class="label label-danger">闲置介绍</span></h4></label></div>
+			<textarea id="xzSmOther" class="form-control" placeholder="介绍一下你的宝贝吧"></textarea>
+		</div>
+
+
+	</div>
+
+	<div id="xzSmPicDiv" style="display: none;">
+		<img id="onlyPrevious" src="../img/previous.png" title="返回"/>
+		<form enctype="multipart/form-data">
+			<div class="file-loading">
+				<input id="file-2" name="file-2" type="file" multiple accept="image/*">
 			</div>
-			<div id="main-other-div">
-				<div>
+		</form>
+	</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style="display:none;">
+	<!--发布part1-->
+	<div id="fabu-part1">
+		<div id="main-pic-div">
+			<form enctype="multipart/form-data">
+				<div class="file-loading">
+					<input id="file-1" name="file-1" type="file" accept="image/*">
+				</div>
+			</form>
+		</div>
+		<div id="main-other-div">
+			<div>
 				<div id="main-other-div-select1">
 					<label for="name"><h4><span class="label label-primary">发布类型</span></h4></label>
-				    <select id="fabu-type-select" class="form-control">
-				      <option value="">请选择类型</option>
-				      <option value="SM">数码闲置</option>
-				      <option value="SJ">书籍闲置</option>
-				      <option value="RC">日常用品</option>
-				      <option value="JZ">兼职信息</option>
-				    </select>
+					<select id="fabu-type-select" class="form-control">
+						<option value="">请选择类型</option>
+						<option value="SM">数码闲置</option>
+						<option value="SJ">书籍闲置</option>
+						<option value="RC">日常用品</option>
+						<option value="JZ">兼职信息</option>
+					</select>
 				</div>
 				<div id="main-other-div-select2">
 					<label for="name"><h4><span class="label label-success">所在区域</span></h4></label>
-				    <select id="fabu-area-select" class="form-control">
-				      <option value="">请选择区域</option>
-				      <option value="A">女神A区</option>
-				      <option value="B">男神B区</option>
-				      <option value="C">神秘C区 </option>
-				      <option value="Z">其他 </option>
-				    </select>
-				</div>
-				</div>
-				<hr id="hr-line" />
-				<div id="main-other-name">
-					<div><label>名称</label>&nbsp;<input id="fabuName" type="text" placeholder="给宝贝起个响亮的名字" /></div>
-					<div><label>价格</label>&nbsp;<input id="fabuPrice" type="number" placeholder="理想的出手价格"/></div>
-					<div><label>特点</label>&nbsp;<input id="fabuWords" type="text" placeholder="宝贝的亮点"/><img id="tedian-pic" src="../img/tedian-open.png" title="选择"/></div>
-					<div><label> QQ&nbsp; </label>&nbsp;<input id="fabuQq" type="text"  placeholder="留下QQ方便约"/></div>
-					<div><label>微信</label>&nbsp;<input id="fabuWx" type="text"   placeholder="留下微信方便约"/></div>
-				</div>
-				<div id="main-other-system">
-					<button class="btn btn-danger" value="颜值高" onclick="selectBtn(this)">颜值高</button>
-					<button class="btn btn-primary" value="全新" onclick="selectBtn(this)">全新</button>
-					<button class="btn btn-success" value="国行" onclick="selectBtn(this)">国行</button>
-					<button class="btn btn-default" value="港版" onclick="selectBtn(this)">港版</button>
-					<button class="btn btn-primary" value="全新" onclick="selectBtn(this)">全新</button>
-					<button class="btn btn-default" value="九成新" onclick="selectBtn(this)">九成新</button>
-					<button class="btn btn-success" value="价格可刀" onclick="selectBtn(this)">价格可刀</button>
-					<button class="btn btn-default" value="一口价" onclick="selectBtn(this)">一口价</button>
-					<button class="btn btn-default" value="送货上门" onclick="selectBtn(this)">送货上门</button>
-					<button class="btn btn-default" value="自取" onclick="selectBtn(this)">自取</button>
-					<button class="btn btn-danger" value="无押金" onclick="selectBtn(this)">无押金</button>
+					<select id="fabu-area-select" class="form-control">
+						<option value="">请选择区域</option>
+						<option value="A">女神A区</option>
+						<option value="B">男神B区</option>
+						<option value="C">神秘C区 </option>
+						<option value="Z">其他 </option>
+					</select>
 				</div>
 			</div>
+			<hr id="hr-line" />
+			<div id="main-other-name">
+				<div><label>名称</label>&nbsp;<input id="fabuName" type="text" placeholder="给宝贝起个响亮的名字" /></div>
+				<div><label>价格</label>&nbsp;<input id="fabuPrice" type="number" placeholder="理想的出手价格"/></div>
+				<div><label>特点</label>&nbsp;<input id="fabuWords" type="text" placeholder="宝贝的亮点"/><img id="tedian-pic" src="../img/tedian-open.png" title="选择"/></div>
+				<div><label> QQ&nbsp; </label>&nbsp;<input id="fabuQq" type="text"  placeholder="留下QQ方便约"/></div>
+				<div><label>微信</label>&nbsp;<input id="fabuWx" type="text"   placeholder="留下微信方便约"/></div>
+			</div>
+			<div id="main-other-system">
+				<button class="btn btn-danger" value="颜值高" onclick="selectBtn(this)">颜值高</button>
+				<button class="btn btn-primary" value="全新" onclick="selectBtn(this)">全新</button>
+				<button class="btn btn-success" value="国行" onclick="selectBtn(this)">国行</button>
+				<button class="btn btn-default" value="港版" onclick="selectBtn(this)">港版</button>
+				<button class="btn btn-primary" value="全新" onclick="selectBtn(this)">全新</button>
+				<button class="btn btn-default" value="九成新" onclick="selectBtn(this)">九成新</button>
+				<button class="btn btn-success" value="价格可刀" onclick="selectBtn(this)">价格可刀</button>
+				<button class="btn btn-default" value="一口价" onclick="selectBtn(this)">一口价</button>
+				<button class="btn btn-default" value="送货上门" onclick="selectBtn(this)">送货上门</button>
+				<button class="btn btn-default" value="自取" onclick="selectBtn(this)">自取</button>
+				<button class="btn btn-danger" value="无押金" onclick="selectBtn(this)">无押金</button>
+			</div>
 		</div>
-		
-		<!--发布part2-->
-		<div id="fabu-part2" >
-            <form enctype="multipart/form-data">
-       			<div class="file-loading">
-            		<input id="file-2" name="file-2" type="file" multiple accept="image/*">
-       			 </div>
-    		</form>
-            <div id="fabu-part2-text-div">
-            	<textarea id="fabu-part2-text" class="form-control" rows="5" placeholder="介绍一下你的宝贝吧"></textarea>
-            </div>
+	</div>
+
+	<!--发布part2-->
+	<div id="fabu-part2" >
+		<form enctype="multipart/form-data">
+			<div class="file-loading">
+				<input id="file-2" name="file-2" type="file" multiple accept="image/*">
+			</div>
+		</form>
+		<div id="fabu-part2-text-div">
+			<textarea id="fabu-part2-text" class="form-control" rows="5" placeholder="介绍一下你的宝贝吧"></textarea>
 		</div>
-		<!--警告-->
-		<div id="myAlert" class="alert alert-danger">
-			<a href="#" class="close">&times;</a>
-			<strong>警告!</strong><p id="alert-p"></p>
-		</div>
-		<div id="fabu-btn">
-			<button class="btn btn-primary" id="fabu-cancel">取消发布</button>
-			<button class="btn btn-danger" id="fabu-confirm">确认发布</button>
-		</div>
-	</body>
-	
+	</div>
+	<!--警告-->
+	<div id="myAlert" class="alert alert-danger">
+		<a href="#" class="close">&times;</a>
+		<strong>警告!</strong><p id="alert-p"></p>
+	</div>
+	<div id="fabu-btn">
+		<button class="btn btn-primary" id="fabu-cancel">取消发布</button>
+		<button class="btn btn-danger" id="fabu-confirm">确认发布</button>
+	</div>
+</div>
+</body>
+
 </html>
  

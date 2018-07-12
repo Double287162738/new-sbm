@@ -1,134 +1,318 @@
-/*发布part1*/
-#main-pic-div {
-    display: inline-block;
-    vertical-align: top;
-    margin-left: 5%;
-    margin-top: 2%;
-    width: 25%;
-}
-
-#main-other-div {
-    display: inline-block;
-    vertical-align: top;
-    margin-top: 2%;
-    width: 60%;
-    height: 100%;
-    margin-left: 3%;
-}
-
-#main-other-div-select1, #main-other-div-select2 {
-    width: 20%;
-    display: inline-block;
-    vertical-align: top;
-    margin-right: 3%;
-}
-
-#main-other-div-select1 h4 {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-#main-other-div-select2 h4 {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-#main-other-name {
-    display: inline-block;
-    vertical-align: top;
-    width: 50%;
-}
-
-#main-other-name div {
-    margin-top: 2%;
-    font-size: 15px;
-}
-
-#main-other-name input {
-    height: 35px;
-    width: 70%;
-}
-
-#hr-line {
-    width: 800px;
-    border: 0;
-    height: 2px;
-    background-image: -webkit-linear-gradient(to right, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
-    background-image: -moz-linear-gradient(to right, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
-    background-image: -o-linear-gradient(to right, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
-    margin-bottom: 0;
-}
-
-#fabuWords {
-    width: 62% !important;
-}
-
-#tedian-pic {
-    cursor: pointer;
-    max-height: 35px;
-    margin-top: -3px;
-}
-
-#main-other-system {
-    display: inline-block;
-    vertical-align: top;
-    height: 210px;
-    width: 48%;
-    padding: 10px;
-}
-
-#main-other-system button {
-    margin-bottom: 3px !important;
-}
-
-/*发布部分2*/
-#fabu-part2 {
-    width: 90%;
+#firstDiv{
+    width: 1200px;
+    height: 500px;
     margin: auto;
-    margin-top: 3%;
+    background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+    border-radius: 10px;
+}
+#firstTitle{
+    position: absolute;
+    font-size: 30px;
+    color: white;
+    width: 242px;
 }
 
-#fabu-part2-text {
-    border: none;
-    border-bottom: 2px solid #D3D3D3;
-    background: white;
-    border-style: inset;
-    font-family: Microsoft YaHei;
-    resize: none;
-    font-size: 17px;
-    margin-bottom: 2%;
-    text-align: center;
-    vertical-align: middle;
-    height: 140px;
-    line-height: 120px;
+#first{
+    position: absolute;
+    margin-top: 150px;
+    margin-left: 330px;
+}
+#second{
+    position: absolute;
+    margin-top: 150px;
+    margin-left: 670px;
+}
+#third{
+    position: absolute;
+    margin-top: 300px;
+    margin-left: 330px;
+}
+#fourth{
+    position: absolute;
+    margin-top: 300px;
+    margin-left: 670px;
+}
+.xzTypeBtn{
+    width:200px;
+    height:80px;
+    text-transform:uppercase;
+    color:#fff;
+    font-size:1.6em;
+    letter-spacing:1px;
+    border:none;
+    outline:none;
+    cursor:pointer;
+    transition:800ms ease all;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+.xzTypeBtnFirst{
+    background:#6E459B;
+}
+.xzTypeBtnSecond{
+    background:#4BBFC3;
+}
+.xzTypeBtnthird{
+    background:#C94646;
+}
+.xzTypeBtnfourth{
+    background:#f90;
+}
+.buttonBox{
+    position:relative;
+    margin:1vw 3vw;
+    cursor:pointer;
+}
+.border{
+    position:absolute;
+    background:none;
+    transition:all .5s ease-in-out;
 }
 
-#fabu-part2-text-div {
-    margin-top: 3%;
+#first>.border:nth-of-type(1){
+    top:0;
+    left:0;
+    width:0;
+    height:0;
+    border-top:2px solid white;
 }
 
-/*发布按钮区*/
-#fabu-btn {
-    text-align: center;
-    margin-bottom: 3%;
+#first>.border:nth-of-type(2){
+    top:0;
+    right:0;
+    width:10px;
+    height:0;
+    border-right:2px solid white;
 }
 
-#fabu-cancel {
-    margin-right: 3%;
+#first>.border:nth-of-type(3){
+    bottom:0;
+    right:0;
+    width:0;
+    height:0;
+    border-bottom:2px solid white;
 }
 
-/*警示弹窗*/
-#myAlert {
-    width: 90%;
-    margin: 0;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 2%;
-    display: none;
-    text-align: center;
+#first>.border:nth-of-type(4){
+    bottom:0;
+    left:0;
+    width:0;
+    height:0;
+    border-left:2px solid white;
 }
 
-#alert-p {
-    display: inline-block;
+#first:hover .border:nth-of-type(1){
+    width:200px;
+}
+
+#first:hover .border:nth-of-type(2){
+    height:80px;
+}
+
+#first:hover .border:nth-of-type(3){
+    width:200px;
+}
+
+#first:hover .border:nth-of-type(4){
+    height:80px;
+}
+
+
+#second>.border:nth-of-type(1){
+    top:0;
+    left:50%;
+    width:0;
+    border-top:2px solid white;
+}
+
+#second>.border:nth-of-type(2){
+    bottom:0;
+    left:50%;
+    width:0;
+    border-bottom:2px solid white;
+}
+
+#second:hover .border{
+    width:200px;
+    transform:translate(-100px, 0);
+}
+
+
+
+#third>.border:nth-of-type(1){
+    top:0;
+    left:50%;
+    width:0;
+    border-top:2px solid white;
+}
+
+#third>.border:nth-of-type(2){
+    bottom:0;
+    left:50%;
+    width:0;
+    border-bottom:2px solid white;
+}
+
+#third:hover .border{
+    width:200px;
+    transform:translate(-100px, 0);
+}
+
+#fourth>.border:nth-of-type(1){
+    top:0;
+    left:0;
+    width:0;
+    height:0;
+    border-top:2px solid white;
+}
+
+#fourth>.border:nth-of-type(2){
+    top:0;
+    right:0;
+    width:10px;
+    height:0;
+    border-right:2px solid white;
+}
+
+#fourth>.border:nth-of-type(3){
+    bottom:0;
+    right:0;
+    width:0;
+    height:0;
+    border-bottom:2px solid white;
+}
+
+#fourth>.border:nth-of-type(4){
+    bottom:0;
+    left:0;
+    width:0;
+    height:0;
+    border-left:2px solid white;
+}
+
+#fourth:hover .border:nth-of-type(1){
+    width:200px;
+}
+
+#fourth:hover .border:nth-of-type(2){
+    height:80px;
+}
+
+#fourth:hover .border:nth-of-type(3){
+    width:200px;
+}
+
+#fourth:hover .border:nth-of-type(4){
+    height:80px;
+}
+
+
+#xzAreaDiv,#xzSmTypeDiv{
+    position: absolute;
+    width: 150px;
+}
+#xzAreaDiv{
+    margin-top: 120px;
+    margin-left: 170px;
+}
+#xzSmTypeDiv{
+    margin-top: 120px;
+    margin-left: 350px;
+}
+#xzSmNameDiv{
+    position: absolute;
+    margin-top: 180px;
+    margin-left: 170px;
+}
+#xzSmPriceDiv{
+    position: absolute;
+    margin-top: 180px;
+    margin-left: 350px;
+}
+#xzSmQqDiv{
+    position: absolute;
+    margin-top: 242px;
+    margin-left: 170px;
+}
+#xzSmWxDiv{
+    position: absolute;
+    margin-top: 242px;
+    margin-left: 350px;
+}
+#xzSmWordsDiv{
+    position: absolute;
+    margin-top: 304px;
+    margin-left: 170px;
+}
+#xzSmOtherDiv{
+    position: absolute;
+    margin-top: 120px;
+    margin-left: 640px;
+}
+#xzDetailDiv h4 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+#fabuName,#fabuPrice,#fabuQq,#fabuWx,#fabuWords{
+    width: 150px;
+    height: 36px;
+    border-radius: 4px;
+}
+#xzSmOther{
+    width: 400px;
+    height: 215px;
+}
+#fabuWords{
+    width: 290px;
+}
+#tedian-pic{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    margin-top: -3px;
+    cursor: pointer;
+}
+#teDianDiv{
+    position: absolute;
+    width: 325px;
+    height: 120px;
+    margin-top: 5px;
+}
+#xzSmPicDiv{
+    position: absolute;
+    margin-top: 120px;
+    margin-left: 100px;
+    width: 1000px;
+}
+#previous{
+    cursor: pointer;
+    position: absolute;
+    top: 300px;
+    margin-left: 50px;
+    width: 60px;
+    height: 60px;
+}
+#previous:hover{
+    transform: scale(1.1);
+}
+#next:hover{
+    transform: scale(1.1);
+}
+#onlyPrevious:hover{
+    transform: scale(1.1);
+}
+#next{
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top: 300px;
+    margin-left: 1090px;
+}
+#onlyPrevious{
+    cursor: pointer;
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    left:-90px;
+    top:100px;
 }
