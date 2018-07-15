@@ -1,11 +1,8 @@
 package com.sbm.pojo.model;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import java.util.Date;
 
-public class Goods {
+public class Goods  {
 
     private String goodsId;
 
@@ -14,6 +11,8 @@ public class Goods {
     private String userName;
 
     private String goodsName;
+
+    private String goodsSpecificType;
 
     private String goodsType;
 
@@ -87,6 +86,14 @@ public class Goods {
 
     public void setGoodsName(String goodsName) {
         this.goodsName = goodsName;
+    }
+
+    public String getGoodsSpecificType() {
+        return goodsSpecificType;
+    }
+
+    public void setGoodsSpecificType(String goodsSpecificType) {
+        this.goodsSpecificType = goodsSpecificType;
     }
 
     public String getGoodsType() {

@@ -1,3 +1,15 @@
+
+var xzInfo =
+    {"goodsType":"",
+    "goodsArea":"",
+    "goodsSpecificType":"",
+    "goodsName":"",
+    "goodsPrice":"",
+    "goodsQq":"",
+    "goodsWx":"",
+    "goodsWords":"",
+    "goodsOther":"",
+};
 $(function(){
     showFirstTitle();
     var index = 1;
@@ -18,6 +30,15 @@ $(function () {
         $("#xzSmPicDiv").hide();
     });
     $("#next").click(function () {
+        xzInfo.goodsArea=$("#fabu-area-select").val();
+        xzInfo.goodsSpecificType=$("#fabu-type-select").val();
+        xzInfo.goodsName = $("#fabuName").val();
+        xzInfo.goodsPrice=$("#fabuPrice").val();
+        xzInfo.goodsQq=$("#fabuQq").val();
+        xzInfo.goodsWx=$("#fabuWx").val();
+        xzInfo.goodsWords=$("#fabuWords").val();
+        xzInfo.goodsOther=$("#xzSmOther").val();
+        console.log(xzInfo);
         $("#xzTypeDiv").hide();
         $("#xzDetailDiv").hide();
         $("#xzSmPicDiv").show();
@@ -28,6 +49,9 @@ $(function () {
         $("#xzDetailDiv").show();
         $("#xzSmPicDiv").hide();
         $("#firstTitle").text("输入闲置其他信息");
+    });
+    $("#fabuSave").click(function () {
+        $('#file-2').fileinput("upload");
     });
 })
 
@@ -45,7 +69,7 @@ $(function(){
         uploadUrl: "http://localhost:8080/my-sbm/fabu/uploadPic.do",
         maxFileSize: 1024 * 20,
         minFileCount: 1,
-        maxFileCount: 8, /*允许最大上传数，可以多个，当前设置单个*/
+        maxFileCount: 5, /*允许最大上传数，可以多个，当前设置单个*/
         enctype: 'multipart/form-data',
         //allowedPreviewTypes : [ 'image' ], //allowedFileTypes: ['image', 'video', 'flash'],
         allowedFileExtensions: ["jpg", "png", "gif"], /*上传文件格式*/
@@ -144,6 +168,7 @@ function selectXzType(type){
     $("#xzDetailDiv").show();
     $("#xzSmPicDiv").hide();
     $("#xzTypeDiv").hide();
+    xzInfo.goodsType=type;
     $("#firstTitle").text("输入闲置其他信息");
 
 

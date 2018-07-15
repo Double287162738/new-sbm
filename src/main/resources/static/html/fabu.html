@@ -107,12 +107,12 @@
 
 		<div id="xzSmTypeDiv">
 			<label for="name"><h4><span class="label label-warning">闲置类型</span></h4></label>
-			<select id="fabu-area-select" class="form-control">
+			<select id="fabu-type-select" class="form-control">
 				<option value="">请选择类型</option>
-				<option value="A">手机</option>
-				<option value="B">电脑</option>
-				<option value="C">平板 </option>
-				<option value="Z">其他 </option>
+				<option value="SJ">手机</option>
+				<option value="DN">电脑</option>
+				<option value="PB">平板 </option>
+				<option value="OTHER">其他 </option>
 			</select>
 		</div>
 
@@ -164,6 +164,7 @@
 
 	<div id="xzSmPicDiv" style="display: none;">
 		<img id="onlyPrevious" src="../img/previous.png" title="返回"/>
+		<div id="fabuSave"><img src="../img/fabuSave.png" title="确认发布"/></div>
 		<form enctype="multipart/form-data">
 			<div class="file-loading">
 				<input id="file-2" name="file-2" type="file" multiple accept="image/*">
@@ -191,84 +192,84 @@
 
 
 
-<div style="display:none;">
-	<!--发布part1-->
-	<div id="fabu-part1">
-		<div id="main-pic-div">
-			<form enctype="multipart/form-data">
-				<div class="file-loading">
-					<input id="file-1" name="file-1" type="file" accept="image/*">
-				</div>
-			</form>
-		</div>
-		<div id="main-other-div">
-			<div>
-				<div id="main-other-div-select1">
-					<label for="name"><h4><span class="label label-primary">发布类型</span></h4></label>
-					<select id="fabu-type-select" class="form-control">
-						<option value="">请选择类型</option>
-						<option value="SM">数码闲置</option>
-						<option value="SJ">书籍闲置</option>
-						<option value="RC">日常用品</option>
-						<option value="JZ">兼职信息</option>
-					</select>
-				</div>
-				<div id="main-other-div-select2">
-					<label for="name"><h4><span class="label label-success">所在区域</span></h4></label>
-					<select id="fabu-area-select" class="form-control">
-						<option value="">请选择区域</option>
-						<option value="A">女神A区</option>
-						<option value="B">男神B区</option>
-						<option value="C">神秘C区 </option>
-						<option value="Z">其他 </option>
-					</select>
-				</div>
-			</div>
-			<hr id="hr-line" />
-			<div id="main-other-name">
-				<div><label>名称</label>&nbsp;<input id="fabuName" type="text" placeholder="给宝贝起个响亮的名字" /></div>
-				<div><label>价格</label>&nbsp;<input id="fabuPrice" type="number" placeholder="理想的出手价格"/></div>
-				<div><label>特点</label>&nbsp;<input id="fabuWords" type="text" placeholder="宝贝的亮点"/><img id="tedian-pic" src="../img/tedian-open.png" title="选择"/></div>
-				<div><label> QQ&nbsp; </label>&nbsp;<input id="fabuQq" type="text"  placeholder="留下QQ方便约"/></div>
-				<div><label>微信</label>&nbsp;<input id="fabuWx" type="text"   placeholder="留下微信方便约"/></div>
-			</div>
-			<div id="main-other-system">
-				<button class="btn btn-danger" value="颜值高" onclick="selectBtn(this)">颜值高</button>
-				<button class="btn btn-primary" value="全新" onclick="selectBtn(this)">全新</button>
-				<button class="btn btn-success" value="国行" onclick="selectBtn(this)">国行</button>
-				<button class="btn btn-default" value="港版" onclick="selectBtn(this)">港版</button>
-				<button class="btn btn-primary" value="全新" onclick="selectBtn(this)">全新</button>
-				<button class="btn btn-default" value="九成新" onclick="selectBtn(this)">九成新</button>
-				<button class="btn btn-success" value="价格可刀" onclick="selectBtn(this)">价格可刀</button>
-				<button class="btn btn-default" value="一口价" onclick="selectBtn(this)">一口价</button>
-				<button class="btn btn-default" value="送货上门" onclick="selectBtn(this)">送货上门</button>
-				<button class="btn btn-default" value="自取" onclick="selectBtn(this)">自取</button>
-				<button class="btn btn-danger" value="无押金" onclick="selectBtn(this)">无押金</button>
-			</div>
-		</div>
-	</div>
+<!--<div style="display:none;">-->
+	<!--&lt;!&ndash;发布part1&ndash;&gt;-->
+	<!--<div id="fabu-part1">-->
+		<!--<div id="main-pic-div">-->
+			<!--<form enctype="multipart/form-data">-->
+				<!--<div class="file-loading">-->
+					<!--<input id="file-1" name="file-1" type="file" accept="image/*">-->
+				<!--</div>-->
+			<!--</form>-->
+		<!--</div>-->
+		<!--<div id="main-other-div">-->
+			<!--<div>-->
+				<!--<div id="main-other-div-select1">-->
+					<!--<label for="name"><h4><span class="label label-primary">发布类型</span></h4></label>-->
+					<!--<select id="fabu-type-select" class="form-control">-->
+						<!--<option value="">请选择类型</option>-->
+						<!--<option value="SM">数码闲置</option>-->
+						<!--<option value="SJ">书籍闲置</option>-->
+						<!--<option value="RC">日常用品</option>-->
+						<!--<option value="JZ">兼职信息</option>-->
+					<!--</select>-->
+				<!--</div>-->
+				<!--<div id="main-other-div-select2">-->
+					<!--<label for="name"><h4><span class="label label-success">所在区域</span></h4></label>-->
+					<!--<select id="fabu-area-select" class="form-control">-->
+						<!--<option value="">请选择区域</option>-->
+						<!--<option value="A">女神A区</option>-->
+						<!--<option value="B">男神B区</option>-->
+						<!--<option value="C">神秘C区 </option>-->
+						<!--<option value="Z">其他 </option>-->
+					<!--</select>-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--<hr id="hr-line" />-->
+			<!--<div id="main-other-name">-->
+				<!--<div><label>名称</label>&nbsp;<input id="fabuName" type="text" placeholder="给宝贝起个响亮的名字" /></div>-->
+				<!--<div><label>价格</label>&nbsp;<input id="fabuPrice" type="number" placeholder="理想的出手价格"/></div>-->
+				<!--<div><label>特点</label>&nbsp;<input id="fabuWords" type="text" placeholder="宝贝的亮点"/><img id="tedian-pic" src="../img/tedian-open.png" title="选择"/></div>-->
+				<!--<div><label> QQ&nbsp; </label>&nbsp;<input id="fabuQq" type="text"  placeholder="留下QQ方便约"/></div>-->
+				<!--<div><label>微信</label>&nbsp;<input id="fabuWx" type="text"   placeholder="留下微信方便约"/></div>-->
+			<!--</div>-->
+			<!--<div id="main-other-system">-->
+				<!--<button class="btn btn-danger" value="颜值高" onclick="selectBtn(this)">颜值高</button>-->
+				<!--<button class="btn btn-primary" value="全新" onclick="selectBtn(this)">全新</button>-->
+				<!--<button class="btn btn-success" value="国行" onclick="selectBtn(this)">国行</button>-->
+				<!--<button class="btn btn-default" value="港版" onclick="selectBtn(this)">港版</button>-->
+				<!--<button class="btn btn-primary" value="全新" onclick="selectBtn(this)">全新</button>-->
+				<!--<button class="btn btn-default" value="九成新" onclick="selectBtn(this)">九成新</button>-->
+				<!--<button class="btn btn-success" value="价格可刀" onclick="selectBtn(this)">价格可刀</button>-->
+				<!--<button class="btn btn-default" value="一口价" onclick="selectBtn(this)">一口价</button>-->
+				<!--<button class="btn btn-default" value="送货上门" onclick="selectBtn(this)">送货上门</button>-->
+				<!--<button class="btn btn-default" value="自取" onclick="selectBtn(this)">自取</button>-->
+				<!--<button class="btn btn-danger" value="无押金" onclick="selectBtn(this)">无押金</button>-->
+			<!--</div>-->
+		<!--</div>-->
+	<!--</div>-->
 
-	<!--发布part2-->
-	<div id="fabu-part2" >
-		<form enctype="multipart/form-data">
-			<div class="file-loading">
-				<input id="file-2" name="file-2" type="file" multiple accept="image/*">
-			</div>
-		</form>
-		<div id="fabu-part2-text-div">
-			<textarea id="fabu-part2-text" class="form-control" rows="5" placeholder="介绍一下你的宝贝吧"></textarea>
-		</div>
-	</div>
-	<!--警告-->
-	<div id="myAlert" class="alert alert-danger">
-		<a href="#" class="close">&times;</a>
-		<strong>警告!</strong><p id="alert-p"></p>
-	</div>
-	<div id="fabu-btn">
-		<button class="btn btn-primary" id="fabu-cancel">取消发布</button>
-		<button class="btn btn-danger" id="fabu-confirm">确认发布</button>
-	</div>
-</div>
+	<!--&lt;!&ndash;发布part2&ndash;&gt;-->
+	<!--<div id="fabu-part2" >-->
+		<!--<form enctype="multipart/form-data">-->
+			<!--<div class="file-loading">-->
+				<!--<input id="file-2" name="file-2" type="file" multiple accept="image/*">-->
+			<!--</div>-->
+		<!--</form>-->
+		<!--<div id="fabu-part2-text-div">-->
+			<!--<textarea id="fabu-part2-text" class="form-control" rows="5" placeholder="介绍一下你的宝贝吧"></textarea>-->
+		<!--</div>-->
+	<!--</div>-->
+	<!--&lt;!&ndash;警告&ndash;&gt;-->
+	<!--<div id="myAlert" class="alert alert-danger">-->
+		<!--<a href="#" class="close">&times;</a>-->
+		<!--<strong>警告!</strong><p id="alert-p"></p>-->
+	<!--</div>-->
+	<!--<div id="fabu-btn">-->
+		<!--<button class="btn btn-primary" id="fabu-cancel">取消发布</button>-->
+		<!--<button class="btn btn-danger" id="fabu-confirm">确认发布</button>-->
+	<!--</div>-->
+<!--</div>-->
 </body>
 
 </html>

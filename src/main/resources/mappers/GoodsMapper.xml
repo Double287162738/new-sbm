@@ -1,53 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sbm.mapper.GoodsMapper">
-    <resultMap id="BaseResultMap" type="com.sbm.pojo.model.Goods">
-        <id column="GOODS_ID" property="goodsId" jdbcType="VARCHAR"/>
-        <result column="USER_ID" property="userId" jdbcType="VARCHAR"/>
-        <result column="USER_NAME" property="userName" jdbcType="VARCHAR"/>
-        <result column="GOODS_NAME" property="goodsName" jdbcType="VARCHAR"/>
-        <result column="GOODS_TYPE" property="goodsType" jdbcType="VARCHAR"/>
-        <result column="GOODS_AREA" property="goodsArea" jdbcType="VARCHAR"/>
-        <result column="GOODS_PRICE" property="goodsPrice" jdbcType="VARCHAR"/>
-        <result column="GOODS_WORDS" property="goodsWords" jdbcType="VARCHAR"/>
-        <result column="GOODS_QQ" property="goodsQq" jdbcType="VARCHAR"/>
-        <result column="GOODS_WX" property="goodsWx" jdbcType="VARCHAR"/>
-        <result column="GOODS_OTHER" property="goodsOther" jdbcType="VARCHAR"/>
-        <result column="GOODS_CLICK_AMOUNT" property="goodsClickAmount" jdbcType="VARCHAR"/>
-        <result column="GOODS_COLLECTION_AMOUNT" property="goodsCollectionAmount" jdbcType="VARCHAR"/>
-        <result column="GOODS_PIC1" property="goodsPic1" jdbcType="VARCHAR"/>
-        <result column="GOODS_PIC2" property="goodsPic2" jdbcType="VARCHAR"/>
-        <result column="GOODS_PIC3" property="goodsPic3" jdbcType="VARCHAR"/>
-        <result column="GOODS_PIC4" property="goodsPic4" jdbcType="VARCHAR"/>
-        <result column="GOODS_PIC5" property="goodsPic5" jdbcType="VARCHAR"/>
-        <result column="GOODS_PIC6" property="goodsPic6" jdbcType="VARCHAR"/>
-        <result column="GOODS_PIC7" property="goodsPic7" jdbcType="VARCHAR"/>
-        <result column="GOODS_PIC8" property="goodsPic8" jdbcType="VARCHAR"/>
-        <result column="GOODS_PIC9" property="goodsPic9" jdbcType="VARCHAR"/>
-        <result column="GOODS_GMT_CREATE" property="goodsGmtCreate" jdbcType="TIMESTAMP"/>
-        <result column="GOODS_LAST_MOD" property="goodsLastMod" jdbcType="TIMESTAMP"/>
-        <result column="GOODS_NO" property="goodsNo" jdbcType="VARCHAR"/>
+<mapper namespace="com.sbm.mapper.GoodsMapper" >
+    <resultMap id="BaseResultMap" type="com.sbm.pojo.model.Goods" >
+        <id column="GOODS_ID" property="goodsId" jdbcType="VARCHAR" />
+        <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+        <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+        <result column="GOODS_NAME" property="goodsName" jdbcType="VARCHAR" />
+        <result column="GOODS_SPECIFIC_TYPE" property="goodsSpecificType" jdbcType="VARCHAR" />
+        <result column="GOODS_TYPE" property="goodsType" jdbcType="VARCHAR" />
+        <result column="GOODS_AREA" property="goodsArea" jdbcType="VARCHAR" />
+        <result column="GOODS_PRICE" property="goodsPrice" jdbcType="VARCHAR" />
+        <result column="GOODS_WORDS" property="goodsWords" jdbcType="VARCHAR" />
+        <result column="GOODS_QQ" property="goodsQq" jdbcType="VARCHAR" />
+        <result column="GOODS_WX" property="goodsWx" jdbcType="VARCHAR" />
+        <result column="GOODS_OTHER" property="goodsOther" jdbcType="VARCHAR" />
+        <result column="GOODS_CLICK_AMOUNT" property="goodsClickAmount" jdbcType="VARCHAR" />
+        <result column="GOODS_COLLECTION_AMOUNT" property="goodsCollectionAmount" jdbcType="VARCHAR" />
+        <result column="GOODS_PIC1" property="goodsPic1" jdbcType="VARCHAR" />
+        <result column="GOODS_PIC2" property="goodsPic2" jdbcType="VARCHAR" />
+        <result column="GOODS_PIC3" property="goodsPic3" jdbcType="VARCHAR" />
+        <result column="GOODS_PIC4" property="goodsPic4" jdbcType="VARCHAR" />
+        <result column="GOODS_PIC5" property="goodsPic5" jdbcType="VARCHAR" />
+        <result column="GOODS_PIC6" property="goodsPic6" jdbcType="VARCHAR" />
+        <result column="GOODS_PIC7" property="goodsPic7" jdbcType="VARCHAR" />
+        <result column="GOODS_PIC8" property="goodsPic8" jdbcType="VARCHAR" />
+        <result column="GOODS_PIC9" property="goodsPic9" jdbcType="VARCHAR" />
+        <result column="GOODS_GMT_CREATE" property="goodsGmtCreate" jdbcType="TIMESTAMP" />
+        <result column="GOODS_LAST_MOD" property="goodsLastMod" jdbcType="TIMESTAMP" />
+        <result column="GOODS_NO" property="goodsNo" jdbcType="VARCHAR" />
     </resultMap>
-    <sql id="Example_Where_Clause">
-        <where>
-            <foreach collection="oredCriteria" item="criteria" separator="or">
-                <if test="criteria.valid">
-                    <trim prefix="(" suffix=")" prefixOverrides="and">
-                        <foreach collection="criteria.criteria" item="criterion">
-                            <choose>
-                                <when test="criterion.noValue">
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
                                     and ${criterion.condition}
                                 </when>
-                                <when test="criterion.singleValue">
+                                <when test="criterion.singleValue" >
                                     and ${criterion.condition} #{criterion.value}
                                 </when>
-                                <when test="criterion.betweenValue">
+                                <when test="criterion.betweenValue" >
                                     and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                                 </when>
-                                <when test="criterion.listValue">
+                                <when test="criterion.listValue" >
                                     and ${criterion.condition}
-                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
-                                             separator=",">
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -58,26 +58,25 @@
             </foreach>
         </where>
     </sql>
-    <sql id="Update_By_Example_Where_Clause">
-        <where>
-            <foreach collection="example.oredCriteria" item="criteria" separator="or">
-                <if test="criteria.valid">
-                    <trim prefix="(" suffix=")" prefixOverrides="and">
-                        <foreach collection="criteria.criteria" item="criterion">
-                            <choose>
-                                <when test="criterion.noValue">
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
                                     and ${criterion.condition}
                                 </when>
-                                <when test="criterion.singleValue">
+                                <when test="criterion.singleValue" >
                                     and ${criterion.condition} #{criterion.value}
                                 </when>
-                                <when test="criterion.betweenValue">
+                                <when test="criterion.betweenValue" >
                                     and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                                 </when>
-                                <when test="criterion.listValue">
+                                <when test="criterion.listValue" >
                                     and ${criterion.condition}
-                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
-                                             separator=",">
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -88,493 +87,508 @@
             </foreach>
         </where>
     </sql>
-    <sql id="Base_Column_List">
-        GOODS_ID, USER_ID, USER_NAME, GOODS_NAME, GOODS_TYPE, GOODS_AREA, GOODS_PRICE, GOODS_WORDS,
-        GOODS_QQ, GOODS_WX, GOODS_OTHER, GOODS_CLICK_AMOUNT, GOODS_COLLECTION_AMOUNT, GOODS_PIC1,
-        GOODS_PIC2, GOODS_PIC3, GOODS_PIC4, GOODS_PIC5, GOODS_PIC6, GOODS_PIC7, GOODS_PIC8,
-        GOODS_PIC9, GOODS_GMT_CREATE, GOODS_LAST_MOD, GOODS_NO
+    <sql id="Base_Column_List" >
+        GOODS_ID, USER_ID, USER_NAME, GOODS_NAME, GOODS_SPECIFIC_TYPE, GOODS_TYPE, GOODS_AREA, 
+        GOODS_PRICE, GOODS_WORDS, GOODS_QQ, GOODS_WX, GOODS_OTHER, GOODS_CLICK_AMOUNT, GOODS_COLLECTION_AMOUNT, 
+        GOODS_PIC1, GOODS_PIC2, GOODS_PIC3, GOODS_PIC4, GOODS_PIC5, GOODS_PIC6, GOODS_PIC7, 
+        GOODS_PIC8, GOODS_PIC9, GOODS_GMT_CREATE, GOODS_LAST_MOD, GOODS_NO
     </sql>
-    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sbm.pojo.model.GoodsExample">
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sbm.pojo.model.GoodsExample" >
         select
-        <if test="distinct">
+        <if test="distinct" >
             distinct
         </if>
         <if test="includeColumns == null or includeColumns.size()==0 ">
-            <include refid="Base_Column_List"/>
-        </if>
-        <if test="includeColumns!=null and includeColumns.size() > 0">
-            <foreach collection="includeColumns" index="index" item="includeColumn" separator=",">
-                ${includeColumn}
-            </foreach>
-        </if>
+			<include refid="Base_Column_List"/>
+		</if>
+		<if test="includeColumns!=null and includeColumns.size() > 0">
+			<foreach collection="includeColumns" index="index" item="includeColumn" separator=",">
+				${includeColumn}
+			</foreach>
+		</if>
         from goods
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
         </if>
-        <if test="orderByClause != null">
+        <if test="orderByClause != null" >
             order by ${orderByClause}
         </if>
-        <include refid="MySqlPaginationSuffix"/>
+        <include refid="MySqlPaginationSuffix" />
     </select>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
-        select
-        <include refid="Base_Column_List"/>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
         from goods
         where GOODS_ID = #{goodsId,jdbcType=VARCHAR}
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
         delete from goods
         where GOODS_ID = #{goodsId,jdbcType=VARCHAR}
     </delete>
-    <delete id="deleteByExample" parameterType="com.sbm.pojo.model.GoodsExample">
+    <delete id="deleteByExample" parameterType="com.sbm.pojo.model.GoodsExample" >
         delete from goods
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
         </if>
     </delete>
-    <insert id="insert" parameterType="com.sbm.pojo.model.Goods">
-        insert into goods (GOODS_ID, USER_ID, USER_NAME,
-        GOODS_NAME, GOODS_TYPE, GOODS_AREA,
-        GOODS_PRICE, GOODS_WORDS, GOODS_QQ,
-        GOODS_WX, GOODS_OTHER, GOODS_CLICK_AMOUNT,
-        GOODS_COLLECTION_AMOUNT, GOODS_PIC1, GOODS_PIC2,
-        GOODS_PIC3, GOODS_PIC4, GOODS_PIC5,
-        GOODS_PIC6, GOODS_PIC7, GOODS_PIC8,
-        GOODS_PIC9, GOODS_GMT_CREATE, GOODS_LAST_MOD,
-        GOODS_NO)
-        values (#{goodsId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
-        #{goodsName,jdbcType=VARCHAR}, #{goodsType,jdbcType=VARCHAR}, #{goodsArea,jdbcType=VARCHAR},
-        #{goodsPrice,jdbcType=VARCHAR}, #{goodsWords,jdbcType=VARCHAR}, #{goodsQq,jdbcType=VARCHAR},
-        #{goodsWx,jdbcType=VARCHAR}, #{goodsOther,jdbcType=VARCHAR}, #{goodsClickAmount,jdbcType=VARCHAR},
-        #{goodsCollectionAmount,jdbcType=VARCHAR}, #{goodsPic1,jdbcType=VARCHAR}, #{goodsPic2,jdbcType=VARCHAR},
-        #{goodsPic3,jdbcType=VARCHAR}, #{goodsPic4,jdbcType=VARCHAR}, #{goodsPic5,jdbcType=VARCHAR},
-        #{goodsPic6,jdbcType=VARCHAR}, #{goodsPic7,jdbcType=VARCHAR}, #{goodsPic8,jdbcType=VARCHAR},
-        #{goodsPic9,jdbcType=VARCHAR}, #{goodsGmtCreate,jdbcType=TIMESTAMP}, #{goodsLastMod,jdbcType=TIMESTAMP},
-        #{goodsNo,jdbcType=VARCHAR})
+    <insert id="insert" parameterType="com.sbm.pojo.model.Goods" >
+        insert into goods (GOODS_ID, USER_ID, USER_NAME, 
+            GOODS_NAME, GOODS_SPECIFIC_TYPE, GOODS_TYPE, 
+            GOODS_AREA, GOODS_PRICE, GOODS_WORDS, 
+            GOODS_QQ, GOODS_WX, GOODS_OTHER, 
+            GOODS_CLICK_AMOUNT, GOODS_COLLECTION_AMOUNT, 
+            GOODS_PIC1, GOODS_PIC2, GOODS_PIC3, 
+            GOODS_PIC4, GOODS_PIC5, GOODS_PIC6, 
+            GOODS_PIC7, GOODS_PIC8, GOODS_PIC9, 
+            GOODS_GMT_CREATE, GOODS_LAST_MOD, GOODS_NO
+            )
+        values (#{goodsId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+            #{goodsName,jdbcType=VARCHAR}, #{goodsSpecificType,jdbcType=VARCHAR}, #{goodsType,jdbcType=VARCHAR}, 
+            #{goodsArea,jdbcType=VARCHAR}, #{goodsPrice,jdbcType=VARCHAR}, #{goodsWords,jdbcType=VARCHAR}, 
+            #{goodsQq,jdbcType=VARCHAR}, #{goodsWx,jdbcType=VARCHAR}, #{goodsOther,jdbcType=VARCHAR}, 
+            #{goodsClickAmount,jdbcType=VARCHAR}, #{goodsCollectionAmount,jdbcType=VARCHAR}, 
+            #{goodsPic1,jdbcType=VARCHAR}, #{goodsPic2,jdbcType=VARCHAR}, #{goodsPic3,jdbcType=VARCHAR}, 
+            #{goodsPic4,jdbcType=VARCHAR}, #{goodsPic5,jdbcType=VARCHAR}, #{goodsPic6,jdbcType=VARCHAR}, 
+            #{goodsPic7,jdbcType=VARCHAR}, #{goodsPic8,jdbcType=VARCHAR}, #{goodsPic9,jdbcType=VARCHAR}, 
+            #{goodsGmtCreate,jdbcType=TIMESTAMP}, #{goodsLastMod,jdbcType=TIMESTAMP}, #{goodsNo,jdbcType=VARCHAR}
+            )
     </insert>
-    <insert id="insertSelective" parameterType="com.sbm.pojo.model.Goods">
+    <insert id="insertSelective" parameterType="com.sbm.pojo.model.Goods" >
         insert into goods
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="goodsId != null">
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="goodsId != null" >
                 GOODS_ID,
             </if>
-            <if test="userId != null">
+            <if test="userId != null" >
                 USER_ID,
             </if>
-            <if test="userName != null">
+            <if test="userName != null" >
                 USER_NAME,
             </if>
-            <if test="goodsName != null">
+            <if test="goodsName != null" >
                 GOODS_NAME,
             </if>
-            <if test="goodsType != null">
+            <if test="goodsSpecificType != null" >
+                GOODS_SPECIFIC_TYPE,
+            </if>
+            <if test="goodsType != null" >
                 GOODS_TYPE,
             </if>
-            <if test="goodsArea != null">
+            <if test="goodsArea != null" >
                 GOODS_AREA,
             </if>
-            <if test="goodsPrice != null">
+            <if test="goodsPrice != null" >
                 GOODS_PRICE,
             </if>
-            <if test="goodsWords != null">
+            <if test="goodsWords != null" >
                 GOODS_WORDS,
             </if>
-            <if test="goodsQq != null">
+            <if test="goodsQq != null" >
                 GOODS_QQ,
             </if>
-            <if test="goodsWx != null">
+            <if test="goodsWx != null" >
                 GOODS_WX,
             </if>
-            <if test="goodsOther != null">
+            <if test="goodsOther != null" >
                 GOODS_OTHER,
             </if>
-            <if test="goodsClickAmount != null">
+            <if test="goodsClickAmount != null" >
                 GOODS_CLICK_AMOUNT,
             </if>
-            <if test="goodsCollectionAmount != null">
+            <if test="goodsCollectionAmount != null" >
                 GOODS_COLLECTION_AMOUNT,
             </if>
-            <if test="goodsPic1 != null">
+            <if test="goodsPic1 != null" >
                 GOODS_PIC1,
             </if>
-            <if test="goodsPic2 != null">
+            <if test="goodsPic2 != null" >
                 GOODS_PIC2,
             </if>
-            <if test="goodsPic3 != null">
+            <if test="goodsPic3 != null" >
                 GOODS_PIC3,
             </if>
-            <if test="goodsPic4 != null">
+            <if test="goodsPic4 != null" >
                 GOODS_PIC4,
             </if>
-            <if test="goodsPic5 != null">
+            <if test="goodsPic5 != null" >
                 GOODS_PIC5,
             </if>
-            <if test="goodsPic6 != null">
+            <if test="goodsPic6 != null" >
                 GOODS_PIC6,
             </if>
-            <if test="goodsPic7 != null">
+            <if test="goodsPic7 != null" >
                 GOODS_PIC7,
             </if>
-            <if test="goodsPic8 != null">
+            <if test="goodsPic8 != null" >
                 GOODS_PIC8,
             </if>
-            <if test="goodsPic9 != null">
+            <if test="goodsPic9 != null" >
                 GOODS_PIC9,
             </if>
-            <if test="goodsGmtCreate != null">
+            <if test="goodsGmtCreate != null" >
                 GOODS_GMT_CREATE,
             </if>
-            <if test="goodsLastMod != null">
+            <if test="goodsLastMod != null" >
                 GOODS_LAST_MOD,
             </if>
-            <if test="goodsNo != null">
+            <if test="goodsNo != null" >
                 GOODS_NO,
             </if>
         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="goodsId != null">
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="goodsId != null" >
                 #{goodsId,jdbcType=VARCHAR},
             </if>
-            <if test="userId != null">
+            <if test="userId != null" >
                 #{userId,jdbcType=VARCHAR},
             </if>
-            <if test="userName != null">
+            <if test="userName != null" >
                 #{userName,jdbcType=VARCHAR},
             </if>
-            <if test="goodsName != null">
+            <if test="goodsName != null" >
                 #{goodsName,jdbcType=VARCHAR},
             </if>
-            <if test="goodsType != null">
+            <if test="goodsSpecificType != null" >
+                #{goodsSpecificType,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsType != null" >
                 #{goodsType,jdbcType=VARCHAR},
             </if>
-            <if test="goodsArea != null">
+            <if test="goodsArea != null" >
                 #{goodsArea,jdbcType=VARCHAR},
             </if>
-            <if test="goodsPrice != null">
+            <if test="goodsPrice != null" >
                 #{goodsPrice,jdbcType=VARCHAR},
             </if>
-            <if test="goodsWords != null">
+            <if test="goodsWords != null" >
                 #{goodsWords,jdbcType=VARCHAR},
             </if>
-            <if test="goodsQq != null">
+            <if test="goodsQq != null" >
                 #{goodsQq,jdbcType=VARCHAR},
             </if>
-            <if test="goodsWx != null">
+            <if test="goodsWx != null" >
                 #{goodsWx,jdbcType=VARCHAR},
             </if>
-            <if test="goodsOther != null">
+            <if test="goodsOther != null" >
                 #{goodsOther,jdbcType=VARCHAR},
             </if>
-            <if test="goodsClickAmount != null">
+            <if test="goodsClickAmount != null" >
                 #{goodsClickAmount,jdbcType=VARCHAR},
             </if>
-            <if test="goodsCollectionAmount != null">
+            <if test="goodsCollectionAmount != null" >
                 #{goodsCollectionAmount,jdbcType=VARCHAR},
             </if>
-            <if test="goodsPic1 != null">
+            <if test="goodsPic1 != null" >
                 #{goodsPic1,jdbcType=VARCHAR},
             </if>
-            <if test="goodsPic2 != null">
+            <if test="goodsPic2 != null" >
                 #{goodsPic2,jdbcType=VARCHAR},
             </if>
-            <if test="goodsPic3 != null">
+            <if test="goodsPic3 != null" >
                 #{goodsPic3,jdbcType=VARCHAR},
             </if>
-            <if test="goodsPic4 != null">
+            <if test="goodsPic4 != null" >
                 #{goodsPic4,jdbcType=VARCHAR},
             </if>
-            <if test="goodsPic5 != null">
+            <if test="goodsPic5 != null" >
                 #{goodsPic5,jdbcType=VARCHAR},
             </if>
-            <if test="goodsPic6 != null">
+            <if test="goodsPic6 != null" >
                 #{goodsPic6,jdbcType=VARCHAR},
             </if>
-            <if test="goodsPic7 != null">
+            <if test="goodsPic7 != null" >
                 #{goodsPic7,jdbcType=VARCHAR},
             </if>
-            <if test="goodsPic8 != null">
+            <if test="goodsPic8 != null" >
                 #{goodsPic8,jdbcType=VARCHAR},
             </if>
-            <if test="goodsPic9 != null">
+            <if test="goodsPic9 != null" >
                 #{goodsPic9,jdbcType=VARCHAR},
             </if>
-            <if test="goodsGmtCreate != null">
+            <if test="goodsGmtCreate != null" >
                 #{goodsGmtCreate,jdbcType=TIMESTAMP},
             </if>
-            <if test="goodsLastMod != null">
+            <if test="goodsLastMod != null" >
                 #{goodsLastMod,jdbcType=TIMESTAMP},
             </if>
-            <if test="goodsNo != null">
+            <if test="goodsNo != null" >
                 #{goodsNo,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.sbm.pojo.model.GoodsExample" resultType="java.lang.Integer">
+    <select id="countByExample" parameterType="com.sbm.pojo.model.GoodsExample" resultType="java.lang.Integer" >
         SELECT COUNT(1) FROM
-        <if test="distinct">
+        <if test="distinct" >
             (SELECT
-            DISTINCT
-            <include refid="Base_Column_List"/>
-            from GOODS
-            <if test="_parameter != null">
-                <include refid="Example_Where_Clause"/>
-            </if>
-            ) AS COUNT_SQL
+          DISTINCT
+          <include refid="Base_Column_List"/>
+          from goods
+          <if test="_parameter != null">
+              <include refid="Example_Where_Clause"/>
+          </if>) AS COUNT_SQL
         </if>
-        <if test="!distinct">
-
-            GOODS
-            <if test="_parameter != null">
-                <include refid="Example_Where_Clause"/>
-            </if>
+        <if test="!distinct" >
+            
+          goods
+          <if test="_parameter != null" >
+              <include refid="Example_Where_Clause" />
+          </if>
 
         </if>
     </select>
-    <update id="updateByExampleSelective" parameterType="map">
+    <update id="updateByExampleSelective" parameterType="map" >
         update goods
-        <set>
-            <if test="record.goodsId != null">
+        <set >
+            <if test="record.goodsId != null" >
                 GOODS_ID = #{record.goodsId,jdbcType=VARCHAR},
             </if>
-            <if test="record.userId != null">
+            <if test="record.userId != null" >
                 USER_ID = #{record.userId,jdbcType=VARCHAR},
             </if>
-            <if test="record.userName != null">
+            <if test="record.userName != null" >
                 USER_NAME = #{record.userName,jdbcType=VARCHAR},
             </if>
-            <if test="record.goodsName != null">
+            <if test="record.goodsName != null" >
                 GOODS_NAME = #{record.goodsName,jdbcType=VARCHAR},
             </if>
-            <if test="record.goodsType != null">
+            <if test="record.goodsSpecificType != null" >
+                GOODS_SPECIFIC_TYPE = #{record.goodsSpecificType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.goodsType != null" >
                 GOODS_TYPE = #{record.goodsType,jdbcType=VARCHAR},
             </if>
-            <if test="record.goodsArea != null">
+            <if test="record.goodsArea != null" >
                 GOODS_AREA = #{record.goodsArea,jdbcType=VARCHAR},
             </if>
-            <if test="record.goodsPrice != null">
+            <if test="record.goodsPrice != null" >
                 GOODS_PRICE = #{record.goodsPrice,jdbcType=VARCHAR},
             </if>
-            <if test="record.goodsWords != null">
+            <if test="record.goodsWords != null" >
                 GOODS_WORDS = #{record.goodsWords,jdbcType=VARCHAR},
             </if>
-            <if test="record.goodsQq != null">
+            <if test="record.goodsQq != null" >
                 GOODS_QQ = #{record.goodsQq,jdbcType=VARCHAR},
             </if>
-            <if test="record.goodsWx != null">
+            <if test="record.goodsWx != null" >
                 GOODS_WX = #{record.goodsWx,jdbcType=VARCHAR},
             </if>
-            <if test="record.goodsOther != null">
+            <if test="record.goodsOther != null" >
                 GOODS_OTHER = #{record.goodsOther,jdbcType=VARCHAR},
             </if>
-            <if test="record.goodsClickAmount != null">
+            <if test="record.goodsClickAmount != null" >
                 GOODS_CLICK_AMOUNT = #{record.goodsClickAmount,jdbcType=VARCHAR},
             </if>
-            <if test="record.goodsCollectionAmount != null">
+            <if test="record.goodsCollectionAmount != null" >
                 GOODS_COLLECTION_AMOUNT = #{record.goodsCollectionAmount,jdbcType=VARCHAR},
             </if>
-            <if test="record.goodsPic1 != null">
+            <if test="record.goodsPic1 != null" >
                 GOODS_PIC1 = #{record.goodsPic1,jdbcType=VARCHAR},
             </if>
-            <if test="record.goodsPic2 != null">
+            <if test="record.goodsPic2 != null" >
                 GOODS_PIC2 = #{record.goodsPic2,jdbcType=VARCHAR},
             </if>
-            <if test="record.goodsPic3 != null">
+            <if test="record.goodsPic3 != null" >
                 GOODS_PIC3 = #{record.goodsPic3,jdbcType=VARCHAR},
             </if>
-            <if test="record.goodsPic4 != null">
+            <if test="record.goodsPic4 != null" >
                 GOODS_PIC4 = #{record.goodsPic4,jdbcType=VARCHAR},
             </if>
-            <if test="record.goodsPic5 != null">
+            <if test="record.goodsPic5 != null" >
                 GOODS_PIC5 = #{record.goodsPic5,jdbcType=VARCHAR},
             </if>
-            <if test="record.goodsPic6 != null">
+            <if test="record.goodsPic6 != null" >
                 GOODS_PIC6 = #{record.goodsPic6,jdbcType=VARCHAR},
             </if>
-            <if test="record.goodsPic7 != null">
+            <if test="record.goodsPic7 != null" >
                 GOODS_PIC7 = #{record.goodsPic7,jdbcType=VARCHAR},
             </if>
-            <if test="record.goodsPic8 != null">
+            <if test="record.goodsPic8 != null" >
                 GOODS_PIC8 = #{record.goodsPic8,jdbcType=VARCHAR},
             </if>
-            <if test="record.goodsPic9 != null">
+            <if test="record.goodsPic9 != null" >
                 GOODS_PIC9 = #{record.goodsPic9,jdbcType=VARCHAR},
             </if>
-            <if test="record.goodsGmtCreate != null">
+            <if test="record.goodsGmtCreate != null" >
                 GOODS_GMT_CREATE = #{record.goodsGmtCreate,jdbcType=TIMESTAMP},
             </if>
-            <if test="record.goodsLastMod != null">
+            <if test="record.goodsLastMod != null" >
                 GOODS_LAST_MOD = #{record.goodsLastMod,jdbcType=TIMESTAMP},
             </if>
-            <if test="record.goodsNo != null">
+            <if test="record.goodsNo != null" >
                 GOODS_NO = #{record.goodsNo,jdbcType=VARCHAR},
             </if>
         </set>
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause"/>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
         </if>
     </update>
-    <update id="updateByExample" parameterType="map">
+    <update id="updateByExample" parameterType="map" >
         update goods
         set GOODS_ID = #{record.goodsId,jdbcType=VARCHAR},
-        USER_ID = #{record.userId,jdbcType=VARCHAR},
-        USER_NAME = #{record.userName,jdbcType=VARCHAR},
-        GOODS_NAME = #{record.goodsName,jdbcType=VARCHAR},
-        GOODS_TYPE = #{record.goodsType,jdbcType=VARCHAR},
-        GOODS_AREA = #{record.goodsArea,jdbcType=VARCHAR},
-        GOODS_PRICE = #{record.goodsPrice,jdbcType=VARCHAR},
-        GOODS_WORDS = #{record.goodsWords,jdbcType=VARCHAR},
-        GOODS_QQ = #{record.goodsQq,jdbcType=VARCHAR},
-        GOODS_WX = #{record.goodsWx,jdbcType=VARCHAR},
-        GOODS_OTHER = #{record.goodsOther,jdbcType=VARCHAR},
-        GOODS_CLICK_AMOUNT = #{record.goodsClickAmount,jdbcType=VARCHAR},
-        GOODS_COLLECTION_AMOUNT = #{record.goodsCollectionAmount,jdbcType=VARCHAR},
-        GOODS_PIC1 = #{record.goodsPic1,jdbcType=VARCHAR},
-        GOODS_PIC2 = #{record.goodsPic2,jdbcType=VARCHAR},
-        GOODS_PIC3 = #{record.goodsPic3,jdbcType=VARCHAR},
-        GOODS_PIC4 = #{record.goodsPic4,jdbcType=VARCHAR},
-        GOODS_PIC5 = #{record.goodsPic5,jdbcType=VARCHAR},
-        GOODS_PIC6 = #{record.goodsPic6,jdbcType=VARCHAR},
-        GOODS_PIC7 = #{record.goodsPic7,jdbcType=VARCHAR},
-        GOODS_PIC8 = #{record.goodsPic8,jdbcType=VARCHAR},
-        GOODS_PIC9 = #{record.goodsPic9,jdbcType=VARCHAR},
-        GOODS_GMT_CREATE = #{record.goodsGmtCreate,jdbcType=TIMESTAMP},
-        GOODS_LAST_MOD = #{record.goodsLastMod,jdbcType=TIMESTAMP},
-        GOODS_NO = #{record.goodsNo,jdbcType=VARCHAR}
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause"/>
+            USER_ID = #{record.userId,jdbcType=VARCHAR},
+            USER_NAME = #{record.userName,jdbcType=VARCHAR},
+            GOODS_NAME = #{record.goodsName,jdbcType=VARCHAR},
+            GOODS_SPECIFIC_TYPE = #{record.goodsSpecificType,jdbcType=VARCHAR},
+            GOODS_TYPE = #{record.goodsType,jdbcType=VARCHAR},
+            GOODS_AREA = #{record.goodsArea,jdbcType=VARCHAR},
+            GOODS_PRICE = #{record.goodsPrice,jdbcType=VARCHAR},
+            GOODS_WORDS = #{record.goodsWords,jdbcType=VARCHAR},
+            GOODS_QQ = #{record.goodsQq,jdbcType=VARCHAR},
+            GOODS_WX = #{record.goodsWx,jdbcType=VARCHAR},
+            GOODS_OTHER = #{record.goodsOther,jdbcType=VARCHAR},
+            GOODS_CLICK_AMOUNT = #{record.goodsClickAmount,jdbcType=VARCHAR},
+            GOODS_COLLECTION_AMOUNT = #{record.goodsCollectionAmount,jdbcType=VARCHAR},
+            GOODS_PIC1 = #{record.goodsPic1,jdbcType=VARCHAR},
+            GOODS_PIC2 = #{record.goodsPic2,jdbcType=VARCHAR},
+            GOODS_PIC3 = #{record.goodsPic3,jdbcType=VARCHAR},
+            GOODS_PIC4 = #{record.goodsPic4,jdbcType=VARCHAR},
+            GOODS_PIC5 = #{record.goodsPic5,jdbcType=VARCHAR},
+            GOODS_PIC6 = #{record.goodsPic6,jdbcType=VARCHAR},
+            GOODS_PIC7 = #{record.goodsPic7,jdbcType=VARCHAR},
+            GOODS_PIC8 = #{record.goodsPic8,jdbcType=VARCHAR},
+            GOODS_PIC9 = #{record.goodsPic9,jdbcType=VARCHAR},
+            GOODS_GMT_CREATE = #{record.goodsGmtCreate,jdbcType=TIMESTAMP},
+            GOODS_LAST_MOD = #{record.goodsLastMod,jdbcType=TIMESTAMP},
+            GOODS_NO = #{record.goodsNo,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.sbm.pojo.model.Goods">
+    <update id="updateByPrimaryKeySelective" parameterType="com.sbm.pojo.model.Goods" >
         update goods
-        <set>
-            <if test="userId != null">
+        <set >
+            <if test="userId != null" >
                 USER_ID = #{userId,jdbcType=VARCHAR},
             </if>
-            <if test="userName != null">
+            <if test="userName != null" >
                 USER_NAME = #{userName,jdbcType=VARCHAR},
             </if>
-            <if test="goodsName != null">
+            <if test="goodsName != null" >
                 GOODS_NAME = #{goodsName,jdbcType=VARCHAR},
             </if>
-            <if test="goodsType != null">
+            <if test="goodsSpecificType != null" >
+                GOODS_SPECIFIC_TYPE = #{goodsSpecificType,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsType != null" >
                 GOODS_TYPE = #{goodsType,jdbcType=VARCHAR},
             </if>
-            <if test="goodsArea != null">
+            <if test="goodsArea != null" >
                 GOODS_AREA = #{goodsArea,jdbcType=VARCHAR},
             </if>
-            <if test="goodsPrice != null">
+            <if test="goodsPrice != null" >
                 GOODS_PRICE = #{goodsPrice,jdbcType=VARCHAR},
             </if>
-            <if test="goodsWords != null">
+            <if test="goodsWords != null" >
                 GOODS_WORDS = #{goodsWords,jdbcType=VARCHAR},
             </if>
-            <if test="goodsQq != null">
+            <if test="goodsQq != null" >
                 GOODS_QQ = #{goodsQq,jdbcType=VARCHAR},
             </if>
-            <if test="goodsWx != null">
+            <if test="goodsWx != null" >
                 GOODS_WX = #{goodsWx,jdbcType=VARCHAR},
             </if>
-            <if test="goodsOther != null">
+            <if test="goodsOther != null" >
                 GOODS_OTHER = #{goodsOther,jdbcType=VARCHAR},
             </if>
-            <if test="goodsClickAmount != null">
+            <if test="goodsClickAmount != null" >
                 GOODS_CLICK_AMOUNT = #{goodsClickAmount,jdbcType=VARCHAR},
             </if>
-            <if test="goodsCollectionAmount != null">
+            <if test="goodsCollectionAmount != null" >
                 GOODS_COLLECTION_AMOUNT = #{goodsCollectionAmount,jdbcType=VARCHAR},
             </if>
-            <if test="goodsPic1 != null">
+            <if test="goodsPic1 != null" >
                 GOODS_PIC1 = #{goodsPic1,jdbcType=VARCHAR},
             </if>
-            <if test="goodsPic2 != null">
+            <if test="goodsPic2 != null" >
                 GOODS_PIC2 = #{goodsPic2,jdbcType=VARCHAR},
             </if>
-            <if test="goodsPic3 != null">
+            <if test="goodsPic3 != null" >
                 GOODS_PIC3 = #{goodsPic3,jdbcType=VARCHAR},
             </if>
-            <if test="goodsPic4 != null">
+            <if test="goodsPic4 != null" >
                 GOODS_PIC4 = #{goodsPic4,jdbcType=VARCHAR},
             </if>
-            <if test="goodsPic5 != null">
+            <if test="goodsPic5 != null" >
                 GOODS_PIC5 = #{goodsPic5,jdbcType=VARCHAR},
             </if>
-            <if test="goodsPic6 != null">
+            <if test="goodsPic6 != null" >
                 GOODS_PIC6 = #{goodsPic6,jdbcType=VARCHAR},
             </if>
-            <if test="goodsPic7 != null">
+            <if test="goodsPic7 != null" >
                 GOODS_PIC7 = #{goodsPic7,jdbcType=VARCHAR},
             </if>
-            <if test="goodsPic8 != null">
+            <if test="goodsPic8 != null" >
                 GOODS_PIC8 = #{goodsPic8,jdbcType=VARCHAR},
             </if>
-            <if test="goodsPic9 != null">
+            <if test="goodsPic9 != null" >
                 GOODS_PIC9 = #{goodsPic9,jdbcType=VARCHAR},
             </if>
-            <if test="goodsGmtCreate != null">
+            <if test="goodsGmtCreate != null" >
                 GOODS_GMT_CREATE = #{goodsGmtCreate,jdbcType=TIMESTAMP},
             </if>
-            <if test="goodsLastMod != null">
+            <if test="goodsLastMod != null" >
                 GOODS_LAST_MOD = #{goodsLastMod,jdbcType=TIMESTAMP},
             </if>
-            <if test="goodsNo != null">
+            <if test="goodsNo != null" >
                 GOODS_NO = #{goodsNo,jdbcType=VARCHAR},
             </if>
         </set>
         where GOODS_ID = #{goodsId,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.sbm.pojo.model.Goods">
+    <update id="updateByPrimaryKey" parameterType="com.sbm.pojo.model.Goods" >
         update goods
         set USER_ID = #{userId,jdbcType=VARCHAR},
-        USER_NAME = #{userName,jdbcType=VARCHAR},
-        GOODS_NAME = #{goodsName,jdbcType=VARCHAR},
-        GOODS_TYPE = #{goodsType,jdbcType=VARCHAR},
-        GOODS_AREA = #{goodsArea,jdbcType=VARCHAR},
-        GOODS_PRICE = #{goodsPrice,jdbcType=VARCHAR},
-        GOODS_WORDS = #{goodsWords,jdbcType=VARCHAR},
-        GOODS_QQ = #{goodsQq,jdbcType=VARCHAR},
-        GOODS_WX = #{goodsWx,jdbcType=VARCHAR},
-        GOODS_OTHER = #{goodsOther,jdbcType=VARCHAR},
-        GOODS_CLICK_AMOUNT = #{goodsClickAmount,jdbcType=VARCHAR},
-        GOODS_COLLECTION_AMOUNT = #{goodsCollectionAmount,jdbcType=VARCHAR},
-        GOODS_PIC1 = #{goodsPic1,jdbcType=VARCHAR},
-        GOODS_PIC2 = #{goodsPic2,jdbcType=VARCHAR},
-        GOODS_PIC3 = #{goodsPic3,jdbcType=VARCHAR},
-        GOODS_PIC4 = #{goodsPic4,jdbcType=VARCHAR},
-        GOODS_PIC5 = #{goodsPic5,jdbcType=VARCHAR},
-        GOODS_PIC6 = #{goodsPic6,jdbcType=VARCHAR},
-        GOODS_PIC7 = #{goodsPic7,jdbcType=VARCHAR},
-        GOODS_PIC8 = #{goodsPic8,jdbcType=VARCHAR},
-        GOODS_PIC9 = #{goodsPic9,jdbcType=VARCHAR},
-        GOODS_GMT_CREATE = #{goodsGmtCreate,jdbcType=TIMESTAMP},
-        GOODS_LAST_MOD = #{goodsLastMod,jdbcType=TIMESTAMP},
-        GOODS_NO = #{goodsNo,jdbcType=VARCHAR}
+            USER_NAME = #{userName,jdbcType=VARCHAR},
+            GOODS_NAME = #{goodsName,jdbcType=VARCHAR},
+            GOODS_SPECIFIC_TYPE = #{goodsSpecificType,jdbcType=VARCHAR},
+            GOODS_TYPE = #{goodsType,jdbcType=VARCHAR},
+            GOODS_AREA = #{goodsArea,jdbcType=VARCHAR},
+            GOODS_PRICE = #{goodsPrice,jdbcType=VARCHAR},
+            GOODS_WORDS = #{goodsWords,jdbcType=VARCHAR},
+            GOODS_QQ = #{goodsQq,jdbcType=VARCHAR},
+            GOODS_WX = #{goodsWx,jdbcType=VARCHAR},
+            GOODS_OTHER = #{goodsOther,jdbcType=VARCHAR},
+            GOODS_CLICK_AMOUNT = #{goodsClickAmount,jdbcType=VARCHAR},
+            GOODS_COLLECTION_AMOUNT = #{goodsCollectionAmount,jdbcType=VARCHAR},
+            GOODS_PIC1 = #{goodsPic1,jdbcType=VARCHAR},
+            GOODS_PIC2 = #{goodsPic2,jdbcType=VARCHAR},
+            GOODS_PIC3 = #{goodsPic3,jdbcType=VARCHAR},
+            GOODS_PIC4 = #{goodsPic4,jdbcType=VARCHAR},
+            GOODS_PIC5 = #{goodsPic5,jdbcType=VARCHAR},
+            GOODS_PIC6 = #{goodsPic6,jdbcType=VARCHAR},
+            GOODS_PIC7 = #{goodsPic7,jdbcType=VARCHAR},
+            GOODS_PIC8 = #{goodsPic8,jdbcType=VARCHAR},
+            GOODS_PIC9 = #{goodsPic9,jdbcType=VARCHAR},
+            GOODS_GMT_CREATE = #{goodsGmtCreate,jdbcType=TIMESTAMP},
+            GOODS_LAST_MOD = #{goodsLastMod,jdbcType=TIMESTAMP},
+            GOODS_NO = #{goodsNo,jdbcType=VARCHAR}
         where GOODS_ID = #{goodsId,jdbcType=VARCHAR}
     </update>
-    <sql id="MySqlPaginationSuffix">
-        <if test="page != null">
+    <sql id="MySqlPaginationSuffix" >
+        <if test="page != null" >
             <![CDATA[ LIMIT #{page.pageSize} OFFSET #{page.recordIndex}]]>
         </if>
     </sql>
-    <select id="selectOneByExample" resultMap="BaseResultMap" parameterType="com.sbm.pojo.model.GoodsExample">
+    <select id="selectOneByExample" resultMap="BaseResultMap" parameterType="com.sbm.pojo.model.GoodsExample" >
         select
-        <if test="distinct">
+        <if test="distinct" >
             distinct
         </if>
-        <if test="includeColumns == null or includeColumns.size()==0">
-            <include refid="Base_Column_List"/>
-        </if>
-        <if test="includeColumns!=null and includeColumns.size() > 0">
-            <foreach collection="includeColumns" index="index" item="includeColumn" separator=",">
-                ${includeColumn}
-            </foreach>
-        </if>
-        from GOODS
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-        <if test="orderByClause != null">
-            order by ${orderByClause}
-        </if>
+        <if test="includeColumns == null or includeColumns.size()==0" >
+      <include refid="Base_Column_List" />
+    </if>
+    <if test="includeColumns!=null and includeColumns.size() > 0" >
+      <foreach collection="includeColumns" index="index" item="includeColumn" separator="," >
+        ${includeColumn}
+      </foreach>
+    </if>
+         from goods
+        <if test="_parameter != null" >
+     <include refid="Example_Where_Clause" />
+     </if>
+        <if test="orderByClause != null" >
+     order by ${orderByClause}
+     </if>
         LIMIT 1 OFFSET 0
     </select>
 </mapper>

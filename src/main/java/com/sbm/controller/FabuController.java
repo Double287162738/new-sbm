@@ -49,7 +49,7 @@ public class FabuController extends MyMultipartResolver {
     @RequestMapping("/uploadPic.do")
     @ResponseBody
     public ExecuteResult<List<String>> LoadPic(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String path = "D:/home/" + NowTimeUtils.getYear() + "/" + NowTimeUtils.getMonth() + "/" + NowTimeUtils.getDay();
+        String path = SkssConstant.XZ_UPLOAD_URL + NowTimeUtils.getYear() + "/" + NowTimeUtils.getMonth() + "/" + NowTimeUtils.getDay();
         ExecuteResult<List<String>> result = new ExecuteResult<>();
         //得到session对象
         HttpSession session = request.getSession(false);

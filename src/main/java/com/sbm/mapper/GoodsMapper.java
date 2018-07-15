@@ -2,9 +2,7 @@ package com.sbm.mapper;
 
 import com.sbm.pojo.model.Goods;
 import com.sbm.pojo.model.GoodsExample;
-
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

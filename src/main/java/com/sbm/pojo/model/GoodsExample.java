@@ -1,12 +1,12 @@
 package com.sbm.pojo.model;
 
+import com.sbm.util.Page;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.sbm.util.Page;
 
 public class GoodsExample {
 
@@ -20,34 +20,35 @@ public class GoodsExample {
 
     List<String> includeColumns = new ArrayList<String>();
 
-    private static Map<String, String> MODEL_INFOS = new HashMap<String, String>();
+    private static Map<String, String> MODEL_INFOS = new HashMap<String,String>();
 
     static {
-        MODEL_INFOS.put("goodsId", "GOODS_ID");
-        MODEL_INFOS.put("userId", "USER_ID");
-        MODEL_INFOS.put("userName", "USER_NAME");
-        MODEL_INFOS.put("goodsName", "GOODS_NAME");
-        MODEL_INFOS.put("goodsType", "GOODS_TYPE");
-        MODEL_INFOS.put("goodsArea", "GOODS_AREA");
-        MODEL_INFOS.put("goodsPrice", "GOODS_PRICE");
-        MODEL_INFOS.put("goodsWords", "GOODS_WORDS");
-        MODEL_INFOS.put("goodsQq", "GOODS_QQ");
-        MODEL_INFOS.put("goodsWx", "GOODS_WX");
-        MODEL_INFOS.put("goodsOther", "GOODS_OTHER");
-        MODEL_INFOS.put("goodsClickAmount", "GOODS_CLICK_AMOUNT");
-        MODEL_INFOS.put("goodsCollectionAmount", "GOODS_COLLECTION_AMOUNT");
-        MODEL_INFOS.put("goodsPic1", "GOODS_PIC1");
-        MODEL_INFOS.put("goodsPic2", "GOODS_PIC2");
-        MODEL_INFOS.put("goodsPic3", "GOODS_PIC3");
-        MODEL_INFOS.put("goodsPic4", "GOODS_PIC4");
-        MODEL_INFOS.put("goodsPic5", "GOODS_PIC5");
-        MODEL_INFOS.put("goodsPic6", "GOODS_PIC6");
-        MODEL_INFOS.put("goodsPic7", "GOODS_PIC7");
-        MODEL_INFOS.put("goodsPic8", "GOODS_PIC8");
-        MODEL_INFOS.put("goodsPic9", "GOODS_PIC9");
-        MODEL_INFOS.put("goodsGmtCreate", "GOODS_GMT_CREATE");
-        MODEL_INFOS.put("goodsLastMod", "GOODS_LAST_MOD");
-        MODEL_INFOS.put("goodsNo", "GOODS_NO");
+        MODEL_INFOS.put("goodsId","GOODS_ID");
+        MODEL_INFOS.put("userId","USER_ID");
+        MODEL_INFOS.put("userName","USER_NAME");
+        MODEL_INFOS.put("goodsName","GOODS_NAME");
+        MODEL_INFOS.put("goodsSpecificType","GOODS_SPECIFIC_TYPE");
+        MODEL_INFOS.put("goodsType","GOODS_TYPE");
+        MODEL_INFOS.put("goodsArea","GOODS_AREA");
+        MODEL_INFOS.put("goodsPrice","GOODS_PRICE");
+        MODEL_INFOS.put("goodsWords","GOODS_WORDS");
+        MODEL_INFOS.put("goodsQq","GOODS_QQ");
+        MODEL_INFOS.put("goodsWx","GOODS_WX");
+        MODEL_INFOS.put("goodsOther","GOODS_OTHER");
+        MODEL_INFOS.put("goodsClickAmount","GOODS_CLICK_AMOUNT");
+        MODEL_INFOS.put("goodsCollectionAmount","GOODS_COLLECTION_AMOUNT");
+        MODEL_INFOS.put("goodsPic1","GOODS_PIC1");
+        MODEL_INFOS.put("goodsPic2","GOODS_PIC2");
+        MODEL_INFOS.put("goodsPic3","GOODS_PIC3");
+        MODEL_INFOS.put("goodsPic4","GOODS_PIC4");
+        MODEL_INFOS.put("goodsPic5","GOODS_PIC5");
+        MODEL_INFOS.put("goodsPic6","GOODS_PIC6");
+        MODEL_INFOS.put("goodsPic7","GOODS_PIC7");
+        MODEL_INFOS.put("goodsPic8","GOODS_PIC8");
+        MODEL_INFOS.put("goodsPic9","GOODS_PIC9");
+        MODEL_INFOS.put("goodsGmtCreate","GOODS_GMT_CREATE");
+        MODEL_INFOS.put("goodsLastMod","GOODS_LAST_MOD");
+        MODEL_INFOS.put("goodsNo","GOODS_NO");
     }
 
     public GoodsExample() {
@@ -104,7 +105,7 @@ public class GoodsExample {
     }
 
     public void setPage(Page page) {
-        this.page = page;
+        this.page=page;
     }
 
     public Page getPage() {
@@ -120,20 +121,21 @@ public class GoodsExample {
         includeColumns.add(columnName);
     }
 
-    public void addSelectiveFields(String... fields) {
-        for (String field : fields) {
+    public void addSelectiveFields(String ... fields) {
+        for(String field:fields){
             addSelectiveField(field);
         }
     }
 
     public void addSelectiveFields(List<String> fields) {
-        for (String field : fields) {
+        for(String field:fields){
             addSelectiveField(field);
         }
     }
 
     /**
-     * 2018-04-01
+     * 
+     * 2018-07-15
      */
     protected abstract static class GeneratedCriteria {
 
@@ -454,6 +456,76 @@ public class GoodsExample {
 
         public Criteria andGoodsNameNotBetween(String value1, String value2) {
             addCriterion("GOODS_NAME not between", value1, value2, "goodsName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsSpecificTypeIsNull() {
+            addCriterion("GOODS_SPECIFIC_TYPE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsSpecificTypeIsNotNull() {
+            addCriterion("GOODS_SPECIFIC_TYPE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsSpecificTypeEqualTo(String value) {
+            addCriterion("GOODS_SPECIFIC_TYPE =", value, "goodsSpecificType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsSpecificTypeNotEqualTo(String value) {
+            addCriterion("GOODS_SPECIFIC_TYPE <>", value, "goodsSpecificType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsSpecificTypeGreaterThan(String value) {
+            addCriterion("GOODS_SPECIFIC_TYPE >", value, "goodsSpecificType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsSpecificTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("GOODS_SPECIFIC_TYPE >=", value, "goodsSpecificType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsSpecificTypeLessThan(String value) {
+            addCriterion("GOODS_SPECIFIC_TYPE <", value, "goodsSpecificType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsSpecificTypeLessThanOrEqualTo(String value) {
+            addCriterion("GOODS_SPECIFIC_TYPE <=", value, "goodsSpecificType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsSpecificTypeLike(String value) {
+            addCriterion("GOODS_SPECIFIC_TYPE like", value, "goodsSpecificType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsSpecificTypeNotLike(String value) {
+            addCriterion("GOODS_SPECIFIC_TYPE not like", value, "goodsSpecificType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsSpecificTypeIn(List<String> values) {
+            addCriterion("GOODS_SPECIFIC_TYPE in", values, "goodsSpecificType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsSpecificTypeNotIn(List<String> values) {
+            addCriterion("GOODS_SPECIFIC_TYPE not in", values, "goodsSpecificType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsSpecificTypeBetween(String value1, String value2) {
+            addCriterion("GOODS_SPECIFIC_TYPE between", value1, value2, "goodsSpecificType");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsSpecificTypeNotBetween(String value1, String value2) {
+            addCriterion("GOODS_SPECIFIC_TYPE not between", value1, value2, "goodsSpecificType");
             return (Criteria) this;
         }
 
@@ -1917,7 +1989,8 @@ public class GoodsExample {
     }
 
     /**
-     * 2018-04-01
+     * 
+     * 2018-07-15
      */
     public static class Criterion {
 

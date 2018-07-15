@@ -300,6 +300,9 @@
 #onlyPrevious:hover{
     transform: scale(1.1);
 }
+#fabuSave:hover{
+    transform: scale(1.1);
+}
 #next{
     cursor: pointer;
     width: 60px;
@@ -315,4 +318,24 @@
     height: 60px;
     left:-90px;
     top:100px;
+}
+#fabuSave{
+    cursor: pointer;
+    position: absolute;
+    width:54px;
+    height:54px;
+    border: 3px solid #cdcdcd;
+    border-radius: 50%;
+    right: -80px;
+    top:105px;
+}
+#fabuSave >img{
+    position: absolute;
+    width:70%;
+    height: 70%;
+    margin:auto;
+    left: 0px;
+    right:0px;
+    top:0px;
+    bottom: 0px;
 }

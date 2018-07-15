@@ -1,5 +1,8 @@
 package com.sbm.util;
 
+/**
+ * @author Administrator
+ */
 public final class SkssConstant {
 
 
@@ -9,5 +12,13 @@ public final class SkssConstant {
     public static final String RESULT_FAIL = "0";
     //返回结果未登录
     public static final String NOT_LOGIN = "2";
+    /**
+     * 闲置图片上传路径
+     */
+    public static final String XZ_UPLOAD_URL= "D:/pic/goodsPic/";
 
+    /**
+     * 头像图片上传路径
+     */
+    public static final String AVATAR_UPLOAD_URL= "D:/pic/avatarPic/";
 }
