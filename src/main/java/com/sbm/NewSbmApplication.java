@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartResolver;
 @Configuration
 @MapperScan("com.sbm.mapper")
 @EnableAutoConfiguration(exclude = {MultipartAutoConfiguration.class})
+@ServletComponentScan
 public class NewSbmApplication {
 
     public static void main(String[] args) {
@@ -32,4 +34,6 @@ public class NewSbmApplication {
         resolver.setMaxUploadSize(5 * 1024 * 1024);
         return resolver;
     }
+
+
 }

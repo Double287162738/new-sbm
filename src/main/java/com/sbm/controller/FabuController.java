@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.alibaba.fastjson.JSONObject;
 import com.sbm.pojo.model.Goods;
+import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -135,6 +136,10 @@ public class FabuController extends MyMultipartResolver {
                     }
                     in.close();
                     out.close();
+                   // 压缩图片
+                   // Thumbnails.of(item.getInputStream()).scale(1f).outputQuality(0.25f).toFile(path+filename);
+
+
                 }
             }
         } catch (Exception e) {
