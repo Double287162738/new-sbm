@@ -1,8 +1,8 @@
 
 var xzInfo =
-    {"goodsType":"",
-    "goodsArea":"",
-    "goodsSpecificType":"",
+    {"goodsType":"1",
+    "goodsArea":"2",
+    "goodsSpecificType":"3",
     "goodsName":"",
     "goodsPrice":"",
     "goodsQq":"",
@@ -69,14 +69,17 @@ $(function(){
         uploadUrl: "http://localhost:8080/my-sbm/fabu/uploadPic.do",
         maxFileSize: 1024 * 20,
         minFileCount: 1,
-        maxFileCount: 5, /*允许最大上传数，可以多个，当前设置单个*/
+        maxFileCount: 5, /*允许最大上传数，可以多个，当前设置单5个*/
         enctype: 'multipart/form-data',
         //allowedPreviewTypes : [ 'image' ], //allowedFileTypes: ['image', 'video', 'flash'],
         allowedFileExtensions: ["jpg", "png", "gif"], /*上传文件格式*/
         msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
         dropZoneTitle: "请选择闲置图片（第一张将作为展示图片）",
         dropZoneClickTitle: "",
-        //uploadExtraData: {"id": id},//这个是外带数据
+        uploadExtraData: function(){
+            var data=xzInfo;
+            return data;
+        },//这个是外带数据
         showBrowse: true,
         browseOnZoneClick: true,
         layoutTemplates: {
