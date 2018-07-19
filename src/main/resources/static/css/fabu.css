@@ -253,6 +253,8 @@
     margin-bottom: 0;
 }
 #fabuName,#fabuPrice,#fabuQq,#fabuWx,#fabuWords{
+    font-size: 14px;
+    padding-left:14px;
     width: 150px;
     height: 36px;
     border-radius: 4px;

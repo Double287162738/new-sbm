@@ -42,21 +42,14 @@ public class FabuServiceImpl implements FabuService {
             result.addErrorMessage("该用户不存在，请确认后再发布");
             return result;
         }
-        if (StringUtils.isNotBlank(checkGoods(goods))) {
-            result.setResult(SkssConstant.RESULT_FAIL);
-            result.addErrorMessage(checkGoods(goods));
-            return result;
-        }
         //给物品一个ID
         goods.setUserName(user.getUserName());
         goods.setGoodsId(GetUuidUtils.getUUID());
         goods.setUserId(userId);
         goods.setGoodsNo(Long.toString(System.currentTimeMillis()));
-        makeNewGoodsPic(goods);
         goods.setGoodsGmtCreate(new Date());
         goodsMapper.insertSelective(goods);
         result.setResult(SkssConstant.RESULT_SUCCESS);
-        result.setSuccessMessage("发布成功");
         return result;
     }
 
