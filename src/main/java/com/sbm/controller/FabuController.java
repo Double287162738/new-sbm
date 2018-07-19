@@ -50,7 +50,13 @@ public class FabuController extends MyMultipartResolver {
     @RequestMapping("/uploadPic.do")
     @ResponseBody
     public ExecuteResult<List<String>> LoadPic(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String path = SkssConstant.XZ_UPLOAD_URL + NowTimeUtils.getYear() + "/" + NowTimeUtils.getMonth() + "/" + NowTimeUtils.getDay();
+      //  String path = SkssConstant.XZ_UPLOAD_URL + NowTimeUtils.getYear() + "/" + NowTimeUtils.getMonth() + "/" + NowTimeUtils.getDay();
+        File directory = new File("");//设定为当前文件夹
+        //获取绝对路径
+       String xzUrl= directory.getAbsolutePath();
+       String path = xzUrl+ NowTimeUtils.getYear() + "/" + NowTimeUtils.getMonth() + "/" + NowTimeUtils.getDay();
+       System.out.println("上传路径为："+path);
+
         ExecuteResult<List<String>> result = new ExecuteResult<>();
         //得到session对象
         HttpSession session = request.getSession(false);
@@ -125,7 +131,7 @@ public class FabuController extends MyMultipartResolver {
                     //第三方提供的
                     //item.write( new File(path,filename) );
                     //手动写的
-                    OutputStream out = new FileOutputStream(new File(path, filename));
+                    /*OutputStream out = new FileOutputStream(new File(path, filename));
                     InputStream in = item.getInputStream();
                     int length = 0;
                     byte[] buf = new byte[1024];
@@ -135,9 +141,9 @@ public class FabuController extends MyMultipartResolver {
                         out.write(buf, 0, length);
                     }
                     in.close();
-                    out.close();
+                    out.close();*/
                    // 压缩图片
-                   // Thumbnails.of(item.getInputStream()).scale(1f).outputQuality(0.25f).toFile(path+filename);
+                    Thumbnails.of(item.getInputStream()).scale(1f).outputQuality(0.25f).toFile(path+"/"+filename);
 
 
                 }
