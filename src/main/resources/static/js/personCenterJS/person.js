@@ -1,4 +1,3 @@
-var baseUrl = "http://localhost:8080";
 var nowFile = null;
 var uploadFile = null;
 var openEditPerInfo = false;
@@ -33,14 +32,14 @@ $(function () {
                     document.getElementById("edit-input1").value = data.result.userQq;
                     document.getElementById("edit-input2").value = data.result.userWx;
                     document.getElementById("edit-input3").value = data.result.userSex;
-                    document.getElementById("per-pic-img").src = baseUrl + "/file/AvatarPic/" + userAvatarPic.substring(0, 4) + "/" + userAvatarPic.substring(4, 6) + "/"
+                    document.getElementById("per-pic-img").src = avatarPicURL + userAvatarPic.substring(0, 4) + "/" + userAvatarPic.substring(4, 6) + "/"
                         + userAvatarPic.substring(6, 8) + "/" + userAvatarPic;
                     perInfo = {
                         "userName": data.result.userName,
                         "userQq": data.result.userQq,
                         "userWx": data.result.userWx,
                         "userSex": data.result.userSex,
-                        "userAvatar": baseUrl + "/file/AvatarPic/" + userAvatarPic.substring(0, 4) + "/" + userAvatarPic.substring(4, 6) + "/"
+                        "userAvatar": avatarPicURL + userAvatarPic.substring(0, 4) + "/" + userAvatarPic.substring(4, 6) + "/"
                         + userAvatarPic.substring(6, 8) + "/" + userAvatarPic
                     };
                 } else {
@@ -233,7 +232,7 @@ function changePerInfo() {
         perInfo.userWx = newUserWx;
         perInfo.userSex = newUserSex;
         if (returnPicAvatarName != null) {
-            perInfo.userAvatar = perInfo.userAvatar = baseUrl + "/file/AvatarPic/" + returnPicAvatarName.substring(0, 4) + "/" + returnPicAvatarName.substring(4, 6) + "/"
+            perInfo.userAvatar = perInfo.userAvatar = avatarPicURL + returnPicAvatarName.substring(0, 4) + "/" + returnPicAvatarName.substring(4, 6) + "/"
                 + returnPicAvatarName.substring(6, 8) + "/" + returnPicAvatarName;
         }
         var changePerInfo = {
@@ -285,7 +284,7 @@ function showPerFabuGoods(data) {
         append = append +
             "<div id='fabu-all'>" +
             "<div id='fabu-pic'>" +
-            "<img src='" + baseUrl + "/file/GoodsPic/" + goodsPic1.substring(0, 4) + "/" + goodsPic1.substring(4, 6) + "/"
+            "<img src='" + goodsPicURL + goodsPic1.substring(0, 4) + "/" + goodsPic1.substring(4, 6) + "/"
             + goodsPic1.substring(6, 8) + "/" + goodsPic1 + "' />" +
             "</div>" +
             "<div id='fabu-other'>" +

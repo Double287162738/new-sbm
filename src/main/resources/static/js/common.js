@@ -1,11 +1,10 @@
 
-var baseUrl = "http://localhost:8080";
 $(function () {
     if(getCookie("userAvatar") != null){
         var userAvatarPic = getCookie("userAvatar");
         document.getElementById("loginOrLoginOut").innerHTML = '';
         $("#loginOrLoginOut").append("<li class='loginOrLoginOut'><a href='##' id='logOut'><span class='glyphicon glyphicon-log-in'></span> 注销</a></li>");
-        document.getElementById("perPic").src = baseUrl + "/E:/pic/avatarPic/" + userAvatarPic.substring(0, 4) + "/" + userAvatarPic.substring(4, 6) + "/"
+        document.getElementById("perPic").src = avatarPicURL + userAvatarPic.substring(0, 4) + "/" + userAvatarPic.substring(4, 6) + "/"
             + userAvatarPic.substring(6, 8) + "/" + userAvatarPic;
     }else{
         document.getElementById("perPic").src = "../img/perPic.png";

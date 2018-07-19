@@ -84,7 +84,6 @@
 
 /*展示部分->详情部分*/
 #per-click-show, #yifabu-click-show, #sc-click-show, #recycle-click-show {
-    border-left: 2px solid #DCDCDC;
     display: inline-block;
     vertical-align: top;
     width: 79%;
