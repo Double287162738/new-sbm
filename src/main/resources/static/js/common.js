@@ -15,7 +15,7 @@ $(function () {
     }
     //发布闲置
     $("#fabu-a").click(function () {
-        if(getCookie("userId") != null){
+        if(userAvatar != null && userAvatar != ""){
             window.location.href = 'fabu.html';
         }else{
             window.location.href = 'login.html';
