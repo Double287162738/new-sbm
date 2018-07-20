@@ -1,4 +1,3 @@
-var baseUrl = "http://localhost:8080";
 var totalPage;
 var currentPage;
 var keyword;
@@ -53,7 +52,7 @@ $(function () {
                             "<div id='xianzhi-pic-border'>" +
                             "<a onclick='openDetail(\"" + data.records[i].goodsId + "\")' data-toggle='modal' >" +
                             "<div id='xianzhi-pic'>" +
-                            "<img src='" + baseUrl + "/file/GoodsPic/" + goodsPic1.substring(0, 4) + "/" + goodsPic1.substring(4, 6) + "/"
+                            "<img src='" + goodsPicURL + goodsPic1.substring(0, 4) + "/" + goodsPic1.substring(4, 6) + "/"
                             + goodsPic1.substring(6, 8) + "/" + goodsPic1 + "' />" +
                             "</div>" +
                             "</a>" +
@@ -254,7 +253,7 @@ function makeGoodsDetails(keyword, currentPage) {
                             "<div id='xianzhi-pic-border'>" +
                             "<a onclick='openDetail(" + data.records[i].goodsId + ")' data-toggle='modal' >" +
                             "<div id='xianzhi-pic'>" +
-                            "<img src='" + baseUrl + "/file/GoodsPic/" + goodsPic1.substring(0, 4) + "/" + goodsPic1.substring(4, 6) + "/"
+                            "<img src='" + goodsPicURL + goodsPic1.substring(0, 4) + "/" + goodsPic1.substring(4, 6) + "/"
                             + goodsPic1.substring(6, 8) + "/" + goodsPic1 + "' />" +
                             "</div>" +
                             "</a>" +
@@ -421,7 +420,7 @@ function openDetail(e) {
                     data.result.goodsWx = "太粗心了，竟然没有留下QQ";
                 }
                 var goodsPic1 = data.result.goodsPic1;
-                document.getElementById("goodsPic1").src = baseUrl + "/file/GoodsPic/" + goodsPic1.substring(0, 4) + "/" + goodsPic1.substring(4, 6) + "/"
+                document.getElementById("goodsPic1").src = goodsPicURL + goodsPic1.substring(0, 4) + "/" + goodsPic1.substring(4, 6) + "/"
                     + goodsPic1.substring(6, 8) + "/" + goodsPic1;
                 document.getElementById("owner").innerHTML = data.result.userName;
                 document.getElementById("goods").innerHTML = data.result.goodsName;
@@ -455,27 +454,6 @@ function openDetail(e) {
                 } else {
                     $.cookie("goodsPic5", "null");
                 }
-                if (data.result.goodsPic6 != null) {
-                    $.cookie("goodsPic6", data.result.goodsPic6);
-                } else {
-                    $.cookie("goodsPic6", "null");
-                }
-                if (data.result.goodsPic7 != null) {
-                    $.cookie("goodsPic7", data.result.goodsPic7);
-                } else {
-                    $.cookie("goodsPic7", "null");
-                }
-                if (data.result.goodsPic8 != null) {
-                    $.cookie("goodsPic8", data.result.goodsPic8);
-                } else {
-                    $.cookie("goodsPic8", "null");
-                }
-                if (data.result.goodsPic9 != null) {
-                    $.cookie("goodsPic9", data.result.goodsPic9);
-                } else {
-                    $.cookie("goodsPic9", "null");
-                }
-
             }
         },
         error: function (e) {

@@ -299,16 +299,6 @@ public class UserLoginController {
                 result.setResult(user);
                 result.setSuccessMessage(userName + "登录成功");
                 cleanCookie("verCode", response, request);
-                //用户头像放入cookie
-                Cookie userAvatarCookie = new Cookie("userAvatar",user.getUserAvatar());
-                userAvatarCookie.setMaxAge(24*60*60);
-                userAvatarCookie.setPath("/");
-                response.addCookie(userAvatarCookie);
-                //用户ID放入cookie
-                Cookie userIdCookie = new Cookie("userId",user.getUserId());
-                userIdCookie.setMaxAge(24*60*60);
-                userIdCookie.setPath("/");
-                response.addCookie(userIdCookie);
                 //创建session对象
                 HttpSession session = request.getSession();
                 session.setAttribute("userId", user.getUserId());

@@ -2,11 +2,15 @@ package com.sbm.service.impl;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.sbm.mapper.UserMapper;
+import com.sbm.pojo.model.User;
+import com.sbm.util.SkssConstant;
 import org.apache.commons.lang.StringUtils;
 
 import org.springframework.stereotype.Service;
@@ -22,153 +26,127 @@ public class UserPersonCenterServcieImpl implements UserPersonCenterServcie {
 
     @Resource
     private GoodsMapper goodsMapper;
+    @Resource
+    private UserMapper userMapper;
+
 
     @Override
-    public void updateAndDelFilOtherPic(String needDelOtherPicIds, String goodsId) {
-
+    public void updateAndDelFilOtherPic(String needDelOtherPicIds, String goodsId,Goods goods) {
         if (StringUtils.isNotBlank(needDelOtherPicIds) && !"null".equals(needDelOtherPicIds)) {
+            //拆分需要删除的图片ID
             needDelOtherPicIds = needDelOtherPicIds.substring(0, needDelOtherPicIds.length() - 1);
             List<String> idStrings = StringToListUtils.changeToList(needDelOtherPicIds, "-");
-            List<String> bindIds = new ArrayList<>();
-            //拼接需要置空的图片字段
-            for (String s : idStrings) {
-                bindIds.add("goodsPic" + s);
-            }
-            Goods goods = goodsMapper.selectByPrimaryKey(goodsId);
-            Goods toNullOtherPicgoods = new Goods();
-            toNullOtherPicgoods.setGoodsId(goodsId);
-            //删除已经存在的图片
+            //查询出该商品在数据库的当前信息
+            Goods oldGood = goodsMapper.selectByPrimaryKey(goodsId);
+            //删除已经存在的图片,置空数据库中对应的字段
             for (String s : idStrings) {
                 if (Integer.valueOf(s) == 2) {
-                    toNullOtherPicgoods.setGoodsPic2("");
-                    deleteOtherPic(goods.getGoodsPic2());
+                    //置空需要删除的字段
+                    goods.setGoodsPic2("");
+                    //删除服务器的旧的图片
+                    deleteOtherPic(oldGood.getGoodsPic2());
                 }
                 if (Integer.valueOf(s) == 3) {
-                    toNullOtherPicgoods.setGoodsPic3("");
-                    deleteOtherPic(goods.getGoodsPic3());
+                    //置空需要删除的字段
+                    goods.setGoodsPic3("");
+                    //删除服务器的旧的图片
+                    deleteOtherPic(oldGood.getGoodsPic3());
                 }
                 if (Integer.valueOf(s) == 4) {
-                    toNullOtherPicgoods.setGoodsPic4("");
-                    deleteOtherPic(goods.getGoodsPic4());
+                    //置空需要删除的字段
+                    goods.setGoodsPic4("");
+                    //删除服务器的旧的图片
+                    deleteOtherPic(oldGood.getGoodsPic4());
                 }
                 if (Integer.valueOf(s) == 5) {
-                    toNullOtherPicgoods.setGoodsPic5("");
-                    deleteOtherPic(goods.getGoodsPic5());
-                }
-                if (Integer.valueOf(s) == 6) {
-                    toNullOtherPicgoods.setGoodsPic6("");
-                    deleteOtherPic(goods.getGoodsPic6());
-                }
-                if (Integer.valueOf(s) == 7) {
-                    toNullOtherPicgoods.setGoodsPic7("");
-                    deleteOtherPic(goods.getGoodsPic7());
-                }
-                if (Integer.valueOf(s) == 8) {
-                    toNullOtherPicgoods.setGoodsPic8("");
-                    deleteOtherPic(goods.getGoodsPic8());
-                }
-                if (Integer.valueOf(s) == 9) {
-                    toNullOtherPicgoods.setGoodsPic9("");
-                    deleteOtherPic(goods.getGoodsPic9());
+                    //置空需要删除的字段
+                    goods.setGoodsPic5("");
+                    //删除服务器的旧的图片
+                    deleteOtherPic(oldGood.getGoodsPic5());
                 }
             }
-            //置空需要删除的图片
-            goodsMapper.updateByPrimaryKeySelective(toNullOtherPicgoods);
         }
     }
 
     public void deleteOtherPic(String picName) {
-        File oldUserAvatar = new File("F://Pic/GoodsPic/" + picName.substring(0, 4) + "/"
+        File oldUserAvatar = new File(SkssConstant.XZ_UPLOAD_URL + picName.substring(0, 4) + "/"
                 + picName.substring(4, 6) + "/"
                 + picName.substring(6, 8) + "/"
                 + picName);
         oldUserAvatar.delete();
     }
 
+    public void deleteAvatarPic(String picName) {
+        File oldUserAvatar = new File(SkssConstant.AVATAR_UPLOAD_URL + picName.substring(0, 4) + "/"
+                + picName.substring(4, 6) + "/"
+                + picName.substring(6, 8) + "/"
+                + picName);
+        oldUserAvatar.delete();
+    }
 
     @Override
-    public void updateChangeFilOtherPic(Map<String, String> changeOtherPicIds, String goodsId) {
-        if (changeOtherPicIds.isEmpty() || StringUtils.isBlank(goodsId)) {
-            return;
-        }
+    public void updateUserInfo(User user) {
+        userMapper.updateByPrimaryKeySelective(user);
+    }
+
+
+    @Override
+    public void updateChangeFilOtherPic(Map<String, String> changeOtherPicIds, String goodsId,Goods goods) {
         List<String> needDelFileOtherPicIds = new ArrayList<>();
-        Goods needChangeOtherPicGood = new Goods();
-        for (String string : changeOtherPicIds.keySet()) {
-            if (Integer.valueOf(string) == 1) {
-                needChangeOtherPicGood.setGoodsPic1(changeOtherPicIds.get(string));
-                needDelFileOtherPicIds.add("goodsPic1");
+        if(!changeOtherPicIds.isEmpty()){
+            for (String string : changeOtherPicIds.keySet()) {
+                if (Integer.valueOf(string) == 1) {
+                    //赋值更新之后重新生成的图片名称
+                    goods.setGoodsPic1(changeOtherPicIds.get(string));
+                    //需要删除的图片
+                    needDelFileOtherPicIds.add("goodsPic1");
+                }
+                if (Integer.valueOf(string) == 2) {
+                    goods.setGoodsPic2(changeOtherPicIds.get(string));
+                    needDelFileOtherPicIds.add("goodsPic2");
+                }
+                if (Integer.valueOf(string) == 3) {
+                    goods.setGoodsPic3(changeOtherPicIds.get(string));
+                    needDelFileOtherPicIds.add("goodsPic3");
+                }
+                if (Integer.valueOf(string) == 4) {
+                    goods.setGoodsPic4(changeOtherPicIds.get(string));
+                    needDelFileOtherPicIds.add("goodsPic4");
+                }
+                if (Integer.valueOf(string) == 5) {
+                    goods.setGoodsPic5(changeOtherPicIds.get(string));
+                    needDelFileOtherPicIds.add("goodsPic5");
+                }
             }
-            if (Integer.valueOf(string) == 2) {
-                needChangeOtherPicGood.setGoodsPic2(changeOtherPicIds.get(string));
-                needDelFileOtherPicIds.add("goodsPic2");
-            }
-            if (Integer.valueOf(string) == 3) {
-                needChangeOtherPicGood.setGoodsPic3(changeOtherPicIds.get(string));
-                needDelFileOtherPicIds.add("goodsPic3");
-            }
-            if (Integer.valueOf(string) == 4) {
-                needChangeOtherPicGood.setGoodsPic4(changeOtherPicIds.get(string));
-                needDelFileOtherPicIds.add("goodsPic4");
-            }
-            if (Integer.valueOf(string) == 5) {
-                needChangeOtherPicGood.setGoodsPic5(changeOtherPicIds.get(string));
-                needDelFileOtherPicIds.add("goodsPic5");
-            }
-            if (Integer.valueOf(string) == 6) {
-                needChangeOtherPicGood.setGoodsPic6(changeOtherPicIds.get(string));
-                needDelFileOtherPicIds.add("goodsPic6");
-            }
-            if (Integer.valueOf(string) == 7) {
-                needChangeOtherPicGood.setGoodsPic7(changeOtherPicIds.get(string));
-                needDelFileOtherPicIds.add("goodsPic7");
-            }
-            if (Integer.valueOf(string) == 8) {
-                needChangeOtherPicGood.setGoodsPic8(changeOtherPicIds.get(string));
-                needDelFileOtherPicIds.add("goodsPic8");
-            }
-            if (Integer.valueOf(string) == 9) {
-                needChangeOtherPicGood.setGoodsPic9(changeOtherPicIds.get(string));
-                needDelFileOtherPicIds.add("goodsPic9");
-            }
-            needChangeOtherPicGood.setGoodsId(goodsId);
-
         }
 
-        //删除改变图片的旧图片
-        GoodsExample goodsExample = new GoodsExample();
-        goodsExample.createCriteria().andGoodsIdEqualTo(goodsId);
-        goodsExample.addSelectiveFields(needDelFileOtherPicIds);
-        Goods goods = goodsMapper.selectOneByExample(goodsExample);
-        if (StringUtils.isNotBlank(goods.getGoodsPic1())) {
-            deleteOtherPic(goods.getGoodsPic1());
+        if(needDelFileOtherPicIds.size()>0){
+            //删除替换图片的旧图片
+            GoodsExample goodsExample = new GoodsExample();
+            goodsExample.createCriteria().andGoodsIdEqualTo(goodsId);
+            //只查询需要删除的图片
+            goodsExample.addSelectiveFields(needDelFileOtherPicIds);
+            Goods oldGood = goodsMapper.selectOneByExample(goodsExample);
+            //if判断如果不为空，即需要删除服务器上的图片
+            if (StringUtils.isNotBlank(goods.getGoodsPic1())) {
+                deleteOtherPic(oldGood.getGoodsPic1());
+            }
+            if (StringUtils.isNotBlank(goods.getGoodsPic2())) {
+                deleteOtherPic(oldGood.getGoodsPic2());
+            }
+            if (StringUtils.isNotBlank(goods.getGoodsPic3())) {
+                deleteOtherPic(oldGood.getGoodsPic3());
+            }
+            if (StringUtils.isNotBlank(goods.getGoodsPic4())) {
+                deleteOtherPic(oldGood.getGoodsPic4());
+            }
+            if (StringUtils.isNotBlank(goods.getGoodsPic5())) {
+                deleteOtherPic(oldGood.getGoodsPic5());
+            }
         }
-        if (StringUtils.isNotBlank(goods.getGoodsPic2())) {
-            deleteOtherPic(goods.getGoodsPic2());
-        }
-        if (StringUtils.isNotBlank(goods.getGoodsPic3())) {
-            deleteOtherPic(goods.getGoodsPic3());
-        }
-        if (StringUtils.isNotBlank(goods.getGoodsPic4())) {
-            deleteOtherPic(goods.getGoodsPic4());
-        }
-        if (StringUtils.isNotBlank(goods.getGoodsPic5())) {
-            deleteOtherPic(goods.getGoodsPic5());
-        }
-        if (StringUtils.isNotBlank(goods.getGoodsPic6())) {
-            deleteOtherPic(goods.getGoodsPic6());
-        }
-        if (StringUtils.isNotBlank(goods.getGoodsPic7())) {
-            deleteOtherPic(goods.getGoodsPic7());
-        }
-        if (StringUtils.isNotBlank(goods.getGoodsPic8())) {
-            deleteOtherPic(goods.getGoodsPic8());
-        }
-        if (StringUtils.isNotBlank(goods.getGoodsPic9())) {
-            deleteOtherPic(goods.getGoodsPic9());
-        }
-
-        //更换改变图片的名称
-        goodsMapper.updateByPrimaryKeySelective(needChangeOtherPicGood);
+        goods.setGoodsLastMod(new Date());
+        //整体更新该商品的信息
+        goodsMapper.updateByPrimaryKeySelective(goods);
 
     }
 

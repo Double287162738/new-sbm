@@ -1,11 +1,11 @@
-
+var userAvatar=null;
 $(function () {
-    if(getCookie("userAvatar") != null){
-        var userAvatarPic = getCookie("userAvatar");
+    getAvatarPicName();
+    if(userAvatar != null){
         document.getElementById("loginOrLoginOut").innerHTML = '';
         $("#loginOrLoginOut").append("<li class='loginOrLoginOut'><a href='##' id='logOut'><span class='glyphicon glyphicon-log-in'></span> 注销</a></li>");
-        document.getElementById("perPic").src = avatarPicURL + userAvatarPic.substring(0, 4) + "/" + userAvatarPic.substring(4, 6) + "/"
-            + userAvatarPic.substring(6, 8) + "/" + userAvatarPic;
+        document.getElementById("perPic").src = avatarPicURL + userAvatar.substring(0, 4) + "/" + userAvatar.substring(4, 6) + "/"
+            + userAvatar.substring(6, 8) + "/" + userAvatar;
     }else{
         document.getElementById("perPic").src = "../img/perPic.png";
         var s = "<li class='loginOrLoginOut'><a href='login.html?index=regist'><span class='glyphicon glyphicon-user'></span> 注册</a></li>"+
@@ -56,3 +56,18 @@ $(function () {
 
 });
 
+function getAvatarPicName() {
+    $.ajax({
+        url: baseUrl + "/my-sbm/personCenter/avatarPic.do",
+        // 请求方式
+        type: "get",
+        data: "",
+        processData: false,
+        contentType: false,
+        async: false,
+        dataType: "text",
+        success: function (data) {
+           userAvatar=data;
+        }
+    });
+}

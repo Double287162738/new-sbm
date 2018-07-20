@@ -2,8 +2,6 @@ var nowFile = null;
 var uploadFile = null;
 var openEditPerInfo = false;
 var ifUploadPerPic = false;
-var ifUploadPerPicSuccess = false;
-var returnPicAvatarName = null;
 var perInfo;
 var totalPage;
 var currentPage;
@@ -147,33 +145,6 @@ $(function () {
 });
 
 
-function uploadPerPic() {
-    //上传头像图片
-    $.ajax({
-        // 规定把请求发送到那个URL  
-        url: baseUrl + "/my-sbm/personCenter/uploadPerPic.do",
-        // 请求方式  
-        type: "post",
-        data: uploadFile,
-        processData: false,
-        contentType: false,
-        async: false,
-        // 服务器响应的数据类型  
-        dataType: "json",
-        // 请求成功时执行的回调函数  
-        success: function (data) {
-            // 图片显示地址  
-            if (data.result != null) {
-                ifUploadPerPicSuccess = true;
-                returnPicAvatarName = data.result;
-            } else {
-                ifUploadPerPicSuccess = false;
-            }
-        }
-    });
-}
-
-
 //取消按钮
 function closePerInfoEdit() {
     openEditPerInfo = false;
@@ -197,77 +168,61 @@ function closePerInfoEdit() {
     document.getElementById("edit-input1").value = perInfo.userQq;
     document.getElementById("edit-input2").value = perInfo.userWx;
     document.getElementById("edit-input3").value = perInfo.userSex;
-    document.getElementById("per-pic-img").src = perInfo.userAvatar;
+    if(perInfo.userAvatar!=null){
+        document.getElementById("per-pic-img").src = perInfo.userAvatar;
+    }
 };
 
-function savePerInfoChange() {
-    if (ifUploadPerPic) {
-        uploadPerPic();
-    }
-    if (ifUploadPerPic) {
-        if (ifUploadPerPicSuccess) {
-            changePerInfo();
-        } else {
-            alert("上传头像失败，请重新选择头像");
-        }
-    } else {
-        changePerInfo();
-    }
-}
 
-function changePerInfo() {
+//保存用户修改信息
+function savePerInfoChange() {
+    //用户信息
     var newUserName = document.getElementById("edit-input").value.trim();
     var newUserQq = document.getElementById("edit-input1").value.trim();
     var newUserWx = document.getElementById("edit-input2").value.trim();
     var newUserSex = document.getElementById("edit-input3").value.trim();
-    if (newUserName == perInfo.userName
-        && newUserQq == perInfo.userQq
-        && newUserWx == perInfo.userWx
-        && newUserSex == perInfo.userSex
-        && returnPicAvatarName == perInfo.userAvatar) {
-        alert("保存成功");
-    } else {
-        perInfo.userName = newUserName;
-        perInfo.userQq = newUserQq;
-        perInfo.userWx = newUserWx;
-        perInfo.userSex = newUserSex;
-        if (returnPicAvatarName != null) {
-            perInfo.userAvatar = perInfo.userAvatar = avatarPicURL + returnPicAvatarName.substring(0, 4) + "/" + returnPicAvatarName.substring(4, 6) + "/"
-                + returnPicAvatarName.substring(6, 8) + "/" + returnPicAvatarName;
-        }
-        var changePerInfo = {
-            'userName': newUserName,
-            'userQq': newUserQq,
-            'userWx': newUserWx,
-            'userSex': newUserSex
-        };
-        if (returnPicAvatarName != null) {
-            changePerInfo.userAvatar = perInfo.userAvatar.split("/")[8];
-            returnPicAvatarName = null;
-        }
-        var url = baseUrl + "/my-sbm/personCenter/savePerInfoChange.do";
-        $.ajax({
-            url: url,
-            type: "post",
-            data: changePerInfo,
-            dataType: 'json',
-            success: function (data) {
-                if (data.result == '1') {
-                    $("#cancel-btn").click();
-                    alert("修改成功");
-                } else if (data.result == '0') {
-                    alert(data.errorMessage);
-                } else {
-                    alert("未知错误，请重试或联系管理员");
-                }
-
-            },
-            error: function (e) {
-                alert("修改失败，请重试或联系管理员1");
-                return;
-            }
-        });  //提交其他信息结束
+    perInfo.userName=newUserName;
+    perInfo.userQq=newUserQq;
+    perInfo.userWx=newUserWx;
+    perInfo.userSex=newUserSex;
+    var user = {"userName":newUserName,
+                "userSex":newUserSex,
+                "userQq":newUserQq,
+                "userWx":newUserWx
+                };
+    //头像有改动
+    if(ifUploadPerPic){
+        uploadFile.append("user",JSON.stringify(user));
+    }else{
+        //头像无改动，formData一个不存在的表单
+        uploadFile = new FormData($("#perPicForm")[1]);
+        uploadFile.append("user",JSON.stringify(user));
     }
+
+    $.ajax({
+        url: baseUrl + "/my-sbm/personCenter/uploadPerInfo.do",
+        // 请求方式
+        type: "post",
+        data: uploadFile,
+        processData: false,
+        contentType: false,
+        async: false,
+        // 服务器响应的数据类型
+        dataType: "json",
+        // 请求成功时执行的回调函数
+        success: function (data) {
+            console.log(data.result);
+            perInfo.userAvatar= null;
+            var newAvatarPicUrl=avatarPicURL + data.result.substring(0, 4) + "/" + data.result.substring(4, 6) + "/"
+                + data.result.substring(6, 8) + "/" + data.result;
+            document.getElementById("perPic").src=newAvatarPicUrl;
+            alert("修改成功");
+            document.getElementById("cancel-btn").click();
+        },
+        error:function () {
+            alert("非常抱歉，修改失败，请重试或联系管理员");
+        }
+    });
 }
 
 

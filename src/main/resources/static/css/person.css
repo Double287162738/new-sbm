@@ -159,7 +159,7 @@
     height: 80%;
     display: inline-block;
     vertical-align: sub;
-    margin-top: 1.2%;
+    margin-top: 14px;
     font-size: 20px;
     background: white;
 }
@@ -203,6 +203,7 @@
 }
 
 #fabu-pic {
+    position: relative;
     text-align: center;
     display: inline-block;
     vertical-align: top;
@@ -213,9 +214,15 @@
 }
 
 #fabu-pic img {
-    max-height: 90%;
+    position: absolute;
+    margin: auto;
+    max-height: 100%;
     max-width: 100%;
-    vertical-align: middle !important;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    padding:5px;
 }
 
 #fabu-other {

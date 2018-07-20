@@ -1,4 +1,3 @@
-var baseUrl = "http://localhost:8080";
 var totalPage;
 var currentPage;
 
@@ -59,7 +58,7 @@ function showPerScGoods(data) {
         append = append +
             "<div id='fabu-all'>" +
             "<div id='fabu-pic'>" +
-            "<img src='" + baseUrl + "/file/GoodsPic/" + goodsPic1.substring(0, 4) + "/" + goodsPic1.substring(4, 6) + "/"
+            "<img src='" + goodsPicURL + goodsPic1.substring(0, 4) + "/" + goodsPic1.substring(4, 6) + "/"
             + goodsPic1.substring(6, 8) + "/" + goodsPic1 + "' />" +
             "</div>" +
             "<div id='fabu-other'>" +

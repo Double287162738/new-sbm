@@ -44,7 +44,7 @@ function showYifabuDetail(goodsId) {
                     data.result.goodsWx = "太粗心了，竟然没有留下QQ";
                 }
                 var goodsPic1 = data.result.goodsPic1;
-                document.getElementById("goodsPic1").src = baseUrl + "/file/GoodsPic/" + goodsPic1.substring(0, 4) + "/" + goodsPic1.substring(4, 6) + "/"
+                document.getElementById("goodsPic1").src = goodsPicURL + goodsPic1.substring(0, 4) + "/" + goodsPic1.substring(4, 6) + "/"
                     + goodsPic1.substring(6, 8) + "/" + goodsPic1;
                 document.getElementById("owner").innerHTML = data.result.userName;
                 document.getElementById("goods").innerHTML = data.result.goodsName;
@@ -80,30 +80,6 @@ function showYifabuDetail(goodsId) {
                     $.cookie("goodsPic5", data.result.goodsPic5);
                 } else {
                     $.cookie("goodsPic5", "null");
-                }
-                if (data.result.goodsPic6 != null && data.result.goodsPic6 != '') {
-                    console.log("6:" + data.result.goodsPic6);
-                    $.cookie("goodsPic6", data.result.goodsPic6);
-                } else {
-                    $.cookie("goodsPic6", "null");
-                }
-                if (data.result.goodsPic7 != null && data.result.goodsPic7 != '') {
-                    console.log("7:" + data.result.goodsPic7);
-                    $.cookie("goodsPic7", data.result.goodsPic7);
-                } else {
-                    $.cookie("goodsPic7", "null");
-                }
-                if (data.result.goodsPic8 != null && data.result.goodsPic8 != '') {
-                    console.log("8:" + data.result.goodsPic8);
-                    $.cookie("goodsPic8", data.result.goodsPic8);
-                } else {
-                    $.cookie("goodsPic8", "null");
-                }
-                if (data.result.goodsPic9 != null && data.result.goodsPic9 != '') {
-                    console.log("9:" + data.result.goodsPic9);
-                    $.cookie("goodsPic9", data.result.goodsPic9);
-                } else {
-                    $.cookie("goodsPic9", "null");
                 }
             }
         },

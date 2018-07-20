@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -42,6 +43,21 @@ public class UserPersonCenterController {
     private SousouService sousouService;
     @Resource
     private UserPersonCenterServcie userPersonCenterServcie;
+
+    @RequestMapping("/avatarPic.do")
+    @ResponseBody
+    public String getUserAvatarPic(HttpServletResponse response, HttpServletRequest request){
+        String result;
+        HttpSession session = request.getSession();
+        String userId = (String) session.getAttribute("userId");
+        if(userId==null){
+            return null;
+        }else {
+           result= UserService.getUserByUserId(userId).getUserAvatar();
+        }
+        return result;
+    }
+
 
     @RequestMapping("/personInfo.do")
     @ResponseBody
@@ -107,76 +123,55 @@ public class UserPersonCenterController {
         return result;
     }
 
-    @RequestMapping("/uploadPerPic.do")
+    @RequestMapping("/uploadPerInfo.do")
     @ResponseBody
     public ExecuteResult<String> uploadPerPic(@RequestParam(value = "uploadFile", required = false) MultipartFile uploadFile, HttpServletRequest request, HttpServletResponse response) {
         ExecuteResult<String> result = new ExecuteResult<>();
         try {
-            // 获取图片原始文件名
-            String originalFilename = uploadFile.getOriginalFilename();
-            System.out.println(originalFilename);
-
-            // 获取上传图片的扩展名(jpg/png/...)
-            String extension = FilenameUtils.getExtension(originalFilename);
-
-            // 文件名随机生成
-            String name = NowTimeUtils.getYmd() + GetUuidUtils.getUUID() + "." + extension;
-
-            // 图片上传的相对路径（因为相对路径放到页面上就可以显示图片）
-            String path = "F://Pic/AvatarPic/" + NowTimeUtils.getYear() + "/" + NowTimeUtils.getMonth() + "/" + NowTimeUtils.getDay() + "/" + name;
-
-            // 图片上传的绝对路径
-//	            String url = request.getSession().getServletContext().getRealPath("") + path;  
-            String url = path;
-            File dir = new File(url);
-            if (!dir.exists()) {
-                dir.mkdirs();
+            //得到session对象
+            HttpSession session = request.getSession(false);
+            //取出session数据
+            String userId = (String) session.getAttribute("userId");
+            if (userId == null) {
+                //没有登录成功，返回未登录，跳转页面
+                result.setResult(SkssConstant.NOT_LOGIN);
+                return result;
             }
-
-            // 上传图片
-            uploadFile.transferTo(new File(url));
-            result.setResult(name);
-            // 将相对路径写回（json格式）
-            //JSONObject jsonObject = new JSONObject();
-            // 将图片上传到本地
-            //jsonObject.put("path", path);
-
-            // 设置响应数据的类型json
-            //response.setContentType("application/json; charset=utf-8");
-            // 写回
-            //response.getWriter().write(jsonObject.toString());
-
-        } catch (Exception e) {
-            result.addErrorMessage("头像上传失败，请联系管理员");
-        }
-        return result;
-    }
-
-    @RequestMapping("/editGoodsDetails.do")
-    @ResponseBody
-    public ExecuteResult<Boolean> editGoodsDetails(HttpServletRequest request, HttpServletResponse response, Goods goods) {
-        ExecuteResult<Boolean> result = new ExecuteResult<>();
-        String goodsId = "";
-        try {
-            Cookie[] cookies = request.getCookies();
-            if (cookies != null && cookies.length > 0) {
-                for (Cookie cookie : cookies) {
-                    if (cookie.getName().equals("goodsId")) {
-                        goodsId = cookie.getValue();
-                    }
+            //编辑之后的用户信息
+            User user = JSON.parseObject(request.getParameter("user"),User.class);
+            user.setUserId(userId);
+            //查询数据库拿到旧的头像
+            User oldUser = UserService.getUserByUserId(userId);
+            String oldAvatarPic = oldUser.getUserAvatar();
+            if(uploadFile!=null){
+                // 获取图片原始文件名
+                String originalFilename = uploadFile.getOriginalFilename();
+                // 获取上传图片的扩展名(jpg/png/...)
+                String extension = FilenameUtils.getExtension(originalFilename);
+                // 文件名随机生成
+                String name = NowTimeUtils.getYmd() + GetUuidUtils.getUUID() + "." + extension;
+                //更新头像
+                user.setUserAvatar(name);
+                // 图片上传的相对路径（因为相对路径放到页面上就可以显示图片）
+                String path = SkssConstant.AVATAR_UPLOAD_URL + NowTimeUtils.getYear() + "/" + NowTimeUtils.getMonth() + "/" + NowTimeUtils.getDay() + "/" + name;
+                String url = path;
+                File dir = new File(url);
+                if (!dir.exists()) {
+                    dir.mkdirs();
                 }
+                // 上传图片
+                uploadFile.transferTo(new File(url));
+                //删除旧的头像
+                userPersonCenterServcie.deleteAvatarPic(oldAvatarPic);
+                //如果头像有改动则返回新生成的名字
+                oldAvatarPic=name;
             }
-            if (StringUtils.isBlank(goodsId)) {
-                result.setResult(false);
-                result.addErrorMessage("编辑失效，请重新打开编辑页面");
-            }
-            goods.setGoodsId(goodsId);
-            goods.setGoodsLastMod(new Date());
-            userPersonCenterServcie.updateGoodsDetails(goods);
-            result.setResult(true);
+            //更新用户信息
+            userPersonCenterServcie.updateUserInfo(user);
+            //返回用户名
+            result.setResult(oldAvatarPic);
         } catch (Exception e) {
-            result.setResult(false);
-            result.addErrorMessage("编辑失败，请重试或联系管理员");
+            result.addErrorMessage("非常抱歉，修改失败，请重试或联系管理员");
         }
         return result;
     }
@@ -187,50 +182,39 @@ public class UserPersonCenterController {
         ExecuteResult<String> result = new ExecuteResult<>();
         Map<String, String> otherPicName = new HashMap<>();
         try {
-            Cookie[] cookies = request.getCookies();
-            String deleteOtherPicId = null;
-            String goodsId = null;
-            String changePicId = null;
-            if (cookies != null && cookies.length > 0) {
-                for (Cookie cookie : cookies) {
-                    if (cookie.getName().equals("deletePicId")) {
-                        deleteOtherPicId = cookie.getValue();
-                    }
-                    if (cookie.getName().equals("goodsId")) {
-                        goodsId = cookie.getValue();
-                    }
-                    if (cookie.getName().equals("changePicId")) {
-                        changePicId = cookie.getValue();
-                    }
-                }
-            }
+            //编辑之后的商品信息
+            Goods changeGoods = JSON.parseObject(request.getParameter("goods"),Goods.class);
+            //需要删除的图片
+            String deleteOtherPicId = request.getParameter("deletePic");
+            //需要替换的图片
+            String changePicId = request.getParameter("changePic");
+            //商品ID
+            String goodsId = changeGoods.getGoodsId();
             //数据库置空删除的详情图片，并删除旧的图片
             if (StringUtils.isNotBlank(deleteOtherPicId)) {
-                userPersonCenterServcie.updateAndDelFilOtherPic(deleteOtherPicId, goodsId);
+                //这一步删除服务器旧的图片，置空需要删除的图片字段（没有数据库的删除和更新操作）
+                userPersonCenterServcie.updateAndDelFilOtherPic(deleteOtherPicId, goodsId,changeGoods);
             }
             if (StringUtils.isNotBlank(changePicId)) {
                 Integer index = 0;
-                //将改变的图片按照顺序有小到大排序
+                //将需要改变的图片按照ID由小到大排序
                 List<Integer> changePicIdAsc = StringToListUtils.changeToListIntAsc(changePicId.substring(0, changePicId.length() - 1), "-");
                 //更新变化的图片
                 for (int i = 0; i < uploadFiles.length; i++) {
                     if (uploadFiles[i] != null) {
                         // 获取图片原始文件名
                         String originalFilename = uploadFiles[i].getOriginalFilename();
-
                         // 获取上传图片的扩展名(jpg/png/...)
                         String extension = FilenameUtils.getExtension(originalFilename);
                         if (StringUtils.isNotBlank(extension)) {
+                            //删除优先级大于替换（场景：用户先更换后删除，那么只需要直接删除即可，无需更新）
                             if (deleteOtherPicId.indexOf(changePicIdAsc.get(index).toString()) == -1) {
                                 // 文件名随机生成
                                 String name = NowTimeUtils.getYmd() + GetUuidUtils.getUUID() + "." + extension;
-
-                                //保留那些图片被替换
+                                //保留被替换的图片
                                 otherPicName.put(changePicIdAsc.get(index).toString(), name);
-
-                                // 图片上传的相对路径（因为相对路径放到页面上就可以显示图片）
-                                String path = "F://Pic/GoodsPic/" + NowTimeUtils.getYear() + "/" + NowTimeUtils.getMonth() + "/" + NowTimeUtils.getDay() + "/" + name;
-
+                                // 图片上传的相对路径
+                                String path = SkssConstant.XZ_UPLOAD_URL + NowTimeUtils.getYear() + "/" + NowTimeUtils.getMonth() + "/" + NowTimeUtils.getDay() + "/" + name;
                                 String url = path;
                                 File dir = new File(url);
                                 if (!dir.exists()) {
@@ -244,7 +228,7 @@ public class UserPersonCenterController {
                     }
                 }
             }
-            userPersonCenterServcie.updateChangeFilOtherPic(otherPicName, goodsId);
+            userPersonCenterServcie.updateChangeFilOtherPic(otherPicName, goodsId,changeGoods);
             result.setResult("success");
         } catch (Exception e) {
             result.addErrorMessage("修改失败，请联系管理员");
@@ -274,7 +258,7 @@ public class UserPersonCenterController {
                 } else {
                     if (user.getUserAvatar() != null) {
                         String picName = user2.getUserAvatar();
-                        File oldUserAvatar = new File("F://Pic/AvatarPic/" + picName.substring(0, 4) + "/"
+                        File oldUserAvatar = new File(SkssConstant.AVATAR_UPLOAD_URL + picName.substring(0, 4) + "/"
                                 + picName.substring(4, 6) + "/"
                                 + picName.substring(6, 8) + "/"
                                 + picName);
@@ -288,86 +272,6 @@ public class UserPersonCenterController {
         }
         return result;
 
-    }
-
-    public String makeEditGoods(HttpServletRequest request, HttpServletResponse response, Goods goods) {
-        Cookie[] cookies = request.getCookies();
-        StringBuilder sb = new StringBuilder();
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("goodsId")) {
-                goods.setGoodsId(cookie.getValue());
-                cookie.setPath("/");
-                cookie.setMaxAge(0);
-                response.addCookie(cookie);
-            }
-            if (cookie.getName().equals("editGoodsName")) {
-                goods.setGoodsName(cookie.getValue());
-                cookie.setPath("/");
-                cookie.setMaxAge(0);
-                response.addCookie(cookie);
-            }
-            if (cookie.getName().equals("editGoodsWords")) {
-                goods.setGoodsWords(cookie.getValue());
-                cookie.setPath("/");
-                cookie.setMaxAge(0);
-                response.addCookie(cookie);
-            }
-            if (cookie.getName().equals("editGoodsArea")) {
-                goods.setGoodsArea(cookie.getValue());
-                cookie.setPath("/");
-                cookie.setMaxAge(0);
-                response.addCookie(cookie);
-            }
-            if (cookie.getName().equals("editGoodsType")) {
-                goods.setGoodsType(cookie.getValue());
-                cookie.setPath("/");
-                cookie.setMaxAge(0);
-                response.addCookie(cookie);
-            }
-            if (cookie.getName().equals("editGoodsPrice")) {
-                goods.setGoodsPrice(cookie.getValue());
-                cookie.setPath("/");
-                cookie.setMaxAge(0);
-                response.addCookie(cookie);
-            }
-            if (cookie.getName().equals("editGoodsQq")) {
-                goods.setGoodsQq(cookie.getValue());
-                cookie.setPath("/");
-                cookie.setMaxAge(0);
-                response.addCookie(cookie);
-            }
-            if (cookie.getName().equals("editGoodsWx")) {
-                goods.setGoodsWx(cookie.getValue());
-                cookie.setPath("/");
-                cookie.setMaxAge(0);
-                response.addCookie(cookie);
-            }
-        }
-        if (StringUtils.isBlank(goods.getGoodsId())) {
-            sb.append("修改已经失效，请重新打开编辑");
-        }
-        if (StringUtils.isBlank(goods.getGoodsName())) {
-            sb.append("名称不能为空");
-        }
-        if (StringUtils.isBlank(goods.getGoodsWords())) {
-            sb.append("特点不能为空");
-        }
-        if (StringUtils.isBlank(goods.getGoodsPrice())) {
-            sb.append("价格不能为空");
-        }
-        if (StringUtils.isBlank(goods.getGoodsPrice())) {
-            sb.append("价格不能为空");
-        }
-        if (StringUtils.isBlank(goods.getGoodsType())) {
-            goods.setGoodsType("Z");
-        }
-        if (StringUtils.isBlank(goods.getGoodsArea())) {
-            goods.setGoodsArea("Z");
-        }
-        if (StringUtils.isBlank(goods.getGoodsQq()) && StringUtils.isBlank(goods.getGoodsWx())) {
-            sb.append("QQ和微信至少留一个");
-        }
-        return sb.toString();
     }
 
 

@@ -1,5 +1,14 @@
 var ifUploadPerPic = false;
 var oldData = {};
+var editGoodsId;
+var goodsPics={
+    "pic1":"",
+    "pic2":"",
+    "pic3":"",
+    "pic4":"",
+    "pic5":""
+}
+var picAmount = 0;
 $(function () {
     //闲置详情框的高度
     $("#editModal").css("height", window.screen.height);
@@ -28,7 +37,6 @@ function closeEdit() {
 function editYifabu(goodsId) {
     var url = baseUrl + "/my-sbm/sousou/sougoodsDetail.do";
     var data = {"goodsId": goodsId};
-    var editPicAmount = 0;
     $.ajax({
         url: url,
         type: "post",
@@ -57,7 +65,7 @@ function editYifabu(goodsId) {
                     data.result.goodsType = "Z";
                 }
                 var goodsPic1 = data.result.goodsPic1;
-                document.getElementById("mainPic").src = baseUrl + "/file/GoodsPic/" + goodsPic1.substring(0, 4) + "/" + goodsPic1.substring(4, 6) + "/"
+                document.getElementById("mainPic").src = goodsPicURL + goodsPic1.substring(0, 4) + "/" + goodsPic1.substring(4, 6) + "/"
                     + goodsPic1.substring(6, 8) + "/" + goodsPic1;
                 document.getElementById("edit-owner").value = data.result.userName;
                 document.getElementById("edit-goods").value = data.result.goodsName;
@@ -79,56 +87,31 @@ function editYifabu(goodsId) {
                     "goodsWx": data.result.goodsWx,
                     "goodsOther": data.result.goodsOther
                 };
-                setCookie("goodsId", data.result.goodsId);
+                editGoodsId=data.result.goodsId;
                 if (data.result.goodsPic2 != null && data.result.goodsPic2 != '') {
-                    $.cookie("edit-goodsPic2", data.result.goodsPic2);
-                    editPicAmount++;
+                    goodsPics.pic2=data.result.goodsPic2;
+                    picAmount++;
                 } else {
-                    $.cookie("edit-goodsPic2", "null");
+                    goodsPics.pic2="null";
                 }
                 if (data.result.goodsPic3 != null && data.result.goodsPic3 != '') {
-                    $.cookie("edit-goodsPic3", data.result.goodsPic3);
-                    editPicAmount++;
+                    goodsPics.pic3=data.result.goodsPic3;
+                    picAmount++;
                 } else {
-                    $.cookie("edit-goodsPic3", "null");
+                    goodsPics.pic3="null";
                 }
                 if (data.result.goodsPic4 != null && data.result.goodsPic4 != '') {
-                    $.cookie("edit-goodsPic4", data.result.goodsPic4);
-                    editPicAmount++;
+                    goodsPics.pic4=data.result.goodsPic4;
+                    picAmount++;
                 } else {
-                    $.cookie("edit-goodsPic4", "null");
+                    goodsPics.pic4="null";
                 }
                 if (data.result.goodsPic5 != null && data.result.goodsPic5 != '') {
-                    $.cookie("edit-goodsPic5", data.result.goodsPic5);
-                    editPicAmount++;
+                    goodsPics.pic5=data.result.goodsPic5;
+                    picAmount++;
                 } else {
-                    $.cookie("edit-goodsPic5", "null");
+                    goodsPics.pic5="null";
                 }
-                if (data.result.goodsPic6 != null && data.result.goodsPic6 != '') {
-                    $.cookie("edit-goodsPic6", data.result.goodsPic6);
-                    editPicAmount++;
-                } else {
-                    $.cookie("edit-goodsPic6", "null");
-                }
-                if (data.result.goodsPic7 != null && data.result.goodsPic7 != '') {
-                    $.cookie("edit-goodsPic7", data.result.goodsPic7);
-                    editPicAmount++;
-                } else {
-                    $.cookie("edit-goodsPic7", "null");
-                }
-                if (data.result.goodsPic8 != null && data.result.goodsPic8 != '') {
-                    $.cookie("edit-goodsPic8", data.result.goodsPic8);
-                    editPicAmount++;
-                } else {
-                    $.cookie("edit-goodsPic8", "null");
-                }
-                if (data.result.goodsPic9 != null && data.result.goodsPic9 != '') {
-                    $.cookie("edit-goodsPic9", data.result.goodsPic9);
-                    editPicAmount++;
-                } else {
-                    $.cookie("edit-goodsPic9", "null");
-                }
-                $.cookie("editPicAmount", editPicAmount);
             }
         },
         error: function (e) {
@@ -172,3 +155,18 @@ $(function () {
         window.frames["edit-obj1"].document.getElementById("select-other-pic1").click();
     })
 });
+
+
+//返回商品ID
+function getGoodsId(){
+    return editGoodsId;
+}
+//返回
+function getGoodsPics(){
+    console.log(goodsPics);
+    return goodsPics;
+}
+//返回图片数量
+function getPicAmount(){
+    return picAmount;
+}

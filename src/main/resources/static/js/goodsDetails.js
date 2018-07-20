@@ -1,4 +1,3 @@
-var baseUrl = "http://localhost:8080";
 $(function () {
     var appendHTML = '';
     if ($.cookie("goodsPic2") == "null") {
@@ -21,30 +20,10 @@ $(function () {
     } else {
         document.getElementById("goodsPic5").src = makePicURL($.cookie("goodsPic5"));
     }
-    if ($.cookie("goodsPic6") == "null") {
-        $("#item6").remove();
-    } else {
-        document.getElementById("goodsPic6").src = makePicURL($.cookie("goodsPic6"));
-    }
-    if ($.cookie("goodsPic7") == "null") {
-        $("#item7").remove();
-    } else {
-        document.getElementById("goodsPic7").src = makePicURL($.cookie("goodsPic7"));
-    }
-    if ($.cookie("goodsPic8") == "null") {
-        $("#item8").remove();
-    } else {
-        document.getElementById("goodsPic8").src = makePicURL($.cookie("goodsPic8"));
-    }
-    if ($.cookie("goodsPic9") == "null") {
-        $("#item9").remove();
-    } else {
-        document.getElementById("goodsPic9").src = makePicURL($.cookie("goodsPic9"));
-    }
 })
 
 function makePicURL(picName) {
-    var picURL = baseUrl + "/file/GoodsPic/" + picName.substring(0, 4) + "/" + picName.substring(4, 6) + "/"
+    var picURL = goodsPicURL + picName.substring(0, 4) + "/" + picName.substring(4, 6) + "/"
         + picName.substring(6, 8) + "/" + picName;
     return picURL;
 }
