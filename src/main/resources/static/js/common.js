@@ -1,7 +1,7 @@
 var userAvatar=null;
 $(function () {
     getAvatarPicName();
-    if(userAvatar != null){
+    if(userAvatar != null && userAvatar != ""){
         document.getElementById("loginOrLoginOut").innerHTML = '';
         $("#loginOrLoginOut").append("<li class='loginOrLoginOut'><a href='##' id='logOut'><span class='glyphicon glyphicon-log-in'></span> 注销</a></li>");
         document.getElementById("perPic").src = avatarPicURL + userAvatar.substring(0, 4) + "/" + userAvatar.substring(4, 6) + "/"
@@ -67,6 +67,7 @@ function getAvatarPicName() {
         async: false,
         dataType: "text",
         success: function (data) {
+            console.log(data);
            userAvatar=data;
         }
     });
