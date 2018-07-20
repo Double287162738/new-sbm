@@ -54,6 +54,16 @@ $(function () {
         });
     });
 
+    $("#perPic").click(function () {
+        if(userAvatar != null && userAvatar != ""){
+            window.location.href = 'person.html?index=personZL';
+        }else{
+            window.location.href = 'login.html';
+        }
+    });
+
+
+
 });
 
 function getAvatarPicName() {
