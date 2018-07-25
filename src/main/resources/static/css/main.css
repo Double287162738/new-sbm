@@ -276,3 +276,133 @@ dt{
 .F8FAFCBackground{
 	background: #F8FAFC;
 }
+#recommend-all{
+	width:1200px;
+}
+
+
+.owner-team{
+	margin:auto;
+	width:1200px;
+	background: url(../img/pageBackGround.jpg);
+	text-align: center;
+	height: 380px;
+	padding-top: 30px;
+	padding-bottom: 100px;
+	background-position: 50% -202px;
+	margin-top:50px;
+	margin-bottom:50px;
+	border-radius: 10px;
+	box-shadow:0px 5px 5px #C0C0C0;
+}
+.team-title{
+	color: white;
+}
+.team-title strong{
+	color: #d43f3a;
+	font-size: 25px;
+}
+.team-position{
+	color: white;
+}
+.team-pic{
+	width: 150px;
+	height: 150px;
+	margin: auto;
+}
+.teaner-name{
+	color: white;
+}
+.team-teamer{
+	width: 180px;
+	display: inline-block;
+	margin-right: 50px;
+	margin-left: 50px;
+	margin-top: 40px;
+}
+
+
+
+.connect{
+	width: 1200px;
+	margin: auto;
+	padding-left: 100px;
+}
+.connect-our{
+	position: relative;
+	height: 200px;
+}
+.connect-our div:nth-child(1){
+	display: inline-block;
+	width: 260px;
+	position: relative;
+	height: 200px;
+}
+.connect-our div:nth-child(1) img{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	margin: auto;
+}
+.connect-our div:nth-child(2){
+	border-left: 2px solid #C0C0C0;
+	margin-left: 30px;
+	position: absolute;
+	display: inline-block;
+	width: 330px;
+	height: 160px;
+	margin-top: 20px;
+	padding:0px 10px 0px 30px ;
+}
+.connect-our div:nth-child(3){
+	border-left: 2px solid #C0C0C0;
+	padding-top: 10px;
+	padding-left: 30px;
+	display: inline-block;
+	margin-top: 20px;
+	margin-left: 360px;
+	position: absolute;
+	width: 200px;
+	height: 160px;
+}
+.connect-our div:nth-child(3) img{
+	max-height: 80%;
+	max-width: 80%;
+}
+
+.connect-our div:nth-child(3) h5{
+	margin-left: 40px;
+}
+
+.connect-our div:nth-child(4){
+	border-left: 2px solid #C0C0C0;
+	padding-left: 30px;
+	padding-top: 10px;
+	display: inline-block;
+	margin-top: 20px;
+	margin-left: 600px;
+	position: absolute;
+	width: 200px;
+	height: 160px;
+}
+
+.connect-our div:nth-child(4) img{
+	max-height: 80%;
+	max-width: 80%;
+}
+.connect-our div:nth-child(4) h5{
+	margin-left: 40px;
+}
+
+.copyAllRight{
+	width: 1200px;
+	margin: auto;
+	color: white;
+	background: #22252e;
+	text-align: center;
+	font-size: 13px;
+	padding:10px 0px 10px 0px;
+	border-radius: 5px 5px 0px 0px;
+}
