@@ -1,4 +1,3 @@
-var baseUrl = "http://localhost:8080/my-sbm";
 $(function () {
     $("#registB").click(function () {
         $("#loginmain").hide();
@@ -68,7 +67,7 @@ $(function () {
         }, 1000);
         //封装数据
         var loginInfo1 = {"phoneCode": phoneCode};
-        var urlll = baseUrl + "/login/sendPhoneCode";
+        var urlll = baseUrl + "/my-sbm/login/sendPhoneCode";
         $.ajax({
             url: urlll,
             type: "post",
@@ -96,7 +95,7 @@ $(function () {
     })
 
  /*  注册 */
-    var urll = baseUrl + "/login/registered";
+    var urll = baseUrl + "/my-sbm/login/registered";
     $("#regist-btn").click(function () {
         var userName = $("#mobile-input").val();
         var passWord = $("#pwd-input").val();
@@ -160,7 +159,7 @@ $(function () {
 
 /*登陆*/
 $(function () {
-    var url = baseUrl + "/login/userLogin.do";
+    var url = baseUrl + "/my-sbm/login/userLogin.do";
     $("#loginButton").click(function () {
         var userName = $("#username").val();
         var password = $("#password").val();

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet"  href="../css/bootstrap.css" />
+		<link rel="stylesheet" href="../css/topic.css" />
+		<link rel="stylesheet"  href="../css/bootstrap-theme.css" />
+		<link rel="stylesheet"  href="../css/common.css" />
+		<script src="../js/jquery-3.1.1.min.js"></script>
+		<script src="../js/bootstrap.min.js"></script>
+		<script src="../js/topic.js"></script>
+	</head>
+	<body>
+		<nav class="navbar navbar-default" role="navigation" id="navHeader">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a id="skssA" class="navbar-brand" href="main.html"><img src="../img/skss.png" id="skssPic"></a>
+				</div>
+				<div>
+					<ul class="nav navbar-nav">
+						<li class="margin20px"><a href="person.html?index=personFB">已发布</a></li>
+						<li class="margin20px"><a href="##">人气闲置</a></li>
+						<li class="margin20px"><a href="person.html?index=personSC">收藏夹</a></li>
+						<li class="margin20px"><a id="fabu-a">发布闲置</a></li>
+						<li class="margin20px"><a href="##">留白功能</a></li>
+					</ul>
+				</div>
+				<form class="navbar-form navbar-left" role="search" id="searchForm">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="嗖嗖就有" id="sousuoInput">
+					</div>
+					<button type="submit" class="btn btn-danger" id="sousuoBtn">搜索</button>
+				</form>
+				<div id="perDiv" class="navbar-header navbar-right">
+					<a id="perA" class="navbar-brand" href="person.html?index=personZL"><img src="" id="perPic" class="img-circle"></a>
+					<ul class="nav navbar-nav navbar-right" id="loginOrLoginOut">
+						<li class="loginOrLoginOut"><a href="login.html?index=regist"><span class="glyphicon glyphicon-user"></span> 注册</a></li>
+						<li class="loginOrLoginOut"><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<div class="topic">
+			<div class="topic-left">
+				<div class="head">
+					<a><img src="../img/edit-open.png"/>&nbsp;发起话题</a>
+					<a><img src="../img/topic-msg.png"/>&nbsp;消息(3)</a>
+				</div>
+				<div class="topic-no-pic-all">
+					<div class="topic-owner-head">
+						<div><img src="../img/gangtiexia.jpg"/></div>
+						<div>往事随风</div>
+						<div>2018-07-12 15:30</div>
+					</div>
+					<div class="topic-title">
+						你有哪些给女孩子在谈恋爱中的忠告？
+					</div>
+					<div class="topic-no-pic-detail" id="topic-no-pic-detail">
+						1.再喜欢一个人也不要把爱表达的太满 男人就是恃宠而骄的大猪蹄子，不要让他以为你离不开他。
+						2.他喜欢你可以真的很喜欢你，他不爱你时的绝情也是真的，你再多的挽留也留不住他，反而让他看不起你。
+						<a class="topic-no-pic-read-all" onclick="topicNoPicReadAll()">阅读全文</a>
+					</div>
+					<div class="topic-bottom">
+						<div><img src="../img/liulan.png"/><p>30</p></div>
+						<div><img src="../img/topic-jb.png"/><p><a>举报</a></p></div>
+						<div><img src="../img/topic-pl.png"/><p class="topic-pl-num"><a>300条评论</a></p></div>
+					</div>
+				</div>
+				
+				<div class="topic-have-pic-all">
+					<div class="topic-owner-head">
+						<div><img src="../img/HBuilder.png"/></div>
+						<div>Hbuilder</div>
+						<div>2018-07-12 09:30</div>
+					</div>
+					<div class="topic-title">
+						一个男生的魅力体现哪里？
+					</div>
+					<div class="topic-have-pic-detail" id="topic-have-pic-detail">
+						<div class="topic-pic"><img src="../img/2.jpg"/></div>
+						<div class="topic-detail">
+							上个图 看一下赛程 法国队轻松吗？他的对手是阿根廷，乌拉圭，
+							比利时。一个比一个强大，都是夺冠的热门。克罗地亚伟大吗？
+							他的对手是丹麦，俄罗斯，英格兰。？？大家赞誉的克罗地亚
+							不过是因为实力不够，导致自己场场加时罢了。拼命也是真的，
+							那法国的坎特不拼吗？马图伊迪不拼吗？真的是服了一些人
+							的唯弱者论了。
+							<a id="topic-have-pic-read-all" onclick="topicHavePicReadAll()">阅读全文</a>
+						</div>
+					</div>
+					<div class="topic-bottom">
+						<div><img src="../img/liulan.png"/><p>12</p></div>
+						<div><img src="../img/topic-jb.png"/><p><a>举报</a></p></div>
+						<div><img src="../img/topic-pl.png"/><p class="topic-pl-num"><a>34条评论</a></p></div>
+					</div>
+					<div class="topic-comment">
+						<div class="add-comment">
+							<input class="add-comment-input" placeholder="留下你的评论..." />
+							<button class="btn btn-danger">评论</button>
+						</div>
+						<div class="old-comment-all">
+							<div class="old-comment">
+								<div class="old-comment-head">
+									<div><img src="../img/gangtiexia.jpg"/></div>
+									<div>往事随风&nbsp;<i>回复</i>&nbsp;&nbsp;快乐风男</div>
+									<div>2018-07-15 23:10</div>
+								</div>
+								<div class="old-comment-detail">
+									你好啊，我是往事随风，你快乐吗？
+								</div>
+								<div class="old-comment-bottom">
+									<div><img src="../img/topic-hf.png" /><a onclick="reply(this)">回复</a></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				
+			</div>
+			<div class="topic-right">
+				
+			</div>
+		</div>
+		
+
+	</body>
+</html>
