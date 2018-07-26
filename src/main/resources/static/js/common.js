@@ -77,7 +77,6 @@ function getAvatarPicName() {
         async: false,
         dataType: "text",
         success: function (data) {
-            console.log(data);
            userAvatar=data;
         }
     });
