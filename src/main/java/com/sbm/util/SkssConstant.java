@@ -15,10 +15,10 @@ public final class SkssConstant {
     /**
      * 闲置图片上传路径
      */
-    public static final String XZ_UPLOAD_URL= "E:/pic/goodsPic/";
+    public static final String XZ_UPLOAD_URL= "/home/pic/goodsPic/";
 
     /**
      * 头像图片上传路径
      */
-    public static final String AVATAR_UPLOAD_URL= "E:/pic/avatarPic/";
+    public static final String AVATAR_UPLOAD_URL= "/home/pic/avatarPic/";
 }
