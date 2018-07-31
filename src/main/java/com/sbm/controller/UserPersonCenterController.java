@@ -201,8 +201,8 @@ public class UserPersonCenterController {
                 List<Integer> changePicIdAsc = StringToListUtils.changeToListIntAsc(changePicId.substring(0, changePicId.length() - 1), "-");
                 //更新变化的图片
                 for (int i = 0; i < changePicIdAsc.size(); i++) {
-                        if (uploadFiles[changePicIdAsc.get(i)] != null) {
-                            // 获取图片原始文件名,uploadFiles坐标从0开始，但是传入的改动的图片下标最小是1，所以需要默认-1
+                        // 获取图片原始文件名,uploadFiles坐标从0开始，但是传入的改动的图片下标最小是1，所以需要默认-1
+                        if (uploadFiles[changePicIdAsc.get(i)-1] != null) {
                             String originalFilename = uploadFiles[changePicIdAsc.get(i)-1].getOriginalFilename();
                             // 获取上传图片的扩展名(jpg/png/...)
                             String extension = FilenameUtils.getExtension(originalFilename);

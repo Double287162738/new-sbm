@@ -96,6 +96,8 @@ function editYifabu(goodsId) {
                      +'</figure>'
                      +'</li>';
                     picAmount++;
+                }else{
+                    editOtherPicDetail=editOtherPicDetail+'<input style="display: none !important;" id="select-other-pic2" type="file" multiple name="uploadFiles" accept="image/*"/>';
                 }
                 if (data.result.goodsPic3 != null && data.result.goodsPic3 != '') {
                     editOtherPicDetail=editOtherPicDetail+'<li class="item falldown" id="item3">'
@@ -111,6 +113,8 @@ function editYifabu(goodsId) {
                         +'</figure>'
                         +'</li>';
                     picAmount++;
+                }else{
+                    editOtherPicDetail=editOtherPicDetail+'<input style="display: none !important;" id="select-other-pic3" type="file" multiple name="uploadFiles" accept="image/*"/>';
                 }
                 if (data.result.goodsPic4 != null && data.result.goodsPic4 != '') {
                     editOtherPicDetail=editOtherPicDetail+'<li class="item falldown" id="item4">'
@@ -126,6 +130,8 @@ function editYifabu(goodsId) {
                         +'</figure>'
                         +'</li>';
                     picAmount++;
+                }else{
+                    editOtherPicDetail=editOtherPicDetail+'<input style="display: none !important;" id="select-other-pic4" type="file" multiple name="uploadFiles" accept="image/*"/>';
                 }
                 if (data.result.goodsPic5 != null && data.result.goodsPic5 != '') {
                     editOtherPicDetail=editOtherPicDetail+'<li class="item falldown" id="item5">'
@@ -141,6 +147,8 @@ function editYifabu(goodsId) {
                         +'</figure>'
                         +'</li>';
                     picAmount++;
+                }else{
+                    editOtherPicDetail=editOtherPicDetail+'<input style="display: none !important;" id="select-other-pic5" type="file" multiple name="uploadFiles" accept="image/*"/>';
                 }
                 document.getElementById("editGoodsDetailPic").innerHTML = editOtherPicDetail;
             }
