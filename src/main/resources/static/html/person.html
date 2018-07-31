@@ -14,6 +14,8 @@
 		<link rel="stylesheet" href="../css/personCenter/editPerFaBu.css" />
 		<link rel="stylesheet" href="../css/special/hover-select-special.css" />
 		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../css/styles.css"/>
+		<link rel="stylesheet" href="../css/special/hover-select-special.css"/>
 		<script src="../js/jquery-3.1.1.min.js"></script>
 		<script src="../js/bootstrap.min.js"></script>
 		<script src="../js/jquery.form.js"></script>
@@ -26,6 +28,9 @@
 		<script src="../js/common.js"></script>
 		<script src="../js/fileURL.js"></script>
 		<script src="../js/personCenterJS/person.js"></script>
+		<script src="../sliderJs/jquery.mousewheel.js"></script>
+		<script src="../sliderJs/modernizr-1.5.min.js"></script>
+		<script src="../sliderJs/scripts.js"></script>
 	</head>
 	<body>
 	<!--导航栏部分-->
@@ -191,7 +196,7 @@
   					
   					<div class="modal-body">
   						<div id="pic-part">
-  							<img id="goodsPic1" src="../img/IphoneX.png" />
+  							<img id="goodsPic1" src="../img/perCenter/loading.gif" />
   						</div>
   						<div id="other-part">
   							<div><h3 id="goodsName"></h3></div>
@@ -205,7 +210,10 @@
   						</div>
   						<hr id="hr1" style="margin-top: 2%;"/>
   						<!--滑块展示开始-->
-  						<object style="height: 310px;" id="obj1" style="border:0px" type="text/x-scriptlet" data="goodsDetails.html" width=100% height=615px;></object>
+						<div class="demo-wrapper">
+							<ul class="portfolio-items" id="showGoodsDetailPic">
+							</ul>
+						</div>
     					<!--滑块展示结束-->
     					<div id="goodsOthers">
 							<textarea id="ownerSay" class="form-control" rows="5"  readonly="readonly">
@@ -232,10 +240,9 @@
   					<div class="modal-body">
   						<div id="edit-pic-part">
 	  						<div class="hovereffect">
-	  							<form id="mainPicForm"  method="post" enctype="multipart/form-data"> <input style="display: none !important;"  id="select-main-pic" type="file" multiple name="uploadFile" accept="image/*" /></form>
 	  							<img class="img-responsive" id="mainPic" src="../img/perCenter/loading.gif" />
 		        				<div class="overlay">
-						           <a class="info" id="changePic1">点击更换</a>
+						           <a class="info" id="changePic1" onclick="changePic('1')">点击更换</a>
 						        </div>
 	            			</div>
             			</div>
@@ -269,14 +276,21 @@
   						</div>
   						<hr id="edit-hr1" style="margin-top: 2%;"/>
   						<!--滑块展示开始-->
-  						<object style="height: 310px;" id="edit-obj1" name="edit-obj1"  style="border:0px" type="text/x-scriptlet" data="../html/personCenter/editPerFabuOtherPic.html" width=100% height=615px;></object>
+						<form id="otherPicForm" method="post" enctype="multipart/form-data">
+							<input style="display: none !important;" onchange="selectOtherPic('1')" id="select-other-pic1" type="file" multiple
+								   name="uploadFiles" accept="image/*"/>
+							<div class="demo-wrapper">
+								<ul class="portfolio-items" id="editGoodsDetailPic">
+								</ul>
+							</div>
+						</form>
     					<!--滑块展示结束-->
     					<div id="edit-goodsOthers">
 							<textarea id="edit-ownerSay" class="form-control" rows="5" >***</textarea>
 						</div>
   					</div>
   					<div id="edit-saveDiv">
-  						<div><button id="edit-saveBtn" onclick="saveEdit()" class="btn tip tip-right" data-tip="保存修改"></button></div>
+  						<div><button id="edit-saveBtn" class="btn tip tip-right" data-tip="保存修改"></button></div>
   						<div><button id="edit-cancelBtn" onclick="closeEdit()" class="btn tip tip-right" data-tip="取消修改"></button></div>
   					</div>
   				</div>	

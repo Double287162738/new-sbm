@@ -434,26 +434,37 @@ function openDetail(e) {
                 document.getElementById("weixinSpan").innerHTML = "&nbsp;" + data.result.goodsWx;
                 document.getElementById("areaSpan").innerHTML = data.result.goodsArea+"区";
                 document.getElementById("ownerSay").innerHTML = data.result.goodsOther;
+                document.getElementById("goodsDetailPic").innerHTML = "";
+                var otherPicDetail = "";
                 if (data.result.goodsPic2 != null) {
-                    $.cookie("goodsPic2", data.result.goodsPic2);
-                } else {
-                    $.cookie("goodsPic2", "null");
+                    otherPicDetail=otherPicDetail+'<li class="item falldown" id="item2">'
+                                                 +'<figure>'
+                                                    +'<div class="view"><img id="goodsPic2" src='+getPicUrl(data.result.goodsPic2)+'/></div>'
+                                                 +'</figure>'
+                                                 +'</li>';
                 }
                 if (data.result.goodsPic3 != null) {
-                    $.cookie("goodsPic3", data.result.goodsPic3);
-                } else {
-                    $.cookie("goodsPic3", "null");
+                    otherPicDetail=otherPicDetail+'<li class="item falldown" id="item3">'
+                        +'<figure>'
+                        +'<div class="view"><img id="goodsPic3" src='+getPicUrl(data.result.goodsPic3)+'/></div>'
+                        +'</figure>'
+                        +'</li>';
                 }
                 if (data.result.goodsPic4 != null) {
-                    $.cookie("goodsPic4", data.result.goodsPic4);
-                } else {
-                    $.cookie("goodsPic4", "null");
+                    otherPicDetail=otherPicDetail+'<li class="item falldown" id="item4">'
+                        +'<figure>'
+                        +'<div class="view"><img id="goodsPic4" src='+getPicUrl(data.result.goodsPic4)+'/></div>'
+                        +'</figure>'
+                        +'</li>';
                 }
                 if (data.result.goodsPic5 != null) {
-                    $.cookie("goodsPic5", data.result.goodsPic5);
-                } else {
-                    $.cookie("goodsPic5", "null");
+                    otherPicDetail=otherPicDetail+'<li class="item falldown" id="item5">'
+                        +'<figure>'
+                        +'<div class="view"><img id="goodsPic5" src='+getPicUrl(data.result.goodsPic5)+'/></div>'
+                        +'</figure>'
+                        +'</li>';
                 }
+                document.getElementById("goodsDetailPic").innerHTML = otherPicDetail;
             }
         },
         error: function (e) {
@@ -465,5 +476,10 @@ function openDetail(e) {
     $('#goodsModal').modal('show')
 }
 
+
+function getPicUrl(picName) {
+    return goodsPicURL + picName.substring(0, 4) + "/" + picName.substring(4, 6) + "/"
+        + picName.substring(6, 8) + "/" + picName;
+}
 
 

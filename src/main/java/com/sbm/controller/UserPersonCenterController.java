@@ -200,32 +200,31 @@ public class UserPersonCenterController {
                 //将需要改变的图片按照ID由小到大排序
                 List<Integer> changePicIdAsc = StringToListUtils.changeToListIntAsc(changePicId.substring(0, changePicId.length() - 1), "-");
                 //更新变化的图片
-                for (int i = 0; i < uploadFiles.length; i++) {
-                    if (uploadFiles[i] != null) {
-                        // 获取图片原始文件名
-                        String originalFilename = uploadFiles[i].getOriginalFilename();
-                        // 获取上传图片的扩展名(jpg/png/...)
-                        String extension = FilenameUtils.getExtension(originalFilename);
-                        if (StringUtils.isNotBlank(extension)) {
-                            //删除优先级大于替换（场景：用户先更换后删除，那么只需要直接删除即可，无需更新）
-                            if (deleteOtherPicId.indexOf(changePicIdAsc.get(index).toString()) == -1) {
-                                // 文件名随机生成
-                                String name = NowTimeUtils.getYmd() + GetUuidUtils.getUUID() + "." + extension;
-                                //保留被替换的图片
-                                otherPicName.put(changePicIdAsc.get(index).toString(), name);
-                                // 图片上传的相对路径
-                                String path = SkssConstant.XZ_UPLOAD_URL + NowTimeUtils.getYear() + "/" + NowTimeUtils.getMonth() + "/" + NowTimeUtils.getDay() + "/" + name;
-                                String url = path;
-                                File dir = new File(url);
-                                if (!dir.exists()) {
-                                    dir.mkdirs();
+                for (int i = 0; i < changePicIdAsc.size(); i++) {
+                        if (uploadFiles[changePicIdAsc.get(i)] != null) {
+                            // 获取图片原始文件名,uploadFiles坐标从0开始，但是传入的改动的图片下标最小是1，所以需要默认-1
+                            String originalFilename = uploadFiles[changePicIdAsc.get(i)-1].getOriginalFilename();
+                            // 获取上传图片的扩展名(jpg/png/...)
+                            String extension = FilenameUtils.getExtension(originalFilename);
+                            if (StringUtils.isNotBlank(extension)) {
+                                //删除优先级大于替换（场景：用户先更换后删除，那么只需要直接删除即可，无需更新）
+                                if (deleteOtherPicId.indexOf(changePicIdAsc.get(i).toString()) == -1) {
+                                    // 文件名随机生成
+                                    String name = NowTimeUtils.getYmd() + GetUuidUtils.getUUID() + "." + extension;
+                                    //保留被替换的图片
+                                    otherPicName.put(changePicIdAsc.get(i).toString(), name);
+                                    // 图片上传的相对路径
+                                    String path = SkssConstant.XZ_UPLOAD_URL + NowTimeUtils.getYear() + "/" + NowTimeUtils.getMonth() + "/" + NowTimeUtils.getDay() + "/" + name;
+                                    String url = path;
+                                    File dir = new File(url);
+                                    if (!dir.exists()) {
+                                        dir.mkdirs();
+                                    }
+                                    //同上注释，下标默认-1
+                                    uploadFiles[changePicIdAsc.get(i)-1].transferTo(new File(url));
                                 }
-                                uploadFiles[i].transferTo(new File(url));
                             }
-                            index++;
                         }
-
-                    }
                 }
             }
             userPersonCenterServcie.updateChangeFilOtherPic(otherPicName, goodsId,changeGoods);

@@ -70,7 +70,7 @@ $(function(){
         uploadClass: "btn btn-primary",//设置上传按钮样式
         showCaption: true,//是否显示标题
         language: "zh",//配置语言
-        uploadUrl: "http://localhost:8080/my-sbm/fabu/uploadPic.do",
+        uploadUrl: baseUrl+"/my-sbm/fabu/uploadPic.do",
         maxFileSize: 1024 * 20,
         minFileCount: 1,
         maxFileCount: 5, /*允许最大上传数，可以多个，当前设置单5个*/

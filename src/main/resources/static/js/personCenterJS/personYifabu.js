@@ -57,30 +57,37 @@ function showYifabuDetail(goodsId) {
                 document.getElementById("qqSpan").innerHTML = "&nbsp;" + data.result.goodsQq;
                 document.getElementById("weixinSpan").innerHTML = "&nbsp;" + data.result.goodsWx;
                 document.getElementById("ownerSay").innerHTML = data.result.goodsOther;
+                document.getElementById("showGoodsDetailPic").innerHTML = "";
+                var showOtherPicDetail = "";
                 if (data.result.goodsPic2 != null && data.result.goodsPic2 != '') {
-                    console.log("2:" + data.result.goodsPic2);
-                    $.cookie("goodsPic2", data.result.goodsPic2);
-                } else {
-                    $.cookie("goodsPic2", "null");
+                    showOtherPicDetail=showOtherPicDetail+'<li class="item falldown" id="item2">'
+                        +'<figure>'
+                        +'<div class="view"><img src='+getPicUrl(data.result.goodsPic2)+'/></div>'
+                        +'</figure>'
+                        +'</li>';
                 }
                 if (data.result.goodsPic3 != null && data.result.goodsPic3 != '') {
-                    console.log("3:" + data.result.goodsPic3);
-                    $.cookie("goodsPic3", data.result.goodsPic3);
-                } else {
-                    $.cookie("goodsPic3", "null");
+                    showOtherPicDetail=showOtherPicDetail+'<li class="item falldown" id="item3">'
+                        +'<figure>'
+                        +'<div class="view"><img src='+getPicUrl(data.result.goodsPic3)+'/></div>'
+                        +'</figure>'
+                        +'</li>';
                 }
                 if (data.result.goodsPic4 != null && data.result.goodsPic4 != '') {
-                    console.log("4:" + data.result.goodsPic4);
-                    $.cookie("goodsPic4", data.result.goodsPic4);
-                } else {
-                    $.cookie("goodsPic4", "null");
+                    showOtherPicDetail=showOtherPicDetail+'<li class="item falldown" id="item4">'
+                        +'<figure>'
+                        +'<div class="view"><img src='+getPicUrl(data.result.goodsPic4)+'/></div>'
+                        +'</figure>'
+                        +'</li>';
                 }
                 if (data.result.goodsPic5 != null && data.result.goodsPic5 != '') {
-                    console.log("5:" + data.result.goodsPic5);
-                    $.cookie("goodsPic5", data.result.goodsPic5);
-                } else {
-                    $.cookie("goodsPic5", "null");
+                    showOtherPicDetail=showOtherPicDetail+'<li class="item falldown" id="item5">'
+                        +'<figure>'
+                        +'<div class="view"><img src='+getPicUrl(data.result.goodsPic5)+'/></div>'
+                        +'</figure>'
+                        +'</li>';
                 }
+                document.getElementById("showGoodsDetailPic").innerHTML = showOtherPicDetail;
             }
         },
         error: function (e) {
@@ -90,4 +97,9 @@ function showYifabuDetail(goodsId) {
     });
 
     $('#goodsModal').modal('show');
+}
+
+function getPicUrl(picName) {
+    return goodsPicURL + picName.substring(0, 4) + "/" + picName.substring(4, 6) + "/"
+        + picName.substring(6, 8) + "/" + picName;
 }
