@@ -436,28 +436,28 @@ function openDetail(e) {
                 document.getElementById("ownerSay").innerHTML = data.result.goodsOther;
                 document.getElementById("goodsDetailPic").innerHTML = "";
                 var otherPicDetail = "";
-                if (data.result.goodsPic2 != null) {
+                if (data.result.goodsPic2 != null && data.result.goodsPic2 != '') {
                     otherPicDetail=otherPicDetail+'<li class="item falldown" id="item2">'
                                                  +'<figure>'
                                                     +'<div class="view"><img id="goodsPic2" src='+getPicUrl(data.result.goodsPic2)+'/></div>'
                                                  +'</figure>'
                                                  +'</li>';
                 }
-                if (data.result.goodsPic3 != null) {
+                if (data.result.goodsPic3 != null && data.result.goodsPic3 != '') {
                     otherPicDetail=otherPicDetail+'<li class="item falldown" id="item3">'
                         +'<figure>'
                         +'<div class="view"><img id="goodsPic3" src='+getPicUrl(data.result.goodsPic3)+'/></div>'
                         +'</figure>'
                         +'</li>';
                 }
-                if (data.result.goodsPic4 != null) {
+                if (data.result.goodsPic4 != null && data.result.goodsPic4 != '') {
                     otherPicDetail=otherPicDetail+'<li class="item falldown" id="item4">'
                         +'<figure>'
                         +'<div class="view"><img id="goodsPic4" src='+getPicUrl(data.result.goodsPic4)+'/></div>'
                         +'</figure>'
                         +'</li>';
                 }
-                if (data.result.goodsPic5 != null) {
+                if (data.result.goodsPic5 != null && data.result.goodsPic5 != '') {
                     otherPicDetail=otherPicDetail+'<li class="item falldown" id="item5">'
                         +'<figure>'
                         +'<div class="view"><img id="goodsPic5" src='+getPicUrl(data.result.goodsPic5)+'/></div>'
