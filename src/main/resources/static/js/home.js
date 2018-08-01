@@ -2,10 +2,17 @@ var totalPage;
 var currentPage;
 var keyword;
 $(function () {
-    var xianzhiNameHeight = $("#xianzhi-name").height();
-//	$("#xianzhi-name").css("font-size",xianzhiNameHeight*0.7);
-//	$("#xianzhi-keyword").css("font-size",xianzhiNameHeight*0.6);
-
+    //搜索框的回车事件
+    $('#sousuoInput').bind('keydown', function (event) {
+        if (event.keyCode == "13") {
+            window.location.href = 'home.html?keyword=' + $("#sousuoInput").val() + "&currentPage=1";
+            window.event.returnValue=false;
+        }
+    });
+    $("#sousou").click(function () {
+        window.location.href = 'home.html?keyword=' + $("#sousuoInput").val() + "&currentPage=1";
+        window.event.returnValue=false;
+    });
     //闲置详情框的高度
     $("#goodsModal").css("height", window.screen.height);
     //图片的高度
@@ -36,6 +43,8 @@ $(function () {
     keyword = locationUrl.split("?")[1].split("&")[0].split("=")[1];
     currentPage = locationUrl.split("?")[1].split("&")[1].split("=")[1];
     if (keyword != null && currentPage != null) {
+        $("#sousuoInput").val(decodeURI(keyword));
+        $("#findInput").val(decodeURI(keyword));
         document.getElementById("showPart").innerHTML = '';
         var data = {"keyword": keyword, "currentPage": currentPage};
         $.ajax({
