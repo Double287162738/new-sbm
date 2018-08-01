@@ -234,10 +234,16 @@ a.active.focus {
 	width:50%;
 	float: left;
 }
+#other-part-child1 >div{
+	margin-bottom:10px;
+}
 #other-part-child2{
 	float: right;
 	width:50%;
 	height:150px;
+}
+#other-part-child2 >div{
+	margin-bottom:10px;
 }
 #other-part-btn{
 	float: left;

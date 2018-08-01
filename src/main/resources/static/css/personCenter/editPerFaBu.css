@@ -147,12 +147,15 @@
 #edit-weixin-div input, #edit-goodsArea select, #edit-goodsType select {
     height: 85%;
     width: 200px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 200;
+}
+#edit-goodsType select{
+    width:93px;
 }
 
 #edit-goodsArea select, #edit-goodsType select {
-    font-size: 17px;
+    font-size: 15px;
     font-weight: 400;
 }
 

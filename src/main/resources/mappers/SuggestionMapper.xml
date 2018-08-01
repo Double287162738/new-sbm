@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sbm.mapper.SuggestionMapper" >
+    <resultMap id="BaseResultMap" type="com.sbm.pojo.model.Suggestion" >
+        <id column="SUGGESTION_ID" property="suggestionId" jdbcType="VARCHAR" />
+        <result column="SUGGESTION_SCORE" property="suggestionScore" jdbcType="VARCHAR" />
+        <result column="SUGGESTION_DETAIL" property="suggestionDetail" jdbcType="VARCHAR" />
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="IF_AUDIT" property="ifAudit" jdbcType="VARCHAR" />
+        <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="VERSION" property="version" jdbcType="INTEGER" />
+    </resultMap>
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List" >
+        SUGGESTION_ID, SUGGESTION_SCORE, SUGGESTION_DETAIL, CREATE_TIME, IF_AUDIT, UPDATE_TIME, 
+        VERSION
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sbm.pojo.model.SuggestionExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <if test="includeColumns == null or includeColumns.size()==0 ">
+			<include refid="Base_Column_List"/>
+		</if>
+		<if test="includeColumns!=null and includeColumns.size() > 0">
+			<foreach collection="includeColumns" index="index" item="includeColumn" separator=",">
+				${includeColumn}
+			</foreach>
+		</if>
+        from suggestion
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+        <include refid="MySqlPaginationSuffix" />
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from suggestion
+        where SUGGESTION_ID = #{suggestionId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from suggestion
+        where SUGGESTION_ID = #{suggestionId,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.sbm.pojo.model.SuggestionExample" >
+        delete from suggestion
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.sbm.pojo.model.Suggestion" >
+        insert into suggestion (SUGGESTION_ID, SUGGESTION_SCORE, SUGGESTION_DETAIL, 
+            CREATE_TIME, IF_AUDIT, UPDATE_TIME, 
+            VERSION)
+        values (#{suggestionId,jdbcType=VARCHAR}, #{suggestionScore,jdbcType=VARCHAR}, #{suggestionDetail,jdbcType=VARCHAR}, 
+            #{createTime,jdbcType=TIMESTAMP}, #{ifAudit,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+            #{version,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.sbm.pojo.model.Suggestion" >
+        insert into suggestion
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="suggestionId != null" >
+                SUGGESTION_ID,
+            </if>
+            <if test="suggestionScore != null" >
+                SUGGESTION_SCORE,
+            </if>
+            <if test="suggestionDetail != null" >
+                SUGGESTION_DETAIL,
+            </if>
+            <if test="createTime != null" >
+                CREATE_TIME,
+            </if>
+            <if test="ifAudit != null" >
+                IF_AUDIT,
+            </if>
+            <if test="updateTime != null" >
+                UPDATE_TIME,
+            </if>
+            <if test="version != null" >
+                VERSION,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="suggestionId != null" >
+                #{suggestionId,jdbcType=VARCHAR},
+            </if>
+            <if test="suggestionScore != null" >
+                #{suggestionScore,jdbcType=VARCHAR},
+            </if>
+            <if test="suggestionDetail != null" >
+                #{suggestionDetail,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ifAudit != null" >
+                #{ifAudit,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="version != null" >
+                #{version,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.sbm.pojo.model.SuggestionExample" resultType="java.lang.Integer" >
+        SELECT COUNT(1) FROM
+        <if test="distinct" >
+            (SELECT
+          DISTINCT
+          <include refid="Base_Column_List"/>
+          from SUGGESTION
+          <if test="_parameter != null">
+              <include refid="Example_Where_Clause"/>
+          </if>) AS COUNT_SQL
+        </if>
+        <if test="!distinct" >
+            
+          SUGGESTION
+          <if test="_parameter != null" >
+              <include refid="Example_Where_Clause" />
+          </if>
+
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map" >
+        update suggestion
+        <set >
+            <if test="record.suggestionId != null" >
+                SUGGESTION_ID = #{record.suggestionId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.suggestionScore != null" >
+                SUGGESTION_SCORE = #{record.suggestionScore,jdbcType=VARCHAR},
+            </if>
+            <if test="record.suggestionDetail != null" >
+                SUGGESTION_DETAIL = #{record.suggestionDetail,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null" >
+                CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.ifAudit != null" >
+                IF_AUDIT = #{record.ifAudit,jdbcType=VARCHAR},
+            </if>
+            <if test="record.updateTime != null" >
+                UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.version != null" >
+                VERSION = #{record.version,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map" >
+        update suggestion
+        set SUGGESTION_ID = #{record.suggestionId,jdbcType=VARCHAR},
+            SUGGESTION_SCORE = #{record.suggestionScore,jdbcType=VARCHAR},
+            SUGGESTION_DETAIL = #{record.suggestionDetail,jdbcType=VARCHAR},
+            CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+            IF_AUDIT = #{record.ifAudit,jdbcType=VARCHAR},
+            UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+            VERSION = #{record.version,jdbcType=INTEGER}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.sbm.pojo.model.Suggestion" >
+        update suggestion
+        <set >
+            <if test="suggestionScore != null" >
+                SUGGESTION_SCORE = #{suggestionScore,jdbcType=VARCHAR},
+            </if>
+            <if test="suggestionDetail != null" >
+                SUGGESTION_DETAIL = #{suggestionDetail,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ifAudit != null" >
+                IF_AUDIT = #{ifAudit,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null" >
+                UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="version != null" >
+                VERSION = #{version,jdbcType=INTEGER},
+            </if>
+        </set>
+        where SUGGESTION_ID = #{suggestionId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.sbm.pojo.model.Suggestion" >
+        update suggestion
+        set SUGGESTION_SCORE = #{suggestionScore,jdbcType=VARCHAR},
+            SUGGESTION_DETAIL = #{suggestionDetail,jdbcType=VARCHAR},
+            CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            IF_AUDIT = #{ifAudit,jdbcType=VARCHAR},
+            UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+            VERSION = #{version,jdbcType=INTEGER}
+        where SUGGESTION_ID = #{suggestionId,jdbcType=VARCHAR}
+    </update>
+    <sql id="MySqlPaginationSuffix" >
+        <if test="page != null" >
+            <![CDATA[ LIMIT #{page.pageSize} OFFSET #{page.recordIndex}]]>
+        </if>
+    </sql>
+    <select id="selectOneByExample" resultMap="BaseResultMap" parameterType="com.sbm.pojo.model.SuggestionExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <if test="includeColumns == null or includeColumns.size()==0" >
+      <include refid="Base_Column_List" />
+    </if>
+    <if test="includeColumns!=null and includeColumns.size() > 0" >
+      <foreach collection="includeColumns" index="index" item="includeColumn" separator="," >
+        ${includeColumn}
+      </foreach>
+    </if>
+         from SUGGESTION
+        <if test="_parameter != null" >
+     <include refid="Example_Where_Clause" />
+     </if>
+        <if test="orderByClause != null" >
+     order by ${orderByClause}
+     </if>
+        LIMIT 1 OFFSET 0
+    </select>
+</mapper>

@@ -125,10 +125,12 @@ function showFirstTitle() {
 //选择
 function selectBtn(btn) {
     var old = $("#fabuWords").val();
-    if (old.length < 1) {
-        document.getElementById("fabuWords").value = btn.value;
-    } else {
-        document.getElementById("fabuWords").value = old + "/" + btn.value;
+    if(old.length+btn.value.length<=12){
+        if (old.length < 1) {
+            document.getElementById("fabuWords").value = btn.value;
+        } else {
+            document.getElementById("fabuWords").value = old + "/" + btn.value;
+        }
     }
 }
 

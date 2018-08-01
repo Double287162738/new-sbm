@@ -5,6 +5,10 @@ var picAmount = 0;
 var changeBtnId;
 var deletePicId = '';
 var changePicId = '';
+var SmType2Html='<option value="SJ">手机</option>'
+                +'<option value="DN">电脑</option>'
+                +'<option value="PB">平板 </option>'
+                +'<option value="OTHER">其他 </option>';
 $(function () {
     //闲置详情框的高度
     $("#editModal").css("height", window.screen.height);
@@ -16,6 +20,15 @@ $(function () {
     $("#editModal").scroll(function () {
         var top = 100 + $("#editModal").scrollTop();
         $("#edit-saveDiv").css("top", top + "px");
+    });
+    var type1 = $("#edit-goodsType1-select").val();
+    $("#edit-goodsType1-select").on("change",function () {
+        type1 = $("#edit-goodsType1-select").val();
+        if(type1=="SM"){
+            document.getElementById("edit-goodsType2-select").innerHTML = SmType2Html;
+        }else{
+            document.getElementById("edit-goodsType2-select").innerHTML = "";
+        }
     });
 
 })
@@ -65,7 +78,13 @@ function editYifabu(goodsId) {
                 document.getElementById("edit-goodsName-input").value = data.result.goodsName;
                 document.getElementById("edit-goodsWords-input").value = data.result.goodsWords;
                 $("#edit-goodsArea-select").val(data.result.goodsArea);
-                document.getElementById("edit-goodsType-select").value = data.result.goodsType;
+                document.getElementById("edit-goodsType1-select").value = data.result.goodsType;
+                if(data.result.goodsType=="SM"){
+                    document.getElementById("edit-goodsType2-select").innerHTML = SmType2Html;
+                    document.getElementById("edit-goodsType2-select").value = data.result.goodsSpecificType;
+                }else{
+                    document.getElementById("edit-goodsType2-select").innerHTML = "";
+                }
                 document.getElementById("edit-jiage-input").value = data.result.goodsPrice;
                 document.getElementById("edit-qq-input").value = data.result.goodsQq;
                 document.getElementById("edit-wx-input").value = data.result.goodsWx;
@@ -229,14 +248,15 @@ $(function () {
         var editGoodsName = document.getElementById("edit-goodsName-input").value;
         var editGoodsWords =document.getElementById("edit-goodsWords-input").value;
         var editGoodsArea = document.getElementById("edit-goodsArea-select").value;
-        var editGoodsType = document.getElementById("edit-goodsType-select").value;
+        var editGoodsType = document.getElementById("edit-goodsType1-select").value;
+        var editGoodsSpecificType = document.getElementById("edit-goodsType2-select").value;
         var editGoodsPrice = document.getElementById("edit-jiage-input").value;
         var editGoodsQq = document.getElementById("edit-qq-input").value;
         var editGoodsWx = document.getElementById("edit-wx-input").value;
         var goodsOther = document.getElementById("edit-ownerSay").value;
         var goods = {
             "goodsName": editGoodsName, "goodsWords": editGoodsWords, "goodsArea": editGoodsArea,
-            "goodsType": editGoodsType, "goodsPrice": editGoodsPrice, "goodsQq": editGoodsQq,
+            "goodsType": editGoodsType,"goodsSpecificType":editGoodsSpecificType, "goodsPrice": editGoodsPrice, "goodsQq": editGoodsQq,
             "goodsWx": editGoodsWx,"goodsId":editGoodsId,"goodsOther":goodsOther
         };
         uploadFiles.append("goods",JSON.stringify(goods));

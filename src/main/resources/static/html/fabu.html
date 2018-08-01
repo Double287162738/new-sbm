@@ -122,7 +122,7 @@
 
 		<div id="xzSmNameDiv">
 			<div><label for="name"><h4><span class="label label-success">闲置名称</span></h4></label></div>
-			<input id="fabuName" type="text" placeholder="" />
+			<input id="fabuName" type="text" placeholder="" maxlength="8"/>
 		</div>
 
 		<div id="xzSmPriceDiv">
@@ -132,17 +132,17 @@
 
 		<div id="xzSmQqDiv">
 			<div><label for="name"><h4><span class="label label-success">&nbsp;QQ&nbsp;</span></h4></label></div>
-			<input id="fabuQq" type="text" placeholder="" />
+			<input id="fabuQq" type="text" placeholder="" maxlength="12" onkeyup="this.value=this.value.replace(/\D/g,'')"/>
 		</div>
 
 		<div id="xzSmWxDiv">
 			<div><label for="name"><h4><span class="label label-warning">&nbsp;微信&nbsp;</span></h4></label></div>
-			<input id="fabuWx" type="text" placeholder="" />
+			<input id="fabuWx" type="text" placeholder="" maxlength="12" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5\d]/g,'');"/>
 		</div>
 
 		<div id="xzSmWordsDiv">
 			<div><label for="name"><h4><span class="label label-success">闲置特点</span></h4></label></div>
-			<input id="fabuWords" type="text" placeholder="" /><img id="tedian-pic" src="../img/tedian-open.png" title="点击选择"/>
+			<input id="fabuWords" type="text" placeholder="" maxlength="12"/><img id="tedian-pic" src="../img/tedian-open.png" title="点击选择"/>
 			<div id="teDianDiv" style="display: none;">
 				<button class="btn btn-default" value="颜值高" onclick="selectBtn(this)">颜值高</button>
 				<button class="btn btn-default" value="全新" onclick="selectBtn(this)">全新</button>
@@ -160,7 +160,7 @@
 
 		<div id="xzSmOtherDiv">
 			<div><label for="name"><h4><span class="label label-danger">闲置介绍</span></h4></label></div>
-			<textarea id="xzSmOther" class="form-control" placeholder="介绍一下你的宝贝吧"></textarea>
+			<textarea id="xzSmOther" class="form-control" placeholder="介绍一下你的宝贝吧" maxlength="100"></textarea>
 		</div>
 
 

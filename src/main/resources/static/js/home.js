@@ -473,7 +473,7 @@ function openDetail(e) {
         }
     });
 
-    $('#goodsModal').modal('show')
+    $('#goodsModal').modal('show');
 }
 
 

@@ -1,0 +1,53 @@
+.all{
+	width: 1000px;
+	height: 500px;
+	margin: auto;
+}
+.title{
+	padding-top: 30px;
+	width: 100%;
+	text-align: center;
+	font-size: 24px;
+	color: #fb775d;
+}
+.feedBack1{
+	margin-top: 30px;
+	width: 100%;
+	padding-left: 200px;
+	font-size: 20px;
+}
+.prompt{
+	margin-top: 5px;
+	width: 100%;
+	padding-left: 240px;
+	color: #999;
+	font-size: 14px;
+}
+.star{
+	padding-left: 240px;
+}
+.star >span{
+	margin-top: 10px;
+	display: inline-block;
+	font-size: 35px;
+	color: #fb775d;
+	margin-right: 40px;
+	cursor: pointer;
+}
+.less-score{
+	color: #999;
+}
+.add-score{
+	color: #fb775d;
+}
+.suggestion{
+	width: 53%;
+	margin: auto;
+	margin-top: 10px;
+	height: 150px !important;
+}
+.suggestion-sub{
+	width: 100px;
+	margin-top: 20px;
+	margin-left: 640px;
+}
