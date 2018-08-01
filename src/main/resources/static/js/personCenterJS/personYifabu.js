@@ -1,4 +1,3 @@
-var baseUrl = "http://localhost:8080";
 
 $(function () {
     //闲置详情框的高度

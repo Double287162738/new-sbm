@@ -390,3 +390,7 @@ a.active.focus {
 .dddBlackground{
 	background: #ddd !important;
 }
+.notAllowed:hover {
+	cursor: not-allowed;
+}
+

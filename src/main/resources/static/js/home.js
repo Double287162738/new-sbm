@@ -1,6 +1,7 @@
 var totalPage;
 var currentPage;
 var keyword;
+var nowGoodsId;
 $(function () {
     //搜索框的回车事件
     $('#sousuoInput').bind('keydown', function (event) {
@@ -398,9 +399,12 @@ function upPage() {
 
 
 function openDetail(e) {
-
+    $("#addCollectBtn").bind("click", addCollection);
+    document.getElementById("ifCollect").innerHTML="加入收藏夹";
+    $("#addCollectBtn").removeClass("notAllowed");
     var url = baseUrl + "/my-sbm/sousou/sougoodsDetail.do";
     var data = {"goodsId": e};
+    nowGoodsId=e;
     $.ajax({
         url: url,
         type: "post",
@@ -491,4 +495,28 @@ function getPicUrl(picName) {
         + picName.substring(6, 8) + "/" + picName;
 }
 
+function addCollection() {
+    console.log(1222);
+    var data = {"goodsId":nowGoodsId};
+    $.ajax({
+        url: baseUrl + "/my-sbm/collection/addCollection.do",
+        type: "post",
+        data:data,
+        dataType: 'json',
+        success: function (data) {
+            if(data.result=="2"){
+                window.location.href = 'login.html';
+            }else{
+                document.getElementById("ifCollect").innerHTML="已收藏";
+                $("#addCollectBtn").addClass("notAllowed");
+                $("#addCollectBtn").unbind();
+            }
+        },
+        error: function (e) {
+            document.getElementById("ifCollect").innerHTML="已收藏";
+            $("#addCollectBtn").addClass("notAllowed");
+            $("#addCollectBtn").unbind();
+        }
+    });
+}
 
