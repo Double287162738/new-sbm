@@ -4,18 +4,15 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.sbm.mapper.customerMapper.GoodsCustomerMapper;
+import com.sbm.pojo.model.*;
+import com.sbm.util.StringToListUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.sbm.mapper.CollectionMapper;
 import com.sbm.mapper.GoodsMapper;
 import com.sbm.mapper.RecycleMapper;
-import com.sbm.pojo.model.Collection;
-import com.sbm.pojo.model.CollectionExample;
-import com.sbm.pojo.model.Goods;
-import com.sbm.pojo.model.GoodsExample;
-import com.sbm.pojo.model.Recycle;
-import com.sbm.pojo.model.RecycleExample;
 import com.sbm.service.SousouService;
 import com.sbm.util.ExecuteResult;
 import com.sbm.util.Page;
@@ -31,34 +28,61 @@ public class SousouServiceImpl implements SousouService {
     @Resource
     private GoodsMapper goodsMapper;
     @Resource
+    private GoodsCustomerMapper goodsCustomerMapper;
+    @Resource
     private CollectionMapper CollectionMapper;
     @Resource
     private RecycleMapper recycleMapper;
 
     @Override
-    public Page souGoods(Page page, String keyword) {
+    public Page souGoods(SouSouInparameterDTO souSouInparameterDTO) {
+        Page page = new Page();
+        page.setCurrentPage(souSouInparameterDTO.getCurrentPage());
         Page resultPage = new Page();
         //拼接搜索关键字
         StringBuilder newKeyWord = new StringBuilder();
-        newKeyWord.append("%");
-        for (int i = 0; i < keyword.length(); i++) {
-            newKeyWord.append(keyword.charAt(i));
+        if(StringUtils.isNotBlank(souSouInparameterDTO.getKeyWord())){
             newKeyWord.append("%");
+            for (int i = 0; i < souSouInparameterDTO.getKeyWord().length(); i++) {
+                newKeyWord.append(souSouInparameterDTO.getKeyWord().charAt(i));
+                newKeyWord.append("%");
+            }
         }
         //搜索结果包含字段
         List<String> stringList = asList("goodsId", "userId", "goodsName", "goodsPrice", "goodsWords", "goodsQq", "goodsWx", "goodsClickAmount",
-                "goodsOther", "goodsPic1", "goodsPic2", "goodsPic3", "goodsPic4", "goodsPic5", "goodsPic6", "goodsPic7",
-                "goodsPic8", "goodsPic9");
-        //查询
-        GoodsExample goodsExample = new GoodsExample();
-        goodsExample.addSelectiveFields(stringList);
-        goodsExample.setPage(page);
-        goodsExample.setOrderByClause("goods_no ASC");
-        goodsExample.createCriteria().andGoodsNameLike(newKeyWord.toString());
-        List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
-        Integer count = goodsMapper.countByExample(goodsExample);
-        resultPage.setRecords(goodsList);
-        resultPage.setTotalRecord(count);
+                "goodsOther", "goodsPic1", "goodsPic2", "goodsPic3", "goodsPic4", "goodsPic5");
+        if(StringUtils.isBlank(souSouInparameterDTO.getSouType()) || souSouInparameterDTO.getSouType().equals("all")){
+            GoodsExample goodsExample = new GoodsExample();
+            goodsExample.addSelectiveFields(stringList);
+            goodsExample.setPage(page);
+            goodsExample.setOrderByClause("goods_no ASC");
+            if(souSouInparameterDTO.getSouArea()==null || souSouInparameterDTO.getSouArea().size()==0 ){
+                if(StringUtils.isNotBlank(newKeyWord.toString())){
+                    goodsExample.createCriteria().andGoodsNameLike(newKeyWord.toString());
+                }
+            }else{
+                if(StringUtils.isNotBlank(newKeyWord.toString())){
+                    goodsExample.createCriteria().andGoodsNameLike(newKeyWord.toString()).andGoodsAreaIn(souSouInparameterDTO.getSouArea());
+                }else{
+                    goodsExample.createCriteria().andGoodsAreaIn(souSouInparameterDTO.getSouArea());
+                }
+            }
+            List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
+            Integer count = goodsMapper.countByExample(goodsExample);
+            resultPage.setRecords(goodsList);
+            resultPage.setTotalRecord(count);
+        }else {
+            try{
+                souSouInparameterDTO.setPage(page);
+                souSouInparameterDTO.setKeyWord(newKeyWord.toString());
+                List<Goods> goodsList = goodsCustomerMapper.sousou(souSouInparameterDTO);
+                Integer count = goodsCustomerMapper.sousouCount(souSouInparameterDTO);
+                resultPage.setRecords(goodsList);
+                resultPage.setTotalRecord(count);
+            }catch (Exception e){
+                e.getMessage();
+            }
+        }
         return resultPage;
     }
 

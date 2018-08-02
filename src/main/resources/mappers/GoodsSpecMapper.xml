@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sbm.mapper.GoodsSpecMapper" >
+    <resultMap id="BaseResultMap" type="com.sbm.pojo.model.GoodsSpec" >
+        <id column="GOOD_ID" property="goodId" jdbcType="VARCHAR" />
+        <result column="TYPE" property="type" jdbcType="VARCHAR" />
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List" >
+        GOOD_ID, TYPE, CREATE_TIME, REMARK
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sbm.pojo.model.GoodsSpecExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <if test="includeColumns == null or includeColumns.size()==0 ">
+			<include refid="Base_Column_List"/>
+		</if>
+		<if test="includeColumns!=null and includeColumns.size() > 0">
+			<foreach collection="includeColumns" index="index" item="includeColumn" separator=",">
+				${includeColumn}
+			</foreach>
+		</if>
+        from goods_spec
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+        <include refid="MySqlPaginationSuffix" />
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from goods_spec
+        where GOOD_ID = #{goodId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from goods_spec
+        where GOOD_ID = #{goodId,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.sbm.pojo.model.GoodsSpecExample" >
+        delete from goods_spec
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.sbm.pojo.model.GoodsSpec" >
+        insert into goods_spec (GOOD_ID, TYPE, CREATE_TIME, 
+            REMARK)
+        values (#{goodId,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+            #{remark,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.sbm.pojo.model.GoodsSpec" >
+        insert into goods_spec
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="goodId != null" >
+                GOOD_ID,
+            </if>
+            <if test="type != null" >
+                TYPE,
+            </if>
+            <if test="createTime != null" >
+                CREATE_TIME,
+            </if>
+            <if test="remark != null" >
+                REMARK,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="goodId != null" >
+                #{goodId,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.sbm.pojo.model.GoodsSpecExample" resultType="java.lang.Integer" >
+        SELECT COUNT(1) FROM
+        <if test="distinct" >
+            (SELECT
+          DISTINCT
+          <include refid="Base_Column_List"/>
+          from GOODS_SPEC
+          <if test="_parameter != null">
+              <include refid="Example_Where_Clause"/>
+          </if>) AS COUNT_SQL
+        </if>
+        <if test="!distinct" >
+            
+          GOODS_SPEC
+          <if test="_parameter != null" >
+              <include refid="Example_Where_Clause" />
+          </if>
+
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map" >
+        update goods_spec
+        <set >
+            <if test="record.goodId != null" >
+                GOOD_ID = #{record.goodId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.type != null" >
+                TYPE = #{record.type,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null" >
+                CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.remark != null" >
+                REMARK = #{record.remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map" >
+        update goods_spec
+        set GOOD_ID = #{record.goodId,jdbcType=VARCHAR},
+            TYPE = #{record.type,jdbcType=VARCHAR},
+            CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+            REMARK = #{record.remark,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.sbm.pojo.model.GoodsSpec" >
+        update goods_spec
+        <set >
+            <if test="type != null" >
+                TYPE = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null" >
+                REMARK = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where GOOD_ID = #{goodId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.sbm.pojo.model.GoodsSpec" >
+        update goods_spec
+        set TYPE = #{type,jdbcType=VARCHAR},
+            CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            REMARK = #{remark,jdbcType=VARCHAR}
+        where GOOD_ID = #{goodId,jdbcType=VARCHAR}
+    </update>
+    <sql id="MySqlPaginationSuffix" >
+        <if test="page != null" >
+            <![CDATA[ LIMIT #{page.pageSize} OFFSET #{page.recordIndex}]]>
+        </if>
+    </sql>
+    <select id="selectOneByExample" resultMap="BaseResultMap" parameterType="com.sbm.pojo.model.GoodsSpecExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <if test="includeColumns == null or includeColumns.size()==0" >
+      <include refid="Base_Column_List" />
+    </if>
+    <if test="includeColumns!=null and includeColumns.size() > 0" >
+      <foreach collection="includeColumns" index="index" item="includeColumn" separator="," >
+        ${includeColumn}
+      </foreach>
+    </if>
+         from GOODS_SPEC
+        <if test="_parameter != null" >
+     <include refid="Example_Where_Clause" />
+     </if>
+        <if test="orderByClause != null" >
+     order by ${orderByClause}
+     </if>
+        LIMIT 1 OFFSET 0
+    </select>
+</mapper>

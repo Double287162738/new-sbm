@@ -2,6 +2,7 @@ package com.sbm.controller;
 
 import javax.annotation.Resource;
 
+import com.sbm.pojo.model.SouSouInparameterDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,14 +22,13 @@ public class SousouController {
     /**
      * 搜索物品
      *
-     * @param page
-     * @param keyword
+     * @param souSouInparameterDTO
      * @return
      */
     @RequestMapping("/sougoods.do")
     @ResponseBody
-    public Page souGoods(Page page, String keyword) {
-        return sousouService.souGoods(page, keyword);
+    public Page souGoods(SouSouInparameterDTO souSouInparameterDTO) {
+        return sousouService.souGoods(souSouInparameterDTO);
     }
 
     /**

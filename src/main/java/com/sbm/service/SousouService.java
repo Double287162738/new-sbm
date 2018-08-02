@@ -1,6 +1,7 @@
 package com.sbm.service;
 
 import com.sbm.pojo.model.Goods;
+import com.sbm.pojo.model.SouSouInparameterDTO;
 import com.sbm.util.ExecuteResult;
 import com.sbm.util.Page;
 
@@ -10,11 +11,10 @@ public interface SousouService {
     /**
      * 关键字搜索物品
      *
-     * @param page
-     * @param keyword
+     * @param souSouInparameterDTO
      * @return
      */
-    Page souGoods(Page page, String keyword);
+    Page souGoods(SouSouInparameterDTO souSouInparameterDTO);
 
 
     /**

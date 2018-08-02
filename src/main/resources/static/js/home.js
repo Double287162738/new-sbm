@@ -2,38 +2,15 @@ var totalPage;
 var currentPage;
 var keyword;
 var nowGoodsId;
+var souType="";
+var souArea={};
 $(function () {
-    //搜索框的回车事件
-    $('#sousuoInput').bind('keydown', function (event) {
-        if (event.keyCode == "13") {
-            window.location.href = 'home.html?keyword=' + $("#sousuoInput").val() + "&currentPage=1";
-            window.event.returnValue=false;
-        }
-    });
-    $("#sousou").click(function () {
-        window.location.href = 'home.html?keyword=' + $("#sousuoInput").val() + "&currentPage=1";
-        window.event.returnValue=false;
-    });
     //闲置详情框的高度
     $("#goodsModal").css("height", window.screen.height);
     //图片的高度
     $("#pic-part").css("height", $("#goodsModal").height() * 0.5);
     //价格、用户等其他信息部分
     $("#other-part").css("height", $("#goodsModal").height() * 0.5);
-//	var index;
-//	var a = document.getElementById('shoucangPic');
-//	index = a.src;
-//	$("#shoucangPic").click(function(){
-//		if(index.indexOf("shoucang.png")>-1){
-//		 	index="../img/shoucang1.png";
-//		 	a.src="../img/shoucang1.png";
-//		 }
-//		 else{
-//		 	index="../img/shoucang.png";
-//		 	a.src="../img/shoucang.png";
-//		 }
-//	});
-    //接收搜索请求
     var locationUrl = window.location.href;
     if (locationUrl.indexOf("?") == -1 || locationUrl.indexOf("&") == -1) {
         return;
@@ -43,53 +20,93 @@ $(function () {
     }
     keyword = locationUrl.split("?")[1].split("&")[0].split("=")[1];
     currentPage = locationUrl.split("?")[1].split("&")[1].split("=")[1];
+    //搜索框的回车事件
+    $('#sousuoInput').bind('keydown', function (event) {
+        if (event.keyCode == "13") {
+            keyword=$("#sousuoInput").val();
+            currentPage=1;
+            getSouSouResult();
+        }
+    });
+    $("#sousou").click(function () {
+        keyword=$("#findInput").val();
+        currentPage=1;
+        getSouSouResult();
+    });
+    //接收搜索请求
     if (keyword != null && currentPage != null) {
-        $("#sousuoInput").val(decodeURI(keyword));
-        $("#findInput").val(decodeURI(keyword));
-        document.getElementById("showPart").innerHTML = '';
-        var data = {"keyword": keyword, "currentPage": currentPage};
-        $.ajax({
-            url: baseUrl + "/my-sbm/sousou/sougoods.do",
-            type: "post",
-            data: data,
-            dataType: 'json',
-            success: function (data) {
-                if (data.records != null) {
-                    for (var i = 0; i < data.records.length; i++) {
-                        var goodsPic1 = data.records[i].goodsPic1;
-                        $("#showPart").append(
-                            "<div id='xianzhi-all'>" +
-                            "<div id='xianzhi-pic-border'>" +
-                            "<a onclick='openDetail(\"" + data.records[i].goodsId + "\")' data-toggle='modal' >" +
-                            "<div id='xianzhi-pic'>" +
-                            "<img src='" + goodsPicURL + goodsPic1.substring(0, 4) + "/" + goodsPic1.substring(4, 6) + "/"
-                            + goodsPic1.substring(6, 8) + "/" + goodsPic1 + "' />" +
-                            "</div>" +
-                            "</a>" +
-                            "</div>" +
-                            "<div id='xianzhi-other-border'>" +
-                            "<div id='xianzhi-price-border'><span class='glyphicon glyphicon-yen'></span><span id='xianzhi-price'>" + data.records[i].goodsPrice + "</span></div>" +
-                            "<div id='xianzhi-name'>" + data.records[i].goodsName + "</div>" +
-                            "<div id='xianzhi-keyword'>" + data.records[i].goodsWords + "</div>" +
-                            "</div>" +
-                            "</div>")
-                    }
-                    totalPage = data.totalPage;
-                    makePage(totalPage);
-                } else {
-                    console.log("无数据");
-                }
-            },
-            error: function (e) {
-                console.log("错误");
-            }
-        });
-    } else {
+        getSouSouResult();
+    }else {
         return;
     }
 
+    $(".especiallyArea").change(function () {
+        var groupCheckbox=$("input[name='area']");
+        souArea={};
+        var index=0;
+        for(i=0;i<groupCheckbox.length;i++){
+            if(groupCheckbox[i].checked){
+                souArea[index]=groupCheckbox[i].value;
+                index++;
+            }
+        }
+        console.log("乔永宝："+souArea);
+        getSouSouResult();
+    });
+
 
 });
+
+function especiallySouSou(obj,type) {
+    $(obj).addClass('sousou-btn-click');
+    $(obj).siblings().removeClass("sousou-btn-click");
+    souType=type;
+    getSouSouResult();
+}
+
+
+function getSouSouResult(){
+    $("#sousuoInput").val(decodeURI(keyword));
+    $("#findInput").val(decodeURI(keyword));
+    document.getElementById("showPart").innerHTML = '';
+    var souSouInparameterDTO={"keyWord":keyword,"souType":souType,"currentPage":currentPage,"souArea":souArea};
+    $.ajax({
+        url: baseUrl + "/my-sbm/sousou/sougoods.do",
+        type: "post",
+        data: souSouInparameterDTO,
+        dataType: 'json',
+        success: function (data) {
+            if (data.records != null) {
+                for (var i = 0; i < data.records.length; i++) {
+                    var goodsPic1 = data.records[i].goodsPic1;
+                    $("#showPart").append(
+                        "<div id='xianzhi-all'>" +
+                        "<div id='xianzhi-pic-border'>" +
+                        "<a onclick='openDetail(\"" + data.records[i].goodsId + "\")' data-toggle='modal' >" +
+                        "<div id='xianzhi-pic'>" +
+                        "<img src='" + goodsPicURL + goodsPic1.substring(0, 4) + "/" + goodsPic1.substring(4, 6) + "/"
+                        + goodsPic1.substring(6, 8) + "/" + goodsPic1 + "' />" +
+                        "</div>" +
+                        "</a>" +
+                        "</div>" +
+                        "<div id='xianzhi-other-border'>" +
+                        "<div id='xianzhi-price-border'><span class='glyphicon glyphicon-yen'></span><span id='xianzhi-price'>" + data.records[i].goodsPrice + "</span></div>" +
+                        "<div id='xianzhi-name'>" + data.records[i].goodsName + "</div>" +
+                        "<div id='xianzhi-keyword'>" + data.records[i].goodsWords + "</div>" +
+                        "</div>" +
+                        "</div>")
+                }
+                totalPage = data.totalPage;
+                makePage(totalPage);
+            } else {
+                console.log("无数据");
+            }
+        },
+        error: function (e) {
+            console.log("错误");
+        }
+    });
+}
 
 //画出分页部分
 function makePage(totalPage) {

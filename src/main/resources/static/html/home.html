@@ -67,14 +67,13 @@
 		
   		<!--嗖嗖导航开始-->
   		<div id="sousou-rec">
-  			<button class="sousou-btn">嗖嗖推荐</button>
-  			<button class="sousou-btn">嗖嗖人气</button>
-  			<button class="sousou-btn">嗖嗖全站</button>
+  			<button class="sousou-btn" onclick="especiallySouSou(this,'rec')">嗖嗖推荐</button>
+  			<button class="sousou-btn" onclick="especiallySouSou(this,'pop')">嗖嗖人气</button>
+  			<button class="sousou-btn sousou-btn-click" onclick="especiallySouSou(this,'all')">嗖嗖全站</button>
   			
-  			<div><input  type="checkbox"/>A区</div>
-  			<div><input  type="checkbox"/>B区</div>
-  			<div><input  type="checkbox"/>C区</div>
-  			<div><input  type="checkbox"/>全校</div>
+  			<div><input  class="especiallyArea" type="checkbox" checked name="area" value="A"/>A区</div>
+  			<div><input  class="especiallyArea" type="checkbox" checked name="area" value="B"/>B区</div>
+  			<div><input  class="especiallyArea" type="checkbox" checked name="area" value="C"/>C区</div>
   		</div>
   		
   		<!--间隔-->

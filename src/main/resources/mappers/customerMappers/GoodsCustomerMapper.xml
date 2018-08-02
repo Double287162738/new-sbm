@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sbm.mapper.customerMapper.GoodsCustomerMapper" >
+    <resultMap id="BaseResultMap" type="com.sbm.pojo.model.Goods" >
+        <id column="GOODS_ID" property="goodsId" jdbcType="VARCHAR" />
+        <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+        <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+        <result column="GOODS_NAME" property="goodsName" jdbcType="VARCHAR" />
+        <result column="GOODS_SPECIFIC_TYPE" property="goodsSpecificType" jdbcType="VARCHAR" />
+        <result column="GOODS_TYPE" property="goodsType" jdbcType="VARCHAR" />
+        <result column="GOODS_AREA" property="goodsArea" jdbcType="VARCHAR" />
+        <result column="GOODS_PRICE" property="goodsPrice" jdbcType="VARCHAR" />
+        <result column="GOODS_WORDS" property="goodsWords" jdbcType="VARCHAR" />
+        <result column="GOODS_QQ" property="goodsQq" jdbcType="VARCHAR" />
+        <result column="GOODS_WX" property="goodsWx" jdbcType="VARCHAR" />
+        <result column="GOODS_OTHER" property="goodsOther" jdbcType="VARCHAR" />
+        <result column="GOODS_CLICK_AMOUNT" property="goodsClickAmount" jdbcType="VARCHAR" />
+        <result column="GOODS_COLLECTION_AMOUNT" property="goodsCollectionAmount" jdbcType="VARCHAR" />
+        <result column="GOODS_PIC1" property="goodsPic1" jdbcType="VARCHAR" />
+        <result column="GOODS_PIC2" property="goodsPic2" jdbcType="VARCHAR" />
+        <result column="GOODS_PIC3" property="goodsPic3" jdbcType="VARCHAR" />
+        <result column="GOODS_PIC4" property="goodsPic4" jdbcType="VARCHAR" />
+        <result column="GOODS_PIC5" property="goodsPic5" jdbcType="VARCHAR" />
+        <result column="GOODS_PIC6" property="goodsPic6" jdbcType="VARCHAR" />
+        <result column="GOODS_PIC7" property="goodsPic7" jdbcType="VARCHAR" />
+        <result column="GOODS_PIC8" property="goodsPic8" jdbcType="VARCHAR" />
+        <result column="GOODS_PIC9" property="goodsPic9" jdbcType="VARCHAR" />
+        <result column="GOODS_GMT_CREATE" property="goodsGmtCreate" jdbcType="TIMESTAMP" />
+        <result column="GOODS_LAST_MOD" property="goodsLastMod" jdbcType="TIMESTAMP" />
+        <result column="GOODS_NO" property="goodsNo" jdbcType="VARCHAR" />
+    </resultMap>
+    <select id="sousou" resultMap="BaseResultMap" parameterType="com.sbm.pojo.model.SouSouInparameterDTO" >
+        select goods.*
+        from goods_spec,goods
+        where goods.goods_id = goods_spec.good_id
+        <if test="souType != null" >
+            and goods_spec.type = #{souType}
+        </if>
+        <if test="souArea != null and souArea.size()>0" >
+            and goods.goods_area in
+            <foreach collection="souArea" item="listItem" open="(" close=")" separator="," >
+                #{listItem}
+            </foreach>
+        </if>
+        <if test="keyWord != null and keyWord!=''" >
+            and goods.goods_name like #{keyWord}
+        </if>
+        order by goods.goods_no
+        <include refid="MySqlPaginationSuffix" />
+    </select>
+
+    <select id="sousouCount" resultType="java.lang.Integer" parameterType="com.sbm.pojo.model.SouSouInparameterDTO" >
+        select count(*)
+        from goods_spec,goods
+        where goods.goods_id = goods_spec.good_id
+        <if test="souType != null" >
+            and goods_spec.type = #{souType}
+        </if>
+        <if test="souArea != null and souArea.size()>0" >
+            and goods.goods_area in
+            <foreach collection="souArea" item="listItem" open="(" close=")" separator="," >
+                #{listItem}
+            </foreach>
+        </if>
+        <if test="keyWord != null and keyWord!=''" >
+            and goods.goods_name like #{keyWord}
+        </if>
+    </select>
+
+
+
+    <sql id="MySqlPaginationSuffix" >
+        <if test="page != null" >
+            <![CDATA[ LIMIT #{page.pageSize} OFFSET #{page.recordIndex}]]>
+        </if>
+    </sql>
+
+</mapper>

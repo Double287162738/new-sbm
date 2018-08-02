@@ -46,7 +46,7 @@ a.active.focus {
 	border-radius: 0;
 	text-align: center;
 }
-.sousou-btn:focus{
+.sousou-btn-click{
 	outline: none;
 	border: 1px solid #A9A9A9;
 	background:	#DCDCDC;
