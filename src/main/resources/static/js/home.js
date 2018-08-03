@@ -13,7 +13,6 @@ $(function () {
     //价格、用户等其他信息部分
     $("#other-part").css("height", $("#goodsModal").height() * 0.5);
     var locationUrl = window.location.href;
-    console.log("敲"+locationUrl);
     if (locationUrl.indexOf("?") == -1 || locationUrl.indexOf("&") == -1) {
         return;
     }
@@ -24,9 +23,9 @@ $(function () {
     currentPage = locationUrl.split("?")[1].split("&")[1].split("=")[1];
     specialType = locationUrl.split("?")[1].split("&")[2].split("=")[1];
     //搜索框的回车事件
-    $('#sousuoInput').bind('keydown', function (event) {
+    $('#findInput').bind('keydown', function (event) {
         if (event.keyCode == "13") {
-            keyword=$("#sousuoInput").val();
+            keyword=$("#findInput").val();
             currentPage=1;
             getSouSouResult();
         }
