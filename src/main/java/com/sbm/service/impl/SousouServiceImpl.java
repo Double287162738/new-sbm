@@ -53,19 +53,23 @@ public class SousouServiceImpl implements SousouService {
                 "goodsOther", "goodsPic1", "goodsPic2", "goodsPic3", "goodsPic4", "goodsPic5");
         if(StringUtils.isBlank(souSouInparameterDTO.getSouType()) || souSouInparameterDTO.getSouType().equals("all")){
             GoodsExample goodsExample = new GoodsExample();
+            GoodsExample.Criteria criteria = goodsExample.createCriteria();
             goodsExample.addSelectiveFields(stringList);
             goodsExample.setPage(page);
             goodsExample.setOrderByClause("goods_no ASC");
             if(souSouInparameterDTO.getSouArea()==null || souSouInparameterDTO.getSouArea().size()==0 ){
                 if(StringUtils.isNotBlank(newKeyWord.toString())){
-                    goodsExample.createCriteria().andGoodsNameLike(newKeyWord.toString());
+                    criteria.andGoodsNameLike(newKeyWord.toString());
                 }
             }else{
                 if(StringUtils.isNotBlank(newKeyWord.toString())){
-                    goodsExample.createCriteria().andGoodsNameLike(newKeyWord.toString()).andGoodsAreaIn(souSouInparameterDTO.getSouArea());
+                    criteria.andGoodsNameLike(newKeyWord.toString()).andGoodsAreaIn(souSouInparameterDTO.getSouArea());
                 }else{
-                    goodsExample.createCriteria().andGoodsAreaIn(souSouInparameterDTO.getSouArea());
+                    criteria.andGoodsAreaIn(souSouInparameterDTO.getSouArea());
                 }
+            }
+            if(StringUtils.isNotBlank(souSouInparameterDTO.getSpecialType())){
+                criteria.andGoodsSpecificTypeEqualTo(souSouInparameterDTO.getSpecialType());
             }
             List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
             Integer count = goodsMapper.countByExample(goodsExample);

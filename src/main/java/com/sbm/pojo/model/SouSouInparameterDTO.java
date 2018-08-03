@@ -15,6 +15,7 @@ public class SouSouInparameterDTO implements Serializable{
     protected List<String> souArea;//搜索区域
     protected int currentPage;//当前页
     protected Page page;
+    protected String specialType;//详细类型
 
     public String getKeyWord() {
         return keyWord;
@@ -54,5 +55,13 @@ public class SouSouInparameterDTO implements Serializable{
 
     public void setPage(Page page) {
         this.page = page;
+    }
+
+    public String getSpecialType() {
+        return specialType;
+    }
+
+    public void setSpecialType(String specialType) {
+        this.specialType = specialType;
     }
 }

@@ -25,12 +25,12 @@ $(function () {
     //搜索框的回车事件
     $('#findInput').bind('keydown', function (event) {
         if (event.keyCode == "13") {
-            window.location.href = 'home.html?keyword=' + $("#sousuoInput").val() + "&currentPage=1";
+            window.location.href = 'home.html?keyword=' + $("#sousuoInput").val() + "&currentPage=1&specialType=";
             window.event.returnValue=false;
         }
     });
     $("#sousuoBtn").click(function () {
-        window.location.href = 'home.html?keyword=' + $("#sousuoInput").val() + "&currentPage=1";
+        window.location.href = 'home.html?keyword=' + $("#sousuoInput").val() + "&currentPage=1&specialType=";
         window.event.returnValue=false;
     });
 

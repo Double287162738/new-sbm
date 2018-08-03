@@ -1,6 +1,7 @@
 var totalPage;
 var currentPage;
 var keyword;
+var specialType;
 var nowGoodsId;
 var souType="";
 var souArea={};
@@ -12,6 +13,7 @@ $(function () {
     //价格、用户等其他信息部分
     $("#other-part").css("height", $("#goodsModal").height() * 0.5);
     var locationUrl = window.location.href;
+    console.log("敲"+locationUrl);
     if (locationUrl.indexOf("?") == -1 || locationUrl.indexOf("&") == -1) {
         return;
     }
@@ -20,6 +22,7 @@ $(function () {
     }
     keyword = locationUrl.split("?")[1].split("&")[0].split("=")[1];
     currentPage = locationUrl.split("?")[1].split("&")[1].split("=")[1];
+    specialType = locationUrl.split("?")[1].split("&")[2].split("=")[1];
     //搜索框的回车事件
     $('#sousuoInput').bind('keydown', function (event) {
         if (event.keyCode == "13") {
@@ -50,7 +53,6 @@ $(function () {
                 index++;
             }
         }
-        console.log("乔永宝："+souArea);
         getSouSouResult();
     });
 
@@ -69,7 +71,7 @@ function getSouSouResult(){
     $("#sousuoInput").val(decodeURI(keyword));
     $("#findInput").val(decodeURI(keyword));
     document.getElementById("showPart").innerHTML = '';
-    var souSouInparameterDTO={"keyWord":keyword,"souType":souType,"currentPage":currentPage,"souArea":souArea};
+    var souSouInparameterDTO={"keyWord":keyword,"souType":souType,"currentPage":currentPage,"souArea":souArea,"specialType":specialType};
     $.ajax({
         url: baseUrl + "/my-sbm/sousou/sougoods.do",
         type: "post",

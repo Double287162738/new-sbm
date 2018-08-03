@@ -45,6 +45,9 @@
         <if test="keyWord != null and keyWord!=''" >
             and goods.goods_name like #{keyWord}
         </if>
+        <if test="specialType != null and specialType!=''" >
+            and goods.goods_specific_type = #{specialType}
+        </if>
         order by goods.goods_no
         <include refid="MySqlPaginationSuffix" />
     </select>
@@ -64,6 +67,9 @@
         </if>
         <if test="keyWord != null and keyWord!=''" >
             and goods.goods_name like #{keyWord}
+        </if>
+        <if test="specialType != null and specialType!=''" >
+            and goods.goods_specific_type = #{specialType}
         </if>
     </select>
 

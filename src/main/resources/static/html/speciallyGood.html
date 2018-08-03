@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>SK嗖嗖-嗖嗖就有</title>
+	<link rel="shortcut icon" href="../img/favicon.ico"/>
+	<link rel="stylesheet" href="../css/bootstrap-theme.css" />
+	<link rel="stylesheet" href="../css/bootstrap.min.css" />
+	<link rel="stylesheet" href="../css/bootstrap-theme.min.css" />
+	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" href="../css/speciallyGood.css" />
+	<script src="../js/jquery-3.1.1.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/common.js"></script>
+	<script src="../js/fileURL.js"></script>
+	<script src="../js/speciallyGood.js"></script>
+	<meta charset="UTF-8">
+	</head>
+	<body>
+		<!--导航栏部分-->
+		<nav class="navbar navbar-default" role="navigation" id="navHeader">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a id="skssA" class="navbar-brand" href="main.html"><img src="../img/skss.png" id="skssPic"></a>
+				</div>
+				<div>
+					<ul class="nav navbar-nav">
+						<li class="margin20px"><a href="person.html?index=personFB">已发布</a></li>
+						<li class="margin20px"><a href="##">人气闲置</a></li>
+						<li class="margin20px"><a href="person.html?index=personSC">收藏夹</a></li>
+						<li class="margin20px"><a id="fabu-a">发布闲置</a></li>
+						<li class="margin20px"><a href="##">留白功能</a></li>
+					</ul>
+				</div>
+				<form class="navbar-form navbar-left" role="search" id="searchForm">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="嗖嗖就有" id="sousuoInput">
+					</div>
+					<button type="submit" class="btn btn-danger" id="sousuoBtn">搜索</button>
+				</form>
+				<div id="perDiv" class="navbar-header navbar-right">
+					<a id="perA" class="navbar-brand"><img src="" id="perPic" class="img-circle"></a>
+					<ul class="nav navbar-nav navbar-right" id="loginOrLoginOut">
+						<li class="loginOrLoginOut"><a href="login.html?index=regist"><span class="glyphicon glyphicon-user"></span> 注册</a></li>
+						<li class="loginOrLoginOut"><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		
+		
+		<div class="box">
+			<!-- 存放大图的容器-->
+			<div class="all">
+				<div class="top-img">
+					<div class="activeimg">
+						<div><img src="../img/ewm.png"></div>
+						<div><img src="../img/huoban.png"></div>
+						<div><img src="../img/3.jpg"></div>
+						<div><img src="../img/4.jpg"></div>
+						<div><img src="../img/5.jpg"></div>
+					</div>
+					<div class="left"><img src="../img/left.png"> </div>
+					<div class="right"><img src="../img/right.png"></div>
+				</div>
+				<!-- 存放缩略图的容器-->
+				<div class="bot-img">
+					<ul>
+						<li class="active"><img src="../img/ewm.png"></li>
+						<li><img src="../img/huoban.png"></li>
+						<li><img src="../img/3.jpg"></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<div class="detailBox">
+			<div><input type="text" value="Iphone7" disabled="disabled"/></div>
+			<div><input type="text" value="全新/国行/同城交易" disabled="disabled"/></div>
+			<div class="hr1"></div>
+			<div>
+				<div class="detail1"><img src="../img/jiage.png"><input id="price" value="200.0" disabled="disabled"/></div>
+				<div class="detail2"><img src="../img/qq.png"><input id="qq" value="287162738" disabled="disabled"/></div>
+				<div class="detail3"><img src="../img/weixin.png"><input id="wx" value="Double" disabled="disabled"/></div>
+			</div>
+			<div>
+				<div class="detail4"><img src="../img/area.png"><input id="area" value="B区" disabled="disabled"/></div>
+				<div class="detail5"><img src="../img/shoucang1.png"><input id="scnum" value="被30人收藏" disabled="disabled"/></div>
+				<div class="detail6"><img src="../img/liulan.png"><input id="llnum" value="被浏览120次" disabled="disabled"/></div>
+			</div>
+			<div>
+				<textarea id="other" class="form-control" placeholder="" maxlength="500" disabled="disabled"></textarea>
+			</div>
+			
+		</div>
+		
+	</body>
+</html>
+ 
