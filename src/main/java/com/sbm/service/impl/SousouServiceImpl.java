@@ -33,7 +33,6 @@ public class SousouServiceImpl implements SousouService {
     private CollectionMapper CollectionMapper;
     @Resource
     private RecycleMapper recycleMapper;
-
     @Override
     public Page souGoods(SouSouInparameterDTO souSouInparameterDTO) {
         Page page = new Page();
@@ -196,6 +195,17 @@ public class SousouServiceImpl implements SousouService {
         resultPage.setRecords(resultGoodsList);
         resultPage.setTotalRecord(count);
         return resultPage;
+    }
+
+    @Override
+    public List<Goods> souGoodsHover(String type) {
+        List<Goods> result = new ArrayList<>();
+        try {
+            result= goodsCustomerMapper.souGoodsHover(type);
+        }catch (Exception e){
+            e.getMessage();
+        }
+        return result;
     }
 
 

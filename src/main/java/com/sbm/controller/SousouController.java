@@ -12,6 +12,8 @@ import com.sbm.service.SousouService;
 import com.sbm.util.ExecuteResult;
 import com.sbm.util.Page;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/sousou")
 public class SousouController {
@@ -41,5 +43,11 @@ public class SousouController {
     @ResponseBody
     public ExecuteResult<Goods> souGoods(String goodsId) {
         return sousouService.souGoodsDetail(goodsId);
+    }
+
+    @RequestMapping("/sougoodsHover.do")
+    @ResponseBody
+    public List<Goods> souGoodsHover(String type){
+        return sousouService.souGoodsHover(type);
     }
 }

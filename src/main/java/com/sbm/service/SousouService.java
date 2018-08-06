@@ -5,6 +5,8 @@ import com.sbm.pojo.model.SouSouInparameterDTO;
 import com.sbm.util.ExecuteResult;
 import com.sbm.util.Page;
 
+import java.util.List;
+
 
 public interface SousouService {
 
@@ -55,4 +57,12 @@ public interface SousouService {
      * @return
      */
     Page souPerRecycleGoods(Page page, String userId, String keyword);
+
+
+    /**
+     * 搜索导航悬浮的闲置
+     * @param type
+     * @return
+     */
+    List<Goods> souGoodsHover(String type);
 }

@@ -1,25 +1,12 @@
-
 $(function(){
-    $('.bot-img ul li').click(function(){
-        var _this=$(this);
-        _this.addClass('active').siblings('li').removeClass('active');
-        var int=_this.index();
-        $('.activeimg').animate({left:int*-500},"slow");
-    });
-    var list=$('.bot-img ul li').length;
-    $('.activeimg').css({
-        width:list*500,
-    });
-    $('.right').click(function(){
-        next(list)
 
-    })
-    $('.left').click(function(){
-        prev(list)
-    });
-
-    
 })
+function changeLi(obj){
+    var _this=$(obj);
+    _this.addClass('active').siblings('li').removeClass('active');
+    var int=_this.index();
+    $('.activeimg').animate({left:int*-500},"slow");
+}
 var index=0;
 //下一张
 function next(list){
@@ -47,6 +34,7 @@ function prev(list){
 }
 
 $(function () {
+    var picNum=0;
     var locationUrl = window.location.href;
     if (locationUrl.indexOf("id") == -1) {
         return;
@@ -85,35 +73,50 @@ $(function () {
                 }
                 $("#name").val(data.result.goodsName);
                 $("#words").val(data.result.goodsWords);
-                $("#price").val("&nbsp;" + data.result.goodsPrice);
-                $("#scnum").val("&nbsp;被" + data.result.goodsCollectionAmount + "人收藏");
-                $("#llnum").val("&nbsp;" + data.result.goodsClickAmount + "人浏览过");
-                $("#qq").val("&nbsp;" + data.result.goodsQq);
-                $("#wx").val("&nbsp;" + data.result.goodsWx);
+                $("#price").val(data.result.goodsPrice);
+                $("#scnum").val(data.result.goodsCollectionAmount + "人收藏");
+                $("#llnum").val(data.result.goodsClickAmount + "人浏览过");
+                $("#qq").val(data.result.goodsQq);
+                $("#wx").val(data.result.goodsWx);
                 $("#area").val(data.result.goodsArea+"区");
                 $("#other").val( data.result.goodsOther);
                 var activeimgHtml="";
                 var botImgHtml="";
                 if (data.result.goodsPic1 != null && data.result.goodsPic1 != '') {
+                    picNum++;
                     activeimgHtml=activeimgHtml+'<div><img id="pic1" src='+getPicUrl(data.result.goodsPic1)+'></div>';
-                    botImgHtml=botImgHtml+'<li class="active"><img src='+getPicUrl(data.result.goodsPic1)+'></li>';
+                    botImgHtml=botImgHtml+'<li class="active" onclick="changeLi(this)"><img src='+getPicUrl(data.result.goodsPic1)+'></li>';
                 }
                 if (data.result.goodsPic2 != null && data.result.goodsPic2 != '') {
+                    picNum++;
                     activeimgHtml=activeimgHtml+'<div><img id="pic2" src='+getPicUrl(data.result.goodsPic2)+'></div>';
-                    botImgHtml=botImgHtml+'<li><img src='+getPicUrl(data.result.goodsPic2)+'></li>';
+                    botImgHtml=botImgHtml+'<li onclick="changeLi(this)"><img src='+getPicUrl(data.result.goodsPic2)+'></li>';
                 }
                 if (data.result.goodsPic3 != null && data.result.goodsPic3 != '') {
+                    picNum++;
                     activeimgHtml=activeimgHtml+'<div><img id="pic3" src='+getPicUrl(data.result.goodsPic3)+'></div>';
-                    botImgHtml=botImgHtml+'<li><img src='+getPicUrl(data.result.goodsPic3)+'></li>';
+                    botImgHtml=botImgHtml+'<li onclick="changeLi(this)"><img src='+getPicUrl(data.result.goodsPic3)+'></li>';
                 }
                 if (data.result.goodsPic4 != null && data.result.goodsPic4 != '') {
+                    picNum++;
                     activeimgHtml=activeimgHtml+'<div><img id="pic4" src='+getPicUrl(data.result.goodsPic4)+'></div>';
-                    botImgHtml=botImgHtml+'<li><img src='+getPicUrl(data.result.goodsPic4)+'></li>';
+                    botImgHtml=botImgHtml+'<li onclick="changeLi(this)"><img src='+getPicUrl(data.result.goodsPic4)+'></li>';
                 }
                 if (data.result.goodsPic5 != null && data.result.goodsPic5 != '') {
+                    picNum++;
                     activeimgHtml=activeimgHtml+'<div><img id="pic5" src='+getPicUrl(data.result.goodsPic5)+'></div>';
-                    botImgHtml=botImgHtml+'<li><img src='+getPicUrl(data.result.goodsPic5)+'></li>';
+                    botImgHtml=botImgHtml+'<li onclick="changeLi(this)"><img src='+getPicUrl(data.result.goodsPic5)+'></li>';
                 }
+                $('.activeimg').css({
+                    width:picNum*500,
+                });
+                $('.right').click(function(){
+                    next(picNum)
+
+                })
+                $('.left').click(function(){
+                    prev(picNum)
+                });
                 document.getElementById("activeimg").innerHTML = activeimgHtml;
                 document.getElementById("bot-img").innerHTML = botImgHtml;
 

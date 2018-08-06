@@ -14,4 +14,6 @@ public interface GoodsCustomerMapper {
     List<Goods> sousou(SouSouInparameterDTO souSouInparameterDTO);
 
     Integer sousouCount(SouSouInparameterDTO souSouInparameterDTO);
+
+    List<Goods> souGoodsHover(@Param("type") String type);
 }

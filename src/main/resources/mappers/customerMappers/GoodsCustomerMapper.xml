@@ -52,6 +52,23 @@
         <include refid="MySqlPaginationSuffix" />
     </select>
 
+    <select id="souGoodsHover" resultMap="BaseResultMap">
+        select goods.*
+        from goods,goods_hover
+        where goods.goods_id = goods_hover.good_id
+        and goods_hover.type = #{type}
+    </select>
+
+
+
+    <sql id="MySqlPaginationSuffix" >
+        <if test="page != null" >
+            <![CDATA[ LIMIT #{page.pageSize} OFFSET #{page.recordIndex}]]>
+        </if>
+    </sql>
+
+
+
     <select id="sousouCount" resultType="java.lang.Integer" parameterType="com.sbm.pojo.model.SouSouInparameterDTO" >
         select count(*)
         from goods_spec,goods
@@ -72,13 +89,5 @@
             and goods.goods_specific_type = #{specialType}
         </if>
     </select>
-
-
-
-    <sql id="MySqlPaginationSuffix" >
-        <if test="page != null" >
-            <![CDATA[ LIMIT #{page.pageSize} OFFSET #{page.recordIndex}]]>
-        </if>
-    </sql>
 
 </mapper>
