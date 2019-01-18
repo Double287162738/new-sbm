@@ -3,12 +3,19 @@ var oldData = {};
 var editGoodsId;
 var picAmount = 0;
 var changeBtnId;
-var deletePicId = '';
-var changePicId = '';
-var SmType2Html='<option value="SJ">手机</option>'
+var deletePicId = new Array();
+var changePicId = new Array();
+var SmType2Html_DZ='<option value="SJ">手机</option>'
                 +'<option value="DN">电脑</option>'
                 +'<option value="PB">平板 </option>'
                 +'<option value="OTHER">其他 </option>';
+var SmType2Html_SJ='<option value="ZYK">专业课</option>'+
+                    '<option value="XXK">选修课</option>'+
+                    '<option value="KYZL">考研资料 </option>'+
+                    '<option value="SJ-OTHER">其他 </option>';
+var SmType2Html_RC='<option value="RCYP">日常用品</option>';
+var SmType2Html_JZ='<option value="JZ">兼职</option>';
+var SmType2Html_OTHER='<option value="OTHER">其他</option>';
 $(function () {
     //闲置详情框的高度
     $("#editModal").css("height", window.screen.height);
@@ -17,17 +24,25 @@ $(function () {
     //价格、用户等其他信息部分
     $("#edit-other-part").css("height", $("#editModal").height() * 0.5);
 
+    //设置保存修改按钮的位置
     $("#editModal").scroll(function () {
         var top = 100 + $("#editModal").scrollTop();
         $("#edit-saveDiv").css("top", top + "px");
     });
-    var type1 = $("#edit-goodsType1-select").val();
+
+    //两种type联动
     $("#edit-goodsType1-select").on("change",function () {
-        type1 = $("#edit-goodsType1-select").val();
-        if(type1=="SM"){
-            document.getElementById("edit-goodsType2-select").innerHTML = SmType2Html;
+        var type1 = $("#edit-goodsType1-select").val();
+        if(type1=="DZ"){
+            document.getElementById("edit-goodsType2-select").innerHTML = SmType2Html_DZ;
+        }else if(type1=="SJ"){
+            document.getElementById("edit-goodsType2-select").innerHTML = SmType2Html_SJ;
+        }else if(type1=="RC"){
+            document.getElementById("edit-goodsType2-select").innerHTML = SmType2Html_RC;
+        }else if(type1=="JZ"){
+            document.getElementById("edit-goodsType2-select").innerHTML = SmType2Html_JZ;
         }else{
-            document.getElementById("edit-goodsType2-select").innerHTML = "";
+            document.getElementById("edit-goodsType2-select").innerHTML = SmType2Html_OTHER;
         }
     });
 
@@ -39,9 +54,9 @@ function editYifabu(goodsId) {
     document.getElementById("editGoodsDetailPic").innerHTML = "";
     document.getElementById("mainPic").src="../img/perCenter/loading.gif";
     picAmount=0;
-    deletePicId = '';
-    changePicId = '';
-    var url = baseUrl + "/my-sbm/sousou/sougoodsDetail.do";
+    deletePicId = [];
+    changePicId = [];
+    var url = baseUrl + "/sousou/sougoodsDetail.do";
     var data = {"goodsId": goodsId};
     $.ajax({
         url: url,
@@ -79,12 +94,29 @@ function editYifabu(goodsId) {
                 document.getElementById("edit-goodsWords-input").value = data.result.goodsWords;
                 $("#edit-goodsArea-select").val(data.result.goodsArea);
                 document.getElementById("edit-goodsType1-select").value = data.result.goodsType;
-                if(data.result.goodsType=="SM"){
-                    document.getElementById("edit-goodsType2-select").innerHTML = SmType2Html;
-                    document.getElementById("edit-goodsType2-select").value = data.result.goodsSpecificType;
-                }else{
-                    document.getElementById("edit-goodsType2-select").innerHTML = "";
+
+                document.getElementById("edit-goodsType2-select").innerHTML = '';
+                var append = '';
+                if(data.result.goodsType=="DZ"){
+                    append = '<option value="">请选择类型</option>'+
+                        '<option value="SJ">手机</option>'+
+                        '<option value="DN">电脑</option>'+
+                        '<option value="PB">平板 </option>'+
+                        '<option value="DZ-OTHER">其他 </option>';
+                }else if(data.result.goodsType=="SJ"){
+                    append = '<option value="">请选择类型</option>'+
+                        '<option value="ZYK">专业课</option>'+
+                        '<option value="XXK">选修课</option>'+
+                        '<option value="KYZL">考研资料 </option>'+
+                        '<option value="SJ-OTHER">其他 </option>';
+                }else if(data.result.goodsType=="RC"){
+                    append = '<option value="RCYP">日常用品</option>';
+                }else if(data.result.goodsType=="JZ"){
+                    append = '<option value="">请选择类型</option>'+
+                        '<option value="JZ">兼职</option>';
                 }
+                $("#edit-goodsType2-select").append(append);
+                document.getElementById("edit-goodsType2-select").value = data.result.goodsSpecificType;
                 document.getElementById("edit-jiage-input").value = data.result.goodsPrice;
                 document.getElementById("edit-qq-input").value = data.result.goodsQq;
                 document.getElementById("edit-wx-input").value = data.result.goodsWx;
@@ -105,7 +137,7 @@ function editYifabu(goodsId) {
                     editOtherPicDetail=editOtherPicDetail+'<li class="item falldown" id="item2">'
                     +'<figure>'
                         +'<div class="hovereffect">'
-                        +'<input style="display: none !important;" onchange="selectOtherPic('+2+')" id="select-other-pic2" type="file" multiple name="uploadFiles" accept="image/*"/>'
+                        +'<input style="display: none !important;" onchange="selectOtherPic('+2+')" id="select-other-pic2" type="file" multiple name="uploadFiles2" accept="image/*"/>'
                         +'<div class="view"><img id="goodsPic2" src='+getPicUrl(data.result.goodsPic2)+'/></div>'
                         +'<div class="overlay">'
                         +'<a class="info" id="changePic2" onclick="changePic('+2+')">更换</a>'
@@ -115,14 +147,12 @@ function editYifabu(goodsId) {
                      +'</figure>'
                      +'</li>';
                     picAmount++;
-                }else{
-                    editOtherPicDetail=editOtherPicDetail+'<input style="display: none !important;" id="select-other-pic2" type="file" multiple name="uploadFiles" accept="image/*"/>';
                 }
                 if (data.result.goodsPic3 != null && data.result.goodsPic3 != '') {
                     editOtherPicDetail=editOtherPicDetail+'<li class="item falldown" id="item3">'
                         +'<figure>'
                         +'<div class="hovereffect">'
-                        +'<input style="display: none !important;" onchange="selectOtherPic('+3+')" id="select-other-pic3" type="file" multiple name="uploadFiles" accept="image/*"/>'
+                        +'<input style="display: none !important;" onchange="selectOtherPic('+3+')" id="select-other-pic3" type="file" multiple name="uploadFiles3" accept="image/*"/>'
                         +'<div class="view"><img id="goodsPic3" src='+getPicUrl(data.result.goodsPic3)+'/></div>'
                         +'<div class="overlay">'
                         +'<a class="info" id="changePic3" onclick="changePic('+3+')">更换</a>'
@@ -132,14 +162,12 @@ function editYifabu(goodsId) {
                         +'</figure>'
                         +'</li>';
                     picAmount++;
-                }else{
-                    editOtherPicDetail=editOtherPicDetail+'<input style="display: none !important;" id="select-other-pic3" type="file" multiple name="uploadFiles" accept="image/*"/>';
                 }
                 if (data.result.goodsPic4 != null && data.result.goodsPic4 != '') {
                     editOtherPicDetail=editOtherPicDetail+'<li class="item falldown" id="item4">'
                         +'<figure>'
                         +'<div class="hovereffect">'
-                        +'<input style="display: none !important;" onchange="selectOtherPic('+4+')" id="select-other-pic4" type="file" multiple name="uploadFiles" accept="image/*"/>'
+                        +'<input style="display: none !important;" onchange="selectOtherPic('+4+')" id="select-other-pic4" type="file" multiple name="uploadFiles4" accept="image/*"/>'
                         +'<div class="view"><img id="goodsPic4" src='+getPicUrl(data.result.goodsPic4)+'/></div>'
                         +'<div class="overlay">'
                         +'<a class="info" id="changePic4" onclick="changePic('+4+')">更换</a>'
@@ -149,14 +177,12 @@ function editYifabu(goodsId) {
                         +'</figure>'
                         +'</li>';
                     picAmount++;
-                }else{
-                    editOtherPicDetail=editOtherPicDetail+'<input style="display: none !important;" id="select-other-pic4" type="file" multiple name="uploadFiles" accept="image/*"/>';
                 }
                 if (data.result.goodsPic5 != null && data.result.goodsPic5 != '') {
                     editOtherPicDetail=editOtherPicDetail+'<li class="item falldown" id="item5">'
                         +'<figure>'
                         +'<div class="hovereffect">'
-                        +'<input style="display: none !important;" onchange="selectOtherPic('+5+')" id="select-other-pic5" type="file" multiple name="uploadFiles" accept="image/*"/>'
+                        +'<input style="display: none !important;" onchange="selectOtherPic('+5+')" id="select-other-pic5" type="file" multiple name="uploadFiles5" accept="image/*"/>'
                         +'<div class="view"><img id="goodsPic5" src='+getPicUrl(data.result.goodsPic5)+'/></div>'
                         +'<div class="overlay">'
                         +'<a class="info" id="changePic5" onclick="changePic('+5+')">更换</a>'
@@ -166,35 +192,31 @@ function editYifabu(goodsId) {
                         +'</figure>'
                         +'</li>';
                     picAmount++;
-                }else{
-                    editOtherPicDetail=editOtherPicDetail+'<input style="display: none !important;" id="select-other-pic5" type="file" multiple name="uploadFiles" accept="image/*"/>';
                 }
                 document.getElementById("editGoodsDetailPic").innerHTML = editOtherPicDetail;
             }
         },
         error: function (e) {
-            alert("查看失败，请重试或联系管理员");
+            openAlert("查看失败，请重试或联系管理员");
             return;
         }
     });
     $('#editModal').modal('show');
 }
 
-
-
+//组装图片路径
 function getPicUrl(picName) {
     return goodsPicURL + picName.substring(0, 4) + "/" + picName.substring(4, 6) + "/"
         + picName.substring(6, 8) + "/" + picName;
 }
 
-
-
+//更换图片方法
 function changePic(id) {
     changeBtnId = id;
     document.getElementById("select-other-pic" + changeBtnId).click();
 }
 
-
+//图片
 function selectOtherPic(nowClickOtherPicNum) {
     var ifFileYes = true;
     var $file = $("#select-other-pic" + nowClickOtherPicNum);
@@ -208,12 +230,8 @@ function selectOtherPic(nowClickOtherPicNum) {
         $img = $("#goodsPic" + nowClickOtherPicNum);
     }
     var nowImg = $("#select-other-pic" + nowClickOtherPicNum);
-    if (changePicId == '') {
-        changePicId = nowClickOtherPicNum + '-';
-    } else {
-        if (changePicId.indexOf(nowClickOtherPicNum) == -1) {
-            changePicId = changePicId + nowClickOtherPicNum + '-';
-        }
+    if ($.inArray(nowClickOtherPicNum,changePicId)) {
+        changePicId.push(nowClickOtherPicNum);
     }
     var nowFile = document.getElementById("select-other-pic" + nowClickOtherPicNum).files[0];
     if (nowFile != null && !/image\/\w+/.test(nowFile.type)) {
@@ -226,25 +244,49 @@ function selectOtherPic(nowClickOtherPicNum) {
         $img.attr('src', dataURL);
     } else {
         if (!ifFileYes) {
-            alert("请选择图片文件,不要选择非图片文件。");
+            openAlert("请选择图片文件,不要选择非图片文件。");
         }
     }
 }
 
-
+//删除图片
 function deletePic(otherPicId) {
     if (--picAmount < 1) {
-        alert("不能再删除了！");
+        openAlert("不能再删除了！");
         return;
     }
-    deletePicId = deletePicId + otherPicId + '-';
+    //把删除的图片【替换记录】去掉
+    var newChangePicId = [];
+    for(var i=0;i<changePicId.length;i++){
+        if(changePicId[i]!=otherPicId){
+            newChangePicId.push(changePicId[i]);
+        }
+    }
+    changePicId = newChangePicId;
+    deletePicId.push(otherPicId);
     $("#item" + otherPicId).remove();
 }
 
-
+//保存修改
 $(function () {
     $("#edit-saveBtn").click(function () {
+        var formatChangePicId = new Array();
+        for(var i=0;i<changePicId.length;i++){
+            formatChangePicId.push(parseInt(changePicId[i]));
+        }
         var uploadFiles = new FormData($("#otherPicForm")[0]);
+        var newUploadFiles = new FormData();
+        var flag = true;
+        for(var i=1;i<=5;i++){
+            if($.inArray(i,formatChangePicId)>=0){
+                if(flag){
+                    newUploadFiles.set("uploadFiles",uploadFiles.get("uploadFiles"+i));
+                    flag = false;
+                }else{
+                    newUploadFiles.append("uploadFiles",uploadFiles.get("uploadFiles"+i));
+                }
+            }
+        }
         var editGoodsName = document.getElementById("edit-goodsName-input").value;
         var editGoodsWords =document.getElementById("edit-goodsWords-input").value;
         var editGoodsArea = document.getElementById("edit-goodsArea-select").value;
@@ -259,15 +301,13 @@ $(function () {
             "goodsType": editGoodsType,"goodsSpecificType":editGoodsSpecificType, "goodsPrice": editGoodsPrice, "goodsQq": editGoodsQq,
             "goodsWx": editGoodsWx,"goodsId":editGoodsId,"goodsOther":goodsOther
         };
-        uploadFiles.append("goods",JSON.stringify(goods));
-        uploadFiles.append("deletePic",deletePicId);
-        uploadFiles.append("changePic",changePicId);
+        newUploadFiles.append("goods",JSON.stringify(goods));
+        newUploadFiles.append("deletePic",deletePicId);
+        newUploadFiles.append("changePic",changePicId);
         $.ajax({
-            // 规定把请求发送到那个URL
-            url: baseUrl + "/my-sbm/personCenter/editOtherPic.do",
-            // 请求方式
+            url: baseUrl + "/personCenter/editOtherPic.do",
             type: "post",
-            data: uploadFiles,
+            data: newUploadFiles,
             processData: false,
             contentType: false,
             async: false,
@@ -277,18 +317,18 @@ $(function () {
             success: function (data) {
                 // 图片显示地址
                 if (data.result == "success") {
-                    alert("保存成功");
+                    openAlert("保存成功");
                     parent.closeEdit();
                     parent.yifabu("ALL");
                 } else {
-                    alert(data.errorMessage);
+                    openAlert(data.errorMessage);
                 }
             }
         });
     });
 })
 
-
+//关闭修改窗口
 function closeEdit() {
     $('#editModal').modal('hide');
 }

@@ -1,11 +1,11 @@
 package com.sbm.util;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+
+import javax.servlet.http.HttpServletRequest;
 @Service("multipartResolver")
 @Component
 @ConfigurationProperties(prefix = "hello")

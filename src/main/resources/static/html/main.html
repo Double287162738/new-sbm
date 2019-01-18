@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>SK嗖嗖-嗖嗖就有</title>
-		<link rel="shortcut icon" href="../img/favicon.ico"/>
+		<link rel="shortcut icon" href="#" />
 		<link rel="stylesheet" href="../css/bootstrap-theme.css" />
 		<link rel="stylesheet" href="../css/bootstrap.css" />
 		<link rel="stylesheet" href="../css/bootstrap.min.css" />
@@ -11,12 +11,14 @@
 		<link rel="stylesheet" href="../css/main.css">
 		<link rel="stylesheet" href="../css/common.css" />
 		<link rel="stylesheet" href="../css/recommend.css">
+		<link href="../css/modal/extend/iconfont.css" type="text/css" rel="stylesheet"/>
 		<script src="../js/jquery-3.1.1.min.js"></script>
 		<script src="../js/bootstrap.min.js"></script>
 		<script src="../js/main.js"></script>
 		<script src="../js/common.js"></script>
 		<script src="../js/cookie.js"></script>
 		<script src="../js/fileURL.js"></script>
+		<script src="../js/extend/iconfont.js"></script>
 	</head>
 	<body>
 		<!--导航栏部分-->
@@ -27,11 +29,12 @@
 				</div>
 				<div>
 					<ul class="nav navbar-nav">
+						<li class="margin20px"><a href="main.html">首页</a></li>
 						<li class="margin20px"><a href="person.html?index=personFB">已发布</a></li>
-						<li class="margin20px"><a href="##">人气闲置</a></li>
+						<li class="margin20px"><a href="home.html?keyword=&currentPage=1&specialType=pop">人气闲置</a></li>
 						<li class="margin20px"><a href="person.html?index=personSC">收藏夹</a></li>
 						<li class="margin20px"><a href="##" id="fabu-a">发布闲置</a></li>
-						<li class="margin20px"><a href="##">留白功能</a></li>
+						<!--<li class="margin20px"><a href="##">留白功能</a></li>-->
 					</ul>
 				</div>
 				<form class="navbar-form navbar-left" role="search" id="searchForm">
@@ -43,8 +46,8 @@
 				<div id="perDiv" class="navbar-header navbar-right">
 					<a id="perA" class="navbar-brand"><img src="" id="perPic" class="img-circle"></a>
 					<ul class="nav navbar-nav navbar-right" id="loginOrLoginOut">
-						<li class="loginOrLoginOut"><a href="login.html?index=regist"><span class="glyphicon glyphicon-user"></span> 注册</a></li>
-						<li class="loginOrLoginOut"><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
+						<!--<li class="loginOrLoginOut"><a href="login.html?index=regist"><span class="glyphicon glyphicon-user"></span> 注册</a></li>-->
+						<!--<li class="loginOrLoginOut"><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>-->
 					</ul>
 				</div>
 			</div>
@@ -179,54 +182,123 @@
 							<img class="img-responsive" src="../img/section1Pic.jpg"/>
 							<div class="overlay">
 								<h2>热门闲置</h2>
-								<a class="info" href="#">进入</a>
+								<a class="info" href="home.html?keyword=&currentPage=1&specialType=rec">进入</a>
 							</div>
 						</div>
 					</div>
 					<div class="section-1-goods">
-						<div class="selection-1-1">
-							<div class="section-1-1-detail">
-								<img src="../img/iphone6.png"/>
-								<h4>Iphone7 <strong>￥150.00</strong></h4>
+						<div class="selection-1-1" id="mainGoods1">
+
+							<div class="main_goods_part">
+								<a href="javascript:void(0);">
+									<div class="main_goods_img">
+										<img src="../img/hover-loading.gif"/>
+									</div>
+									<div class="main_goods_text">
+										<h4>*** <strong>***</strong></h4>
+									</div>
+								</a>
 							</div>
-							<div class="section-1-1-detail">
-								<img src="../img/ipad.jpg"/>
-								<h4>Ipad4 32G <strong>￥400.00</strong></h4>
+
+							<div class="main_goods_part">
+								<a href="javascript:void(0);">
+									<div class="main_goods_img">
+										<img src="../img/hover-loading.gif"/>
+									</div>
+									<div class="main_goods_text">
+										<h4>*** <strong>***</strong></h4>
+									</div>
+								</a>
 							</div>
-							<div class="section-1-1-detail">
-								<img src="../img/iwatch.jpg"/>
-								<h4>iWatch3代 <strong>￥521.00</strong></h4>
+
+							<div class="main_goods_part">
+								<a href="javascript:void(0);">
+									<div class="main_goods_img">
+										<img src="../img/hover-loading.gif"/>
+									</div>
+									<div class="main_goods_text">
+										<h4>*** <strong>***</strong></h4>
+									</div>
+								</a>
 							</div>
-							<div class="section-1-1-detail">
-								<img src="../img/iwatch2.jpg"/>
-								<h4>Iphone7 <strong>￥500.00</strong></h4>
+
+							<div class="main_goods_part">
+								<a href="javascript:void(0);">
+									<div class="main_goods_img">
+										<img src="../img/hover-loading.gif"/>
+									</div>
+									<div class="main_goods_text">
+										<h4>*** <strong>***</strong></h4>
+									</div>
+								</a>
 							</div>
-							<div class="section-1-1-detail">
-								<img src="../img/iphoneSE.png"/>
-								<h4>IphoneSE <strong>￥500.00</strong></h4>
+
+							<div class="main_goods_part">
+								<a href="javascript:void(0);">
+									<div class="main_goods_img">
+										<img src="../img/hover-loading.gif"/>
+									</div>
+									<div class="main_goods_text">
+										<h4>*** <strong>***</strong></h4>
+									</div>
+								</a>
 							</div>
 
 						</div>
-						<div class="selection-1-1">
-							<div class="section-1-1-detail">
-								<img src="../img/IphoneXTM.png"/>
-								<h4>IphoneX<strong>￥300.00</strong> </h4>
+						<div class="selection-1-1" id="mainGoods2">
+							<div class="main_goods_part">
+								<a href="javascript:void(0);">
+									<div class="main_goods_img">
+										<img src="../img/hover-loading.gif"/>
+									</div>
+									<div class="main_goods_text">
+										<h4>*** <strong>***</strong></h4>
+									</div>
+								</a>
 							</div>
-							<div class="section-1-1-detail">
-								<img src="../img/shuji1.png"/>
-								<h4>治国理政 <strong>￥5.00</strong></h4>
+
+							<div class="main_goods_part">
+								<a href="javascript:void(0);">
+									<div class="main_goods_img">
+										<img src="../img/hover-loading.gif"/>
+									</div>
+									<div class="main_goods_text">
+										<h4>*** <strong>***</strong></h4>
+									</div>
+								</a>
 							</div>
-							<div class="section-1-1-detail">
-								<img src="../img/iwatch2.jpg"/>
-								<h4>iWatch3代 <strong>￥500.00</strong></h4>
+
+							<div class="main_goods_part">
+								<a href="javascript:void(0);">
+									<div class="main_goods_img">
+										<img src="../img/hover-loading.gif"/>
+									</div>
+									<div class="main_goods_text">
+										<h4>*** <strong>***</strong></h4>
+									</div>
+								</a>
 							</div>
-							<div class="section-1-1-detail">
-								<img src="../img/iwatch.jpg"/>
-								<h4>Iphone7 <strong>￥500.00</strong></h4>
+
+							<div class="main_goods_part">
+								<a href="javascript:void(0);">
+									<div class="main_goods_img">
+										<img src="../img/hover-loading.gif"/>
+									</div>
+									<div class="main_goods_text">
+										<h4>*** <strong>***</strong></h4>
+									</div>
+								</a>
 							</div>
-							<div class="section-1-1-detail">
-								<img src="../img/iphone6.png"/>
-								<h4>IphoneSE <strong>￥500.00</strong></h4>
+
+							<div class="main_goods_part">
+								<a href="javascript:void(0);">
+									<div class="main_goods_img">
+										<img src="../img/hover-loading.gif"/>
+									</div>
+									<div class="main_goods_text">
+										<h4>*** <strong>***</strong></h4>
+									</div>
+								</a>
 							</div>
 						</div>
 					</div>
@@ -281,8 +353,8 @@
 			</div>
 		</div>
 
-		<div class="copyAllRight">版权所有 © All Rights Reserved,鲁ICP备15000254号-1</div>
-		
+		<div class="copyAllRight">版权所有 © All Rights Reserved,京ICP备17014604号-1</div>
+
 </body>
 </html>
  

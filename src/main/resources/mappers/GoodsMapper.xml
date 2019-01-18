@@ -28,6 +28,7 @@
         <result column="GOODS_GMT_CREATE" property="goodsGmtCreate" jdbcType="TIMESTAMP" />
         <result column="GOODS_LAST_MOD" property="goodsLastMod" jdbcType="TIMESTAMP" />
         <result column="GOODS_NO" property="goodsNo" jdbcType="VARCHAR" />
+        <result column="GOODS_STATUS" property="goodsStatus" jdbcType="VARCHAR" />
     </resultMap>
     <sql id="Example_Where_Clause" >
         <where >
@@ -91,7 +92,7 @@
         GOODS_ID, USER_ID, USER_NAME, GOODS_NAME, GOODS_SPECIFIC_TYPE, GOODS_TYPE, GOODS_AREA, 
         GOODS_PRICE, GOODS_WORDS, GOODS_QQ, GOODS_WX, GOODS_OTHER, GOODS_CLICK_AMOUNT, GOODS_COLLECTION_AMOUNT, 
         GOODS_PIC1, GOODS_PIC2, GOODS_PIC3, GOODS_PIC4, GOODS_PIC5, GOODS_PIC6, GOODS_PIC7, 
-        GOODS_PIC8, GOODS_PIC9, GOODS_GMT_CREATE, GOODS_LAST_MOD, GOODS_NO
+        GOODS_PIC8, GOODS_PIC9, GOODS_GMT_CREATE, GOODS_LAST_MOD, GOODS_NO, GOODS_STATUS
     </sql>
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sbm.pojo.model.GoodsExample" >
         select
@@ -140,8 +141,8 @@
             GOODS_PIC1, GOODS_PIC2, GOODS_PIC3, 
             GOODS_PIC4, GOODS_PIC5, GOODS_PIC6, 
             GOODS_PIC7, GOODS_PIC8, GOODS_PIC9, 
-            GOODS_GMT_CREATE, GOODS_LAST_MOD, GOODS_NO
-            )
+            GOODS_GMT_CREATE, GOODS_LAST_MOD, GOODS_NO, 
+            GOODS_STATUS)
         values (#{goodsId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
             #{goodsName,jdbcType=VARCHAR}, #{goodsSpecificType,jdbcType=VARCHAR}, #{goodsType,jdbcType=VARCHAR}, 
             #{goodsArea,jdbcType=VARCHAR}, #{goodsPrice,jdbcType=VARCHAR}, #{goodsWords,jdbcType=VARCHAR}, 
@@ -150,8 +151,8 @@
             #{goodsPic1,jdbcType=VARCHAR}, #{goodsPic2,jdbcType=VARCHAR}, #{goodsPic3,jdbcType=VARCHAR}, 
             #{goodsPic4,jdbcType=VARCHAR}, #{goodsPic5,jdbcType=VARCHAR}, #{goodsPic6,jdbcType=VARCHAR}, 
             #{goodsPic7,jdbcType=VARCHAR}, #{goodsPic8,jdbcType=VARCHAR}, #{goodsPic9,jdbcType=VARCHAR}, 
-            #{goodsGmtCreate,jdbcType=TIMESTAMP}, #{goodsLastMod,jdbcType=TIMESTAMP}, #{goodsNo,jdbcType=VARCHAR}
-            )
+            #{goodsGmtCreate,jdbcType=TIMESTAMP}, #{goodsLastMod,jdbcType=TIMESTAMP}, #{goodsNo,jdbcType=VARCHAR}, 
+            #{goodsStatus,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.sbm.pojo.model.Goods" >
         insert into goods
@@ -234,6 +235,9 @@
             <if test="goodsNo != null" >
                 GOODS_NO,
             </if>
+            <if test="goodsStatus != null" >
+                GOODS_STATUS,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="goodsId != null" >
@@ -313,6 +317,9 @@
             </if>
             <if test="goodsNo != null" >
                 #{goodsNo,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsStatus != null" >
+                #{goodsStatus,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -417,6 +424,9 @@
             <if test="record.goodsNo != null" >
                 GOODS_NO = #{record.goodsNo,jdbcType=VARCHAR},
             </if>
+            <if test="record.goodsStatus != null" >
+                GOODS_STATUS = #{record.goodsStatus,jdbcType=VARCHAR},
+            </if>
         </set>
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
@@ -449,7 +459,8 @@
             GOODS_PIC9 = #{record.goodsPic9,jdbcType=VARCHAR},
             GOODS_GMT_CREATE = #{record.goodsGmtCreate,jdbcType=TIMESTAMP},
             GOODS_LAST_MOD = #{record.goodsLastMod,jdbcType=TIMESTAMP},
-            GOODS_NO = #{record.goodsNo,jdbcType=VARCHAR}
+            GOODS_NO = #{record.goodsNo,jdbcType=VARCHAR},
+            GOODS_STATUS = #{record.goodsStatus,jdbcType=VARCHAR}
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
         </if>
@@ -532,6 +543,9 @@
             <if test="goodsNo != null" >
                 GOODS_NO = #{goodsNo,jdbcType=VARCHAR},
             </if>
+            <if test="goodsStatus != null" >
+                GOODS_STATUS = #{goodsStatus,jdbcType=VARCHAR},
+            </if>
         </set>
         where GOODS_ID = #{goodsId,jdbcType=VARCHAR}
     </update>
@@ -561,7 +575,8 @@
             GOODS_PIC9 = #{goodsPic9,jdbcType=VARCHAR},
             GOODS_GMT_CREATE = #{goodsGmtCreate,jdbcType=TIMESTAMP},
             GOODS_LAST_MOD = #{goodsLastMod,jdbcType=TIMESTAMP},
-            GOODS_NO = #{goodsNo,jdbcType=VARCHAR}
+            GOODS_NO = #{goodsNo,jdbcType=VARCHAR},
+            GOODS_STATUS = #{goodsStatus,jdbcType=VARCHAR}
         where GOODS_ID = #{goodsId,jdbcType=VARCHAR}
     </update>
     <sql id="MySqlPaginationSuffix" >

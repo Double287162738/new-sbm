@@ -2,11 +2,10 @@ package com.sbm.mapper;
 
 import com.sbm.pojo.model.User;
 import com.sbm.pojo.model.UserExample;
-
-import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface UserMapper {

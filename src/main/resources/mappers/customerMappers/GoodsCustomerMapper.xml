@@ -52,6 +52,17 @@
         <include refid="MySqlPaginationSuffix" />
     </select>
 
+    <select id="sousouOnlyTen" resultMap="BaseResultMap">
+        select
+        goods.GOODS_ID,
+        goods.GOODS_NAME,
+        goods.GOODS_PRICE,
+        goods.GOODS_PIC1
+        from goods_spec,goods
+        where goods.goods_id = goods_spec.good_id
+        limit 10
+    </select>
+
     <select id="souGoodsHover" resultMap="BaseResultMap">
         select goods.*
         from goods,goods_hover

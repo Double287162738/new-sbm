@@ -1,37 +1,30 @@
 package com.sbm.controller;
 
-import java.io.File;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import com.alibaba.fastjson.JSON;
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang.StringUtils;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.sbm.pojo.model.Goods;
 import com.sbm.pojo.model.User;
 import com.sbm.service.SousouService;
 import com.sbm.service.UserPersonCenterServcie;
 import com.sbm.service.UserService;
-import com.sbm.util.ExecuteResult;
-import com.sbm.util.GetUuidUtils;
-import com.sbm.util.NowTimeUtils;
-import com.sbm.util.Page;
-import com.sbm.util.SkssConstant;
-import com.sbm.util.StringToListUtils;
+import com.sbm.util.*;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/personCenter")
@@ -44,85 +37,132 @@ public class UserPersonCenterController {
     @Resource
     private UserPersonCenterServcie userPersonCenterServcie;
 
-    @RequestMapping("/avatarPic.do")
+    /**
+     * 获取用户详细信息
+     * @param response
+     * @param request
+     * @return
+     */
+    @RequestMapping("/getUserDetail.do")
     @ResponseBody
-    public String getUserAvatarPic(HttpServletResponse response, HttpServletRequest request){
-        String result;
+    public ExecuteResult<User> getUserAvatarPic(HttpServletResponse response, HttpServletRequest request){
+        ExecuteResult<User> result = new ExecuteResult<>();
         HttpSession session = request.getSession();
-        String userId = (String) session.getAttribute("userId");
-        if(userId==null){
-            return null;
+        Object user = session.getAttribute("user");
+        if(user==null){
+            result.addErrorMessage("未登录");
+            return result;
         }else {
-           result= UserService.getUserByUserId(userId).getUserAvatar();
+           result.setResult((User) user);
+            return result;
         }
-        return result;
     }
 
 
+    /**
+     * 用户信息
+     * @param response
+     * @param request
+     * @return
+     */
     @RequestMapping("/personInfo.do")
     @ResponseBody
     public ExecuteResult<User> getPeronInfo(HttpServletResponse response, HttpServletRequest request) {
         ExecuteResult<User> result = new ExecuteResult<>();
         HttpSession session = request.getSession();
-        String userId = (String) session.getAttribute("userId");
-        if (userId == null) {
+        User user = (User) session.getAttribute("user");
+        if (StringUtils.isBlank(user.getUserId())) {
             result.addErrorMessage("用户登录失效，请重新登录");
         } else {
-            User nowUserInfo = UserService.getUserByUserId(userId);
-            if (nowUserInfo == null) {
-                result.addErrorMessage("查无此人，请重新登录");
-            } else {
-                result.setResult(nowUserInfo);
+            if(StringUtils.isBlank(user.getUserAvatar())){
+                user.setUserAvatar(SkssConstant.COMMON_AVATAR);
             }
+            result.setResult(user);
         }
         return result;
     }
 
+
+    /**
+     * 用户已发布物品信息
+     * @param page
+     * @param response
+     * @param request
+     * @param yiFaBuKind
+     * @param keyword
+     * @return
+     */
     @RequestMapping("/personFabu.do")
     @ResponseBody
     public ExecuteResult<Page> getPeronFabu(Page page, HttpServletResponse response, HttpServletRequest request, String yiFaBuKind, String keyword) {
         ExecuteResult<Page> result = new ExecuteResult<>();
         HttpSession session = request.getSession();
-        String userId = (String) session.getAttribute("userId");
-        if (userId == null) {
+        User user = (User) session.getAttribute("user");
+        if (StringUtils.isBlank(user.getUserId()) || user == null) {
             result.addErrorMessage(SkssConstant.NOT_LOGIN);
         } else {
             page.setPageSize(3);//在此设置每页显示3个，后期可修改每页显示的数量
-            result.setResult(sousouService.souPerFabuGoods(page, userId, yiFaBuKind, keyword));
+            result.setResult(sousouService.souPerFabuGoods(page, user.getUserId(), yiFaBuKind, keyword));
         }
         return result;
     }
 
+
+    /**
+     * 用户收藏物品信息
+     * @param page
+     * @param response
+     * @param request
+     * @param keyword
+     * @return
+     */
     @RequestMapping("/personSc.do")
     @ResponseBody
     public ExecuteResult<Page> getPeronFabu(Page page, HttpServletResponse response, HttpServletRequest request, String keyword) {
         ExecuteResult<Page> result = new ExecuteResult<>();
         HttpSession session = request.getSession();
-        String userId = (String) session.getAttribute("userId");
-        if (userId == null) {
+        User user = (User) session.getAttribute("user");
+        if (StringUtils.isBlank(user.getUserId()) || user == null) {
             result.addErrorMessage(SkssConstant.NOT_LOGIN);
         } else {
             page.setPageSize(3);//在此设置每页显示3个，后期可修改每页显示的数量
-            result.setResult(sousouService.souPerScGoods(page, userId, keyword));
+            result.setResult(sousouService.souPerScGoods(page, user.getUserId(), keyword));
         }
         return result;
     }
 
+
+    /**
+     * 用户回收站物品信息
+     * @param page
+     * @param response
+     * @param request
+     * @param keyword
+     * @return
+     */
     @RequestMapping("/personRecycle.do")
     @ResponseBody
     public ExecuteResult<Page> getPeronRecycle(Page page, HttpServletResponse response, HttpServletRequest request, String keyword) {
         ExecuteResult<Page> result = new ExecuteResult<>();
         HttpSession session = request.getSession();
-        String userId = (String) session.getAttribute("userId");
-        if (userId == null) {
+        User user = (User) session.getAttribute("user");
+        if (StringUtils.isBlank(user.getUserId()) || user == null) {
             result.addErrorMessage(SkssConstant.NOT_LOGIN);
-        } else {
+        }  else {
             page.setPageSize(3);//在此设置每页显示3个，后期可修改每页显示的数量
-            result.setResult(sousouService.souPerRecycleGoods(page, userId, keyword));
+            result.setResult(sousouService.souPerRecycleGoods(page, user.getUserId(), keyword));
         }
         return result;
     }
 
+
+    /**
+     * 上传用户信息修改
+     * @param uploadFile
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping("/uploadPerInfo.do")
     @ResponseBody
     public ExecuteResult<String> uploadPerPic(@RequestParam(value = "uploadFile", required = false) MultipartFile uploadFile, HttpServletRequest request, HttpServletResponse response) {
@@ -131,18 +171,17 @@ public class UserPersonCenterController {
             //得到session对象
             HttpSession session = request.getSession(false);
             //取出session数据
-            String userId = (String) session.getAttribute("userId");
-            if (userId == null) {
+            Object object = session.getAttribute("user");
+            if (object == null) {
                 //没有登录成功，返回未登录，跳转页面
                 result.setResult(SkssConstant.NOT_LOGIN);
                 return result;
             }
+            User sessionUser = (User)session.getAttribute("user");
             //编辑之后的用户信息
             User user = JSON.parseObject(request.getParameter("user"),User.class);
-            user.setUserId(userId);
-            //查询数据库拿到旧的头像
-            User oldUser = UserService.getUserByUserId(userId);
-            String oldAvatarPic = oldUser.getUserAvatar();
+            user.setUserId(sessionUser.getUserId());
+            String oldAvatarPic = sessionUser.getUserAvatar();
             if(uploadFile!=null){
                 // 获取图片原始文件名
                 String originalFilename = uploadFile.getOriginalFilename();
@@ -168,14 +207,25 @@ public class UserPersonCenterController {
             }
             //更新用户信息
             userPersonCenterServcie.updateUserInfo(user);
-            //返回用户名
+            //返回生成的新头像
             result.setResult(oldAvatarPic);
+            user.setUserAvatar(oldAvatarPic);
+            //更新session中的用户信息
+            session.setAttribute("user",user);
         } catch (Exception e) {
             result.addErrorMessage("非常抱歉，修改失败，请重试或联系管理员");
         }
         return result;
     }
 
+
+    /**
+     * 编辑已发布物品信息
+     * @param uploadFiles
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping("/editOtherPic.do")
     @ResponseBody
     public ExecuteResult<String> updateOtherPic(@RequestParam(value = "uploadFiles", required = false) MultipartFile[] uploadFiles, HttpServletRequest request, HttpServletResponse response) {
@@ -196,34 +246,25 @@ public class UserPersonCenterController {
                 userPersonCenterServcie.updateAndDelFilOtherPic(deleteOtherPicId, goodsId,changeGoods);
             }
             if (StringUtils.isNotBlank(changePicId)) {
-                Integer index = 0;
-                //将需要改变的图片按照ID由小到大排序
-                List<Integer> changePicIdAsc = StringToListUtils.changeToListIntAsc(changePicId.substring(0, changePicId.length() - 1), "-");
+                List<String> changePicIdAsc = StringToListUtils.changeToList(changePicId, ",");
                 //更新变化的图片
                 for (int i = 0; i < changePicIdAsc.size(); i++) {
-                        // 获取图片原始文件名,uploadFiles坐标从0开始，但是传入的改动的图片下标最小是1，所以需要默认-1
-                        if (uploadFiles[changePicIdAsc.get(i)-1] != null) {
-                            String originalFilename = uploadFiles[changePicIdAsc.get(i)-1].getOriginalFilename();
-                            // 获取上传图片的扩展名(jpg/png/...)
-                            String extension = FilenameUtils.getExtension(originalFilename);
-                            if (StringUtils.isNotBlank(extension)) {
-                                //删除优先级大于替换（场景：用户先更换后删除，那么只需要直接删除即可，无需更新）
-                                if (deleteOtherPicId.indexOf(changePicIdAsc.get(i).toString()) == -1) {
-                                    // 文件名随机生成
-                                    String name = NowTimeUtils.getYmd() + GetUuidUtils.getUUID() + "." + extension;
-                                    //保留被替换的图片
-                                    otherPicName.put(changePicIdAsc.get(i).toString(), name);
-                                    // 图片上传的相对路径
-                                    String path = SkssConstant.XZ_UPLOAD_URL + NowTimeUtils.getYear() + "/" + NowTimeUtils.getMonth() + "/" + NowTimeUtils.getDay() + "/" + name;
-                                    String url = path;
-                                    File dir = new File(url);
-                                    if (!dir.exists()) {
-                                        dir.mkdirs();
-                                    }
-                                    //同上注释，下标默认-1
-                                    uploadFiles[changePicIdAsc.get(i)-1].transferTo(new File(url));
-                                }
+                        String originalFilename = uploadFiles[i].getOriginalFilename();
+                        // 获取上传图片的扩展名(jpg/png/...)
+                        String extension = FilenameUtils.getExtension(originalFilename);
+                        if (StringUtils.isNotBlank(extension)) {
+                            // 文件名随机生成
+                            String name = NowTimeUtils.getYmd() + GetUuidUtils.getUUID() + "." + extension;
+                            //保留被替换的图片
+                            otherPicName.put(changePicIdAsc.get(i).toString(), name);
+                            // 图片上传的相对路径
+                            String path = SkssConstant.XZ_UPLOAD_URL + NowTimeUtils.getYear() + "/" + NowTimeUtils.getMonth() + "/" + NowTimeUtils.getDay() + "/" + name;
+                            String url = path;
+                            File dir = new File(url);
+                            if (!dir.exists()) {
+                                dir.mkdirs();
                             }
+                            uploadFiles[i].transferTo(new File(url));
                         }
                 }
             }
@@ -235,6 +276,7 @@ public class UserPersonCenterController {
         return result;
     }
 
+
     @RequestMapping("/savePerInfoChange.do")
     @ResponseBody
     public ExecuteResult<String> savePerInfoChange(User user, HttpServletRequest request) {
@@ -245,12 +287,13 @@ public class UserPersonCenterController {
             result.setResult(SkssConstant.NOT_LOGIN);
             result.addErrorMessage("用户未登录，请登录");
         } else {
-            String userId = (String) session.getAttribute("userId");
-            if (userId == null) {
+            Object object = session.getAttribute("user");
+            if (object == null) {
                 result.setResult(SkssConstant.NOT_LOGIN);
                 result.addErrorMessage("用户未登录，请登录");
             } else {
-                User user2 = UserService.getUserIdAndUserAvatar(userId);
+                User sessionUser = (User)object;
+                User user2 = UserService.getUserIdAndUserAvatar(sessionUser.getUserId());
                 if (user2 == null || user2.getUserId() == null) {
                     result.setResult(SkssConstant.NOT_LOGIN);
                     result.addErrorMessage("用户未登录，请登录");
@@ -263,7 +306,7 @@ public class UserPersonCenterController {
                                 + picName);
                         oldUserAvatar.delete();
                     }
-                    user.setUserId(userId);
+                    user.setUserId(sessionUser.getUserId());
                     UserService.UpdateUser(user);
                     result.setResult(SkssConstant.RESULT_SUCCESS);
                 }
@@ -273,5 +316,24 @@ public class UserPersonCenterController {
 
     }
 
+    //放入回收站
+    @RequestMapping("/deleteToRecycle.do")
+    @ResponseBody
+    public ExecuteResult<Boolean> deleteToRecycle(@RequestBody String goodsId){
+        return userPersonCenterServcie.deleteToRecycle(goodsId);
+    }
 
+    //恢复发布
+    @RequestMapping("/recoverActive.do")
+    @ResponseBody
+    public ExecuteResult<Boolean> recoverActive(@RequestBody String goodsId){
+        return userPersonCenterServcie.recoverActive(goodsId);
+    }
+
+    //删除收藏
+    @RequestMapping("/deleteScGoods.do")
+    @ResponseBody
+    public ExecuteResult<Boolean> deleteScGoods(@RequestBody String goodsId, HttpServletRequest request){
+        return userPersonCenterServcie.deleteScGoods(goodsId,request);
+    }
 }

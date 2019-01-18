@@ -1,16 +1,14 @@
 package com.sbm.service.impl;
 
-import java.util.Arrays;
-import java.util.List;
-
-import javax.annotation.Resource;
-
-import org.springframework.stereotype.Service;
-
 import com.sbm.mapper.UserMapper;
 import com.sbm.pojo.model.User;
 import com.sbm.pojo.model.UserExample;
 import com.sbm.service.UserService;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.List;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -20,9 +18,9 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public User getUserByName(String name) {
+    public User getUserByPhone(String phone) {
         UserExample userExample = new UserExample();
-        userExample.createCriteria().andUserNameEqualTo(name);
+        userExample.createCriteria().andUserPhoneEqualTo(phone);
         User user = userMapper.selectOneByExample(userExample);
         return user;
     }
@@ -80,6 +78,12 @@ public class UserServiceImpl implements UserService {
         UserExample  userExample= new  UserExample();
         userExample.createCriteria().andUserPhoneEqualTo(user.getUserPhone());
         return userMapper.updateByExampleSelective(user,userExample);
+    }
+
+    @Override
+    public int initPassword(User user) {
+        int result = userMapper.updateByPrimaryKeySelective(user);
+        return result;
     }
 
 

@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="#" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../css/b_login.css">
+    <link rel="stylesheet" type="text/css" href="../css/login.css">
     <link rel="stylesheet" type="text/css" href="../css/drag.css">
+    <link rel="stylesheet" type="text/css" href="../css/loading.css">
     <script src="../js/jquery-3.1.1.min.js"></script>
-    <script src="../js/drag.js"></script>
-    <script src="../js/b_login.js"></script>
+    <script src="../js/loading.js"></script>
+    <script src="../js/login.js"></script>
     <script src="../js/cookie.js"></script>
     <script src="../js/fileURL.js"></script>
-    <title>登录页面</title>
+    <title>登录</title>
 </head>
 <body>
 <div class="login">
@@ -27,8 +29,7 @@
         <div id="sanjiao1"></div>
         <p>扫码登录更安全</p><img src="../img/safe.png"/></div>
     <div class="loginmain" id="loginmain">
-        <h2 id="loginH2">密码登录&nbsp;<span id="loginMsg" style="vertical-align: super; font-size:12px;"
-                                         class="label label-danger"></span></h2>
+        <h2 id="loginH2">密码登录&nbsp;<span id="loginMsg" style="vertical-align: super; font-size:12px;"class="label label-danger"></span></h2>
         <form action="#" class="form-horizontal">
             <!-- 让表单在一行中显示form-horizontal -->
             <div class="form-group" id="login-part">
@@ -37,16 +38,14 @@
                 <!--登录密码-->
                 <div><input type="password" name="password" id="password" class="form-control" placeholder="密码"></div>
                 <!--登录滑动验证码-->
-                <div id="drag"></div>
+                <!--<div id="drag"></div>-->
                 <!--登录按钮-->
-                <input id="loginButton" type="button" name="button" value="登录" class="btn">
+                <div><input class="loginButton btn" id="loginButton" type="button" name="button" value="登录" ></div>
+                <div><input class="registButton btn" id="registButton" type="button" name="button" value="注册"></div>
             </div>
 
-            <div class="form-group">
-                <div id="fAndR">
-                    <a id="forgetB" class="btn">忘记密码</a>
-                    <a id="registB" class="btn">免费注册</a>
-                </div>
+            <div class="forget_pwd">
+                <a id="forgetB" class="btn">忘记密码</a>
             </div>
         </form>
     </div>
@@ -61,35 +60,33 @@
         </div>
     </div>
     <div id="regist" style="display: none;">
-        &nbsp;<span id="loginMsg1" style="vertical-align: super; font-size:12px;" class="label label-danger"></span>
+        &nbsp;<span id="registMsg" style="vertical-align: super; font-size:12px;" class="label label-danger"></span>
         <form>
-            <div><span id="mobile-num" >手机号</span><input id="mobile-input"/></div>
-            <div><span id="pwd-num" >密&nbsp;&nbsp;&nbsp;&nbsp;码</span><input id="pwd-input" type="password" /></div>
-            <div><span id="code-num" datatype="password">验证码</span><input id="code-input"/>
-                <button id="get-code" class="btn btn-danger">获取验证码</button>
+            <div><span id="mobile-num" class="mobile-num" >手机号</span><input id="mobile-input" class="mobile-input"/></div>
+            <div><span id="pwd-num" class="pwd-num">密&nbsp;&nbsp;&nbsp;&nbsp;码</span><input id="pwd-input" type="password"  class="pwd-input"/></div>
+            <div><span id="code-num" class="code-num" datatype="password">验证码</span><input id="code-input" class="code-input"/>
+            <button id="get-code" class="btn btn-danger get-code">获取验证码</button>
             </div>
-            <div id="regist-btn" class="btn btn-default">注册</div>
+            <div id="regist-btn" class="btn btn-default regist-btn">注册</div>
         </form>
     </div>
-    <!--<div id="forget" style="display: none;">
+    <div id="forget" style="display: none;">
+        &nbsp;<span id="initPwdMsg" style="vertical-align: super; font-size:12px;" class="label label-danger"></span>
         <form>
-            <div><span id="mobile-num">手机号</span><input id="mobile-update"/></div>
-            <div><span id="pwd-num">新密码</span><input id="pwd-update"/></div>
-            <div><span id="code-num">验证码</span><input id="code-update"/>
-                <button id="get-code" class="btn btn-primary">获取验证码</button>
+            <div><span class="mobile-num">手机号</span><input id="mobile-update" class="mobile-input"/></div>
+            <div><span class="pwd-num">新密码</span><input id="pwd-update" class="pwd-input" type="password"/></div>
+            <div><span class="code-num">验证码</span><input id="code-update" class="code-input"/>
+            <button id="get_code_init_pwd" class="btn btn-primary get-code">获取验证码</button>
             </div>
-            <div id="regist-btn" class="btn btn-default">修改密码</div>
+            <div id="change_pwd" class="btn btn-default regist-btn">修改密码</div>
         </form>
-    </div>-->
+    </div>
     <div class="rightpic">
         <div id="container">
             <img src="../img/4.png" alt="" width="500px" height="330px">
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    $('#drag').drag();
-</script>
 <script src="../js/delaunay.js"></script>
 <script src="../js/TweenMax.js"></script>
 <script src="../js/effect.js"></script>

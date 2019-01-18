@@ -188,7 +188,7 @@
 .shake:hover,
 .shake-trigger:hover .shake, .shake.shake-freeze, .shake.shake-constant {
     animation-name: shake;
-    animation-duration: 100ms;
+    animation-duration: 3000ms;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
 }
@@ -349,7 +349,7 @@
 .shake-little:hover,
 .shake-trigger:hover .shake-little, .shake-little.shake-freeze, .shake-little.shake-constant {
     animation-name: shake-little;
-    animation-duration: 100ms;
+    animation-duration: 3000ms;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
 }
@@ -671,7 +671,7 @@
 .shake-hard:hover,
 .shake-trigger:hover .shake-hard, .shake-hard.shake-freeze, .shake-hard.shake-constant {
     animation-name: shake-hard;
-    animation-duration: 100ms;
+    animation-duration: 3000ms;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
 }
@@ -832,7 +832,7 @@
 .shake-horizontal:hover,
 .shake-trigger:hover .shake-horizontal, .shake-horizontal.shake-freeze, .shake-horizontal.shake-constant {
     animation-name: shake-horizontal;
-    animation-duration: 100ms;
+    animation-duration: 3000ms;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
 }
@@ -993,7 +993,7 @@
 .shake-vertical:hover,
 .shake-trigger:hover .shake-vertical, .shake-vertical.shake-freeze, .shake-vertical.shake-constant {
     animation-name: shake-vertical;
-    animation-duration: 100ms;
+    animation-duration: 3000ms;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
 }
@@ -1154,7 +1154,7 @@
 .shake-rotate:hover,
 .shake-trigger:hover .shake-rotate, .shake-rotate.shake-freeze, .shake-rotate.shake-constant {
     animation-name: shake-rotate;
-    animation-duration: 100ms;
+    animation-duration: 3000ms;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
 }
@@ -1254,7 +1254,7 @@
 .shake-crazy:hover,
 .shake-trigger:hover .shake-crazy, .shake-crazy.shake-freeze, .shake-crazy.shake-constant {
     animation-name: shake-crazy;
-    animation-duration: 100ms;
+    animation-duration: 3000ms;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
 }

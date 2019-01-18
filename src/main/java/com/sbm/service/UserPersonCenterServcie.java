@@ -1,9 +1,11 @@
 package com.sbm.service;
 
-import java.util.Map;
-
 import com.sbm.pojo.model.Goods;
 import com.sbm.pojo.model.User;
+import com.sbm.util.ExecuteResult;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 public interface UserPersonCenterServcie {
 
@@ -19,4 +21,9 @@ public interface UserPersonCenterServcie {
 
     void updateUserInfo(User user);
 
+    ExecuteResult<Boolean> deleteToRecycle(String goodsId);
+
+    ExecuteResult<Boolean> recoverActive(String goodsId);
+
+    ExecuteResult<Boolean> deleteScGoods(String goodsId,HttpServletRequest request);
 }

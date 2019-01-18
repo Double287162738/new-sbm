@@ -49,6 +49,7 @@ public class GoodsExample {
         MODEL_INFOS.put("goodsGmtCreate","GOODS_GMT_CREATE");
         MODEL_INFOS.put("goodsLastMod","GOODS_LAST_MOD");
         MODEL_INFOS.put("goodsNo","GOODS_NO");
+        MODEL_INFOS.put("goodsStatus","GOODS_STATUS");
     }
 
     public GoodsExample() {
@@ -135,7 +136,7 @@ public class GoodsExample {
 
     /**
      * 
-     * 2018-07-15
+     * 2019-01-13
      */
     protected abstract static class GeneratedCriteria {
 
@@ -1978,6 +1979,76 @@ public class GoodsExample {
             addCriterion("GOODS_NO not between", value1, value2, "goodsNo");
             return (Criteria) this;
         }
+
+        public Criteria andGoodsStatusIsNull() {
+            addCriterion("GOODS_STATUS is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsStatusIsNotNull() {
+            addCriterion("GOODS_STATUS is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsStatusEqualTo(String value) {
+            addCriterion("GOODS_STATUS =", value, "goodsStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsStatusNotEqualTo(String value) {
+            addCriterion("GOODS_STATUS <>", value, "goodsStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsStatusGreaterThan(String value) {
+            addCriterion("GOODS_STATUS >", value, "goodsStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsStatusGreaterThanOrEqualTo(String value) {
+            addCriterion("GOODS_STATUS >=", value, "goodsStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsStatusLessThan(String value) {
+            addCriterion("GOODS_STATUS <", value, "goodsStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsStatusLessThanOrEqualTo(String value) {
+            addCriterion("GOODS_STATUS <=", value, "goodsStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsStatusLike(String value) {
+            addCriterion("GOODS_STATUS like", value, "goodsStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsStatusNotLike(String value) {
+            addCriterion("GOODS_STATUS not like", value, "goodsStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsStatusIn(List<String> values) {
+            addCriterion("GOODS_STATUS in", values, "goodsStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsStatusNotIn(List<String> values) {
+            addCriterion("GOODS_STATUS not in", values, "goodsStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsStatusBetween(String value1, String value2) {
+            addCriterion("GOODS_STATUS between", value1, value2, "goodsStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsStatusNotBetween(String value1, String value2) {
+            addCriterion("GOODS_STATUS not between", value1, value2, "goodsStatus");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
@@ -1990,7 +2061,7 @@ public class GoodsExample {
 
     /**
      * 
-     * 2018-07-15
+     * 2019-01-13
      */
     public static class Criterion {
 

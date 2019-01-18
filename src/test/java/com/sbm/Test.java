@@ -14,7 +14,6 @@ import org.apache.http.util.EntityUtils;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;

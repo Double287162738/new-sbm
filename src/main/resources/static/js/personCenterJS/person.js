@@ -13,14 +13,32 @@ $(function () {
     $("#save-btn").unbind("click");
     $("#cancel-btn").unbind();
 
+
+    //已发布点击
+    $("#per-fabu").click(function () {
+        document.getElementById("yifabu").innerHTML = '';
+        document.getElementById("yifabu-page").innerHTML = '';
+        $("#per-ziliao").removeClass("per-click");
+        $("#per-fabu").addClass("per-click");
+        $("#per-shoucang").removeClass("per-click");
+        $("#per-huishou").removeClass("per-click");
+        $("#per-click-show").hide();
+        $("#sc-click-show").hide();
+        $("#recycle-click-show").hide();
+        $("#yifabu-click-show").show();
+        nowYiFaBuClick = "ALL";
+        yiFaBuClick(nowYiFaBuClick);
+    });
+
     //个人资料点击
     $("#per-ziliao").click(function () {
+        openLoading();
         $("#per-ziliao").addClass("per-click");
         $("#per-fabu").removeClass("per-click");
         $("#per-shoucang").removeClass("per-click");
         $("#per-huishou").removeClass("per-click");
         $.ajax({
-            url: baseUrl + "/my-sbm/personCenter/personInfo.do",
+            url: baseUrl + "/personCenter/personInfo.do",
             type: "post",
             dataType: 'json',
             success: function (data) {
@@ -40,12 +58,15 @@ $(function () {
                         "userAvatar": avatarPicURL + userAvatarPic.substring(0, 4) + "/" + userAvatarPic.substring(4, 6) + "/"
                         + userAvatarPic.substring(6, 8) + "/" + userAvatarPic
                     };
+                    closeLoading();
                 } else {
-                    console.log("查无此人");
+                    closeLoading();
+                    openAlert("查无此人，请登录")
                 }
             },
             error: function (e) {
-                console.log("请联系管理员");
+                closeLoading();
+                openAlert("服务异常，请联系客服")
             }
         });
         $("#per-click-show").show();
@@ -58,32 +79,17 @@ $(function () {
     $("#souYiFaBuBtn").click(function () {
         yifabu("ALL");
     });
-    //已发布点击
-    $("#per-fabu").click(function () {
-        document.getElementById("yifabu").innerHTML = '';
-        document.getElementById("yifabu-page").innerHTML = '';
-        $("#per-ziliao").removeClass("per-click");
-        $("#per-fabu").addClass("per-click");
-        $("#per-shoucang").removeClass("per-click");
-        $("#per-huishou").removeClass("per-click");
-        $("#per-click-show").hide();
-        $("#sc-click-show").hide();
-        $("#recycle-click-show").hide();
-        $("#yifabu-click-show").show();
-        nowYiFaBuClick = "ALL";
-        yiFaBuClick(nowYiFaBuClick);
-    });
+
     //判断用户点击操作
-    if (index == "personZL") {
-        document.getElementById("per-ziliao").click();
-    } else if (index == "personFB") {
+    if (index == "personFB") {
         document.getElementById("per-fabu").click();
+    } else if (index == "personZL") {
+        document.getElementById("per-ziliao").click();
     }  else if (index == "personSC") {
         document.getElementById("per-shoucang").click();
     }else {
         document.getElementById("per-ziliao").click();
     }
-
 
     //个人资料启动编辑
     $("#edit-open").click(function () {
@@ -124,7 +130,6 @@ $(function () {
         var windowURL = window.URL || window.webkitURL;
         var dataURL;
         var $img = $("#per-pic-img");
-        var nowImg = $("#select-pic-input");
         //赋值全局变量
         uploadFile = new FormData($("#perPicForm")[0]);
         nowFile = document.getElementById("select-pic-input").files[0];
@@ -138,12 +143,11 @@ $(function () {
             $img.attr('src', dataURL);
         } else {
             if (!ifFileYes) {
-                alert("请选择图片,不要选择非图片文件。");
+                openAlert("请选择图片,不要选择非图片文件。");
             }
         }
     });
 });
-
 
 //取消按钮
 function closePerInfoEdit() {
@@ -173,9 +177,9 @@ function closePerInfoEdit() {
     }
 };
 
-
 //保存用户修改信息
 function savePerInfoChange() {
+    openLoading();
     //用户信息
     var newUserName = document.getElementById("edit-input").value.trim();
     var newUserQq = document.getElementById("edit-input1").value.trim();
@@ -195,71 +199,102 @@ function savePerInfoChange() {
         uploadFile.append("user",JSON.stringify(user));
     }else{
         //头像无改动，formData一个不存在的表单
-        uploadFile = new FormData($("#perPicForm")[1]);
+        uploadFile = new FormData();
         uploadFile.append("user",JSON.stringify(user));
     }
 
     $.ajax({
-        url: baseUrl + "/my-sbm/personCenter/uploadPerInfo.do",
+        url: baseUrl + "/personCenter/uploadPerInfo.do",
         // 请求方式
         type: "post",
         data: uploadFile,
         processData: false,
         contentType: false,
-        async: false,
         // 服务器响应的数据类型
         dataType: "json",
         // 请求成功时执行的回调函数
         success: function (data) {
-            console.log(data.result);
             perInfo.userAvatar= null;
             var newAvatarPicUrl=avatarPicURL + data.result.substring(0, 4) + "/" + data.result.substring(4, 6) + "/"
                 + data.result.substring(6, 8) + "/" + data.result;
             document.getElementById("perPic").src=newAvatarPicUrl;
-            alert("修改成功");
+            openAlert("个人修改成功");
             document.getElementById("cancel-btn").click();
+            closeLoading();
         },
         error:function () {
-            alert("非常抱歉，修改失败，请重试或联系管理员");
+            closeLoading();
+            openAlert("非常抱歉，修改失败，请重试或联系管理员");
         }
     });
 }
-
 
 //显示已发布内容
 function showPerFabuGoods(data) {
     var append = "";
     document.getElementById("yifabu").innerHTML = '';
-    for (var i = 0; i < data.records.length; i++) {
-        var goodsPic1 = data.records[i].goodsPic1;
-        var goodsName = data.records[i].goodsName;
-        var goodsWords = data.records[i].goodsWords;
-        var goodsPrice = data.records[i].goodsPrice;
-        var goodsId = data.records[i].goodsId;
-        append = append +
-            "<div id='fabu-all'>" +
-            "<div id='fabu-pic'>" +
-            "<img src='" + goodsPicURL + goodsPic1.substring(0, 4) + "/" + goodsPic1.substring(4, 6) + "/"
-            + goodsPic1.substring(6, 8) + "/" + goodsPic1 + "' />" +
-            "</div>" +
-            "<div id='fabu-other'>" +
-            "<h4>" + goodsName + "</h4>" +
-            "<h5>" + goodsWords + "</h5>" +
-            "<div id='fabu-other-jiage'>" +
-            "<img src='../img/jiage.png' />" +
-            "<span> " + goodsPrice + "</span>" +
-            "</div>" +
-            "</div>" +
-            "<div id='fabu-btn-1'>" +
-            "<button id='show' onclick=showYifabu('" + goodsId + "')>查看</button>" +
-            "<button id='edit' onclick=editYifabu('" + goodsId + "')>编辑</button>" +
-            "<button id='delete'>删除</button>" +
-            "</div>" +
-            "</div>";
+    if(data==null || data.records==null || data.records.length == 0){
+        selectIsNull("yifabu");
+    }else{
+        for (var i = 0; i < data.records.length; i++) {
+            var goodsPic1 = data.records[i].goodsPic1;
+            var goodsName = data.records[i].goodsName;
+            var goodsWords = data.records[i].goodsWords;
+            var goodsPrice = data.records[i].goodsPrice;
+            var goodsId = data.records[i].goodsId;
+            append = append +
+                "<div id='fabu-all' class='goods_"+goodsId+"'>" +
+                "<div id='fabu-pic'>" +
+                "<img src='" + goodsPicURL + goodsPic1.substring(0, 4) + "/" + goodsPic1.substring(4, 6) + "/"
+                + goodsPic1.substring(6, 8) + "/" + goodsPic1 + "' />" +
+                "</div>" +
+                "<div id='fabu-other'>" +
+                "<h4>" + goodsName + "</h4>" +
+                "<h5>" + goodsWords + "</h5>" +
+                "<div id='fabu-other-jiage'>" +
+                "<img src='../img/jiage.png' />" +
+                "<span> " + goodsPrice + "</span>" +
+                "</div>" +
+                "</div>" +
+                "<div id='fabu-btn-1'>" +
+                "<button id='show' onclick=showYifabu('" + goodsId + "')>查看</button>" +
+                "<button id='edit' onclick=editYifabu('" + goodsId + "')>编辑</button>" +
+                "<button id='delete' onclick=deleteYifabu('" + goodsId + "')>删除</button>" +
+                "</div>" +
+                "</div>";
+        }
+        $("#yifabu").append(append);
     }
-    $("#yifabu").append(append);
 }//显示已发布内容end
 
+//删除已发布（放入回收站）
+function deleteYifabu(goodsId) {
+    openLoading();
+    $.ajax({
+        url: baseUrl + "/personCenter/deleteToRecycle.do",
+        // 请求方式
+        type: "post",
+        data: goodsId,
+        contentType: 'application/text',
+        // 服务器响应的数据类型
+        dataType: "json",
+        // 请求成功时执行的回调函数
+        success: function (data) {
+            if(data["result"]){
+                $(".goods_"+goodsId).remove();
+                closeLoading();
+                openAlert("已放入回收站，可在回收站找回")
+            }else{
+                closeLoading();
+                openAlert(data["errorMessages"]);
+            }
+        },
+        error:function () {
+            closeLoading();
+            openAlert("非常抱歉，服务异常，请重试或联系管理员");
+        }
+    });
+}
 
 //画出分页部分
 function makePage(totalPage) {
@@ -549,7 +584,7 @@ function makeGoodsDetails(currentPage) {
             var data = {"yiFaBuKind": nowYiFaBuClick, "currentPage": currentPage};
         }
         $.ajax({
-            url: baseUrl + "/my-sbm/personCenter/personFabu.do",
+            url: baseUrl + "/personCenter/personFabu.do",
             type: "post",
             data: data,
             dataType: 'json',
@@ -571,6 +606,7 @@ function makeGoodsDetails(currentPage) {
 
 
 function yiFaBuClick(e) {
+    openLoading();
     //是否搜索关键字
     if ($("#souYiFaBuInput").val() != null && $("#souYiFaBuInput").val() != '') {
         var data = {"yiFaBuKind": e, "keyword": $("#souYiFaBuInput").val()};
@@ -578,7 +614,7 @@ function yiFaBuClick(e) {
         var data = {"yiFaBuKind": e};
     }
     $.ajax({
-        url: baseUrl + "/my-sbm/personCenter/personFabu.do",
+        url: baseUrl + "/personCenter/personFabu.do",
         type: "post",
         dataType: 'json',
         data: data,
@@ -588,11 +624,15 @@ function yiFaBuClick(e) {
                 return;
             } else {
                 showPerFabuGoods(data.result);
-                makePage(data.result.totalPage);
-                totalPage = data.result.totalPage;
+                if(data.result!=null){
+                    makePage(data.result.totalPage);
+                    totalPage = data.result.totalPage;
+                }
+                closeLoading();
             }
         },
         error: function (e) {
+            closeLoading();
             console.log("请联系管理员");
         }
     });
@@ -606,4 +646,8 @@ function yifabu(e) {
     //查询
     yiFaBuClick(e);
 }
+
+
+
+
 

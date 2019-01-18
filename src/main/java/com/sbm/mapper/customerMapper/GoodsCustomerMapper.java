@@ -1,7 +1,6 @@
 package com.sbm.mapper.customerMapper;
 
 import com.sbm.pojo.model.Goods;
-import com.sbm.pojo.model.GoodsExample;
 import com.sbm.pojo.model.SouSouInparameterDTO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -16,4 +15,12 @@ public interface GoodsCustomerMapper {
     Integer sousouCount(SouSouInparameterDTO souSouInparameterDTO);
 
     List<Goods> souGoodsHover(@Param("type") String type);
+
+
+    /**
+     * 搜索前十条
+     * @return
+     */
+    List<Goods> sousouOnlyTen();
+
 }

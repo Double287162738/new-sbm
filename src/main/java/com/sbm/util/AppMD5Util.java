@@ -1,7 +1,5 @@
 package com.sbm.util;
 
-import org.springframework.stereotype.Service;
-
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
@@ -75,12 +73,12 @@ public class AppMD5Util {
 
     public static void main(String[] args) {
         String md5 = MD5("password");
-        String md52 = getMD5("password22");
+        String md52 = getMD5("111");
         SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddHHmmss");
         //MD5(ACCOUNT SID + AUTH TOKEN + timestamp);
 
         String dateStr=sdf.format(new Date());
-        System.out.println("");
+        System.out.println(md52);
     }
 }
 

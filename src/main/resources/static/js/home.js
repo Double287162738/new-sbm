@@ -22,25 +22,42 @@ $(function () {
     keyword = locationUrl.split("?")[1].split("&")[0].split("=")[1];
     currentPage = locationUrl.split("?")[1].split("&")[1].split("=")[1];
     specialType = locationUrl.split("?")[1].split("&")[2].split("=")[1];
+    $("#sousuoInput").val(decodeURI(keyword));
+    $("#findInput").val(decodeURI(keyword));
+    //接收搜索请求
+    if (keyword != null && currentPage != null) {
+        if(specialType=='rec' || specialType=='pop'){
+            if(specialType=='rec'){
+                $("#sousou_rec").addClass('sousou-btn-click');
+                $("#sousou_rec").siblings().removeClass("sousou-btn-click");
+            }else {
+                $("#sousou_pop").addClass('sousou-btn-click');
+                $("#sousou_pop").siblings().removeClass("sousou-btn-click");
+            }
+
+            //此处specialType的作用只是作为临时参数，所以需要置空
+            souType=specialType;
+            specialType='';
+        }
+        getSouSouResult();
+    }else {
+        return;
+    }
     //搜索框的回车事件
     $('#findInput').bind('keydown', function (event) {
         if (event.keyCode == "13") {
             keyword=$("#findInput").val();
+            console.log(keyword);
             currentPage=1;
             getSouSouResult();
         }
     });
     $("#sousou").click(function () {
         keyword=$("#findInput").val();
+        $("#sousuoInput").val("");
         currentPage=1;
         getSouSouResult();
     });
-    //接收搜索请求
-    if (keyword != null && currentPage != null) {
-        getSouSouResult();
-    }else {
-        return;
-    }
 
     $(".especiallyArea").change(function () {
         var groupCheckbox=$("input[name='area']");
@@ -67,17 +84,16 @@ function especiallySouSou(obj,type) {
 
 
 function getSouSouResult(){
-    $("#sousuoInput").val(decodeURI(keyword));
-    $("#findInput").val(decodeURI(keyword));
+    openLoading();
     document.getElementById("showPart").innerHTML = '';
     var souSouInparameterDTO={"keyWord":keyword,"souType":souType,"currentPage":currentPage,"souArea":souArea,"specialType":specialType};
     $.ajax({
-        url: baseUrl + "/my-sbm/sousou/sougoods.do",
+        url: baseUrl + "/sousou/sougoods.do",
         type: "post",
         data: souSouInparameterDTO,
         dataType: 'json',
         success: function (data) {
-            if (data.records != null) {
+            if (data.records != null && data.records.length>0 ) {
                 for (var i = 0; i < data.records.length; i++) {
                     var goodsPic1 = data.records[i].goodsPic1;
                     $("#showPart").append(
@@ -99,15 +115,211 @@ function getSouSouResult(){
                 }
                 totalPage = data.totalPage;
                 makePage(totalPage);
+                closeLoading();
             } else {
-                console.log("无数据");
+                var innerHtml =
+                '<div class="goods_null_part">'+
+                    '<div sou_goods_null_pic>'+
+                        '<svg class="icon" aria-hidden="true" style="width: 200px;height: 200px">'+
+                            '<use xlink:href="#icon-fabu-null"></use>'+
+                        '</svg>'+
+                     '</div>'+
+                    '<div class="kkry">空空如也...</div>'+
+                '</div>';
+                document.getElementById("showPart").innerHTML = innerHtml;
+                closeLoading();
             }
         },
         error: function (e) {
-            console.log("错误");
+            openAlert("服务异常，请联系客服");
         }
     });
 }
+
+//展示查询获得的商品
+function makeGoodsDetails(keyword, currentPage) {
+    if (keyword != null && currentPage != null) {
+        var data = {"keyword": keyword, "currentPage": currentPage};
+        $.ajax({
+            url: baseUrl + "/sousou/sougoods.do",
+            type: "post",
+            data: data,
+            dataType: 'json',
+            success: function (data) {
+                if (data.records != null) {
+                    document.getElementById("showPart").innerHTML = '';
+                    for (var i = 0; i < data.records.length; i++) {
+                        var goodsPic1 = data.records[i].goodsPic1;
+                        $("#showPart").append(
+                            "<div id='xianzhi-all'>" +
+                            "<div id='xianzhi-pic-border'>" +
+                            "<a onclick='openDetail(" + data.records[i].goodsId + ")' data-toggle='modal' >" +
+                            "<div id='xianzhi-pic'>" +
+                            "<img src='" + goodsPicURL + goodsPic1.substring(0, 4) + "/" + goodsPic1.substring(4, 6) + "/"
+                            + goodsPic1.substring(6, 8) + "/" + goodsPic1 + "' />" +
+                            "</div>" +
+                            "</a>" +
+                            "</div>" +
+                            "<div id='xianzhi-other-border'>" +
+                            "<div id='xianzhi-price-border'><span class='glyphicon glyphicon-yen'></span><span id='xianzhi-price'>" + data.records[i].goodsPrice + "</span></div>" +
+                            "<div id='xianzhi-name'>" + data.records[i].goodsName + "</div>" +
+                            "<div id='xianzhi-keyword'>" + data.records[i].goodsWords + "</div>" +
+                            "</div>" +
+                            "</div>")
+                    }
+                    ifAble(currentPage);
+                    ifHavaUpOrDown(totalPage);
+                } else {
+                    console.log("无数据");
+                }
+            },
+            error: function (e) {
+                console.log("错误");
+            }
+        });
+    } else {
+        return;
+    }
+}
+
+//点击查看商品详情
+function openDetail(e) {
+    openLoading();
+    var url = baseUrl + "/sousou/sougoodsDetail.do";
+    var data = {"goodsId": e};
+    nowGoodsId=e;
+    $.ajax({
+        url: url,
+        type: "post",
+        data: data,
+        dataType: 'json',
+        success: function (data) {
+            if (data.result == null) {
+                closeLoading();
+                openAlert(data.errorMessages);
+            } else {
+                if (data.result.userName == null) {
+                    data.result.userName = "一位不愿透漏姓名的唐马儒先生";
+                }
+                if (data.result.goodsName == null) {
+                    data.result.goodsName = "神秘物品";
+                }
+                if (data.result.goodsCollectionAmount == null) {
+                    data.result.goodsCollectionAmount = 0;
+                }
+                if (data.result.goodsClickAmount == null) {
+                    data.result.goodsClickAmount = 0;
+                }
+                if (data.result.goodsQq == null) {
+                    data.result.goodsQq = "太粗心了，竟然没有留下QQ";
+                }
+                if (data.result.goodsWx == null) {
+                    data.result.goodsWx = "太粗心了，竟然没有留下QQ";
+                }
+                var goodsPic1 = data.result.goodsPic1;
+                document.getElementById("goodsPic1").src = goodsPicURL + goodsPic1.substring(0, 4) + "/" + goodsPic1.substring(4, 6) + "/"
+                    + goodsPic1.substring(6, 8) + "/" + goodsPic1;
+                document.getElementById("owner").innerHTML = data.result.userName;
+                document.getElementById("goods").innerHTML = data.result.goodsName;
+                document.getElementById("goodsName").innerHTML = data.result.goodsName;
+                document.getElementById("goodsWords").innerHTML = data.result.goodsWords;
+
+                document.getElementById("goodsPrice").innerHTML = "&nbsp;" + data.result.goodsPrice;
+                document.getElementById("goodsCollectionAmount").innerHTML = "&nbsp;被" + data.result.goodsCollectionAmount + "人收藏";
+                document.getElementById("goodsClickAmount").innerHTML = "&nbsp;" + data.result.goodsClickAmount + "人浏览过";
+                document.getElementById("qqSpan").innerHTML = "&nbsp;" + data.result.goodsQq;
+                document.getElementById("weixinSpan").innerHTML = "&nbsp;" + data.result.goodsWx;
+                document.getElementById("areaSpan").innerHTML = data.result.goodsArea+"区";
+                document.getElementById("ownerSay").innerHTML = data.result.goodsOther;
+                document.getElementById("goodsDetailPic").innerHTML = "";
+                var otherPicDetail = "";
+                if (data.result.goodsPic2 != null && data.result.goodsPic2 != '') {
+                    otherPicDetail=otherPicDetail+'<li class="item falldown" id="item2">'
+                                                 +'<figure>'
+                                                    +'<div class="view"><img id="goodsPic2" src='+getPicUrl(data.result.goodsPic2)+'/></div>'
+                                                 +'</figure>'
+                                                 +'</li>';
+                }
+                if (data.result.goodsPic3 != null && data.result.goodsPic3 != '') {
+                    otherPicDetail=otherPicDetail+'<li class="item falldown" id="item3">'
+                        +'<figure>'
+                        +'<div class="view"><img id="goodsPic3" src='+getPicUrl(data.result.goodsPic3)+'/></div>'
+                        +'</figure>'
+                        +'</li>';
+                }
+                if (data.result.goodsPic4 != null && data.result.goodsPic4 != '') {
+                    otherPicDetail=otherPicDetail+'<li class="item falldown" id="item4">'
+                        +'<figure>'
+                        +'<div class="view"><img id="goodsPic4" src='+getPicUrl(data.result.goodsPic4)+'/></div>'
+                        +'</figure>'
+                        +'</li>';
+                }
+                if (data.result.goodsPic5 != null && data.result.goodsPic5 != '') {
+                    otherPicDetail=otherPicDetail+'<li class="item falldown" id="item5">'
+                        +'<figure>'
+                        +'<div class="view"><img id="goodsPic5" src='+getPicUrl(data.result.goodsPic5)+'/></div>'
+                        +'</figure>'
+                        +'</li>';
+                }
+                if(data.result.ifCollected){
+                    document.getElementById("ifCollect").innerHTML="已收藏";
+                    $("#addCollectBtn").addClass("notAllowed");
+                    $("#addCollectBtn").unbind();
+                }else{
+                    $("#addCollectBtn").bind("click", addCollection);
+                    document.getElementById("ifCollect").innerHTML="加入收藏夹";
+                    $("#addCollectBtn").removeClass("notAllowed");
+                }
+                document.getElementById("goodsDetailPic").innerHTML = otherPicDetail;
+            }
+            closeLoading();
+            $('#goodsModal').modal('show');
+        },
+        error: function (e) {
+            closeLoading();
+            openAlert("查看失败，请重试或联系管理员");
+            return;
+        }
+    });
+
+}
+
+//获得商品图片路径
+function getPicUrl(picName) {
+    return goodsPicURL + picName.substring(0, 4) + "/" + picName.substring(4, 6) + "/"
+        + picName.substring(6, 8) + "/" + picName;
+}
+
+//添加收藏
+function addCollection() {
+    openLoading();
+    var data = {"goodsId":nowGoodsId};
+    $.ajax({
+        url: baseUrl + "/collection/addCollection.do",
+        type: "post",
+        data:data,
+        dataType: 'json',
+        success: function (data) {
+            if(data.result=="2"){
+                window.location.href = 'login.html';
+            }else{
+                document.getElementById("ifCollect").innerHTML="已收藏";
+                $("#addCollectBtn").addClass("notAllowed");
+                $("#addCollectBtn").unbind();
+            }
+            closeLoading();
+        },
+        error: function (e) {
+            document.getElementById("ifCollect").innerHTML="已收藏";
+            $("#addCollectBtn").addClass("notAllowed");
+            $("#addCollectBtn").unbind();
+            closeLoading();
+        }
+    });
+}
+
+
+
 
 //画出分页部分
 function makePage(totalPage) {
@@ -246,7 +458,6 @@ function dianFrontClick(nowPage) {
     changePage(nowPage);
 }
 
-
 function ifHavaUpOrDown(totalPage) {
     if (currentPage <= 1) {
         $("#upPage").addClass("disabled");
@@ -259,53 +470,8 @@ function ifHavaUpOrDown(totalPage) {
         $("#downPage").removeClass("disabled");
     }
 //	$(".disabled").click(function(event){
-//		event.preventDefault();        
+//		event.preventDefault();
 //	});
-}
-
-function makeGoodsDetails(keyword, currentPage) {
-    if (keyword != null && currentPage != null) {
-        var data = {"keyword": keyword, "currentPage": currentPage};
-        $.ajax({
-            url: baseUrl + "/my-sbm/sousou/sougoods.do",
-            type: "post",
-            data: data,
-            dataType: 'json',
-            success: function (data) {
-                if (data.records != null) {
-                    document.getElementById("showPart").innerHTML = '';
-                    for (var i = 0; i < data.records.length; i++) {
-                        var goodsPic1 = data.records[i].goodsPic1;
-                        $("#showPart").append(
-                            "<div id='xianzhi-all'>" +
-                            "<div id='xianzhi-pic-border'>" +
-                            "<a onclick='openDetail(" + data.records[i].goodsId + ")' data-toggle='modal' >" +
-                            "<div id='xianzhi-pic'>" +
-                            "<img src='" + goodsPicURL + goodsPic1.substring(0, 4) + "/" + goodsPic1.substring(4, 6) + "/"
-                            + goodsPic1.substring(6, 8) + "/" + goodsPic1 + "' />" +
-                            "</div>" +
-                            "</a>" +
-                            "</div>" +
-                            "<div id='xianzhi-other-border'>" +
-                            "<div id='xianzhi-price-border'><span class='glyphicon glyphicon-yen'></span><span id='xianzhi-price'>" + data.records[i].goodsPrice + "</span></div>" +
-                            "<div id='xianzhi-name'>" + data.records[i].goodsName + "</div>" +
-                            "<div id='xianzhi-keyword'>" + data.records[i].goodsWords + "</div>" +
-                            "</div>" +
-                            "</div>")
-                    }
-                    ifAble(currentPage);
-                    ifHavaUpOrDown(totalPage);
-                } else {
-                    console.log("无数据");
-                }
-            },
-            error: function (e) {
-                console.log("错误");
-            }
-        });
-    } else {
-        return;
-    }
 }
 
 function ifAble(nowPage) {
@@ -415,126 +581,4 @@ function upPage() {
     }
 }
 
-
-function openDetail(e) {
-    $("#addCollectBtn").bind("click", addCollection);
-    document.getElementById("ifCollect").innerHTML="加入收藏夹";
-    $("#addCollectBtn").removeClass("notAllowed");
-    var url = baseUrl + "/my-sbm/sousou/sougoodsDetail.do";
-    var data = {"goodsId": e};
-    nowGoodsId=e;
-    $.ajax({
-        url: url,
-        type: "post",
-        data: data,
-        dataType: 'json',
-        success: function (data) {
-            if (data.result == null) {
-                alert(data.errorMessages);
-            } else {
-                if (data.result.userName == null) {
-                    data.result.userName = "一位不愿透漏姓名的唐马儒先生";
-                }
-                if (data.result.goodsName == null) {
-                    data.result.goodsName = "神秘物品";
-                }
-                if (data.result.goodsCollectionAmount == null) {
-                    data.result.goodsCollectionAmount = 0;
-                }
-                if (data.result.goodsClickAmount == null) {
-                    data.result.goodsClickAmount = 0;
-                }
-                if (data.result.goodsQq == null) {
-                    data.result.goodsQq = "太粗心了，竟然没有留下QQ";
-                }
-                if (data.result.goodsWx == null) {
-                    data.result.goodsWx = "太粗心了，竟然没有留下QQ";
-                }
-                var goodsPic1 = data.result.goodsPic1;
-                document.getElementById("goodsPic1").src = goodsPicURL + goodsPic1.substring(0, 4) + "/" + goodsPic1.substring(4, 6) + "/"
-                    + goodsPic1.substring(6, 8) + "/" + goodsPic1;
-                document.getElementById("owner").innerHTML = data.result.userName;
-                document.getElementById("goods").innerHTML = data.result.goodsName;
-                document.getElementById("goodsName").innerHTML = data.result.goodsName;
-                document.getElementById("goodsWords").innerHTML = data.result.goodsWords;
-
-                document.getElementById("goodsPrice").innerHTML = "&nbsp;" + data.result.goodsPrice;
-                document.getElementById("goodsCollectionAmount").innerHTML = "&nbsp;被" + data.result.goodsCollectionAmount + "人收藏";
-                document.getElementById("goodsClickAmount").innerHTML = "&nbsp;" + data.result.goodsClickAmount + "人浏览过";
-                document.getElementById("qqSpan").innerHTML = "&nbsp;" + data.result.goodsQq;
-                document.getElementById("weixinSpan").innerHTML = "&nbsp;" + data.result.goodsWx;
-                document.getElementById("areaSpan").innerHTML = data.result.goodsArea+"区";
-                document.getElementById("ownerSay").innerHTML = data.result.goodsOther;
-                document.getElementById("goodsDetailPic").innerHTML = "";
-                var otherPicDetail = "";
-                if (data.result.goodsPic2 != null && data.result.goodsPic2 != '') {
-                    otherPicDetail=otherPicDetail+'<li class="item falldown" id="item2">'
-                                                 +'<figure>'
-                                                    +'<div class="view"><img id="goodsPic2" src='+getPicUrl(data.result.goodsPic2)+'/></div>'
-                                                 +'</figure>'
-                                                 +'</li>';
-                }
-                if (data.result.goodsPic3 != null && data.result.goodsPic3 != '') {
-                    otherPicDetail=otherPicDetail+'<li class="item falldown" id="item3">'
-                        +'<figure>'
-                        +'<div class="view"><img id="goodsPic3" src='+getPicUrl(data.result.goodsPic3)+'/></div>'
-                        +'</figure>'
-                        +'</li>';
-                }
-                if (data.result.goodsPic4 != null && data.result.goodsPic4 != '') {
-                    otherPicDetail=otherPicDetail+'<li class="item falldown" id="item4">'
-                        +'<figure>'
-                        +'<div class="view"><img id="goodsPic4" src='+getPicUrl(data.result.goodsPic4)+'/></div>'
-                        +'</figure>'
-                        +'</li>';
-                }
-                if (data.result.goodsPic5 != null && data.result.goodsPic5 != '') {
-                    otherPicDetail=otherPicDetail+'<li class="item falldown" id="item5">'
-                        +'<figure>'
-                        +'<div class="view"><img id="goodsPic5" src='+getPicUrl(data.result.goodsPic5)+'/></div>'
-                        +'</figure>'
-                        +'</li>';
-                }
-                document.getElementById("goodsDetailPic").innerHTML = otherPicDetail;
-            }
-        },
-        error: function (e) {
-            alert("查看失败，请重试或联系管理员");
-            return;
-        }
-    });
-
-    $('#goodsModal').modal('show');
-}
-
-
-function getPicUrl(picName) {
-    return goodsPicURL + picName.substring(0, 4) + "/" + picName.substring(4, 6) + "/"
-        + picName.substring(6, 8) + "/" + picName;
-}
-
-function addCollection() {
-    console.log(1222);
-    var data = {"goodsId":nowGoodsId};
-    $.ajax({
-        url: baseUrl + "/my-sbm/collection/addCollection.do",
-        type: "post",
-        data:data,
-        dataType: 'json',
-        success: function (data) {
-            if(data.result=="2"){
-                window.location.href = 'login.html';
-            }else{
-                document.getElementById("ifCollect").innerHTML="已收藏";
-                $("#addCollectBtn").addClass("notAllowed");
-                $("#addCollectBtn").unbind();
-            }
-        },
-        error: function (e) {
-            document.getElementById("ifCollect").innerHTML="已收藏";
-            $("#addCollectBtn").addClass("notAllowed");
-            $("#addCollectBtn").unbind();
-        }
-    });
-}
 

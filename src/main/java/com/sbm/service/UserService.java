@@ -7,10 +7,11 @@ public interface UserService {
     /**
      * 通过用户名查找用户
      *
-     * @param name
+     * @param phone
      * @return
      */
-    User getUserByName(String name);
+    User getUserByPhone(String phone);
+
 
     /**
      * 通过用户ID查找用户
@@ -58,6 +59,8 @@ public interface UserService {
      */
     int  forgetPassword(User user);
 
+
+    int initPassword(User user);
 
 
 }

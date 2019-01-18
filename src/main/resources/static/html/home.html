@@ -3,22 +3,25 @@
 	<head>
 	<title>SK嗖嗖-嗖嗖就有</title>
 	<link rel="shortcut icon" href="../img/favicon.ico"/>
-	<link rel="stylesheet" href="../css/bootstrap-theme.css" />
 	<link rel="stylesheet" href="../css/bootstrap.min.css" />
 	<link rel="stylesheet" href="../css/bootstrap-theme.min.css" />
 	<link rel="stylesheet" href="../css/home.css">
 	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" href="../css/loading.css">
 	<link rel="stylesheet" href="../css/styles.css"/>
+	<link href="../css/modal/extend/iconfont.css" type="text/css" rel="stylesheet"/>
 	<script src="../js/jquery-3.1.1.min.js"></script>
+	<script src="../js/common.js"></script>
+	<script src="../js/loading.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/home.js"></script>
-	<script src="../js/common.js"></script>
 	<script src="../js/jquery.cookie.js"></script>
 	<script src="../js/cookie.js"></script>
 	<script src="../js/fileURL.js"></script>
 	<script src="../sliderJs/jquery.mousewheel.js"></script>
 	<script src="../sliderJs/modernizr-1.5.min.js"></script>
 	<script src="../sliderJs/scripts.js"></script>
+	<script src="../js/extend/iconfont.js"></script>
 	<meta charset="UTF-8">
 	</head>
 	<body>
@@ -30,11 +33,12 @@
 			</div>
 			<div>
 				<ul class="nav navbar-nav">
+					<li class="margin20px"><a href="main.html">首页</a></li>
 					<li class="margin20px"><a href="person.html?index=personFB">已发布</a></li>
-					<li class="margin20px"><a href="##">人气闲置</a></li>
+					<li class="margin20px"><a href="home.html?keyword=&currentPage=1&specialType=pop">人气闲置</a></li>
 					<li class="margin20px"><a href="person.html?index=personSC">收藏夹</a></li>
 					<li class="margin20px"><a id="fabu-a">发布闲置</a></li>
-					<li class="margin20px"><a href="##">留白功能</a></li>
+					<!--<li class="margin20px"><a href="##">留白功能</a></li>-->
 				</ul>
 			</div>
 			<form class="navbar-form navbar-left" role="search" id="searchForm">
@@ -67,8 +71,8 @@
 		
   		<!--嗖嗖导航开始-->
   		<div id="sousou-rec">
-  			<button class="sousou-btn" onclick="especiallySouSou(this,'rec')">嗖嗖推荐</button>
-  			<button class="sousou-btn" onclick="especiallySouSou(this,'pop')">嗖嗖人气</button>
+  			<button class="sousou-btn" onclick="especiallySouSou(this,'rec')" id="sousou_rec">嗖嗖推荐</button>
+  			<button class="sousou-btn" onclick="especiallySouSou(this,'pop')" id="sousou_pop">嗖嗖人气</button>
   			<button class="sousou-btn sousou-btn-click" onclick="especiallySouSou(this,'all')">嗖嗖全站</button>
   			
   			<div><input  class="especiallyArea" type="checkbox" checked name="area" value="A"/>A区</div>
@@ -84,7 +88,7 @@
   			
   		<!--闲置展示部分-->	
   		<div id="showPart">
-		
+
 		</div>
  	 	<!--闲置展示部分结束-->
 			<!--分页部分开始-->
@@ -104,10 +108,10 @@
   		<!--分页部分结束-->
   		
   		<!--底部搜索框开始-->
-  		<div id="bottom-sousuo">
-			<input id="bottom-input" type="text" placeholder="&nbsp;&nbsp;嗖嗖就有~"/>
-			<button id="bottom-button">搜索</button>
-  		</div>
+  		<!--<div id="bottom-sousuo">-->
+			<!--<input id="bottom-input" type="text" placeholder="&nbsp;&nbsp;嗖嗖就有~"/>-->
+			<!--<button id="bottom-button">搜索</button>-->
+  		<!--</div>-->
   		
   		<!--底部搜索框结束-->
  	 	

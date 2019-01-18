@@ -1,0 +1,294 @@
+body {
+    background-image: url(../img/2.jpg);
+}
+
+.login {
+    width: 1000px;
+    height: 400px;
+    margin: 100px auto;
+    border: 1px;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 1px;
+    position: relative;
+    color: #fff;
+    border-radius: 25px;
+}
+
+.rightpic {
+    width: 500px;
+    height: 330px;
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    opacity: 0.8;
+}
+
+#container {
+    position: relative;
+    width: 500px;
+    height: 330px;
+}
+
+canvas {
+    position: absolute;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+}
+
+img {
+    position: absolute;
+    -webkit-transition: opacity .3s;
+    transition: opacity .3s;
+}
+
+#loginH2 {
+    position: relative;
+    margin: 50px 0 20px 30px;
+    font-size: 23px;
+}
+
+.control-label {
+    font-size: 17px;
+}
+
+#username, #password, #verCode, #drag {
+    margin: 0 0 0 30px;
+    height: 38px;
+    width: 320px !important;
+}
+
+#verCode {
+    width: 200px;
+}
+
+#verImg {
+    width: 99px;
+    height: 37px;
+}
+
+#verPic {
+    margin: 0 0 0 260px;
+    border: 0px solid red;
+    width: 100px;
+    height: 38px;
+}
+
+.loginButton,.registButton {
+    width: 150px;
+    width: 320px;
+    margin: 0 0 0 30px;
+    background-color: #00b7d3;
+    font-weight: bold;
+    font-size: 15px;
+}
+.registButton{
+    background-color: #ff5000;
+}
+
+.loginmain {
+    margin: 70px 0 0 20px;
+}
+
+#login-part > div {
+    margin-bottom: 10px;
+}
+
+/*扫码登录*/
+#sm-login {
+    position: absolute;
+    z-index: 9999;
+    width: 80px;
+    height: 80px;
+}
+
+#sm-pic {
+    width: 80px;
+    height: 80px;
+}
+
+#sm-pic1 {
+    display: none;
+    width: 60px;
+    height: 60px;
+}
+
+#sm-pic2, #sm-pic3 {
+    display: none;
+    width: 60px;
+    height: 60px;
+}
+
+#sm-login-warning {
+    padding-left: 10px;
+    position: absolute;
+    z-index: 99;
+    margin-left: 80px;
+    margin-top: 10px;
+    height: 30px;
+    width: 150px;
+    border: 1px solid white;
+}
+
+#sm-login-warning > img {
+    margin-top: 2px;
+    margin-left: 3px;
+    display: inline;
+    width: 23px;
+    height: 23px;
+}
+
+#sm-login-warning > p {
+    line-height: 30px;
+    color: #800000;
+    vertical-align: middle;
+    font-size: 15px;
+    display: inline;
+}
+
+#sm-login-warning1 > p {
+    line-height: 33px;
+    color: #800000;
+    vertical-align: middle;
+    font-size: 17px;
+    display: inline;
+}
+
+#login-sm-part {
+    margin-top: 60px;
+    margin-left: 70px;
+    width: 300px;
+    height: 300px;
+    background: #F5F5F5;
+}
+
+#mobile-sao {
+    padding-top: 20px;
+    margin-left: 20px;
+    color: black;
+    font-weight: bolder;
+    font-size: 18px;
+}
+
+#login-ewm {
+    padding-top: 20px;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+#login-ewm > img {
+    width: 150px;
+    height: 150px;
+}
+
+#mobile-prompt {
+    margin-left: 40px;
+    margin-top: 40px;
+    color: #A9A9A9;
+}
+
+#mobile-prompt > p {
+    padding-top: 5px;
+    font-size: 15px;
+    margin-left: 35px;
+}
+
+#mobile-prompt > p > span {
+    color: #FF6347;
+}
+
+/*小三角*/
+#sanjiao {
+    width: 0px;
+    height: 0px;
+    border-width: 8px !important;
+    border: solid;
+    border-color: transparent white transparent transparent;
+    position: absolute;
+    z-index: 99999;
+    top: 6px;
+    left: -17px;
+}
+
+#sanjiao1 {
+    width: 0px;
+    height: 0px;
+    border-width: 8px !important;
+    border: solid;
+    border-color: transparent rgba(0, 0, 0, 0.3) transparent transparent;
+    position: absolute;
+    z-index: 99999;
+    top: 6px;
+    left: -16px;
+}
+
+/*注册*/
+#regist, #forget {
+    padding-top: 30px;
+    margin-top: 60px;
+    margin-left: 70px;
+    width: 300px;
+    height: 300px;
+    border-top: 2px solid #A52A2A;
+}
+
+.mobile-input, .pwd-input {
+    font-size: 17px;
+    color: #696969;
+    width: 200px;
+    height: 35px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.mobile-input:focus {
+    outline: none;
+}
+
+.code-input:focus {
+    outline: none;
+}
+
+.pwd-input:focus {
+    outline: none;
+}
+
+.code-input {
+    font-size: 17px;
+    color: #696969;
+    width: 80px;
+    height: 35px;
+    margin-left: 10px;
+}
+
+.mobile-num, .code-num, .pwd-num {
+    font-size: 17px;
+    color: #F0F8FF;
+    font-weight: bold;
+}
+
+.get-code {
+    width: 110px;
+    height: 33px;
+    margin-left: 10px;
+}
+
+.regist-btn {
+    font-weight: bolder;
+    height: 35px;
+    width: 270px;
+    margin-top: 20px;
+}
+
+.forget_pwd{
+    box-sizing: border-box;
+    width:34%;
+    position: relative;
+}
+.forget_pwd a{
+    position: absolute;
+    right:0;
+}

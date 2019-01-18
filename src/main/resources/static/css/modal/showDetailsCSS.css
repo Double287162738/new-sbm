@@ -1,53 +1,53 @@
-/*闲置展示部分*/
-* {
-    margin: 0px;
-    padding: 0px;
-}
-
-a {
-    text-decoration: none !important;
-    cursor: pointer;
-}
-
-#pic-part {
-    position: relative;
+#pic-part{
+    position:relative;
     vertical-align: top;
     display: inline-block;
     margin-left: 2%;
     width: 35%;
     height: 30%;
 }
-
-#pic-part img {
-    position: absolute;
-    margin: auto;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+#pic-part img{
+    position:absolute;
+    margin:auto;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
     text-align: center;
     max-height: 100%;
     max-width: 100%;
 }
-
-#other-part {
+#other-part{
     vertical-align: top;
     display: inline-block;
-    margin-left: 3%;
-    width: 59%;
+    width: 60%;
+}
+#other-part-child1{
+    height:150px;
+    width:50%;
+    float: left;
+}
+#other-part-child1 >div{
+    margin-bottom:10px;
+}
+#other-part-child2{
+    float: right;
+    width:50%;
+    height:150px;
+}
+#other-part-child2 >div{
+    margin-bottom:10px;
 }
 
-#shoucangPic, #liulanPic, #jiagePic, #qqPic, #weixinPic {
+#shoucangPic,#liulanPic,#jiagePic,#qqPic,#weixinPic,#areaPic{
     vertical-align: top;
     display: inline-block;
-    width: 6%;
+    width: 12%;
     height: 6%;
 }
-
-#jiage-div {
+#jiage-div{
 }
-
-#jiage-div span {
+#jiage-div span{
     font-size: 20px;
     color: red;
     font-weight: bold;
@@ -55,29 +55,34 @@ a {
     display: inline-block;
 }
 
-#shoucang-div {
+#shoucang-div{
     margin-top: 1%;
 }
-
-#shoucang-div span {
+#shoucang-div span{
     font-size: 20px;
     font-weight: bold;
     vertical-align: sub;
     display: inline-block;
 }
-
-#liulan-div {
+#liulan-div{
     margin-top: 1%;
 }
-
-#liulan-div span {
+#liulan-div span{
     font-size: 20px;
     font-weight: bold;
     vertical-align: sub;
     display: inline-block;
 }
-
-#hr2 {
+#area-div{
+    margin-top: 1%;
+}
+#area-div span{
+    font-size: 20px;
+    font-weight: bold;
+    vertical-align: sub;
+    display: inline-block;
+}
+#hr2{
     width: 100%;
     border: 0;
     height: 2px;
@@ -86,59 +91,51 @@ a {
     background-image: -o-linear-gradient(to right, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
-
-#qq-div {
+#qq-div{
     margin-top: 1%;
 }
-
-#qq-div span {
+#qq-div span{
     font-size: 20px;
     font-weight: bold;
     vertical-align: sub;
     display: inline-block;
 }
-
-#weixin-div {
+#weixin-div{
     margin-top: 1%;
 }
-
-#weixin-div span {
+#weixin-div span{
     font-size: 20px;
     font-weight: bold;
     vertical-align: sub;
     display: inline-block;
 }
-
-#fuzhi-pic {
+#fuzhi-pic,#connectQQ-pic{
     cursor: pointer;
     display: inline-block;
     vertical-align: top;
     margin-left: 2%;
-    width: 5%;
+    width: 10%;
     height: 5%;
 }
-
-#fuzhi-pic:hover {
+#fuzhi-pic:hover,#connectQQ-pic:hover{
     transform: scale(1.2);
     cursor: pointer;
 }
 
-#fuzhi-pic:focus {
+#fuzhi-pic:focus,#connectQQ-pic:focus{
     cursor: pointer;
     transform: scale(0.5);
 }
-
-#ownerSay {
+#ownerSay{
     border: none;
-    border-bottom: 2px solid #D3D3D3;
+    border-bottom:2px solid #D3D3D3;
     background: white;
     border-style: inset;
     font-family: Microsoft YaHei;
-    resize: none;
+    resize:none;
     font-size: 17px;
     margin-bottom: 13%;
 }
-
-#owner, #de, #goods {
+#owner,#de,#goods{
     display: inline-block;
 }

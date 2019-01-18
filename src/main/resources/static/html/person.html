@@ -4,8 +4,6 @@
 		<meta charset="UTF-8">
 		<title>SK嗖嗖-嗖嗖就有</title>
 		<link rel="shortcut icon" href="../img/favicon.ico"/>
-		<link rel="stylesheet" href="../css/bootstrap-theme.css" />
-		<link rel="stylesheet" href="../css/bootstrap.css" />
 		<link rel="stylesheet" href="../css/bootstrap.min.css" />
 		<link rel="stylesheet" href="../css/bootstrap-theme.min.css" />
 		<link rel="stylesheet" href="../css/person.css" />
@@ -16,21 +14,8 @@
 		<link rel="stylesheet" href="../css/common.css" />
 		<link rel="stylesheet" href="../css/styles.css"/>
 		<link rel="stylesheet" href="../css/special/hover-select-special.css"/>
-		<script src="../js/jquery-3.1.1.min.js"></script>
-		<script src="../js/bootstrap.min.js"></script>
-		<script src="../js/jquery.form.js"></script>
-		<script src="../js/personCenterJS/personSC.js"></script>
-		<script src="../js/personCenterJS/personRecycle.js"></script>
-		<script src="../js/personCenterJS/personYifabu.js"></script>
-		<script src="../js/personCenterJS/editPerFaBu.js"></script>
-		<script src="../js/jquery.cookie.js"></script>
-		<script src="../js/cookie.js"></script>
-		<script src="../js/common.js"></script>
-		<script src="../js/fileURL.js"></script>
-		<script src="../js/personCenterJS/person.js"></script>
-		<script src="../sliderJs/jquery.mousewheel.js"></script>
-		<script src="../sliderJs/modernizr-1.5.min.js"></script>
-		<script src="../sliderJs/scripts.js"></script>
+		<link rel="stylesheet" type="text/css" href="../css/loading.css">
+		<link href="../css/modal/extend/iconfont.css" type="text/css" rel="stylesheet"/>
 	</head>
 	<body>
 	<!--导航栏部分-->
@@ -41,11 +26,12 @@
 			</div>
 			<div>
 				<ul class="nav navbar-nav">
+					<li class="margin20px"><a href="main.html">首页</a></li>
 					<li class="margin20px"><a href="person.html?index=personFB">已发布</a></li>
-					<li class="margin20px"><a href="##">人气闲置</a></li>
+					<li class="margin20px"><a href="home.html?keyword=&currentPage=1&specialType=pop">人气闲置</a></li>
 					<li class="margin20px"><a href="person.html?index=personSC">收藏夹</a></li>
 					<li class="margin20px"><a id="fabu-a">发布闲置</a></li>
-					<li class="margin20px"><a href="##">留白功能</a></li>
+					<!--<li class="margin20px"><a href="##">留白功能</a></li>-->
 				</ul>
 			</div>
 			<form class="navbar-form navbar-left" role="search" id="searchForm">
@@ -57,8 +43,6 @@
 			<div id="perDiv" class="navbar-header navbar-right">
 				<a id="perA" class="navbar-brand"><img src="" id="perPic" class="img-circle"></a>
 				<ul class="nav navbar-nav navbar-right" id="loginOrLoginOut">
-					<li class="loginOrLoginOut"><a href="login.html?index=regist"><span class="glyphicon glyphicon-user"></span> 注册</a></li>
-					<li class="loginOrLoginOut"><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
 				</ul>
 			</div>
 		</div>
@@ -68,13 +52,13 @@
 		<!--展示部分-->
 		<div id="show-part">
 			<div id="click-part">
-				<div id="per-ziliao" class="shake-owner"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;个人资料</div>
-				<div id="per-fabu" class="shake-owner"><span class="glyphicon glyphicon-open"></span>&nbsp;&nbsp;&nbsp;已&nbsp;发&nbsp;布</div>
-				<div id="per-shoucang" class="shake-owner"><span class="glyphicon glyphicon-heart"></span>&nbsp;&nbsp;&nbsp;收&nbsp;藏&nbsp;夹</div>
-				<div id="per-huishou" class="shake-owner"><span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;&nbsp;回&nbsp;收&nbsp;站</div>
+				<div id="per-ziliao" class="shake"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;个人资料</div>
+				<div id="per-fabu" class="shake-slow"><span class="glyphicon glyphicon-open"></span>&nbsp;&nbsp;&nbsp;已&nbsp;发&nbsp;布</div>
+				<div id="per-shoucang" class="shake-horizontal"><span class="glyphicon glyphicon-heart"></span>&nbsp;&nbsp;&nbsp;收&nbsp;藏&nbsp;夹</div>
+				<div id="per-huishou" class="shake-rotate"><span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;&nbsp;回&nbsp;收&nbsp;站</div>
 			</div>
 			<!--个人信息修改部分开始-->
-			<div id="per-click-show">
+			<div id="per-click-show" style="display: none">
 				<div id="own-ziliao">
 					<!--编辑头像-->
 					<div id="edit-pic">
@@ -198,16 +182,21 @@
   						<div id="pic-part">
   							<img id="goodsPic1" src="../img/perCenter/loading.gif" />
   						</div>
-  						<div id="other-part">
-  							<div><h3 id="goodsName"></h3></div>
-  							<div><h4 id="goodsWords"></h4></div>
-  							<hr id="hr2" />
-  							<div id="jiage-div"><img id="jiagePic" src="../img/jiage.png"/><span id="goodsPrice"></span></div>
-  							<div id="shoucang-div"><a  href="##"><img id="shoucangPic" src="../img/shoucang1.png"/></a><span id="goodsCollectionAmount"></span></div>
-  							<div id="liulan-div"><img id="liulanPic" src="../img/liulan.png"/><span id="goodsClickAmount"></span></div>
-  							<div id="qq-div"><img id="qqPic" src="../img/qq.png"/><span id="qqSpan"></span><img id="fuzhi-pic" title="点击复制" src="../img/fuzhi.png"/></div>
-  							<div id="weixin-div"><img id="weixinPic" src="../img/weixin.png"/><span id="weixinSpan"></span><img id="fuzhi-pic" title="点击复制" src="../img/fuzhi.png"/></div>
-  						</div>
+						<div id="other-part">
+							<div><h3 id="goodsName"></h3></div>
+							<div><h4 id="goodsWords"></h4></div>
+							<hr id="hr2" />
+							<div id="other-part-child1">
+								<div id="jiage-div"><img id="jiagePic" src="../img/jiage.png"/><span id="goodsPrice"></span></div>
+								<div id="shoucang-div"><a  href="##"><img id="shoucangPic" src="../img/shoucang1.png"/></a><span id="goodsCollectionAmount"></span></div>
+								<div id="liulan-div"><img id="liulanPic" src="../img/liulan.png"/><span id="goodsClickAmount"></span></div>
+							</div>
+							<div id="other-part-child2">
+								<div id="qq-div"><img id="qqPic" src="../img/qq.png"/><span id="qqSpan"></span></div>
+								<div id="weixin-div"><img id="weixinPic" src="../img/weixin.png"/><span id="weixinSpan"></span></div>
+								<div id="area-div"><img id="areaPic" src="../img/area.png"/><span id="areaSpan"></span></div>
+							</div>
+						</div>
   						<hr id="hr1" style="margin-top: 2%;"/>
   						<!--滑块展示开始-->
 						<div class="demo-wrapper">
@@ -257,24 +246,26 @@
 								      <option value="A">女神A区</option>
 								      <option value="B">男神B区</option>
 								      <option value="C">神秘C区 </option>
+									  <option value="XN">校内兼职 </option>
+									  <option value="XW">校外兼职 </option>
 								      <option value="Z">其他 </option>
 							     </select>
   							</div>
   							<div id="edit-goodsType"><span>类型</span>
   								 <select id="edit-goodsType1-select">
 								      <option value="">请选择类型</option>
-								      <option value="SM">数码闲置</option>
-								      <option value="SJ">书籍闲置</option>
+								      <option value="DZ">电子产品</option>
+								      <option value="SJ">书籍资料</option>
 								      <option value="RC">日常用品</option>
-								      <option value="JZ">兼职信息</option>
-									  <option value="Z">其他</option>
+								      <option value="JZ">兼职</option>
+									  <option value="OTHER">其他</option>
 							     </select>
 								 -
 								<select id="edit-goodsType2-select">
 
 								</select>
   							</div>
-  							<div id="edit-jiage-div"><img id="edit-jiagePic" src="../img/jiage.png"/><input id="edit-jiage-input" type="number" value="0.00"/></div>
+  							<div id="edit-jiage-div"><img id="edit-jiagePic" src="../img/jiage.png"/><input id="edit-jiage-input" value="0.00"/></div>
   							<div id="edit-qq-div"><img id="edit-qqPic" src="../img/qq.png"/><input id="edit-qq-input" value="***"/></div>
   							<div id="edit-weixin-div"><img id="edit-weixinPic" src="../img/weixin.png"/><input id="edit-wx-input" value="***"/></div>
   						</div>
@@ -282,7 +273,7 @@
   						<!--滑块展示开始-->
 						<form id="otherPicForm" method="post" enctype="multipart/form-data">
 							<input style="display: none !important;" onchange="selectOtherPic('1')" id="select-other-pic1" type="file" multiple
-								   name="uploadFiles" accept="image/*"/>
+								   name="uploadFiles1" accept="image/*"/>
 							<div class="demo-wrapper">
 								<ul class="portfolio-items" id="editGoodsDetailPic">
 								</ul>
@@ -304,4 +295,22 @@
   		
   		
 	</body>
+	<script src="../js/jquery-3.1.1.min.js"></script>
+	<script src="../js/loading.js"></script>
+	<script src="../js/common.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/jquery.form.js"></script>
+	<script src="../js/personCenterJS/personSC.js"></script>
+	<script src="../js/personCenterJS/personRecycle.js"></script>
+	<script src="../js/personCenterJS/personYifabu.js"></script>
+	<script src="../js/personCenterJS/editPerFaBu.js"></script>
+	<script src="../js/jquery.cookie.js"></script>
+	<script src="../js/cookie.js"></script>
+	<script src="../js/fileURL.js"></script>
+	<script src="../sliderJs/jquery.mousewheel.js"></script>
+	<script src="../sliderJs/modernizr-1.5.min.js"></script>
+	<script src="../sliderJs/scripts.js"></script>
+	<script src="../js/extend/iconfont.js"></script>
+	<script src="../js/personCenterJS/person.js"></script>
+
 </html>

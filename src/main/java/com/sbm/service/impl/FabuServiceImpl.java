@@ -1,14 +1,5 @@
 package com.sbm.service.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import javax.annotation.Resource;
-
-import org.apache.commons.lang.StringUtils;
-import org.springframework.stereotype.Service;
-
 import com.sbm.mapper.GoodsMapper;
 import com.sbm.pojo.model.Goods;
 import com.sbm.pojo.model.User;
@@ -18,6 +9,15 @@ import com.sbm.util.ExecuteResult;
 import com.sbm.util.GetUuidUtils;
 import com.sbm.util.SkssConstant;
 import com.sbm.util.StringToListUtils;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import static com.sbm.util.SkssConstant.GOODS_ACTIVE_STATUS;
 
 
 @Service("fabuService")
@@ -48,6 +48,7 @@ public class FabuServiceImpl implements FabuService {
         goods.setUserId(userId);
         goods.setGoodsNo(Long.toString(System.currentTimeMillis()));
         goods.setGoodsGmtCreate(new Date());
+        goods.setGoodsStatus(GOODS_ACTIVE_STATUS);//正常状态（发布中）
         goodsMapper.insertSelective(goods);
         result.setResult(SkssConstant.RESULT_SUCCESS);
         return result;

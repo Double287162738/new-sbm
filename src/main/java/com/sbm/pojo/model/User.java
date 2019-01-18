@@ -1,23 +1,46 @@
 package com.sbm.pojo.model;
 
+import java.util.Date;
 
 public class User {
 
     private String userId;
 
+    /**
+     * 用户名
+     */
     private String userName;
 
+    /**
+     * 密码
+     */
     private String userPwd;
 
+    /**
+     * 性别
+     */
     private String userSex;
 
+    /**
+     * QQ
+     */
     private String userQq;
 
+    /**
+     * 微信
+     */
     private String userWx;
 
+    /**
+     * 手机
+     */
     private String userPhone;
 
     private String userAvatar;
+
+    private Date createTime;
+
+    private Date updateTime;
 
     public String getUserId() {
         return userId;
@@ -81,5 +104,21 @@ public class User {
 
     public void setUserAvatar(String userAvatar) {
         this.userAvatar = userAvatar;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }

@@ -1,11 +1,9 @@
 package com.sbm.pojo.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import com.sbm.util.Page;
+
+import java.util.*;
 
 public class UserExample {
 
@@ -19,17 +17,19 @@ public class UserExample {
 
     List<String> includeColumns = new ArrayList<String>();
 
-    private static Map<String, String> MODEL_INFOS = new HashMap<String, String>();
+    private static Map<String, String> MODEL_INFOS = new HashMap<String,String>();
 
     static {
-        MODEL_INFOS.put("userId", "user_id");
-        MODEL_INFOS.put("userName", "user_name");
-        MODEL_INFOS.put("userPwd", "user_pwd");
-        MODEL_INFOS.put("userSex", "user_sex");
-        MODEL_INFOS.put("userQq", "user_qq");
-        MODEL_INFOS.put("userWx", "user_wx");
-        MODEL_INFOS.put("userPhone", "user_phone");
-        MODEL_INFOS.put("userAvatar", "user_avatar");
+        MODEL_INFOS.put("userId","user_id");
+        MODEL_INFOS.put("userName","user_name");
+        MODEL_INFOS.put("userPwd","user_pwd");
+        MODEL_INFOS.put("userSex","user_sex");
+        MODEL_INFOS.put("userQq","user_qq");
+        MODEL_INFOS.put("userWx","user_wx");
+        MODEL_INFOS.put("userPhone","user_phone");
+        MODEL_INFOS.put("userAvatar","user_avatar");
+        MODEL_INFOS.put("createTime","create_time");
+        MODEL_INFOS.put("updateTime","update_time");
     }
 
     public UserExample() {
@@ -86,7 +86,7 @@ public class UserExample {
     }
 
     public void setPage(Page page) {
-        this.page = page;
+        this.page=page;
     }
 
     public Page getPage() {
@@ -102,20 +102,21 @@ public class UserExample {
         includeColumns.add(columnName);
     }
 
-    public void addSelectiveFields(String... fields) {
-        for (String field : fields) {
+    public void addSelectiveFields(String ... fields) {
+        for(String field:fields){
             addSelectiveField(field);
         }
     }
 
     public void addSelectiveFields(List<String> fields) {
-        for (String field : fields) {
+        for(String field:fields){
             addSelectiveField(field);
         }
     }
 
     /**
-     * 2018-03-23
+     * 
+     * 2019-01-09
      */
     protected abstract static class GeneratedCriteria {
 
@@ -718,6 +719,126 @@ public class UserExample {
             addCriterion("user_avatar not between", value1, value2, "userAvatar");
             return (Criteria) this;
         }
+
+        public Criteria andCreateTimeIsNull() {
+            addCriterion("create_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIsNotNull() {
+            addCriterion("create_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeEqualTo(Date value) {
+            addCriterion("create_time =", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotEqualTo(Date value) {
+            addCriterion("create_time <>", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeGreaterThan(Date value) {
+            addCriterion("create_time >", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("create_time >=", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeLessThan(Date value) {
+            addCriterion("create_time <", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeLessThanOrEqualTo(Date value) {
+            addCriterion("create_time <=", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIn(List<Date> values) {
+            addCriterion("create_time in", values, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotIn(List<Date> values) {
+            addCriterion("create_time not in", values, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeBetween(Date value1, Date value2) {
+            addCriterion("create_time between", value1, value2, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
+            addCriterion("create_time not between", value1, value2, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeIsNull() {
+            addCriterion("update_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeIsNotNull() {
+            addCriterion("update_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeEqualTo(Date value) {
+            addCriterion("update_time =", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeNotEqualTo(Date value) {
+            addCriterion("update_time <>", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeGreaterThan(Date value) {
+            addCriterion("update_time >", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("update_time >=", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeLessThan(Date value) {
+            addCriterion("update_time <", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeLessThanOrEqualTo(Date value) {
+            addCriterion("update_time <=", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeIn(List<Date> values) {
+            addCriterion("update_time in", values, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeNotIn(List<Date> values) {
+            addCriterion("update_time not in", values, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeBetween(Date value1, Date value2) {
+            addCriterion("update_time between", value1, value2, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeNotBetween(Date value1, Date value2) {
+            addCriterion("update_time not between", value1, value2, "updateTime");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
@@ -729,7 +850,8 @@ public class UserExample {
     }
 
     /**
-     * 2018-03-23
+     * 
+     * 2019-01-09
      */
     public static class Criterion {
 

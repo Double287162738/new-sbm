@@ -1,8 +1,10 @@
 package com.sbm.pojo.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.util.Date;
 
-public class Goods  {
+public class Goods {
 
     private String goodsId;
 
@@ -55,6 +57,18 @@ public class Goods  {
     private Date goodsLastMod;
 
     private String goodsNo;
+
+    private String goodsStatus;
+
+    private boolean ifCollected;
+
+    public boolean isIfCollected() {
+        return ifCollected;
+    }
+
+    public void setIfCollected(boolean ifCollected) {
+        this.ifCollected = ifCollected;
+    }
 
     public String getGoodsId() {
         return goodsId;
@@ -262,5 +276,13 @@ public class Goods  {
 
     public void setGoodsNo(String goodsNo) {
         this.goodsNo = goodsNo;
+    }
+
+    public String getGoodsStatus() {
+        return goodsStatus;
+    }
+
+    public void setGoodsStatus(String goodsStatus) {
+        this.goodsStatus = goodsStatus;
     }
 }

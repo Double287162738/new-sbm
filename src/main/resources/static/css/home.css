@@ -101,18 +101,19 @@ a.active.focus {
 	position:relative;
 	width: 90%;
 	margin: auto;
-	height: 1000px;
+	/*height: 1000px;*/
+	margin-bottom:20px;
 }
 #xianzhi-all{
 	vertical-align: top;
-	margin-left: 1%;
-	margin-right: 1%;
-	margin-top: 1%;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-top: 10px;
 	padding: 3px;
 	border: 4px solid 	#DCDCDC;
 	display: inline-block;
-	width: 18%;
-	height: 35%;
+	width: 206px;
+	height: 350px;
 }
 
 #xianzhi-all:hover{
@@ -394,3 +395,14 @@ a.active.focus {
 	cursor: not-allowed;
 }
 
+
+
+/*未查询到商品样式*/
+.goods_null_part{
+	width:100%;
+	height: 250px;
+	text-align: center;
+}
+.sou_goods_kkry,.sou_goods_null_pic{
+	display: inline-block;
+}

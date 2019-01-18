@@ -1,6 +1,7 @@
 package com.sbm.controller;
 
 
+import com.sbm.pojo.model.User;
 import com.sbm.service.CollectionService;
 import com.sbm.util.ExecuteResult;
 import com.sbm.util.SkssConstant;
@@ -27,17 +28,19 @@ public class CollectionController {
         try{
             HttpSession session = request.getSession(false);
             //取出session数据
-            String userId = (String) session.getAttribute("userId");
-            if (userId == null) {
+            Object object = session.getAttribute("user");
+            if (object == null) {
                 //没有登录成功，返回未登录，跳转页面
                 result.setResult(SkssConstant.NOT_LOGIN);
                 return result;
             }
-            collectionService.addCollection(goodsId,userId);
+            User user = (User)object;
+            collectionService.addCollection(goodsId,user.getUserId());
+            result.setSuccessMessage("收藏成功");
         }catch (Exception e){
             e.getMessage();
+            result.addErrorMessage("收藏失败，请联系客服");
         }
-
         return result;
     }
 }

@@ -34,13 +34,14 @@ function prev(list){
 }
 
 $(function () {
+    openLoading();
     var picNum=0;
     var locationUrl = window.location.href;
     if (locationUrl.indexOf("id") == -1) {
         return;
     }
     var id = locationUrl.split("?")[1].split("=")[1];
-    var url = baseUrl + "/my-sbm/sousou/sougoodsDetail.do";
+    var url = baseUrl + "/sousou/sougoodsDetail.do";
     var data = {"goodsId": id};
     $.ajax({
         url: url,
@@ -51,7 +52,8 @@ $(function () {
             document.getElementById("activeimg").innerHTML = "";
             document.getElementById("bot-img").innerHTML = "";
             if (data.result == null) {
-                alert(data.errorMessages);
+                closeLoading();
+                openAlert(data.errorMessages);
             } else {
                 if (data.result.userName == null) {
                     data.result.userName = "一位不愿透漏姓名的唐马儒先生";
@@ -119,11 +121,11 @@ $(function () {
                 });
                 document.getElementById("activeimg").innerHTML = activeimgHtml;
                 document.getElementById("bot-img").innerHTML = botImgHtml;
-
+                closeLoading();
             }
         },
         error: function (e) {
-            alert("查看失败，请重试或联系管理员");
+            openAlert("服务异常，请联系客服");
             return;
         }
     });

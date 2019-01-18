@@ -1,11 +1,8 @@
 package com.sbm.pojo.model;
 
 import com.sbm.util.Page;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
 
 public class CommentReplyExample {
 

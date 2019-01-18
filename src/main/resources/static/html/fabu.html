@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="../css/bootstrap-theme.css" />
 	<link rel="stylesheet" href="../css/common.css">
 	<link rel="stylesheet" href="../css/fabu.css">
+	<link rel="stylesheet" href="../css/loading.css">
 	<link href="../newFileInput/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
 	<link href="../newFileInput/font-awesome.min.css" media="all" rel="stylesheet" type="text/css"/>
 	<link href="../newFileInput/themes/explorer-fa/theme.css" media="all" rel="stylesheet" type="text/css"/>
@@ -21,6 +22,7 @@
 	<script src="../newFileInput/popper.min.js" type="text/javascript"></script>
 	<script src="../js/common.js"></script>
 	<script src="../js/fileURL.js"></script>
+	<script src="../js/loading.js"></script>
 	<meta charset="UTF-8">
 	<title></title>
 </head>
@@ -33,11 +35,12 @@
 		</div>
 		<div>
 			<ul class="nav navbar-nav">
+				<li class="margin20px"><a href="main.html">首页</a></li>
 				<li class="margin20px"><a href="person.html?index=personFB">已发布</a></li>
-				<li class="margin20px"><a href="##">人气闲置</a></li>
+				<li class="margin20px"><a href="home.html?keyword=&currentPage=1&specialType=pop">人气闲置</a></li>
 				<li class="margin20px"><a href="person.html?index=personSC">收藏夹</a></li>
 				<li class="margin20px"><a id="fabu-a">发布闲置</a></li>
-				<li class="margin20px"><a href="##">留白功能</a></li>
+				<!--<li class="margin20px"><a href="##">留白功能</a></li>-->
 			</ul>
 		</div>
 		<form class="navbar-form navbar-left" role="search" id="searchForm">
@@ -72,13 +75,13 @@
 		</div>
 
 		<div id="second" class="buttonBox">
-			<button class="xzTypeBtn xzTypeBtnSecond" onclick="selectXzType('DZ')">书籍资料</button>
+			<button class="xzTypeBtn xzTypeBtnSecond" onclick="selectXzType('SJ')">书籍资料</button>
 			<div class="border"></div>
 			<div class="border"></div>
 		</div>
 
 		<div id="third" class="buttonBox">
-			<button class="xzTypeBtn xzTypeBtnthird" onclick="selectXzType('DZ')">日常用品</button>
+			<button class="xzTypeBtn xzTypeBtnthird" onclick="selectXzType('RC')">日常用品</button>
 			<div class="border"></div>
 			<div class="border"></div>
 			<div class="border"></div>
@@ -87,7 +90,7 @@
 
 
 		<div id="fourth" class="buttonBox">
-			<button class="xzTypeBtn xzTypeBtnfourth" onclick="selectXzType('DZ')">发布兼职</button>
+			<button class="xzTypeBtn xzTypeBtnfourth" onclick="selectXzType('JZ')">发布兼职</button>
 			<div class="border"></div>
 			<div class="border"></div>
 			<div class="border"></div>
@@ -99,7 +102,7 @@
 		<img id="previous" src="../img/previous.png" title="返回"/>
 		<img id="next" src="../img/next.png" title="下一项"/>
 		<div id="xzAreaDiv">
-			<label for="name"><h4><span class="label label-success">所在区域</span></h4></label>
+			<label><h4><span class="label label-success">所在区域</span></h4></label>
 			<select id="fabu-area-select" class="form-control">
 				<option value="">请选择区域</option>
 				<option value="A">女神A区</option>
@@ -110,7 +113,7 @@
 		</div>
 
 		<div id="xzSmTypeDiv">
-			<label for="name"><h4><span class="label label-warning">闲置类型</span></h4></label>
+			<label><h4><span class="label label-warning" id="jz_type">闲置类型</span></h4></label>
 			<select id="fabu-type-select" class="form-control">
 				<option value="">请选择类型</option>
 				<option value="SJ">手机</option>
@@ -121,27 +124,27 @@
 		</div>
 
 		<div id="xzSmNameDiv">
-			<div><label for="name"><h4><span class="label label-success">闲置名称</span></h4></label></div>
+			<div><label><h4><span class="label label-success" id="jz_name">闲置名称</span></h4></label></div>
 			<input id="fabuName" type="text" placeholder="" maxlength="8"/>
 		</div>
 
 		<div id="xzSmPriceDiv">
-			<div><label for="name"><h4><span class="label label-warning">闲置价格</span></h4></label></div>
-			<input id="fabuPrice" type="number" placeholder="" />
+			<div><label><h4><span class="label label-warning" id="jz_price">闲置价格</span></h4></label></div>
+			<input id="fabuPrice" placeholder="" />
 		</div>
 
 		<div id="xzSmQqDiv">
-			<div><label for="name"><h4><span class="label label-success">&nbsp;QQ&nbsp;</span></h4></label></div>
+			<div><label><h4><span class="label label-success">&nbsp;QQ&nbsp;</span></h4></label></div>
 			<input id="fabuQq" type="text" placeholder="" maxlength="12" onkeyup="this.value=this.value.replace(/\D/g,'')"/>
 		</div>
 
 		<div id="xzSmWxDiv">
-			<div><label for="name"><h4><span class="label label-warning">&nbsp;微信&nbsp;</span></h4></label></div>
-			<input id="fabuWx" type="text" placeholder="" maxlength="12" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5\d]/g,'');"/>
+			<div><label><h4><span class="label label-warning">&nbsp;微信&nbsp;</span></h4></label></div>
+			<input id="fabuWx" type="text" placeholder="" maxlength="12"/>
 		</div>
 
 		<div id="xzSmWordsDiv">
-			<div><label for="name"><h4><span class="label label-success">闲置特点</span></h4></label></div>
+			<div><label><h4><span class="label label-success" id="jz_word">闲置特点</span></h4></label></div>
 			<input id="fabuWords" type="text" placeholder="" maxlength="12"/><img id="tedian-pic" src="../img/tedian-open.png" title="点击选择"/>
 			<div id="teDianDiv" style="display: none;">
 				<button class="btn btn-default" value="颜值高" onclick="selectBtn(this)">颜值高</button>
@@ -159,7 +162,7 @@
 		</div>
 
 		<div id="xzSmOtherDiv">
-			<div><label for="name"><h4><span class="label label-danger">闲置介绍</span></h4></label></div>
+			<div><label><h4><span class="label label-danger" id="jz_detail">闲置介绍</span></h4></label></div>
 			<textarea id="xzSmOther" class="form-control" placeholder="介绍一下你的宝贝吧" maxlength="100"></textarea>
 		</div>
 

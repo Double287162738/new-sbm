@@ -1,14 +1,14 @@
 package com.sbm.util;
 
 
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 /**
  * Created by zhangxz on 2018/6/14
  */

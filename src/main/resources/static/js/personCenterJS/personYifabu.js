@@ -13,7 +13,8 @@ function showYifabu(goodsId) {
 }
 
 function showYifabuDetail(goodsId) {
-    var url = baseUrl + "/my-sbm/sousou/sougoodsDetail.do";
+    openLoading();
+    var url = baseUrl + "/sousou/sougoodsDetail.do";
     var data = {"goodsId": goodsId};
     $.ajax({
         url: url,
@@ -22,7 +23,7 @@ function showYifabuDetail(goodsId) {
         dataType: 'json',
         success: function (data) {
             if (data.result == null) {
-                alert(data.errorMessages);
+                openAlert(data.errorMessages);
             } else {
                 if (data.result.userName == null) {
                     data.result.userName = "一位不愿透漏姓名的唐马儒先生";
@@ -56,6 +57,7 @@ function showYifabuDetail(goodsId) {
                 document.getElementById("qqSpan").innerHTML = "&nbsp;" + data.result.goodsQq;
                 document.getElementById("weixinSpan").innerHTML = "&nbsp;" + data.result.goodsWx;
                 document.getElementById("ownerSay").innerHTML = data.result.goodsOther;
+                document.getElementById("areaSpan").innerHTML = data.result.goodsArea;
                 document.getElementById("showGoodsDetailPic").innerHTML = "";
                 var showOtherPicDetail = "";
                 if (data.result.goodsPic2 != null && data.result.goodsPic2 != '') {
@@ -88,14 +90,16 @@ function showYifabuDetail(goodsId) {
                 }
                 document.getElementById("showGoodsDetailPic").innerHTML = showOtherPicDetail;
             }
+            closeLoading();
+            $('#goodsModal').modal('show');
         },
         error: function (e) {
-            alert("查看失败，请重试或联系管理员");
+            closeLoading();
+            openAlert("查看失败，请重试或联系管理员");
             return;
         }
     });
 
-    $('#goodsModal').modal('show');
 }
 
 function getPicUrl(picName) {

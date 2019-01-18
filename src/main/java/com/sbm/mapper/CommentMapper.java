@@ -2,9 +2,10 @@ package com.sbm.mapper;
 
 import com.sbm.pojo.model.Comment;
 import com.sbm.pojo.model.CommentExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface CommentMapper {

@@ -21,4 +21,16 @@ public final class SkssConstant {
      * 头像图片上传路径
      */
     public static final String AVATAR_UPLOAD_URL= "/home/pic/avatarPic/";
+
+
+    /**
+     * 通用头像
+     */
+    public static final String COMMON_AVATAR= "29990101commonavatar.png";
+
+    public static final String GOODS_ACTIVE_STATUS= "active";
+
+    public static final String GOODS_RECYCLE_STATUS= "recycle";
+
+    public static final String GOODS_DELETE_STATUS= "delete";
 }

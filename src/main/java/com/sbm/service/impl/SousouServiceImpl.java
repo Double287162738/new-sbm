@@ -1,25 +1,24 @@
 package com.sbm.service.impl;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-
+import com.sbm.mapper.*;
 import com.sbm.mapper.customerMapper.GoodsCustomerMapper;
 import com.sbm.pojo.model.*;
-import com.sbm.util.StringToListUtils;
-import org.apache.commons.lang.StringUtils;
-import org.springframework.stereotype.Service;
-
-import com.sbm.mapper.CollectionMapper;
-import com.sbm.mapper.GoodsMapper;
-import com.sbm.mapper.RecycleMapper;
 import com.sbm.service.SousouService;
 import com.sbm.util.ExecuteResult;
 import com.sbm.util.Page;
+import com.sbm.util.SkssConstant;
+import com.sbm.util.SnowflakeIdWorker;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import static java.util.Arrays.asList;
-
-import java.util.ArrayList;
 
 
 @Service("sousouService")
@@ -30,9 +29,13 @@ public class SousouServiceImpl implements SousouService {
     @Resource
     private GoodsCustomerMapper goodsCustomerMapper;
     @Resource
-    private CollectionMapper CollectionMapper;
+    private CollectionMapper collectionMapper;
     @Resource
-    private RecycleMapper recycleMapper;
+    private UserOperationMapper userOperationMapper;
+
+    SnowflakeIdWorker snowflakeIdWorker = new SnowflakeIdWorker(0,0);
+
+
     @Override
     public Page souGoods(SouSouInparameterDTO souSouInparameterDTO) {
         Page page = new Page();
@@ -91,9 +94,9 @@ public class SousouServiceImpl implements SousouService {
 
 
     @Override
-    public ExecuteResult<Goods> souGoodsDetail(String goodsId) {
+    public ExecuteResult<Goods> souGoodsDetail(String goodsId,HttpServletRequest request) {
         ExecuteResult<Goods> result = new ExecuteResult<>();
-        if (goodsId == null) {
+        if (StringUtils.isBlank(goodsId)) {
             result.addErrorMessage("请选择查看的闲置");
             return result;
         }
@@ -101,9 +104,45 @@ public class SousouServiceImpl implements SousouService {
         goodsExample.createCriteria().andGoodsIdEqualTo(goodsId);
         Goods goods = goodsMapper.selectOneByExample(goodsExample);
         if (goods == null) {
-            result.addErrorMessage("查看的闲置不存在，请联系管理员");
+            result.addErrorMessage("查看的闲置不存在");
             return result;
         }
+        //获取用户信息
+        HttpSession session = request.getSession();
+        Object object = session.getAttribute("user");
+        if(object==null){
+            goods.setIfCollected(false);
+        }else {
+            User user = (User)object;
+            CollectionExample collectionExample = new CollectionExample();
+            collectionExample.createCriteria().andGoodsIdEqualTo(goodsId).andUserIdEqualTo(user.getUserId());
+            int count = collectionMapper.countByExample(collectionExample);
+            if(count>0){
+                goods.setIfCollected(true);
+            }else {
+                goods.setIfCollected(false);
+            }
+            //增加用户操作记录(用户登录浏览才有效且非浏览自己的商品)
+            if(!goods.getUserId().equals(user.getUserId())){
+                UserOperation userOperation = new UserOperation();
+                userOperation.setOperationId(String.valueOf(snowflakeIdWorker.nextId()));
+                userOperation.setCreateTime(new Date());
+                userOperation.setOperationUserId(user.getUserId());
+                userOperation.setOperationUserIphone(user.getUserPhone());
+                userOperation.setOperationDetail("浏览商品");
+                userOperation.setOperationGoodsId(goodsId);
+                userOperationMapper.insert(userOperation);
+                Goods newGoods = new Goods();
+                newGoods.setGoodsId(goodsId);
+                if(StringUtils.isBlank(goods.getGoodsClickAmount())){
+                    goods.setGoodsClickAmount("0");
+                }
+                //增加点击查看数量
+                newGoods.setGoodsClickAmount(String.valueOf(Integer.valueOf(goods.getGoodsClickAmount())+1));
+                goodsMapper.updateByPrimaryKeySelective(newGoods);
+            }
+        }
+
         result.setResult(goods);
         return result;
     }
@@ -116,6 +155,7 @@ public class SousouServiceImpl implements SousouService {
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
         criteria.andUserIdEqualTo(userId);
+        criteria.andGoodsStatusEqualTo(SkssConstant.GOODS_ACTIVE_STATUS);
         if (!yiFaBuKind.equals("ALL")) {
             criteria.andGoodsTypeEqualTo(yiFaBuKind);
         }
@@ -139,7 +179,7 @@ public class SousouServiceImpl implements SousouService {
         collectionExample.createCriteria().andUserIdEqualTo(userId);
         collectionExample.addSelectiveField("goodsId");
         collectionExample.setOrderByClause("create_time DESC");
-        List<Collection> collections = CollectionMapper.selectByExample(collectionExample);
+        List<Collection> collections = collectionMapper.selectByExample(collectionExample);
         List<String> goodsIdList = new ArrayList<>();
         if (collections == null || collections.size() < 1) {
             return null;
@@ -152,7 +192,6 @@ public class SousouServiceImpl implements SousouService {
         resultPage.setPageSize(3);
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
-        criteria.andUserIdEqualTo(userId);
         criteria.andGoodsIdIn(goodsIdList);
         if (StringUtils.isNotEmpty(keyword.trim())) {
             criteria.andGoodsNameLike("%" + keyword.trim() + "%");
@@ -168,24 +207,12 @@ public class SousouServiceImpl implements SousouService {
 
     @Override
     public Page souPerRecycleGoods(Page page, String userId, String keyword) {
-        RecycleExample recycleExample = new RecycleExample();
-        recycleExample.createCriteria().andUserIdEqualTo(userId);
-        recycleExample.addSelectiveField("goodsId");
-        recycleExample.setOrderByClause("create_time DESC");
-        List<Recycle> recycles = recycleMapper.selectByExample(recycleExample);
-        if (recycles == null || recycles.size() < 1) {
-            return null;
-        }
-        List<String> goodsIdList = new ArrayList<>();
-        for (Recycle r : recycles) {
-            goodsIdList.add(r.getGoodsId());
-        }
         Page resultPage = new Page();
         resultPage.setPageSize(3);
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
         criteria.andUserIdEqualTo(userId);
-        criteria.andGoodsIdIn(goodsIdList);
+        criteria.andGoodsStatusEqualTo(SkssConstant.GOODS_RECYCLE_STATUS);
         if (StringUtils.isNotEmpty(keyword.trim())) {
             criteria.andGoodsNameLike("%" + keyword.trim() + "%");
         }
@@ -205,6 +232,12 @@ public class SousouServiceImpl implements SousouService {
         }catch (Exception e){
             e.getMessage();
         }
+        return result;
+    }
+
+    @Override
+    public List<Goods> souMainGoods() {
+        List<Goods> result = goodsCustomerMapper.sousouOnlyTen();
         return result;
     }
 

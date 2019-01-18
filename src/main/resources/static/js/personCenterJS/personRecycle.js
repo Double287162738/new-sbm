@@ -20,27 +20,33 @@ $(function () {
 });
 
 function findRecycle() {
+    openLoading();
     var data;//传输参数
     if ($("#souRecycleInput").val().trim() != null) {
         data = {"keyword": $("#souRecycleInput").val()};
     }
     $.ajax({
-        url: baseUrl + "/my-sbm/personCenter/personRecycle.do",
+        url: baseUrl + "/personCenter/personRecycle.do",
         type: "post",
         data: data,
         dataType: 'json',
         success: function (data) {
             if (data.errorMessage == '2') {
-                alert("用户未登录，请重新登录");
+                closeLoading();
+                openAlert("用户未登录，请重新登录");
                 return;
             } else {
                 showPerRecycleGoods(data.result);
-                makePage(data.result.totalPage);
-                totalPage = data.result.totalPage;
+                if(data.result!=null){
+                    makePage(data.result.totalPage);
+                    totalPage = data.result.totalPage;
+                }
+                closeLoading();
             }
         },
         error: function (e) {
-            console.log("请联系管理员");
+            closeLoading();
+            openAlert("服务异常，请联系客服(联系方式见首页下方)");
         }
     });
 }
@@ -50,32 +56,36 @@ function findRecycle() {
 function showPerRecycleGoods(data) {
     var append = "";
     document.getElementById("recycle").innerHTML = '';
-    for (var i = 0; i < data.records.length; i++) {
-        var goodsPic1 = data.records[i].goodsPic1;
-        var goodsName = data.records[i].goodsName;
-        var goodsWords = data.records[i].goodsWords;
-        var goodsPrice = data.records[i].goodsPrice;
-        append = append +
-            "<div id='fabu-all'>" +
-            "<div id='fabu-pic'>" +
-            "<img src='" + goodsPicURL + goodsPic1.substring(0, 4) + "/" + goodsPic1.substring(4, 6) + "/"
-            + goodsPic1.substring(6, 8) + "/" + goodsPic1 + "' />" +
-            "</div>" +
-            "<div id='fabu-other'>" +
-            "<h4>" + goodsName + "</h4>" +
-            "<h5>" + goodsWords + "</h5>" +
-            "<div id='fabu-other-jiage'>" +
-            "<img src='../img/jiage.png' />" +
-            "<span> " + goodsPrice + "</span>" +
-            "</div>" +
-            "</div>" +
-            "<div id='fabu-btn'>" +
-            "<button id='showSc'>查看</button>" +
-            "<button id='deleteSc'>删除</button>" +
-            "</div>" +
-            "</div>";
+    if(data==null || data.records==null || data.records.length == 0){
+        selectIsNull("recycle");
+    }else{
+        for (var i = 0; i < data.records.length; i++) {
+            var goodsPic1 = data.records[i].goodsPic1;
+            var goodsName = data.records[i].goodsName;
+            var goodsWords = data.records[i].goodsWords;
+            var goodsPrice = data.records[i].goodsPrice;
+            append = append +
+                "<div id='fabu-all'>" +
+                "<div id='fabu-pic'>" +
+                "<img src='" + goodsPicURL + goodsPic1.substring(0, 4) + "/" + goodsPic1.substring(4, 6) + "/"
+                + goodsPic1.substring(6, 8) + "/" + goodsPic1 + "' />" +
+                "</div>" +
+                "<div id='fabu-other'>" +
+                "<h4>" + goodsName + "</h4>" +
+                "<h5>" + goodsWords + "</h5>" +
+                "<div id='fabu-other-jiage'>" +
+                "<img src='../img/jiage.png' />" +
+                "<span> " + goodsPrice + "</span>" +
+                "</div>" +
+                "</div>" +
+                "<div id='fabu-btn'>" +
+                "<button id='showSc'>查看</button>" +
+                "<button id='deleteSc'>删除</button>" +
+                "</div>" +
+                "</div>";
+        }
+        $("#recycle").append(append);
     }
-    $("#recycle").append(append);
 }//显示SC内容end
 
 
@@ -140,15 +150,13 @@ function makeGoodsDetails(currentPage) {
         ifAble(currentPage);
         ifHavaUpOrDown(totalPage);
         $.ajax({
-            url: baseUrl + "/my-sbm/personCenter/personRecycle.do",
+            url: baseUrl + "/personCenter/personRecycle.do",
             data: data,
             type: "post",
             dataType: 'json',
             success: function (data) {
                 if (data.result != null) {
                     showPerScGoods(data.result);
-                } else {
-                    console.log("无数据");
                 }
             },
             error: function (e) {
@@ -160,6 +168,71 @@ function makeGoodsDetails(currentPage) {
     }
 }
 
+
+//显示回收站内容
+function showPerRecycleGoods(data) {
+    var append = "";
+    document.getElementById("recycle").innerHTML = '';
+    if(data==null || data.records==null || data.records.length == 0){
+        selectIsNull("recycle");
+    }else{
+        for (var i = 0; i < data.records.length; i++) {
+            var goodsPic1 = data.records[i].goodsPic1;
+            var goodsName = data.records[i].goodsName;
+            var goodsWords = data.records[i].goodsWords;
+            var goodsPrice = data.records[i].goodsPrice;
+            var goodsId = data.records[i].goodsId;
+            append = append +
+                "<div id='fabu-all' class='goods_"+goodsId+"'>" +
+                "<div id='fabu-pic'>" +
+                "<img src='" + goodsPicURL + goodsPic1.substring(0, 4) + "/" + goodsPic1.substring(4, 6) + "/"
+                + goodsPic1.substring(6, 8) + "/" + goodsPic1 + "' />" +
+                "</div>" +
+                "<div id='fabu-other'>" +
+                "<h4>" + goodsName + "</h4>" +
+                "<h5>" + goodsWords + "</h5>" +
+                "<div id='fabu-other-jiage'>" +
+                "<img src='../img/jiage.png' />" +
+                "<span> " + goodsPrice + "</span>" +
+                "</div>" +
+                "</div>" +
+                "<div id='fabu-btn'>" +
+                "<button id='showSc' onclick=recoverActive('" + goodsId + "')>恢复发布</button>" +
+                "<button id='deleteSc'>删除</button>" +
+                "</div>" +
+                "</div>";
+        }
+        $("#recycle").append(append);
+    }
+}
+
+function recoverActive(goodsId) {
+    openLoading();
+    $.ajax({
+        url: baseUrl + "/personCenter/recoverActive.do",
+        // 请求方式
+        type: "post",
+        data: goodsId,
+        contentType: 'application/text',
+        // 服务器响应的数据类型
+        dataType: "json",
+        // 请求成功时执行的回调函数
+        success: function (data) {
+            if(data["result"]){
+                $(".goods_"+goodsId).remove();
+                closeLoading();
+                openAlert("已恢复发布，请在已发布中查看")
+            }else{
+                closeLoading();
+                openAlert(data["errorMessages"]);
+            }
+        },
+        error:function () {
+            closeLoading();
+            openAlert("非常抱歉，服务异常，请重试或联系管理员");
+        }
+    });
+}
 
 //上一页
 function upPage() {

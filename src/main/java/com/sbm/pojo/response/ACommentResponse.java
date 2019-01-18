@@ -1,7 +1,5 @@
 package com.sbm.pojo.response;
 
-import com.sbm.pojo.model.CommentReply;
-
 import java.util.Date;
 import java.util.List;
 

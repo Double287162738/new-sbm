@@ -1,42 +1,24 @@
 package com.sbm.controller;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+
+import com.alibaba.fastjson.JSONArray;
+import com.sbm.pojo.model.Goods;
+import com.sbm.pojo.model.User;
+import com.sbm.service.FabuService;
+import com.sbm.util.*;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import com.alibaba.fastjson.JSONObject;
-import com.sbm.pojo.model.Goods;
-import com.sun.net.httpserver.HttpContext;
-import net.coobird.thumbnailator.Thumbnails;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.ResponseBody;
-import com.alibaba.fastjson.JSONArray;
-import com.sbm.service.FabuService;
-import com.sbm.util.ExecuteResult;
-import com.sbm.util.GetUuidUtils;
-import com.sbm.util.MyMultipartResolver;
-import com.sbm.util.NowTimeUtils;
-import com.sbm.util.SkssConstant;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import java.io.*;
+import java.util.List;
 
 @Controller
 @RequestMapping("/fabu")
@@ -59,15 +41,15 @@ public class FabuController extends MyMultipartResolver {
             //得到session对象
             HttpSession session = request.getSession(false);
             //取出session数据
-            String userId = (String) session.getAttribute("userId");
-            if (userId == null) {
+            User user = (User) session.getAttribute("user");
+            if (StringUtils.isBlank(user.getUserId())) {
                 //没有登录成功，返回未登录，跳转页面
                 result.setResult(SkssConstant.NOT_LOGIN);
                 return result;
             }
             //保存闲置的图片之后，返回保存之后的随机文件名
             Goods goods = this.uploadLocalMedia(path, request);
-            fabuService.fabuGoods(goods, userId);
+            fabuService.fabuGoods(goods, user.getUserId());
             return result;
         }
 
@@ -186,14 +168,14 @@ public class FabuController extends MyMultipartResolver {
             //得到session对象
             HttpSession session = request.getSession(false);
             //取出session数据
-            String userId = (String) session.getAttribute("userId");
-            if (userId == null) {
+            User user = (User) session.getAttribute("user");
+            if (StringUtils.isBlank(user.getUserId())) {
                 //没有登录成功，返回错误结果
                 result.addErrorMessage("用户未登录");
                 result.setResult(SkssConstant.NOT_LOGIN);
                 return result;
             }
-           return fabuService.fabuGoods(goods, userId);
+           return fabuService.fabuGoods(goods, user.getUserId());
         }
 
 

@@ -15,7 +15,17 @@ public class RegisteredRequest {
     @NotBlank
     private  String phoneVerified;
     @NotBlank
-    private   String phoneCode;
+    private  String phoneCode;
+    @NotBlank
+    private  String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getUserName() {
         return userName;
